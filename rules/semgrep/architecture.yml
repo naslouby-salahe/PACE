@@ -1,0 +1,26 @@
+rules:
+  - id: no-production-any
+    languages: [python]
+    severity: ERROR
+    message: Production Python must not use Any.
+    paths:
+      include: [/src/**]
+    pattern: Any
+  - id: no-print-in-production
+    languages: [python]
+    severity: ERROR
+    message: Use structured logging or CLI rendering instead of print.
+    paths:
+      include: [/src/**]
+    pattern: print(...)
+  - id: no-catch-all
+    languages: [python]
+    severity: ERROR
+    message: Catch typed failures at the layer that can handle them.
+    paths:
+      include: [/src/**]
+    pattern: |
+      try:
+        ...
+      except Exception as $ERROR:
+        ...

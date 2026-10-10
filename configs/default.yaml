@@ -1,0 +1,96 @@
+scientific:
+  alpha: ALPHA_005
+  reserve_fraction: 0.5
+  calibration_block_size: 250
+  minimum_peer_count: 4
+  seed: 17
+  learning_seeds: [6, 7, 8]
+  joint_scale_cap: 64.0
+  joint_scale_iterations: 20
+  budget_sweep_multipliers:
+    alpha_001: [0.55, 0.75, 1.0, 1.4]
+    alpha_005: [0.4, 0.75, 1.0, 1.4]
+  peer_training:
+    hidden_layer_widths: [64, 16]
+    epochs: 8
+    batch_size: 256
+    learning_rate: 0.001
+  local_detectors:
+    autoencoder_hidden_widths: [20, 10]
+    autoencoder_epochs: 30
+    autoencoder_batch_size: 256
+    autoencoder_learning_rate: 0.001
+    local_training_rows: 400
+    detector_sample_limit: 8000
+    pca_explained_variance: 0.95
+    isolation_forest_trees: 100
+    lof_neighbors: 20
+    nearest_neighbors: 10
+    histogram_bins: 20
+    covariance_regularization: 0.001
+  local_bank:
+    response_forest_trees: 100
+    pair_count: 150
+    pair_bins: 8
+    pair_smoothing: 0.5
+    anchor_share: 0.5
+  study_arms:
+    - MEAN_ENSEMBLE_LOCAL_BRANCH
+    - BANK_WITHOUT_FEATURE_EXPERTS
+    - BANK_WITHOUT_RESPONSE_EXPERTS
+    - BANK_WITHOUT_RARITY_EXPERTS
+    - BANK_WITHOUT_ANCHOR
+    - BANK_SINGLE_UNION
+    - RESPONSE_ON_MARGINS
+    - RESERVE_QUARTER
+    - PEER_MEAN_FUSION
+    - PEER_MAX_FUSION
+    - NO_LOCAL_CHANNEL
+    - LOCAL_ONLY
+runtime:
+  raw_data_root: data/raw
+  output_root: outputs
+  log_level: INFO
+  execution_device: CPU
+  lab_network: 192.168.1.0/24
+  provenance_active: true
+splitting:
+  training_fraction: 0.4
+  reference_fraction: 0.2
+  calibration_fraction: 0.2
+  test_fraction: 0.2
+  minimum_calibration_rows: 350
+  minimum_attack_rows: 600
+  attack_minimum_overrides:
+    - study_stratum: IOT_23
+      minimum_attack_rows: 400
+    - study_stratum: TON_IOT
+      minimum_attack_rows: 400
+    - study_stratum: CTU_13
+      minimum_attack_rows: 400
+    - study_stratum: UNSW_IOT_ATTACK_FLOWS_G1
+      minimum_attack_rows: 30
+    - study_stratum: UNSW_IOT_ATTACK_FLOWS_G2
+      minimum_attack_rows: 30
+  attack_rows_per_half_cap: 10000
+reporting:
+  bootstrap_replicates: 10000
+  bootstrap_seed: 314159
+  confidence_level: 0.95
+protocol_matrix:
+  alpha_levels: [ALPHA_001, ALPHA_005]
+  local_training_row_counts: [100, 400, 750, 2000, 20000]
+  analyses:
+    - kind: UNIVERSAL_PRIMARY
+      budgets: [100, 400]
+    - kind: UNIVERSAL_ROBUSTNESS
+      budgets: [100, 400, 750]
+    - kind: BROAD_SCALING
+      budgets: [100, 400, 2000]
+    - kind: HIGH_RESOURCE
+      budgets: [100, 400, 2000, 20000]
+  power:
+    minimum_meaningful_effect: 0.02
+    difference_sds: [0.05, 0.1, 0.15, 0.2]
+    significance_level: 0.05
+    power: 0.8
