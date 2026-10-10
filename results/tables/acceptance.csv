@@ -1,0 +1,101 @@
+analysis,alpha,local_rows,criterion,measure,value,threshold,satisfied
+universal_primary,0.01,100,non_inferiority,severe targets,0.000000,0.000000,yes
+universal_primary,0.01,100,non_inferiority,harmed target share,0.000000,0.030000,yes
+universal_primary,0.01,100,nominal_gain,nominal gain lower bound,0.011323,0.000000,yes
+universal_primary,0.01,100,matched_gain,matched gain lower bound,0.009682,0.000000,yes
+universal_primary,0.01,100,gain_without_excluded_dataset,gain without excluded dataset,0.009306,0.005000,yes
+universal_primary,0.01,100,gain_without_excluded_dataset,lower bound without excluded dataset,0.001808,-0.005000,yes
+universal_primary,0.01,100,false_alert_rate,false-alert rate increase,0.003476,0.004000,yes
+universal_primary,0.01,100,false_alert_rate,exceedance share increase,0.028736,0.030000,yes
+universal_primary,0.01,100,seed_signs,smallest seed gain,0.018732,0.000000,yes
+universal_primary,0.01,100,stratum_robustness,smallest leave-one-stratum-out gain,0.009306,0.000000,yes
+universal_primary,0.01,400,non_inferiority,severe targets,0.000000,0.000000,yes
+universal_primary,0.01,400,non_inferiority,harmed target share,0.017241,0.030000,yes
+universal_primary,0.01,400,nominal_gain,nominal gain lower bound,0.012339,0.000000,yes
+universal_primary,0.01,400,matched_gain,matched gain lower bound,0.009690,0.000000,yes
+universal_primary,0.01,400,gain_without_excluded_dataset,gain without excluded dataset,0.010228,0.005000,yes
+universal_primary,0.01,400,gain_without_excluded_dataset,lower bound without excluded dataset,0.000995,-0.005000,yes
+universal_primary,0.01,400,false_alert_rate,false-alert rate increase,0.001588,0.004000,yes
+universal_primary,0.01,400,false_alert_rate,exceedance share increase,0.017241,0.030000,yes
+universal_primary,0.01,400,seed_signs,smallest seed gain,0.021601,0.000000,yes
+universal_primary,0.01,400,stratum_robustness,smallest leave-one-stratum-out gain,0.010228,0.000000,yes
+universal_primary,0.05,100,non_inferiority,severe targets,0.000000,0.000000,yes
+universal_primary,0.05,100,non_inferiority,harmed target share,0.000000,0.030000,yes
+universal_primary,0.05,100,nominal_gain,nominal gain lower bound,0.005777,0.000000,yes
+universal_primary,0.05,100,matched_gain,matched gain lower bound,0.005135,0.000000,yes
+universal_primary,0.05,100,gain_without_excluded_dataset,gain without excluded dataset,0.005536,0.000000,yes
+universal_primary,0.05,100,gain_without_excluded_dataset,lower bound without excluded dataset,0.000090,-0.005000,yes
+universal_primary,0.05,100,false_alert_rate,false-alert rate increase,-0.001984,0.002000,yes
+universal_primary,0.05,100,false_alert_rate,exceedance share increase,-0.005747,0.030000,yes
+universal_primary,0.05,100,seed_signs,smallest seed gain,0.017761,0.000000,yes
+universal_primary,0.05,100,stratum_robustness,smallest leave-one-stratum-out gain,0.005536,0.000000,yes
+universal_primary,0.05,400,non_inferiority,severe targets,0.000000,0.000000,yes
+universal_primary,0.05,400,non_inferiority,harmed target share,0.000000,0.030000,yes
+universal_primary,0.05,400,nominal_gain,nominal gain lower bound,0.003116,0.000000,yes
+universal_primary,0.05,400,matched_gain,matched gain lower bound,0.002056,0.000000,yes
+universal_primary,0.05,400,gain_without_excluded_dataset,gain without excluded dataset,0.008299,0.000000,yes
+universal_primary,0.05,400,gain_without_excluded_dataset,lower bound without excluded dataset,0.000143,-0.005000,yes
+universal_primary,0.05,400,false_alert_rate,false-alert rate increase,-0.010070,0.002000,yes
+universal_primary,0.05,400,false_alert_rate,exceedance share increase,-0.040230,0.030000,yes
+universal_primary,0.05,400,seed_signs,smallest seed gain,0.015977,0.000000,yes
+universal_primary,0.05,400,stratum_robustness,smallest leave-one-stratum-out gain,0.008299,0.000000,yes
+universal_robustness,0.01,750,non_inferiority,severe targets,0.000000,0.000000,yes
+universal_robustness,0.01,750,non_inferiority,harmed target share,0.000000,0.030000,yes
+universal_robustness,0.01,750,nominal_gain,nominal gain lower bound,0.009848,0.000000,yes
+universal_robustness,0.01,750,matched_gain,matched gain lower bound,0.007236,0.000000,yes
+universal_robustness,0.01,750,gain_without_excluded_dataset,gain without excluded dataset,0.006289,0.005000,yes
+universal_robustness,0.01,750,gain_without_excluded_dataset,lower bound without excluded dataset,0.000723,-0.005000,yes
+universal_robustness,0.01,750,false_alert_rate,false-alert rate increase,0.001541,0.004000,yes
+universal_robustness,0.01,750,false_alert_rate,exceedance share increase,0.022989,0.030000,yes
+universal_robustness,0.01,750,seed_signs,smallest seed gain,0.017353,0.000000,yes
+universal_robustness,0.01,750,stratum_robustness,smallest leave-one-stratum-out gain,0.006289,0.000000,yes
+universal_robustness,0.05,750,non_inferiority,severe targets,0.000000,0.000000,yes
+universal_robustness,0.05,750,non_inferiority,harmed target share,0.017241,0.030000,yes
+universal_robustness,0.05,750,nominal_gain,nominal gain lower bound,0.003583,0.000000,yes
+universal_robustness,0.05,750,matched_gain,matched gain lower bound,0.002699,0.000000,yes
+universal_robustness,0.05,750,gain_without_excluded_dataset,gain without excluded dataset,0.006261,0.000000,yes
+universal_robustness,0.05,750,gain_without_excluded_dataset,lower bound without excluded dataset,-0.000801,-0.005000,yes
+universal_robustness,0.05,750,false_alert_rate,false-alert rate increase,-0.005447,0.002000,yes
+universal_robustness,0.05,750,false_alert_rate,exceedance share increase,-0.017241,0.030000,yes
+universal_robustness,0.05,750,seed_signs,smallest seed gain,0.017615,0.000000,yes
+universal_robustness,0.05,750,stratum_robustness,smallest leave-one-stratum-out gain,0.006261,0.000000,yes
+broad_scaling,0.01,2000,non_inferiority,severe targets,0.000000,0.000000,yes
+broad_scaling,0.01,2000,non_inferiority,harmed target share,0.000000,0.030000,yes
+broad_scaling,0.01,2000,nominal_gain,nominal gain lower bound,0.003509,0.000000,yes
+broad_scaling,0.01,2000,matched_gain,matched gain lower bound,-0.000021,0.000000,no
+broad_scaling,0.01,2000,gain_without_excluded_dataset,gain without excluded dataset,0.011816,0.005000,yes
+broad_scaling,0.01,2000,gain_without_excluded_dataset,lower bound without excluded dataset,0.000687,-0.005000,yes
+broad_scaling,0.01,2000,false_alert_rate,false-alert rate increase,0.001902,0.004000,yes
+broad_scaling,0.01,2000,false_alert_rate,exceedance share increase,0.028369,0.030000,yes
+broad_scaling,0.01,2000,seed_signs,smallest seed gain,0.015982,0.000000,yes
+broad_scaling,0.01,2000,stratum_robustness,smallest leave-one-stratum-out gain,0.011816,0.000000,yes
+broad_scaling,0.05,2000,non_inferiority,severe targets,0.000000,0.000000,yes
+broad_scaling,0.05,2000,non_inferiority,harmed target share,0.000000,0.030000,yes
+broad_scaling,0.05,2000,nominal_gain,nominal gain lower bound,0.000083,0.000000,yes
+broad_scaling,0.05,2000,matched_gain,matched gain lower bound,-0.000574,0.000000,no
+broad_scaling,0.05,2000,gain_without_excluded_dataset,gain without excluded dataset,-0.000370,0.000000,no
+broad_scaling,0.05,2000,gain_without_excluded_dataset,lower bound without excluded dataset,-0.000712,-0.005000,yes
+broad_scaling,0.05,2000,false_alert_rate,false-alert rate increase,-0.005564,0.002000,yes
+broad_scaling,0.05,2000,false_alert_rate,exceedance share increase,-0.014184,0.030000,yes
+broad_scaling,0.05,2000,seed_signs,smallest seed gain,0.001937,0.000000,yes
+broad_scaling,0.05,2000,stratum_robustness,smallest leave-one-stratum-out gain,-0.000370,0.000000,no
+high_resource,0.01,20000,non_inferiority,severe targets,0.000000,0.000000,yes
+high_resource,0.01,20000,non_inferiority,harmed target share,0.000000,0.030000,yes
+high_resource,0.01,20000,nominal_gain,nominal gain lower bound,-0.000031,0.000000,no
+high_resource,0.01,20000,matched_gain,matched gain lower bound,-0.002141,0.000000,no
+high_resource,0.01,20000,gain_without_excluded_dataset,gain without excluded dataset,0.005177,0.005000,yes
+high_resource,0.01,20000,gain_without_excluded_dataset,lower bound without excluded dataset,-0.000566,-0.005000,yes
+high_resource,0.01,20000,false_alert_rate,false-alert rate increase,0.000037,0.004000,yes
+high_resource,0.01,20000,false_alert_rate,exceedance share increase,0.000000,0.030000,yes
+high_resource,0.01,20000,seed_signs,smallest seed gain,0.001359,0.000000,yes
+high_resource,0.01,20000,stratum_robustness,smallest leave-one-stratum-out gain,0.000845,0.000000,yes
+high_resource,0.05,20000,non_inferiority,severe targets,0.000000,0.000000,yes
+high_resource,0.05,20000,non_inferiority,harmed target share,0.066667,0.030000,no
+high_resource,0.05,20000,nominal_gain,nominal gain lower bound,-0.003778,0.000000,no
+high_resource,0.05,20000,matched_gain,matched gain lower bound,0.000565,0.000000,yes
+high_resource,0.05,20000,gain_without_excluded_dataset,gain without excluded dataset,-0.001736,0.000000,no
+high_resource,0.05,20000,gain_without_excluded_dataset,lower bound without excluded dataset,-0.004378,-0.005000,yes
+high_resource,0.05,20000,false_alert_rate,false-alert rate increase,-0.003071,0.002000,yes
+high_resource,0.05,20000,false_alert_rate,exceedance share increase,0.000000,0.030000,yes
+high_resource,0.05,20000,seed_signs,smallest seed gain,-0.002876,0.000000,no
+high_resource,0.05,20000,stratum_robustness,smallest leave-one-stratum-out gain,-0.001736,0.000000,no

@@ -1,0 +1,57 @@
+\begin{tabular}{ll}
+\toprule
+setting & value \\
+\midrule
+scientific.alpha & 0.05 \\
+scientific.reserve\_fraction & 0.5 \\
+scientific.calibration\_block\_size & 250 \\
+scientific.minimum\_peer\_count & 4 \\
+scientific.seed & 17 \\
+scientific.learning\_seeds & 6; 7; 8 \\
+scientific.joint\_scale\_cap & 64.0 \\
+scientific.joint\_scale\_iterations & 20 \\
+scientific.budget\_sweep\_multipliers.0.01 & 0.55; 0.75; 1.0; 1.4 \\
+scientific.budget\_sweep\_multipliers.0.05 & 0.4; 0.75; 1.0; 1.4 \\
+scientific.peer\_training.hidden\_layer\_widths & 64; 16 \\
+scientific.peer\_training.epochs & 8 \\
+scientific.peer\_training.batch\_size & 256 \\
+scientific.peer\_training.learning\_rate & 0.001 \\
+scientific.local\_detectors.autoencoder\_hidden\_widths & 20; 10 \\
+scientific.local\_detectors.autoencoder\_epochs & 30 \\
+scientific.local\_detectors.autoencoder\_batch\_size & 256 \\
+scientific.local\_detectors.autoencoder\_learning\_rate & 0.001 \\
+scientific.local\_detectors.local\_training\_rows & 400 \\
+scientific.local\_detectors.detector\_sample\_limit & 8000 \\
+scientific.local\_detectors.pca\_explained\_variance & 0.95 \\
+scientific.local\_detectors.isolation\_forest\_trees & 100 \\
+scientific.local\_detectors.lof\_neighbors & 20 \\
+scientific.local\_detectors.nearest\_neighbors & 10 \\
+scientific.local\_detectors.histogram\_bins & 20 \\
+scientific.local\_detectors.covariance\_regularization & 0.001 \\
+scientific.local\_bank.response\_forest\_trees & 100 \\
+scientific.local\_bank.pair\_count & 150 \\
+scientific.local\_bank.pair\_bins & 8 \\
+scientific.local\_bank.pair\_smoothing & 0.5 \\
+scientific.local\_bank.anchor\_share & 0.5 \\
+scientific.study\_arms & PACE with a mean-ensemble local branch; Bank without feature experts; Bank without response experts; Bank without rarity experts; Bank without anchor; Bank single union; Response on margins; Reserve quarter; Peer mean fusion; Peer max fusion; No local channel; Local only \\
+scientific.target\_clients &  \\
+splitting.training\_fraction & 0.4 \\
+splitting.reference\_fraction & 0.2 \\
+splitting.calibration\_fraction & 0.2 \\
+splitting.test\_fraction & 0.2 \\
+splitting.minimum\_calibration\_rows & 350 \\
+splitting.minimum\_attack\_rows & 600 \\
+splitting.attack\_rows\_per\_half\_cap & 10000 \\
+splitting.attack\_minimum\_overrides & study\_stratum: IOT\_23 // minimum\_attack\_rows: 400; study\_stratum: TON\_IOT // minimum\_attack\_rows: 400; study\_stratum: CTU\_13 // minimum\_attack\_rows: 400; study\_stratum: UNSW\_IOT\_ATTACK\_FLOWS\_G1 // minimum\_attack\_rows: 30; study\_stratum: UNSW\_IOT\_ATTACK\_FLOWS\_G2 // minimum\_attack\_rows: 30 \\
+reporting.bootstrap\_replicates & 10000 \\
+reporting.bootstrap\_seed & 314159 \\
+reporting.confidence\_level & 0.95 \\
+protocol\_matrix.alpha\_levels & 0.01; 0.05 \\
+protocol\_matrix.local\_training\_row\_counts & 100; 400; 750; 2000; 20000 \\
+protocol\_matrix.analyses & kind: universal primary // budgets: 100; 400; kind: universal robustness // budgets: 100; 400; 750; kind: broad scaling // budgets: 100; 400; 2000; kind: high resource // budgets: 100; 400; 2000; 20000 \\
+protocol\_matrix.power.minimum\_meaningful\_effect & 0.02 \\
+protocol\_matrix.power.difference\_sds & 0.05; 0.1; 0.15; 0.2 \\
+protocol\_matrix.power.significance\_level & 0.05 \\
+protocol\_matrix.power.power & 0.8 \\
+\bottomrule
+\end{tabular}

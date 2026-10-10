@@ -1,0 +1,52 @@
+setting,value
+scientific.alpha,0.05
+scientific.reserve_fraction,0.5
+scientific.calibration_block_size,250
+scientific.minimum_peer_count,4
+scientific.seed,17
+scientific.learning_seeds,6; 7; 8
+scientific.joint_scale_cap,64.0
+scientific.joint_scale_iterations,20
+scientific.budget_sweep_multipliers.0.01,0.55; 0.75; 1.0; 1.4
+scientific.budget_sweep_multipliers.0.05,0.4; 0.75; 1.0; 1.4
+scientific.peer_training.hidden_layer_widths,64; 16
+scientific.peer_training.epochs,8
+scientific.peer_training.batch_size,256
+scientific.peer_training.learning_rate,0.001
+scientific.local_detectors.autoencoder_hidden_widths,20; 10
+scientific.local_detectors.autoencoder_epochs,30
+scientific.local_detectors.autoencoder_batch_size,256
+scientific.local_detectors.autoencoder_learning_rate,0.001
+scientific.local_detectors.local_training_rows,400
+scientific.local_detectors.detector_sample_limit,8000
+scientific.local_detectors.pca_explained_variance,0.95
+scientific.local_detectors.isolation_forest_trees,100
+scientific.local_detectors.lof_neighbors,20
+scientific.local_detectors.nearest_neighbors,10
+scientific.local_detectors.histogram_bins,20
+scientific.local_detectors.covariance_regularization,0.001
+scientific.local_bank.response_forest_trees,100
+scientific.local_bank.pair_count,150
+scientific.local_bank.pair_bins,8
+scientific.local_bank.pair_smoothing,0.5
+scientific.local_bank.anchor_share,0.5
+scientific.study_arms,PACE with a mean-ensemble local branch; Bank without feature experts; Bank without response experts; Bank without rarity experts; Bank without anchor; Bank single union; Response on margins; Reserve quarter; Peer mean fusion; Peer max fusion; No local channel; Local only
+scientific.target_clients,
+splitting.training_fraction,0.4
+splitting.reference_fraction,0.2
+splitting.calibration_fraction,0.2
+splitting.test_fraction,0.2
+splitting.minimum_calibration_rows,350
+splitting.minimum_attack_rows,600
+splitting.attack_rows_per_half_cap,10000
+splitting.attack_minimum_overrides,study_stratum: IOT_23 // minimum_attack_rows: 400; study_stratum: TON_IOT // minimum_attack_rows: 400; study_stratum: CTU_13 // minimum_attack_rows: 400; study_stratum: UNSW_IOT_ATTACK_FLOWS_G1 // minimum_attack_rows: 30; study_stratum: UNSW_IOT_ATTACK_FLOWS_G2 // minimum_attack_rows: 30
+reporting.bootstrap_replicates,10000
+reporting.bootstrap_seed,314159
+reporting.confidence_level,0.95
+protocol_matrix.alpha_levels,0.01; 0.05
+protocol_matrix.local_training_row_counts,100; 400; 750; 2000; 20000
+protocol_matrix.analyses,kind: universal primary // budgets: 100; 400; kind: universal robustness // budgets: 100; 400; 750; kind: broad scaling // budgets: 100; 400; 2000; kind: high resource // budgets: 100; 400; 2000; 20000
+protocol_matrix.power.minimum_meaningful_effect,0.02
+protocol_matrix.power.difference_sds,0.05; 0.1; 0.15; 0.2
+protocol_matrix.power.significance_level,0.05
+protocol_matrix.power.power,0.8
