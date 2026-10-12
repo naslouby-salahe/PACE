@@ -1,0 +1,18 @@
+\begin{table}[tbp]
+\centering
+\small
+\caption{Selected methodological comparisons. These are differences in assumptions and mechanisms, not a performance ranking; none of these external systems was rerun in the PACE campaign.}
+\label{tab:prior}
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.1cm}>{\raggedright\arraybackslash}p{5.0cm}>{\raggedright\arraybackslash}p{7.1cm}}
+\toprule
+Method & Information and adaptation & Combination and decision \\
+\midrule
+MCDE~\cite{yue2026mcde} & Supervised attack evidence and benign modes; target benign recalibration in transfer analysis & Two calibrated evidence routes followed by a separate final fused threshold. \\
+Kitsune~\cite{kitsune2018} & Benign network training; learned feature groups & Autoencoder ensemble errors feed an output autoencoder; joint detector-response modeling precedes PACE. \\
+D\"IoT~\cite{diot2019} & Benign device-type traffic and collaborative model updates & Federated sequence-model learning, rather than retained foreign supervised classifiers. \\
+OSDN~\cite{osdn2024} & Labeled source and unlabeled target data; heterogeneous feature projections & Learned open-set domain alignment, rather than benign-tail adaptation of frozen compatible peers. \\
+PACE & Labeled peer attacks; target benign fitting, reference, and calibration roles & Separate peer thresholds; calibrated peer, anchor, and bank unions; final OR without aggregate recalibration. \\
+\bottomrule
+\end{tabular}
+\end{table}
+

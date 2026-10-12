@@ -1,0 +1,46 @@
+\documentclass[preprint,12pt]{elsarticle}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,booktabs,graphicx,array}
+\usepackage[margin=25mm]{geometry}
+\usepackage{microtype}
+\usepackage{hyperref}
+\hypersetup{hidelinks,pdftitle={PACE: Peer-wise calibrated experts for benign-only target intrusion detection}}
+\journal{Journal of Information Security and Applications}
+\makeatletter
+\let\ps@pprintTitle\ps@plain
+\makeatother
+\begin{document}
+\begin{frontmatter}
+\title{PACE: Peer-wise calibrated experts for benign-only target intrusion detection}
+\author{Author details pending confirmation}
+\begin{abstract}
+A newly monitored target may supply benign observations while peer clients hold labeled attacks. Combining peer scores under one maximum-score threshold can suppress useful evidence when another peer dominates the target's benign tail. PACE retains separate target-relative peer evidence and combines their calibrated union with an anchored bank of local anomaly experts. The bank includes feature, rarity, and peer-response scores, fitted without target attack labels. We examine a frozen offline evaluation of 58 targets from six corpora and seven study strata, with three learning seeds and two nominal operating parameters. Against the same peer architecture with a mean-ensemble local branch, PACE improves target-macro detection by 0.026086 and 0.028306 at nominal 0.01 with 100 and 400 local fitting rows. Corpus-stratified bootstrap intervals exclude zero, but gains are concentrated in TON\_IoT; excluding it reduces these gains to 0.009306 and 0.010228. Mean realized false-alert rates are 0.033992 and 0.032369, with worst-target rates near 0.67. The fitting budgets exclude additional benign preprocessing, reference, and calibration data. The anchor resolution rule also increases component allocations beyond the nominal value at 0.01, and no test-time false-alert guarantee follows. The results support complementary local evidence in this benchmark while exposing target regressions, calibration failures, and limited gains at larger budgets. Independent deployment validation remains necessary.
+\end{abstract}
+\begin{keyword}
+IoT intrusion detection \sep peer models \sep benign-only learning \sep empirical calibration \sep anomaly ensembles \sep false alerts
+\end{keyword}
+\end{frontmatter}
+\noindent\textbf{Draft for author review.} Author details, declarations, and final human approval are pending.
+\input{sections/introduction}
+\input{sections/related-work}
+\input{sections/problem-formulation}
+\input{sections/methodology}
+\input{sections/experimental-methodology}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/limitations}
+\input{sections/conclusion}
+\section*{Data and code availability}
+The evaluation uses the existing PACE implementation and frozen experimental outputs. A public code archive, immutable release identifier, dataset access links, and applicable redistribution conditions must be confirmed by the authors before submission. No public release is asserted in this draft.
+\section*{Funding and competing interests}
+Funding sources and competing-interest declarations require confirmation by the authors. No absence of funding or competing interests is inferred.
+\section*{Authorship and acknowledgements}
+Author names, affiliations, corresponding-author details, contribution statements, and acknowledgements remain to be supplied and approved by the authors.
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+OpenAI Codex was used for repository inspection, literature assistance, manuscript drafting, and technical verification. This draft requires human scientific review and approval. The authors must confirm the extent of their review and responsibility for the final content before submission; this draft does not assert that such approval has already occurred.
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+\end{document}
+
+
