@@ -4,7 +4,9 @@ A target is a benchmark client with benign observations and no attack labels ava
 
 Let $T_N$ denote the first $N$ observations of the target's retained benign training role, $R$ its benign reference role, and $C$ its benign calibration role. A separate benign test role and held-out attack observations are used for evaluation. Peer $k$ supplies a supervised binary classifier with attack-minus-benign logit margin $m_k(x)$. The target's own supervised classifier, if constructed for its role as a peer to other targets, is excluded from its detector. The objective is to combine transferable attack evidence with target-local anomaly evidence without fitting or calibrating on the target's attack labels.
 
-For an alert rule $A_t:\mathcal{X}_t\to\{0,1\}$, the deployment quantities of interest are
+\input{tables/data-access}
+
+For an alert rule $A_t:\mathcal{X}_t\to\{0,1\}$, the true-positive rate (TPR) and false-positive rate (FPR) of interest are
 \begin{equation}
  \operatorname{TPR}_t=\Pr\{A_t(X)=1\mid Y=1,t\},\qquad
  \operatorname{FPR}_t=\Pr\{A_t(X)=1\mid Y=0,t\}.
@@ -15,5 +17,4 @@ The local fitting budget $N$ is not the total number of target observations requ
 
 We denote the nominal operating parameter by $\alpha$, the local reserve fraction by $r$, and the peer allocation by $B_P=(1-r)\alpha$. The local allocation parameter is $B_L=r\alpha$. These parameters specify calibration operations; they are not bounds on the false-alert probability of future traffic. In particular, the implemented resolution rule can increase the sum of the component allocations above $\alpha$, as detailed below.
 
-The deployment motivation assumes trustworthy peer models, compatible feature extraction, and target observations correctly identified as benign. The evaluation does not test compromised peers, poisoning of benign observations, adaptive evasion, or online distribution-shift handling. Model exchange is an architectural motivation, not an experimentally established privacy guarantee: the benchmark itself prepares clients centrally and uses pooled preprocessing. No claim of federated optimization, cryptographic confidentiality, or differential privacy follows from this design.
-
+The information regime assumes trusted benign target observations, trustworthy peer models, and compatible feature extraction. The benchmark prepares clients centrally with pooled preprocessing; its security and deployment boundaries are assessed in Section~\ref{sec:limitations}.

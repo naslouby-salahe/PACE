@@ -1,18 +1,25 @@
 \begin{table}[tbp]
 \centering
 \small
-\caption{Selected methodological comparisons. These are differences in assumptions and mechanisms, not a performance ranking; none of these external systems was rerun in the PACE campaign.}
+\caption{Methodological comparison of information requirements and decision mechanisms, not a performance ranking. None of the external systems was rerun in the PACE campaign. The two panels separate the five conceptual comparison fields for readability.}
 \label{tab:prior}
 \begin{tabular}{>{\raggedright\arraybackslash}p{2.1cm}>{\raggedright\arraybackslash}p{5.0cm}>{\raggedright\arraybackslash}p{7.1cm}}
 \toprule
-Method & Information and adaptation & Combination and decision \\
+Method & Source-model supervision & Target information used \\
 \midrule
-MCDE~\cite{yue2026mcde} & Supervised attack evidence and benign modes; target benign recalibration in transfer analysis & Two calibrated evidence routes followed by a separate final fused threshold. \\
-Kitsune~\cite{kitsune2018} & Benign network training; learned feature groups & Autoencoder ensemble errors feed an output autoencoder; joint detector-response modeling precedes PACE. \\
-D\"IoT~\cite{diot2019} & Benign device-type traffic and collaborative model updates & Federated sequence-model learning, rather than retained foreign supervised classifiers. \\
-OSDN~\cite{osdn2024} & Labeled source and unlabeled target data; heterogeneous feature projections & Learned open-set domain alignment, rather than benign-tail adaptation of frozen compatible peers. \\
-PACE & Labeled peer attacks; target benign fitting, reference, and calibration roles & Separate peer thresholds; calibrated peer, anchor, and bank unions; final OR without aggregate recalibration. \\
+MCDE~\cite{yue2026mcde} & Labeled benign and known-attack training; benign-mode fitting & Benign reference and threshold sets; trusted target benign recalibration in device transfer. \\
+Kitsune~\cite{kitsune2018} & Unsupervised autoencoders; training traffic assumed benign & Initial local traffic for feature grouping and reconstruction learning. \\
+D\"IoT~\cite{diot2019} & Benign device-type sequence learning across clients & Local device traffic and device type; threshold study uses benign and attack evaluation traffic. \\
+OSDN~\cite{osdn2024} & Labeled source benign and attack categories & Unlabeled target traffic, potentially including unknown attacks; heterogeneous feature spaces. \\
+PACE & Labeled benign and attack data at peers & Trusted benign fitting, reference, and calibration roles; pooled benign preprocessing. \\
+\midrule
+Method & Fusion or adaptation mechanism & Calibration or final decision \\
+\midrule
+MCDE & Supervised score plus distance to benign modes & Benign-tail alignment and branch allocation; separate final fused-score threshold. \\
+Kitsune & Ensemble reconstruction errors feed an output autoencoder & Threshold on output reconstruction error; the paper discusses application-dependent threshold choices. \\
+D\"IoT & Federated aggregation of device-type sequence models & Low packet-symbol probabilities identify anomalies; their fraction in a packet window triggers an alert. \\
+OSDN & Heterogeneous projections and open-set domain alignment & Shared classifier trained on known classes and generated unknown examples. \\
+PACE & Retained peer experts plus local anchor and expert bank & Separate peer, anchor, and bank calibration; final alert OR without aggregate recalibration. \\
 \bottomrule
 \end{tabular}
 \end{table}
-

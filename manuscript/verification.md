@@ -1,130 +1,104 @@
-# PACE manuscript verification
+# PACE revision audit
 
-Audit date: 12 October 2026. Status: READY FOR AUTHOR REVIEW. Preparation, verification and packaging are complete. Author declarations and human approval remain required before submission.
+Revised 13 October 2026. **Editorial draft complete; author confirmation required before submission.** Governing request: attachment 48c252f8-fab8-4454-a1c9-bb65a59bc886/pasted-text-1.txt.
 
-## Scope, evidence and integrity
+## Resolved
 
-The governing request is the attached pasted-text-1.txt (attachment 571cf1f6-867b-4b48-9247-5017172d363a). Persistent changes are confined to manuscript/. No model training, campaign execution, report regeneration, implementation changes, commits or pushes were performed. Read-only recomputation of summary statistics from frozen outcomes is distinguished from new experiments.
+- **Baseline and scope:** inspected the matching 26-page manuscript, LaTeX, bibliography, documentation, executed detector/calibration/preprocessing/statistical code, configuration and frozen results. Baseline title, figures, tables and structure matched the supplied description. Initial working tree was clean. Changes are confined to manuscript/: no scientific code, tests, configuration, datasets or frozen results changed; no retraining, campaign reruns, commits or pushes.
+- **Title, abstract, introduction and conclusion:** adopted requested title and evidence-led summaries. Primary gains and favorable alpha 0.05 detection/FPR outcomes are prominent within the first two pages. Removed adjacent architectural repetition. Abstract has 209 whitespace-delimited words; eventual journal limit remains an author-dependent check.
+- **Related work:** preserved substantive comparisons and rebuilt Table 1 as two readable panels containing all five requested fields. MCDE precedent, retained foreign peers, target information, separate calibration and final OR are explicit; no external performance ranking or new-estimator/theorem claim.
+- **Problem/method:** added data-access Table 2, vector architecture Figure 1 and Algorithm 1. Verified ties, extrapolation, strict exceedance, balanced blocks, higher quantiles, shared multiplier, feasible-cap return and 20-bisection behavior, anchor heuristic and final OR. Alpha .01 allocations remain .005/.005/.0025 (sum .0125); alpha .05 remains .025/.0125/.0125.
+- **Experimental methods:** identified all shared comparator components; retained 40/20/20/20 roles, extra benign data and pooled full-training preprocessing, seeds 6/7/8, 10,000 bootstrap replicates/seed 314159, fixed corpus interpretation, exploratory intervals, unchanged cohorts and engineering-gate/planning-power definitions.
+- **Results:** ordered primary outcomes, complementarity, corpus/target variation, FPR, clamped sensitivity, budget scaling and seed/protocol checks. Table 4 pairs exact detection and both FPR means; Table 5 preserves all distribution metrics.
+- **Figures:** four vector PDFs. Figures 2/3 use full-precision frozen campaign values, enlarged panels, all 58 targets/configuration, negative points/outliers, original three FPR methods and nominal guides. Marker shapes/line styles supplement color. Figure 4 uses unchanged frozen scaling estimates/intervals, distinguishes 58/47/15-target cohorts and represents duplicate primary/robustness points for the identical 58-target cohort once. Connecting segments are visual guides.
+- **Discussion/limitations:** four interpretive subsections and five threat categories. Local-exclusive coverage is distinguished from comparator gain; peer-fusion ablations separately address retained peer evidence.
+- **References:** independently checked 29 DOIs (all HTTP302), Crossref metadata for 27 scholarly records, DataCite for two datasets, and claim-specific original content. Corrected Zimek's omitted subtitle to Ensembles for Unsupervised Outlier Detection: Challenges and Research Questions [Position Paper]. No entries added/removed. Inventory: 26 peer-reviewed publications, one explicitly labeled preprint, two datasets. No SciSpace used.
+- **Presentation:** retained journal-neutral Elsevier-compatible elsarticle and removed the unselected journal name. Author placeholders and AI-use disclosure remain. Elsevier's [AI policy](https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals) was checked; completed human approval is not falsely asserted.
 
-Source hierarchy: executed implementation/configuration; verified frozen outputs and numerical tables; reporting code; documentation; narrative. Read README, both docs/PACE.md and docs/TECHNICAL_ARCHITECTURE.md, configs/default.yaml, relevant core/experiment/dataset/reporting/types modules and behavior tests. No applicable AGENTS.md was found. Result inventory, corrected from early estimates: 15 CSV tables with paired TeX files, 17 PNG figures with PDF counterparts. All original figures were screened on a contact sheet; selected figures were inspected individually. No prior author publication was supplied; absence of undisclosed self-overlap cannot be certified.
+## Numerical verification
 
-Reviewer B independently checked all 110 campaign and 110 report artifacts: schema/content digests and current implementation hashes agree; report source-artifact references correspond. Campaign implementation SHA256: 7dd88ce13b0d32a3875db47869e5ac13f5cecfa0dc82c6d14322dc67419a8a3b. Reporting implementation: d294c7fbf6f1fbff4899ea12c39351be26fc4c4d4824e77734330e4b79e505ff. Read-only Python used PYTHONDONTWRITEBYTECODE=1. This is not a reconstruction of raw datasets or preprocessing digests. Runtime contributes to the provenance digest; artifacts do not contain the separately asserted environment object found in earlier documentation.
+Independent Reviewer B recomputed primary means and corpus-stratified bootstrap intervals from frozen campaign JSON. Order: (.01/100), (.01/400), (.05/100), (.05/400).
 
-Initial tracked worktree was clean. Subsequent git status shows only untracked manuscript/. The three included figure PDFs were SHA256-identical to their results/figures originals. Final git status confirms only manuscript/ is untracked; git diff is empty, so no tracked scientific file differs from HEAD.
-
-## Scientific traceability and resolved discrepancies
-
-| Manuscript content | Authoritative evidence and verified interpretation |
+| Quantity | Verified values |
 |---|---|
-| Evidence transformation | core/evidence.py: upper tail includes ties, smoothed (count+1)/(n+1), negative log; beyond-reference extrapolation is an additional log1p term using max-minus-median with 1e-6 floor. It is not a calibrated p-value. |
-| Block thresholds | core/decision.py: J=max(1,M//250), balanced consecutive np.array_split blocks, zero-based higher quantile ceil((1-w)(n_j-1)), maximum across block quantiles; alert uses strict >. Not temporal block-maximum rank testing. |
-| Union scaling | Same module: starts at multiplier 1, doubles up to 64/cap, then 20 bisections. Singleton anchor also passes through union calibration. A calibration constraint is not a population guarantee. |
-| Low-alpha allocation | _anchor_tier_budget uses configured 1/250. With alpha=.01, reserve=anchor fraction=.5, allocations are peer .005, anchor .005, bank .0025; sum .0125. There is no final aggregate recalibration. At .05, sum is .05, still without a test-time guarantee. |
-| Local models | experiment/models.py: six-score anchor excludes AE; primary local mean comparator has seven scores including AE. Feature bank reuses IF/HBOS/Gaussian outputs and adds marginal/pair rarity plus response IF. No deterministic non-inferiority or isolated AE-removal effect follows. |
-| Rarity details | 150 ordered feature pairs sampled with replacement; self-pairs dropped for d>1, duplicates retained. Unique internal eighth-quantile cuts, left insertion, at most eight active codes but 81 smoothing cells. Marginal score differs from original ECOD; explicitly called ECOD-inspired. |
-| Fitting and information | runner.prepare_clients uses all clients' full benign training roles for pooled scaling, including target rows beyond N. R/C are additional. Feature-space IF/LOF/kNN fitting cap is 8000; response IF fits N response vectors. Shared benchmark still trains AE. No measured computation or communication claim. |
-| Targets and sampling | types.py manifests precede eligibility. Adapters/common code establish 58 targets, six corpora/seven strata, dimensions 36/29/37/38/115/15/13. Targets include scenarios and hosts. Retained-label caps, thinning, deduplication and role-specific chronological splitting are disclosed; no global wall-clock holdout. |
-| Gotham dependency | Adapter calculates five whole-second features on all packets before labels/reservoir sampling. Benign rows can contain attack/unlabeled contemporaneous information; later packets affect earlier rows and role boundaries can share raw contributors. This is not a claim of direct attack-label fitting. |
-| Statistical estimator | reporting/metrics.py: attack types and three seeds averaged before target effects; 10,000 target bootstrap draws within DatasetName, seed314159, linear percentile interval. UNSW groups share one corpus stratum. Shared peers/captures and development selection are not modeled as clusters. |
-| Matched operating points | Primary per-seed sorted-FPR np.interp clamps endpoints and does not enforce monotonicity. Distinct max-fusion routine uses an envelope/coverage exclusion. Primary outside-coverage counts /174: 75,69,36,28 in alpha,N order below. “Clamped sweep-adjusted” is the supported description. |
-| Acceptance | reporting/acceptance.py checks severe/harmed target counts and relative FPR allowances. It is an engineering rule, not statistical non-inferiority or a test of FPR<=alpha. No preregistration established. |
+| PACE detection | .833405 / .838987 / .894767 / .896837 |
+| Comparator detection | .807318 / .810681 / .871348 / .873619 |
+| Paired gains | .026086 / .028306 / .023418 / .023219 |
+| 95% intervals | [.011323,.043346] / [.012339,.047375] / [.005777,.043968] / [.003116,.045968] |
+| PACE mean FPR | .033992 / .032369 / .055453 / .054337 |
+| Comparator mean FPR | .030516 / .030781 / .057437 / .064407 |
+| Clamped gains | .024659 / .025735 / .022176 / .020718 |
+| Clamped intervals | [.009682,.042034] / [.009690,.044983] / [.005135,.042086] / [.002056,.042482] |
+| Endpoint cells /174 | 75 (47 below,28 above) / 69 (49,20) / 36 (12,24) / 28 (9,19) |
+| Excluded-TON gains | .009306 / .010228 / .005536 / .008299 |
+| Excluded-TON intervals | [.001808,.019526] / [.000995,.024240] / [.000090,.014343] / [.000143,.022250] |
+| Rarity removal costs | .008626 / .011977 / .006020 / .010403 |
 
-### Numerical claims
+All ablation values, peer-fusion gains/FPR ranges and eight positive intervals agree with ablations.csv. Stratum, target, decomposition, seed and budget claims agree with frozen tables. Preserved CTU-13 scenario-12 loss .032595; worst PACE FPR .669005/.670842 at alpha .01 and .671844 at .05; local-exclusive .147434/.120957/.000042 for TON_IoT/IoT-23/N-BaIoT at .01/400; high-resource alpha .05 budget decline .028296 with interval [-.032827,-.023766]. No new matched-rate estimate or inferential test.
 
-Order throughout: (.01,100), (.01,400), (.05,100), (.05,400). Values are target-macro quantities, not traffic-weighted operational rates.
+## Adversarial reviews and repeat checks
 
-- headline.csv: nominal gains .026086/.028306/.023418/.023219; clamped sweep-adjusted gains .024659/.025735/.022176/.020718. Reviewer B independently reproduced raw nominal means and all four adjusted means/intervals from frozen campaign outcomes.
-- Excluding TON_IoT gains: .009306/.010228/.005536/.008299. strata.csv TON gains: .117448/.126729/.120780/.104447. Several other-stratum intervals include zero; N-BaIoT gains are negligible.
-- false-alert-rates.csv: PACE mean .033992/.032369/.055453/.054337; comparator .030516/.030781/.057437/.064407. Median .006485/.006419/.019118/.018427; p90 .062058/.067903/.162115/.159692. Distribution is over seed-mean target rates. Worst IoT-23 7-1 rate is .669005/.670842 at .01, .671844 at .05.
-- targets.csv: CTU-13 scenario12 loses .032595 at .01/400. Primary engineering severe/harmed counts do not prove population non-inferiority.
-- scaling.csv and budget-effects.csv: 47-target N2000 matched intervals include zero; .05 excluding TON loses .000370, interval [-.000712,-.000074]. At N20000/15 targets nominal gains .005329/-.001311 have intervals including zero. Within that cohort .05 detection drops .028296 from N100 to N20000, interval [-.032827,-.023766].
-- seeds.csv: seed6 excluded-TON gain at .05/400 is -.000195. Ablation, decomposition and sensitivity tables support only the bounded comparisons stated in Results; removals change calibration allocations and cannot yield additive causal attribution. The response-specific contribution is small.
-- Native manuscript tables transcribe unchanged result values; three existing vector figures show false-alert distribution, target gains and within-cohort scaling. No new scientific figure/data generation.
-
-## Publisher preparation
-
-JISA is the primary target; Internet of Things and JNCA are alternatives. Official ScienceDirect guides and scope pages returned403, so no journal-specific word limit, mandatory graphical abstract/highlights rule, or reference-style requirement is claimed verified.
-
-Verified Elsevier-wide sources:
-- [LaTeX instructions](https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instructions): elsarticle and source submission; eventual Editorial Manager source package may require a flat folder. Working source remains modular.
-- [Artwork](https://www.elsevier.com/about/policies-and-standards/author/artwork-and-media-instructions/artwork-overview) and [sizing](https://www.elsevier.com/about/policies-and-standards/author/artwork-and-media-instructions/artwork-sizing): PDF vector artwork supported. Existing vector figures are retained.
-- [Generative-AI policy](https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals): substantive assistance requires disclosure and human responsibility. Draft names Codex and its actual uses without falsely asserting completed human approval.
-
-Readable single-column elsarticle preprint12pt, numbered equations, native booktabs tables, numerical BibTeX style, approximately220-word abstract, six keywords and four highlights are editorial choices consistent with verified general guidance. No generated imagery used.
-
-## DOI and original-content verification
-
-Metadata authority is Crossref for publications and DataCite for the two Zenodo datasets, cross-checked with original/publisher records. Exact verified author lists, titles, years, venues, volumes/issues and pages/article numbers are stored in references.bib; table keys map uniquely to those records. Every admitted DOI was separately resolved to its intended publisher/record, generally HTTP302. Full-text access was checked independently. “Inspected” means the specified original content was read, not every page or proof. Published metadata takes precedence over preprint titles/dates. DOI presence alone was never used as evidence of a method.
-
-| Key; DOI | Accessible original source and inspected content | Supported manuscript use |
+| Review | Resolved | Confirmed limitation |
 |---|---|---|
-| yue2026mcde; 10.3390/e28091026 | [EuropePMC XML](https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13605448/fullTextXML), sections3 and4, algorithms, transfer/limitations | Closest calibrated supervised/benign-mode fusion; separate final threshold, family holdout; no PACE superiority claim. |
-| barber2023nonexchangeable; 10.1214/23-AOS2276 | [Author preprint](https://arxiv.org/pdf/2202.13415), pp1–5,10–12/3.1 | Weighted quantiles and coverage-gap assumptions; not implemented by PACE. |
-| bates2023outliers; 10.1214/22-AOS2244 | [Author preprint](https://arxiv.org/pdf/2104.08279), pp2–4 definitions/dependence | Marginal versus conditional validity; shared calibration dependence. |
-| angelopoulos2023conformal; 10.1561/2200000101 | [Author preprint](https://arxiv.org/pdf/2107.07511), pp4–5 procedure | Split-conformal correction and marginal coverage; journal title differs from preprint. |
-| liu2008isolation; 10.1109/ICDM.2008.17 | [Author PDF](https://cs.nju.edu.cn/zhouzh/zhouzh.files/publication/icdm08b.pdf), sections2–4, algorithms1–3 | Credit random-partition/path-length estimator. |
-| breunig2000lof; 10.1145/342009.335388 | [Publisher PDF](https://sigmodrecord.org/?download_id=6631&smd_process_download=1), sections3–4 definitions3–7 | Credit relative-density estimator. |
-| pang2021review; 10.1145/3439950 | [Author preprint](https://arxiv.org/pdf/2007.02500), sections4–5.1.1 | Reconstruction objective limitations, not an explanation of measured PACE gains. |
-| diot2019; 10.1109/ICDCS.2019.00080 | [Author preprint](https://arxiv.org/pdf/1804.07474), II–IV | Device-type GRU and sample-weighted iterative federation; PACE is not FL. |
-| kitsune2018; 10.14722/ndss.2018.23204 | [Author preprint](https://arxiv.org/pdf/1802.09089), IV-D algorithms4–5,V | Prior anomaly modeling in detector-error space. |
-| nbaiot2018; 10.1109/MPRV.2018.03367731 | [Author preprint](https://arxiv.org/pdf/1805.03409), III–IV | Benign-only device-local AE, corpus credit; published author order used. |
-| osdn2024; 10.1145/3639822 | [Author preprint](https://arxiv.org/pdf/2311.11249),3–5,eq15 | Labeled source/unlabeled mixed target, heterogeneous alignment. Crossref pp1–26 retained; article ID not inferred from secondary source. |
-| talpini2025; 10.5220/0013376600003890 | [Author PDF](https://marcosavi.altervista.org/Papers/2025_ICAART_Federated_Calibration_IDS.pdf),3–5/algorithm1 | Labeled Platt/FedAvg probability calibration differs from benign alert thresholds. |
-| vim2022; 10.1109/CVPR52688.2022.00487 | [Author preprint](https://arxiv.org/pdf/2203.10807),3–4,eq4–8,6 | Complementary logit/residual OOD evidence; not a direct IDS baseline. |
-| zimek2014; 10.1145/2594473.2594476 | [Publisher PDF](https://www.kdd.org/exploration_files/V15-01-02-Zimek.pdf),4.2,5.1–5.2 | Normalization/diversity/max domination precedent. Verified2014,15(1),11–22; stray33974 field removed. |
-| hyperids2025; 10.1038/s41598-025-11659-7 | [EuropePMC XML](https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12485126/fullTextXML), optimization/client training/evaluation | Labeled hypernetwork personalization differs from frozen peers. Article33974 independently verified. |
-| ecod2022; 10.1109/TKDE.2022.3159580 | [Author preprint](https://arxiv.org/pdf/2201.00382),3.2–3.3/algorithm1 | Original max of three aggregate tails differs from implemented featurewise-max sum. Journal year2023. |
-| jin2026crossprotocol; 10.3390/s26041184 | [EuropePMC XML](https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12944665/fullTextXML),3.1–3.5,4.6–4.7,discussion | Capture/split and transferred-threshold sensitivity; no imported performance. |
-| garcia2020iot23; 10.5281/zenodo.4743746 | [Original dataset description](https://mcfp.felk.cvut.cz/publicDatasets/IoT-23-Dataset/), scenario table | Dataset record, not scholarly full-text publication;20 malicious/3 benign source captures. |
-| belarbi2025gothamdata; 10.5281/zenodo.14502760 | [Original Zenodo documentation](https://zenodo.org/records/14502760), description/metadata | Dataset record,78 emulated devices; registered title differs from preprint; PACE subset separate. |
-| vovk2020averaging; 10.1093/biomet/asaa027 | [Author PDF](https://sas.uwaterloo.ca/~wang/papers/2019Vovk-Wang-BIOM.pdf),1–3 | Valid p-inputs required for formal combination; empirical thresholds supply no population premise. |
-| sommer2010closed; 10.1109/SP.2010.25 | [Author PDF](https://www.icir.org/robin/papers/oakland10-ml.pdf),III-B/C,IV-B/C/D | Semantic gap and operational evaluation; not2026 adoption statistics. |
-| saito2015precision; 10.1371/journal.pone.0118432 | [Publisher full text](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0118432), metrics/PR baseline/simulation | Precision depends on prevalence; no operational precision derived from macro rates. |
-| arp2024pitfalls; 10.1145/3643456 | [Author-hosted publisher PDF](https://www.mlsec.tu-berlin.de/docs/2024-cacm.pdf),P1–P10,3–4 | Selection, baseline and lab-evaluation limitations; DOI-bearing CACM version, not double-counted USENIX work. |
-| hamza2019mud; 10.1145/3314148.3314352 | [Author PDF](https://www.contrib.andrew.cmu.edu/~theophib/papers/SoSR19.pdf),3.1–3.3; [official data](https://iotanalytics.unsw.edu.au/attack-data.html) | UNSW minute MUD-flow data provenance; not UNSW-NB15. |
-| garcia2014ctu; 10.1016/j.cose.2014.05.011 | [Author-uploaded PDF](https://www.researchgate.net/profile/Sebastian-Garcia-19/publication/262921640_An_Empirical_Comparison_of_Botnet_Detection_Methods/links/6015ad13299bf1b33e38cb74/An-Empirical-Comparison-of-Botnet-Detection-Methods.pdf),6/8.1 | CTU-13 creation/labels; original split is not attributed to PACE. |
-| moustafa2021ton; 10.1016/j.scs.2021.102994 | [Author full text](https://www.researchgate.net/publication/352055999_A_new_distributed_architecture_for_evaluating_AI-based_security_systems_at_the_edge_Network_TON_IoT_datasets),3–4,feature descriptions/start6.2 | Corpus architecture/heterogeneity; no original IP-model feature claim attributed to PACE. |
-| xiang2026can; 10.20944/preprints202609.1557.v1 | [Original full text](https://www.preprints.org/manuscript/202609.1557/v1),2.1–2.3,3.5,4 | Normal-only adaptation and block-maximum ranks; different decision unit. Non-peer-reviewed preprint explicitly labeled; posted18September2026. |
-| ha2026targetfpr; 10.3390/app16052284 | [Publisher PDF](https://mdpi-res.com/d_attachment/applsci/applsci-16-02284/article_deploy/applsci-16-02284.pdf),3.1–3.5,4.1–4.2,limitations,eq2–5 | Benign-validation target-FPR threshold transfer, empirical tail-risk reporting; supervised host-session graphs, not target-benign peer unions. |
+| A: novelty/literature | Independent metadata/original-content audit; clarified precedent and five table fields; repaired title. Lead repeated final related-work/table/bibliography review. | Integration may be judged incremental; no executed external competitors. |
+| B: statistics | Independent recomputation of primary, clamped, excluded-TON intervals and FPR; verified adverse results, cohorts, ablations and code. Final lead reread confirmed numerical sections unchanged after audit. | Dependence, development reuse, three seeds, multiplicity, endpoint clamping. |
+| C: security | Independent own-peer exclusion, pooled scaling, role-access, Gotham and chronology checks; repeated compiled-text check found no new overclaim. | Trusted benign onboarding/peers; mixed-second dependencies; no operational validation. |
+| D: presentation | Independent first-build inspection of all pages identified floating connector, unsupported bold small caps and introductory repetition; all fixed. Lead inspected every final page and new Table 1. | Author-dependent fields remain pending. |
 
-| nguyen2025fedmse; 10.1016/j.cose.2025.104337 | [Author accepted manuscript](https://www.jaist.ac.jp/~razvan/publications/fedmse_iot_network_intrusion_detection.pdf),pp4–9,4.1–4.2,algorithms1–2,eq4–6,5.1 | Benign-only AE/centroid and inverse-MSE aggregation; shared processed benign server set. Metadata: Nguyen and Beuran, Computers & Security151(2025)104337. DOI302 to S0167404825000264. |
+The literature agent hit a service usage limit after saving its full audit; the lead completed the final repeat directly. Not every repeat was performed by a separate agent. Further rewriting stopped after supported corrections and final visual verification to avoid churn.
 
-Search is focused, not systematic or proof of uniqueness. Currently29 references:27 scholarly publications (one preprint) and2 datasets; original content inspected for all. The40–60 reference suggestion is a quality target, not a reason to admit inaccessible or redundant citations.
+## Confirmed limitations
 
-Excluded from method-level synthesis after access attempts: CROSS-IoT10.1002/dac.70565; multi-source adaptation10.1016/j.eswa.2024.124352; cross-network transfer10.1016/j.comnet.2026.112434; Choir-IDS10.1016/j.inffus.2025.103473; Shiomoto NOMS10.1109/NOMS69089.2026.11668140. Metadata/abstracts or previews were available, sufficient original methods were not. Shiomoto's abstract alpha denotes Dirichlet heterogeneity, not an FPR budget. Krstajic10.1186/1758-2946-6-10 was read/verified but omitted as redundant with the relevant Arp discussion. FedMSE was admitted after independent original-method and DOI checks. DA-DCC-IDS10.1109/ACCESS.2026.3732976 metadata and DOI redirect were verified (IEEE Access14,150978–151004); institutional abstract was accessible but IEEE full text was not, so excluded from substantive comparison. No SciSpace service/page was used; incidental search hits were ignored.
+Nonrandom/development-used targets and shared peers/captures; conditional bootstrap and exploratory multiplicity; trusted target benign data beyond N and target-influenced pooled scaling; compatible schemas and labeled peer attacks; Gotham mixed-label complete-second aggregation and no network-wide prospective cutoff; empirical allocation/extrapolation/final OR without future FPR guarantees; heterogeneous alerts and target regressions; incomplete expert-level attribution and external baselines; nonmonotonic budgets; no tested malicious-peer, poisoning, evasion, privacy, latency, energy, communications or online-deployment guarantees. These are evidence limitations, not problems cured by rewriting.
 
-## Independent hostile reviews and resolution
+## Blocked author-dependent submission items
 
-Three independent agents completed initial investigation and repeat review after revisions. Temporary service limits delayed but did not replace these reviews.
+Journal choice/exact abstract and format requirements; names, affiliations, correspondence and CRediT; funding/conflicts/acknowledgements; public code archive/release identifier and dataset redistribution conditions; prior/overlapping-publication disclosure; final human scientific approval and AI-assistance responsibility. None invented. These do not block delivery of the requested final draft; they block submitting it unchanged.
 
-| Reviewer | Valid criticism/classification | Correction and repeat-review disposition |
-|---|---|---|
-| A: novelty | Unsupported novelty and incomplete precedent: maximum domination, response-space detection, empirical rarity and calibrated hybrid fusion already exist. | Zimek/Kitsune/ECOD/MCDE credited; contribution limited to specified integration and offline evaluation. OSDN/Talpini/FL information regimes distinguished. Final reread found no remaining major misrepresentation; metadata typo corrected. Integration-only novelty and missing external baselines remain scientific concerns that can justify rejection. |
-| B: methods/statistics | Factual/presentation errors: allocation sum, anchor scaling, quantiles, matched-FPR clamping, dependence, engineering versus statistical non-inferiority. Missing analysis of existing outputs. | Exact rules and .0125 sum stated; raw summaries/hashes independently checked; clamping counts included; uncertainty and acceptance qualified. Repeat review found no new factual methodological error. Development reuse/dependent targets/limited seeds remain limitations. |
-| C: deployment | Unsupported total-data/cold-start, privacy/distribution, physical-device and online-detection implications; missing adapter details. | Pooled full-training scaling, additional R/C, mixed target units, Gotham aggregation and absent latency/drift/adversarial evidence disclosed. Final minor manifest, feature-space cap and thinning details added. Reviewer C rechecked and confirmed these last three edits, including the TON intermediate reservoir bound. |
+## Final build and integrity
 
-No reviewer verdict establishes journal acceptance, uniqueness, or real-world security. No new experiments were introduced to address criticisms.
+TeX Live/latexmk/BibTeX build: 28 pages, four figures, five tables, Algorithm 1, eight equations, 29 references. Final log has no warnings, missing citations/references, overfull or underfull boxes. All final rendered pages inspected; no clipped text/legends/axes/glyphs, table collisions or orphan headings. Enlarged plots use the available width; ordinary terminal bibliography whitespace remains.
 
-## Author confirmations and final gates
+Deterministic Unicode inspection: zero suspicious characters across all 18 manuscript text/source files. All 29 bibliography entries are cited, with no missing keys.
 
-Names/affiliations/correspondence; CRediT; funding/conflicts/acknowledgements; public code release and immutable identifier; dataset redistribution conditions; prior/overlapping publications; final human scientific review and AI-assistance responsibility require author confirmation. These are honestly pending in front matter/declarations.
+PDF SHA256: 9d2b28b22dfec48a31af4c6b0e8573c344adeb6a76581d28f884fd71b48bdf89
 
-Unresolved science: development-selected targets, shared-peer/capture dependencies, class-aware sampling and no prospective global holdout, Gotham aggregate lookahead, total target data beyond N, no final population FPR control, severe heterogeneous false alerts, concentrated gains, incomplete external baselines and absent malicious-peer/drift/resource/deployment evaluations. Writing can bound these findings but cannot cure them.
+Source structure preserved; temporary evidence/build material moved outside repository. No permanent analysis scripts or research infrastructure. Final Git check confirms only manuscript changes. Numerical checks read frozen outcomes without experiments.
 
-Build: cd manuscript && latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex. Available ordinary tools: TeX Live2023, elsarticle3.3, latexmk/BibTeX/Poppler. Main-text count uses texcount -total sections/*.tex, excluding headings/captions/front matter/references. Final counts:8,365 main-text words,185 heading words,276 caption words;26 PDF pages. Abstract whitespace count208; six keywords and four highlights.
+## Reference source register
 
-Final verification: clean-state build in a fresh output directory succeeded with latexmk/pdflatex/BibTeX. No LaTeX warnings, missing citations/references, overfull or underfull boxes. All26 final rendered pages inspected; figures, tables, equations and page breaks are legible and unclipped. PDF SHA256:4c89da3f106f111a1ca31c27ea4f37e6cc6a1e0c31352db48f03d3ed6c1eacbe.
+Original content below was independently inspected for attributed claims; DOI resolution alone was not treated as content verification. Publication metadata remains in references.bib.
 
-Bibliographic consistency:29 unique keys and29 unique DOIs; no missing or uncited entries.27 included scholarly publications with original content inspected, plus two datasets with original documentation. The additional Krstajic publication was inspected but omitted. Included figure PDFs remain byte-identical to originals.
+| Key | Primary/original source; inspected support |
+|---|---|
+| yue2026mcde | https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13605448/fullTextXML : §§3-4 benign-tail branches, budget-adjusted fusion, second disjoint threshold set, HGB, family holdout and benign device-transfer subsection. Supports MCDE row and rigorous distinction. |
+| barber2023nonexchangeable | https://arxiv.org/pdf/2202.13415 : introduction and §3.1 weighted quantiles, distribution drift/exchangeability, nonsymmetric algorithm extension. Supports bounded conformal comparison. |
+| bates2023outliers | https://arxiv.org/pdf/2104.08279 : marginal/conditional validity definitions and dependence from shared calibration. Supports distinction from PACE empirical calibration. |
+| angelopoulos2023conformal | https://arxiv.org/pdf/2107.07511 : finite-sample ceiling correction, calibration/test interpretation, exchangeability and shift subsections. Supports conventional split-conformal comparison. |
+| liu2008isolation | https://cs.nju.edu.cn/zhouzh/zhouzh.files/publication/icdm08b.pdf : random partition isolation and short average path lengths. |
+| breunig2000lof | https://sigmodrecord.org/?download_id=6631&smd_process_download=1 : complete title/authors and local reachability density definition. |
+| pang2021review | https://arxiv.org/pdf/2007.02500 : reconstruction-based representation versus anomaly scoring discussion; autoencoder reconstruction objective. |
+| diot2019 | https://arxiv.org/pdf/1804.07474 : device-type GRU probabilities, benign model assumptions, collaborative federation, low-probability packet definition and window trigger; §VI-A threshold study uses benign Activity and Attack datasets. |
+| kitsune2018 | https://arxiv.org/pdf/1802.09089 : ensemble errors into output AE, train/exec mode, assumed normal initial traffic, discussion of maximum training score or probabilistic cutoff and application-dependent selection. |
+| nbaiot2018 | https://arxiv.org/pdf/1805.03409 : device-local AE, benign training/optimization sets, MSE threshold and majority window settings, nine devices and Mirai/BASHLITE context. |
+| osdn2024 | https://arxiv.org/pdf/2311.11249 and https://arxiv.org/html/2311.11249v1 : §3 labeled source, unobserved target ground truth, unknown target categories, distinct feature dimensions; shared classifier with generated unknown examples. |
+| talpini2025 | https://marcosavi.altervista.org/Papers/2025_ICAART_Federated_Calibration_IDS.pdf : Platt sigmoid parameters, labeled input-output calibration data, cross-entropy, federated calibrator training. |
+| vim2022 | https://arxiv.org/pdf/2203.10807 : feature residual converted to virtual logit and combined with classifier logits; vision setting. |
+| zimek2014 | https://www.kdd.org/exploration_files/V15-01-02-Zimek.pdf : title/subtitle, §4.2 normalization, maximum fusion discussion and individual overestimation. |
+| hyperids2025 | https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12485126/fullTextXML : hypernetwork and client embeddings, categorical cross-entropy, labeled classes. |
+| ecod2022 | https://arxiv.org/pdf/2201.00382 : Algorithm 1 and eqs4-6, three aggregate left/right/skewness scores and maximum; supports explicit distinction from PACE featurewise-max sum. |
+| jin2026crossprotocol | https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12944665/fullTextXML : unlabeled target UDA, random windows versus capture-wise/LOCO, source-selected threshold false-alert failure. |
+| garcia2020iot23 | https://mcfp.felk.cvut.cz/publicDatasets/IoT-23-Dataset/ : original dataset description, 20 infected captures and 3 benign captures; current PACE subset count derives from repository, not original source. |
+| belarbi2025gothamdata | https://zenodo.org/records/14502760 : current full title, all six creators, published date/version, 78 device-level virtualized smart-city traces and ground-truth labeling description. |
+| vovk2020averaging | https://sas.uwaterloo.ca/~wang/papers/2019Vovk-Wang-BIOM.pdf : p-value input premise, arbitrary dependence, Bonferroni and mean scaling. |
+| sommer2010closed | https://www.icir.org/robin/papers/oakland10-ml.pdf : semantic gap from anomalous input to operational security meaning. |
+| saito2015precision | https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0118432 : class-imbalance discussion and prevalence-dependent PR baseline. |
+| arp2024pitfalls | https://www.mlsec.tu-berlin.de/docs/2024-cacm.pdf : sampling bias and laboratory-performance pitfalls in security ML. |
+| hamza2019mud | https://www.contrib.andrew.cmu.edu/~theophib/papers/SoSR19.pdf : original title uses IoT (Crossref typo loT ignored), one-minute flow counters and MUD-flow modeling. |
+| garcia2014ctu | https://www.researchgate.net/profile/Sebastian-Garcia-19/publication/262921640_An_Empirical_Comparison_of_Botnet_Detection_Methods/links/6015ad13299bf1b33e38cb74/An-Empirical-Comparison-of-Botnet-Detection-Methods.pdf : original author PDF accessible through web tool, despite direct HTTP403; dataset and ground-truth sections and manuscript metadata. |
+| moustafa2021ton | https://www.researchgate.net/publication/352055999_A_new_distributed_architecture_for_evaluating_AI-based_security_systems_at_the_edge_Network_TON_IoT_datasets : original full-text via web, direct HTTP403; edge/fog/cloud testbed and dataset collection sections, network/telemetry/OS sources. |
+| xiang2026can | https://www.preprints.org/manuscript/202609.1557/v1 : original full-text via web, direct HTTP403; normal-only adaptation/calibration separation, empirical block ranks and maxima, block-length dependence/resolution constraints, unresolved exchangeability and explicit preprint status. |
+| ha2026targetfpr | https://mdpi-res.com/d_attachment/applsci/applsci-16-02284/article_deploy/applsci-16-02284.pdf : benign validation target-FPR threshold transferred unchanged, labeled seen attacks, host-session graphs and realized violation reporting. |
+| nguyen2025fedmse | https://www.jaist.ac.jp/~razvan/publications/fedmse_iot_network_intrusion_detection.pdf : SAE-CEN benign representation/centroid scoring, processed development set, MSEAvg inverse-error weighting and model-parameter aggregation. |
 
-Final Unicode inspection found zero suspicious hits across main.tex and all nine sections. An18-word normalized exact-overlap check found zero matches with either repository documentation file. This limited check is not a plagiarism certificate; no prior author publication was supplied.
 
-Scope wording follows the author's preference: conclusions are limited to the58-target/six-corpus benchmark. Provenance remains explicit in this audit: docs/PACE.md:111 describes earlier outcome-informed design choices,125 states identical targets across development phases,174 distinguishes untouched seeds from targets. No independent target validation is asserted.
-
-All nine requested manuscript sections, DOI/full-text verification, closest-work comparison, three hostile reviews/reviews after revision, implementation/statistical corrections, adverse results and verified Elsevier-wide preparation requirements are addressed. Current journal-specific guides remain inaccessible; author confirmation is required. Scientific limitations remain substantive and can affect journal suitability. The internal engineering acceptance result does not establish journal readiness.
-
-Packaging cleanup is complete. Initial broad cleanup commands were rejected by automatic approval review; explicit literal-file removal succeeded after inventory verification, followed by removal of the verified-empty directories. Only permanent manuscript deliverables remain.
-
-Clean-build verification was repeated after removing every auxiliary and bibliography intermediate. BibTeX regenerated main.bbl successfully;26 pages, no relevant warnings, and pdftotext -layout output identical to the visually inspected delivered PDF. The delivered PDF hash above is unchanged.
-
-Final editorial assessment: READY FOR AUTHOR REVIEW. Three independent hostile review passes and repeat reviews identified and corrected manuscript errors. Remaining scientific limitations are stated within the benchmark scope; this assessment is not journal acceptance, a deployment guarantee, or permission to omit author confirmation. The final package contains the complete source, compiled PDF,29-entry DOI bibliography, three original vector figures, four native tables, highlights and this consolidated audit.

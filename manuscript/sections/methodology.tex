@@ -1,5 +1,14 @@
 \section{PACE methodology}
 \label{sec:method}
+Figure~\ref{fig:architecture} separates the supervised peer route from the two target-local decisions. Algorithm~\ref{alg:pace} summarizes preparation and inference; the equations below specify the score and quantile conventions.
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=\textwidth]{figures/architecture.pdf}
+\caption{PACE's information flow and final decision. Target benign training, reference, calibration, and test roles are distinct. The benchmark standardizes features using pooled complete benign training roles before restricting local fitting to $N$ rows. Target attack labels enter evaluation only. IF: isolation forest; LOF: local outlier factor; $k$NN: nearest-neighbor distance.}
+\label{fig:architecture}
+\end{figure}
+
 \subsection{Target-relative evidence}
 For an expert score $s$, let $r_1,\ldots,r_n$ be that expert's scores on the target reference role, $r_{\max}=\max_i r_i$, and $d_R=\max\{r_{\max}-\operatorname{median}_i r_i,10^{-6}\}$. The implemented transformation is
 \begin{equation}
@@ -27,7 +36,7 @@ For a collection of $L$ experts with allocation $B$, the default initial shares 
  z_\ell(x)>\tau_{z_\ell}(\lambda w_\ell)\right\}.
  \label{eq:union}
 \end{equation}
-The calibrator measures this union on every calibration block. Starting at $\lambda=1$, it doubles an upper search point until that point violates the block-rate criterion or reaches the allowed cap, then performs 20 bisections to retain a feasible lower point. The configured cap is 64. If the largest share times 64 is at least one, the implementation replaces the multiplier ceiling by $0.999/\max_\ell w_\ell$. If the initial union already violates $B$, the routine returns its initial thresholds; it does not claim to repair arbitrary supplied shares. PACE's equal-share initial unions satisfy the calibration criterion by the fixed-threshold count bound and the union bound.
+The calibrator measures this union on every calibration block. Starting at $\lambda=1$, it doubles an upper search point until that point violates the block-rate criterion or reaches the allowed cap, returns immediately if the cap is feasible; otherwise it performs 20 bisections to retain a feasible lower point. The configured cap is 64. If the largest share times 64 is at least one, the implementation replaces the multiplier ceiling by $0.999/\max_\ell w_\ell$. If the initial union already violates $B$, the routine returns its initial thresholds; it does not claim to repair arbitrary supplied shares. PACE's equal-share initial unions satisfy the calibration criterion by the fixed-threshold count bound and the union bound.
 
 The retained multiplier is a numerical search result on a stepwise calibration function. It should not be interpreted as a unique population optimum. The peer branch applies this routine to the $K$ separate margin-evidence experts with allocation $B_P$. Separate thresholds avoid collapsing all peer evidence into one maximum before calibration. The common multiplier nevertheless couples the thresholds through the observed union, so an unstable peer can still affect their joint calibration.
 
@@ -72,6 +81,28 @@ There is no final calibration pass over this three-way union.
 At $\alpha=0.01$ and $r=a=0.5$, these allocations are $B_P=0.005$, $B_A=0.005$, and $B_B=0.0025$. Their sum is 0.0125, rather than 0.01. At $\alpha=0.05$, they are 0.025, 0.0125, and 0.0125, whose sum is 0.05. Overlap and integer count resolution can make the observed calibration union smaller than the allocation sum, but do not justify presenting Eq.~\eqref{eq:allocation} as a strict partition of $\alpha$. The rule checks $1/b$, whereas the first possible nonzero exceedance for an individual higher quantile depends on its actual block length through $1/(n_j-1)$. The resolution rule is therefore an implemented heuristic, not an exact test of every block's quantile resolution.
 
 The protected anchor preserves a separate local decision path but does not prove non-inferiority to the primary comparator. That comparator averages seven detector evidences, including an autoencoder omitted from the six-member anchor, and uses a different threshold procedure. Target-level regressions must be assessed empirically.
+
+\begin{table}[tbp]
+\centering
+\begin{minipage}{0.96\textwidth}
+\hrule\smallskip
+\refstepcounter{algorithm}\textbf{Algorithm \thealgorithm. PACE preparation and inference}\label{alg:pace}
+\smallskip\hrule\smallskip
+\small
+\textbf{Input:} fixed peer classifiers; target benign roles $T_N,R,C$; nominal $\alpha$; $r=a=0.5$; block parameter $b=250$.
+\begin{enumerate}
+\setlength{\itemsep}{2pt}\setlength{\parskip}{0pt}
+\item Evaluate each peer's attack-minus-benign margins on $T_N,R,C$; construct reference transforms $E_{R,k}$ by Eq.~\eqref{eq:evidence}, including ties and beyond-reference extrapolation.
+\item Fit the local detectors and rarity models on $T_N$, and the response IF on $(e_1,\ldots,e_K)(T_N)$. Transform each local score against its scores on $R$. Form the six-evidence mean anchor and six-expert bank.
+\item Partition $C$ into $\max(1,\lfloor |C|/b\rfloor)$ balanced consecutive blocks. For each expert, use the maximum block higher quantile in Eq.~\eqref{eq:threshold}.
+\item Set $B_P=(1-r)\alpha$ and $B_L=r\alpha$. Compute $B_A,B_B$ with the resolution rule in Eq.~\eqref{eq:allocation}.
+\item Apply \textsc{CalibrateUnion} to the $K$ peers with $B_P$, the singleton anchor with $B_A$, and the six bank experts with $B_B$. Store all reference transforms and thresholds.
+\item For a query $x$, compute the same frozen evidences. Alert if any peer exceeds its threshold, the anchor exceeds its threshold, or any bank expert exceeds its threshold. All comparisons are strict $>$; no final recalibration is applied.
+\end{enumerate}
+\textbf{CalibrateUnion}$(Z,B)$: initialize equal shares $w_\ell=B/L$ and thresholds at $\lambda=1$. Use cap $c=64$, replaced by $0.999/\max_\ell w_\ell$ if $64\max_\ell w_\ell\geq1$. Return the initial thresholds if their worst block union rate exceeds $B$. Otherwise test $\min(2,c)$ and double up to $c$ while feasible; return immediately if $c$ is feasible. Once an infeasible upper point is found, perform 20 bisections, retaining the feasible lower point. Return its thresholds.
+\smallskip\hrule
+\end{minipage}
+\end{table}
 
 \subsection{Training and computation}
 Each peer classifier has two ReLU hidden layers of widths 64 and 16 and two output logits. Training uses class-balanced cross-entropy, Adam updates, eight epochs, batch size 256, and learning rate 0.001. Target-local fitting uses the first $N$ retained training rows. The feature-space isolation-forest and neighbor-based fitting sample is limited to 8000 rows; other local components have their own full-$N$ fitting operations. Fitted score references and thresholds are fixed at inference: the evaluated rule has no online update.
