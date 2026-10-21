@@ -1,0 +1,779 @@
+[
+  {
+    "stratum": "CTU_13",
+    "client": "CTU13-scenario-04",
+    "manifest": "outputs/cache/clients/e53210364fabcce6e600821dfa2904c050a97d59e3f29873b7f8dd717f5a37b8/manifest.json",
+    "manifest_sha256": "85e27a5fba0472eb09a04b6b58be37d25b604e7d678cacb8eefa1dfb0aa2af57",
+    "schema": "CTU_13_ARGUS_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/CTU-13/CTU-13-Dataset.tar.bz2"
+    ]
+  },
+  {
+    "stratum": "CTU_13",
+    "client": "CTU13-scenario-01",
+    "manifest": "outputs/cache/clients/e53210364fabcce6e600821dfa2904c050a97d59e3f29873b7f8dd717f5a37b8/manifest.json",
+    "manifest_sha256": "85e27a5fba0472eb09a04b6b58be37d25b604e7d678cacb8eefa1dfb0aa2af57",
+    "schema": "CTU_13_ARGUS_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/CTU-13/CTU-13-Dataset.tar.bz2"
+    ]
+  },
+  {
+    "stratum": "CTU_13",
+    "client": "CTU13-scenario-12",
+    "manifest": "outputs/cache/clients/e53210364fabcce6e600821dfa2904c050a97d59e3f29873b7f8dd717f5a37b8/manifest.json",
+    "manifest_sha256": "85e27a5fba0472eb09a04b6b58be37d25b604e7d678cacb8eefa1dfb0aa2af57",
+    "schema": "CTU_13_ARGUS_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/CTU-13/CTU-13-Dataset.tar.bz2"
+    ]
+  },
+  {
+    "stratum": "CTU_13",
+    "client": "CTU13-scenario-07",
+    "manifest": "outputs/cache/clients/e53210364fabcce6e600821dfa2904c050a97d59e3f29873b7f8dd717f5a37b8/manifest.json",
+    "manifest_sha256": "85e27a5fba0472eb09a04b6b58be37d25b604e7d678cacb8eefa1dfb0aa2af57",
+    "schema": "CTU_13_ARGUS_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/CTU-13/CTU-13-Dataset.tar.bz2"
+    ]
+  },
+  {
+    "stratum": "CTU_13",
+    "client": "CTU13-scenario-08",
+    "manifest": "outputs/cache/clients/e53210364fabcce6e600821dfa2904c050a97d59e3f29873b7f8dd717f5a37b8/manifest.json",
+    "manifest_sha256": "85e27a5fba0472eb09a04b6b58be37d25b604e7d678cacb8eefa1dfb0aa2af57",
+    "schema": "CTU_13_ARGUS_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/CTU-13/CTU-13-Dataset.tar.bz2"
+    ]
+  },
+  {
+    "stratum": "CTU_13",
+    "client": "CTU13-scenario-05",
+    "manifest": "outputs/cache/clients/e53210364fabcce6e600821dfa2904c050a97d59e3f29873b7f8dd717f5a37b8/manifest.json",
+    "manifest_sha256": "85e27a5fba0472eb09a04b6b58be37d25b604e7d678cacb8eefa1dfb0aa2af57",
+    "schema": "CTU_13_ARGUS_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/CTU-13/CTU-13-Dataset.tar.bz2"
+    ]
+  },
+  {
+    "stratum": "CTU_13",
+    "client": "CTU13-scenario-10",
+    "manifest": "outputs/cache/clients/e53210364fabcce6e600821dfa2904c050a97d59e3f29873b7f8dd717f5a37b8/manifest.json",
+    "manifest_sha256": "85e27a5fba0472eb09a04b6b58be37d25b604e7d678cacb8eefa1dfb0aa2af57",
+    "schema": "CTU_13_ARGUS_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/CTU-13/CTU-13-Dataset.tar.bz2"
+    ]
+  },
+  {
+    "stratum": "CTU_13",
+    "client": "CTU13-scenario-06",
+    "manifest": "outputs/cache/clients/e53210364fabcce6e600821dfa2904c050a97d59e3f29873b7f8dd717f5a37b8/manifest.json",
+    "manifest_sha256": "85e27a5fba0472eb09a04b6b58be37d25b604e7d678cacb8eefa1dfb0aa2af57",
+    "schema": "CTU_13_ARGUS_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/CTU-13/CTU-13-Dataset.tar.bz2"
+    ]
+  },
+  {
+    "stratum": "CTU_13",
+    "client": "CTU13-scenario-09",
+    "manifest": "outputs/cache/clients/e53210364fabcce6e600821dfa2904c050a97d59e3f29873b7f8dd717f5a37b8/manifest.json",
+    "manifest_sha256": "85e27a5fba0472eb09a04b6b58be37d25b604e7d678cacb8eefa1dfb0aa2af57",
+    "schema": "CTU_13_ARGUS_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/CTU-13/CTU-13-Dataset.tar.bz2"
+    ]
+  },
+  {
+    "stratum": "CTU_13",
+    "client": "CTU13-scenario-03",
+    "manifest": "outputs/cache/clients/e53210364fabcce6e600821dfa2904c050a97d59e3f29873b7f8dd717f5a37b8/manifest.json",
+    "manifest_sha256": "85e27a5fba0472eb09a04b6b58be37d25b604e7d678cacb8eefa1dfb0aa2af57",
+    "schema": "CTU_13_ARGUS_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/CTU-13/CTU-13-Dataset.tar.bz2"
+    ]
+  },
+  {
+    "stratum": "CTU_13",
+    "client": "CTU13-scenario-02",
+    "manifest": "outputs/cache/clients/e53210364fabcce6e600821dfa2904c050a97d59e3f29873b7f8dd717f5a37b8/manifest.json",
+    "manifest_sha256": "85e27a5fba0472eb09a04b6b58be37d25b604e7d678cacb8eefa1dfb0aa2af57",
+    "schema": "CTU_13_ARGUS_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/CTU-13/CTU-13-Dataset.tar.bz2"
+    ]
+  },
+  {
+    "stratum": "CTU_13",
+    "client": "CTU13-scenario-13",
+    "manifest": "outputs/cache/clients/e53210364fabcce6e600821dfa2904c050a97d59e3f29873b7f8dd717f5a37b8/manifest.json",
+    "manifest_sha256": "85e27a5fba0472eb09a04b6b58be37d25b604e7d678cacb8eefa1dfb0aa2af57",
+    "schema": "CTU_13_ARGUS_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/CTU-13/CTU-13-Dataset.tar.bz2"
+    ]
+  },
+  {
+    "stratum": "CTU_13",
+    "client": "CTU13-scenario-11",
+    "manifest": "outputs/cache/clients/e53210364fabcce6e600821dfa2904c050a97d59e3f29873b7f8dd717f5a37b8/manifest.json",
+    "manifest_sha256": "85e27a5fba0472eb09a04b6b58be37d25b604e7d678cacb8eefa1dfb0aa2af57",
+    "schema": "CTU_13_ARGUS_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/CTU-13/CTU-13-Dataset.tar.bz2"
+    ]
+  },
+  {
+    "stratum": "TON_IOT",
+    "client": "192.168.1.1",
+    "manifest": "outputs/cache/clients/f260a9e43155cfba9187343b4e2c1abd3c4d231cc1762cef12de61655a9ab8fa/manifest.json",
+    "manifest_sha256": "bf0b397a83ee856eca0e65100ee72c7733ba7de4dae8d0483fe55a7f9de5133b",
+    "schema": "TON_IOT_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/TON-IoT/Processed_datasets/Processed_Network_dataset"
+    ]
+  },
+  {
+    "stratum": "TON_IOT",
+    "client": "192.168.1.152",
+    "manifest": "outputs/cache/clients/f260a9e43155cfba9187343b4e2c1abd3c4d231cc1762cef12de61655a9ab8fa/manifest.json",
+    "manifest_sha256": "bf0b397a83ee856eca0e65100ee72c7733ba7de4dae8d0483fe55a7f9de5133b",
+    "schema": "TON_IOT_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/TON-IoT/Processed_datasets/Processed_Network_dataset"
+    ]
+  },
+  {
+    "stratum": "TON_IOT",
+    "client": "192.168.1.180",
+    "manifest": "outputs/cache/clients/f260a9e43155cfba9187343b4e2c1abd3c4d231cc1762cef12de61655a9ab8fa/manifest.json",
+    "manifest_sha256": "bf0b397a83ee856eca0e65100ee72c7733ba7de4dae8d0483fe55a7f9de5133b",
+    "schema": "TON_IOT_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/TON-IoT/Processed_datasets/Processed_Network_dataset"
+    ]
+  },
+  {
+    "stratum": "TON_IOT",
+    "client": "192.168.1.184",
+    "manifest": "outputs/cache/clients/f260a9e43155cfba9187343b4e2c1abd3c4d231cc1762cef12de61655a9ab8fa/manifest.json",
+    "manifest_sha256": "bf0b397a83ee856eca0e65100ee72c7733ba7de4dae8d0483fe55a7f9de5133b",
+    "schema": "TON_IOT_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/TON-IoT/Processed_datasets/Processed_Network_dataset"
+    ]
+  },
+  {
+    "stratum": "TON_IOT",
+    "client": "192.168.1.190",
+    "manifest": "outputs/cache/clients/f260a9e43155cfba9187343b4e2c1abd3c4d231cc1762cef12de61655a9ab8fa/manifest.json",
+    "manifest_sha256": "bf0b397a83ee856eca0e65100ee72c7733ba7de4dae8d0483fe55a7f9de5133b",
+    "schema": "TON_IOT_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/TON-IoT/Processed_datasets/Processed_Network_dataset"
+    ]
+  },
+  {
+    "stratum": "TON_IOT",
+    "client": "192.168.1.193",
+    "manifest": "outputs/cache/clients/f260a9e43155cfba9187343b4e2c1abd3c4d231cc1762cef12de61655a9ab8fa/manifest.json",
+    "manifest_sha256": "bf0b397a83ee856eca0e65100ee72c7733ba7de4dae8d0483fe55a7f9de5133b",
+    "schema": "TON_IOT_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/TON-IoT/Processed_datasets/Processed_Network_dataset"
+    ]
+  },
+  {
+    "stratum": "TON_IOT",
+    "client": "192.168.1.194",
+    "manifest": "outputs/cache/clients/f260a9e43155cfba9187343b4e2c1abd3c4d231cc1762cef12de61655a9ab8fa/manifest.json",
+    "manifest_sha256": "bf0b397a83ee856eca0e65100ee72c7733ba7de4dae8d0483fe55a7f9de5133b",
+    "schema": "TON_IOT_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/TON-IoT/Processed_datasets/Processed_Network_dataset"
+    ]
+  },
+  {
+    "stratum": "TON_IOT",
+    "client": "192.168.1.195",
+    "manifest": "outputs/cache/clients/f260a9e43155cfba9187343b4e2c1abd3c4d231cc1762cef12de61655a9ab8fa/manifest.json",
+    "manifest_sha256": "bf0b397a83ee856eca0e65100ee72c7733ba7de4dae8d0483fe55a7f9de5133b",
+    "schema": "TON_IOT_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/TON-IoT/Processed_datasets/Processed_Network_dataset"
+    ]
+  },
+  {
+    "stratum": "TON_IOT",
+    "client": "192.168.1.79",
+    "manifest": "outputs/cache/clients/f260a9e43155cfba9187343b4e2c1abd3c4d231cc1762cef12de61655a9ab8fa/manifest.json",
+    "manifest_sha256": "bf0b397a83ee856eca0e65100ee72c7733ba7de4dae8d0483fe55a7f9de5133b",
+    "schema": "TON_IOT_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/TON-IoT/Processed_datasets/Processed_Network_dataset"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "1-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "17-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "20-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "21-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "3-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "33-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "34-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "35-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "36-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "39-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "4-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": []
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "42-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "43-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "44-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "48-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "49-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "5-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": []
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "52-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "60-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "7-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "8-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "IOT_23",
+    "client": "9-1",
+    "manifest": "outputs/cache/clients/5366fb13de7fafcdd0b537c8623075cafa2036acb97316bf05a80c7f8abfa09b/manifest.json",
+    "manifest_sha256": "7d043d33ed4da68c94c48d4d93cef6ea0d225df0ceb2b6fafccb37f1a797a646",
+    "schema": "IOT_23_ZEEK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/IoT-23-v2/iot_23_datasets_small.tar.gz"
+    ]
+  },
+  {
+    "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+    "client": "0017882b9a25",
+    "manifest": "outputs/cache/clients/f6a13b9e39021c0322b6d11ad4271e9e4873cb8cc9dbdd6e2793348c7827cedd/manifest.json",
+    "manifest_sha256": "4f8a17afe27c4de9c0d9ad8d8866dd419de9b456cc4460004d648925b7d3f50f",
+    "schema": "UNSW_MUD_G2_MINUTE_COUNTERS",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/UNSW-IoT-Attack-Flows/flowdata/flowdata/0017882b9a25_flowstats.csv"
+    ]
+  },
+  {
+    "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+    "client": "44650d56ccd3",
+    "manifest": "outputs/cache/clients/f6a13b9e39021c0322b6d11ad4271e9e4873cb8cc9dbdd6e2793348c7827cedd/manifest.json",
+    "manifest_sha256": "4f8a17afe27c4de9c0d9ad8d8866dd419de9b456cc4460004d648925b7d3f50f",
+    "schema": "UNSW_MUD_G2_MINUTE_COUNTERS",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/UNSW-IoT-Attack-Flows/flowdata/flowdata/44650d56ccd3_flowstats.csv"
+    ]
+  },
+  {
+    "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+    "client": "f4f5d88f0a3c",
+    "manifest": "outputs/cache/clients/f6a13b9e39021c0322b6d11ad4271e9e4873cb8cc9dbdd6e2793348c7827cedd/manifest.json",
+    "manifest_sha256": "4f8a17afe27c4de9c0d9ad8d8866dd419de9b456cc4460004d648925b7d3f50f",
+    "schema": "UNSW_MUD_G2_MINUTE_COUNTERS",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/UNSW-IoT-Attack-Flows/flowdata/flowdata/f4f5d88f0a3c_flowstats.csv"
+    ]
+  },
+  {
+    "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+    "client": "74c63b29d71d",
+    "manifest": "outputs/cache/clients/f6a13b9e39021c0322b6d11ad4271e9e4873cb8cc9dbdd6e2793348c7827cedd/manifest.json",
+    "manifest_sha256": "4f8a17afe27c4de9c0d9ad8d8866dd419de9b456cc4460004d648925b7d3f50f",
+    "schema": "UNSW_MUD_G2_MINUTE_COUNTERS",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/UNSW-IoT-Attack-Flows/flowdata/flowdata/74c63b29d71d_flowstats.csv"
+    ]
+  },
+  {
+    "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+    "client": "d073d5018308",
+    "manifest": "outputs/cache/clients/f6a13b9e39021c0322b6d11ad4271e9e4873cb8cc9dbdd6e2793348c7827cedd/manifest.json",
+    "manifest_sha256": "4f8a17afe27c4de9c0d9ad8d8866dd419de9b456cc4460004d648925b7d3f50f",
+    "schema": "UNSW_MUD_G2_MINUTE_COUNTERS",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/UNSW-IoT-Attack-Flows/flowdata/flowdata/d073d5018308_flowstats.csv"
+    ]
+  },
+  {
+    "stratum": "N_BAIOT",
+    "client": "Danmini_Doorbell",
+    "manifest": "outputs/cache/clients/9045def9fc9e55666cd3d9e46da649952420a0becbee2e36392741d0526d307b/manifest.json",
+    "manifest_sha256": "b5c049a3998c71527f3ae7b73374edf5cbeaf7a02a0ec99504d3d2580155f0e1",
+    "schema": "N_BAIOT_KITSUNE_SIGNED_LOG_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Danmini_Doorbell/gafgyt_attacks/combo.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Danmini_Doorbell/gafgyt_attacks/junk.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Danmini_Doorbell/gafgyt_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Danmini_Doorbell/gafgyt_attacks/tcp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Danmini_Doorbell/gafgyt_attacks/udp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Danmini_Doorbell/mirai_attacks/ack.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Danmini_Doorbell/mirai_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Danmini_Doorbell/mirai_attacks/syn.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Danmini_Doorbell/mirai_attacks/udp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Danmini_Doorbell/mirai_attacks/udpplain.csv"
+    ]
+  },
+  {
+    "stratum": "N_BAIOT",
+    "client": "Ecobee_Thermostat",
+    "manifest": "outputs/cache/clients/9045def9fc9e55666cd3d9e46da649952420a0becbee2e36392741d0526d307b/manifest.json",
+    "manifest_sha256": "b5c049a3998c71527f3ae7b73374edf5cbeaf7a02a0ec99504d3d2580155f0e1",
+    "schema": "N_BAIOT_KITSUNE_SIGNED_LOG_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ecobee_Thermostat/gafgyt_attacks/combo.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ecobee_Thermostat/gafgyt_attacks/junk.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ecobee_Thermostat/gafgyt_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ecobee_Thermostat/gafgyt_attacks/tcp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ecobee_Thermostat/gafgyt_attacks/udp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ecobee_Thermostat/mirai_attacks/ack.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ecobee_Thermostat/mirai_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ecobee_Thermostat/mirai_attacks/syn.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ecobee_Thermostat/mirai_attacks/udp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ecobee_Thermostat/mirai_attacks/udpplain.csv"
+    ]
+  },
+  {
+    "stratum": "N_BAIOT",
+    "client": "Ennio_Doorbell",
+    "manifest": "outputs/cache/clients/9045def9fc9e55666cd3d9e46da649952420a0becbee2e36392741d0526d307b/manifest.json",
+    "manifest_sha256": "b5c049a3998c71527f3ae7b73374edf5cbeaf7a02a0ec99504d3d2580155f0e1",
+    "schema": "N_BAIOT_KITSUNE_SIGNED_LOG_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ennio_Doorbell/gafgyt_attacks/combo.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ennio_Doorbell/gafgyt_attacks/junk.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ennio_Doorbell/gafgyt_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ennio_Doorbell/gafgyt_attacks/tcp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Ennio_Doorbell/gafgyt_attacks/udp.csv"
+    ]
+  },
+  {
+    "stratum": "N_BAIOT",
+    "client": "Philips_B120N10_Baby_Monitor",
+    "manifest": "outputs/cache/clients/9045def9fc9e55666cd3d9e46da649952420a0becbee2e36392741d0526d307b/manifest.json",
+    "manifest_sha256": "b5c049a3998c71527f3ae7b73374edf5cbeaf7a02a0ec99504d3d2580155f0e1",
+    "schema": "N_BAIOT_KITSUNE_SIGNED_LOG_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Philips_B120N10_Baby_Monitor/gafgyt_attacks/combo.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Philips_B120N10_Baby_Monitor/gafgyt_attacks/junk.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Philips_B120N10_Baby_Monitor/gafgyt_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Philips_B120N10_Baby_Monitor/gafgyt_attacks/tcp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Philips_B120N10_Baby_Monitor/gafgyt_attacks/udp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Philips_B120N10_Baby_Monitor/mirai_attacks/ack.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Philips_B120N10_Baby_Monitor/mirai_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Philips_B120N10_Baby_Monitor/mirai_attacks/syn.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Philips_B120N10_Baby_Monitor/mirai_attacks/udp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Philips_B120N10_Baby_Monitor/mirai_attacks/udpplain.csv"
+    ]
+  },
+  {
+    "stratum": "N_BAIOT",
+    "client": "Provision_PT_737E_Security_Camera",
+    "manifest": "outputs/cache/clients/9045def9fc9e55666cd3d9e46da649952420a0becbee2e36392741d0526d307b/manifest.json",
+    "manifest_sha256": "b5c049a3998c71527f3ae7b73374edf5cbeaf7a02a0ec99504d3d2580155f0e1",
+    "schema": "N_BAIOT_KITSUNE_SIGNED_LOG_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_737E_Security_Camera/gafgyt_attacks/combo.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_737E_Security_Camera/gafgyt_attacks/junk.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_737E_Security_Camera/gafgyt_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_737E_Security_Camera/gafgyt_attacks/tcp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_737E_Security_Camera/gafgyt_attacks/udp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_737E_Security_Camera/mirai_attacks/ack.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_737E_Security_Camera/mirai_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_737E_Security_Camera/mirai_attacks/syn.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_737E_Security_Camera/mirai_attacks/udp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_737E_Security_Camera/mirai_attacks/udpplain.csv"
+    ]
+  },
+  {
+    "stratum": "N_BAIOT",
+    "client": "Provision_PT_838_Security_Camera",
+    "manifest": "outputs/cache/clients/9045def9fc9e55666cd3d9e46da649952420a0becbee2e36392741d0526d307b/manifest.json",
+    "manifest_sha256": "b5c049a3998c71527f3ae7b73374edf5cbeaf7a02a0ec99504d3d2580155f0e1",
+    "schema": "N_BAIOT_KITSUNE_SIGNED_LOG_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_838_Security_Camera/gafgyt_attacks/combo.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_838_Security_Camera/gafgyt_attacks/junk.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_838_Security_Camera/gafgyt_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_838_Security_Camera/gafgyt_attacks/tcp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_838_Security_Camera/gafgyt_attacks/udp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_838_Security_Camera/mirai_attacks/ack.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_838_Security_Camera/mirai_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_838_Security_Camera/mirai_attacks/syn.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_838_Security_Camera/mirai_attacks/udp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Provision_PT_838_Security_Camera/mirai_attacks/udpplain.csv"
+    ]
+  },
+  {
+    "stratum": "N_BAIOT",
+    "client": "Samsung_SNH_1011_N_Webcam",
+    "manifest": "outputs/cache/clients/9045def9fc9e55666cd3d9e46da649952420a0becbee2e36392741d0526d307b/manifest.json",
+    "manifest_sha256": "b5c049a3998c71527f3ae7b73374edf5cbeaf7a02a0ec99504d3d2580155f0e1",
+    "schema": "N_BAIOT_KITSUNE_SIGNED_LOG_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Samsung_SNH_1011_N_Webcam/gafgyt_attacks/combo.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Samsung_SNH_1011_N_Webcam/gafgyt_attacks/junk.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Samsung_SNH_1011_N_Webcam/gafgyt_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Samsung_SNH_1011_N_Webcam/gafgyt_attacks/tcp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/Samsung_SNH_1011_N_Webcam/gafgyt_attacks/udp.csv"
+    ]
+  },
+  {
+    "stratum": "N_BAIOT",
+    "client": "SimpleHome_XCS7_1002_WHT_Security_Camera",
+    "manifest": "outputs/cache/clients/9045def9fc9e55666cd3d9e46da649952420a0becbee2e36392741d0526d307b/manifest.json",
+    "manifest_sha256": "b5c049a3998c71527f3ae7b73374edf5cbeaf7a02a0ec99504d3d2580155f0e1",
+    "schema": "N_BAIOT_KITSUNE_SIGNED_LOG_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1002_WHT_Security_Camera/gafgyt_attacks/combo.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1002_WHT_Security_Camera/gafgyt_attacks/junk.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1002_WHT_Security_Camera/gafgyt_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1002_WHT_Security_Camera/gafgyt_attacks/tcp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1002_WHT_Security_Camera/gafgyt_attacks/udp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1002_WHT_Security_Camera/mirai_attacks/ack.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1002_WHT_Security_Camera/mirai_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1002_WHT_Security_Camera/mirai_attacks/syn.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1002_WHT_Security_Camera/mirai_attacks/udp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1002_WHT_Security_Camera/mirai_attacks/udpplain.csv"
+    ]
+  },
+  {
+    "stratum": "N_BAIOT",
+    "client": "SimpleHome_XCS7_1003_WHT_Security_Camera",
+    "manifest": "outputs/cache/clients/9045def9fc9e55666cd3d9e46da649952420a0becbee2e36392741d0526d307b/manifest.json",
+    "manifest_sha256": "b5c049a3998c71527f3ae7b73374edf5cbeaf7a02a0ec99504d3d2580155f0e1",
+    "schema": "N_BAIOT_KITSUNE_SIGNED_LOG_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1003_WHT_Security_Camera/gafgyt_attacks/combo.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1003_WHT_Security_Camera/gafgyt_attacks/junk.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1003_WHT_Security_Camera/gafgyt_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1003_WHT_Security_Camera/gafgyt_attacks/tcp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1003_WHT_Security_Camera/gafgyt_attacks/udp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1003_WHT_Security_Camera/mirai_attacks/ack.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1003_WHT_Security_Camera/mirai_attacks/scan.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1003_WHT_Security_Camera/mirai_attacks/syn.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1003_WHT_Security_Camera/mirai_attacks/udp.csv",
+      "/home/naslouby/Projects/datp-shared-data/raw/N-BaIoT/SimpleHome_XCS7_1003_WHT_Security_Camera/mirai_attacks/udpplain.csv"
+    ]
+  },
+  {
+    "stratum": "GOTHAM_2025",
+    "client": "iotsim-air-quality-1",
+    "manifest": "outputs/cache/clients/ca308241d790fd7e8d9806012e85fa4db805900f2278ae409b4b9ed48811f576/manifest.json",
+    "manifest_sha256": "d27172fc8752cd383f0cc327b342974af173ff492556b5324fbd8239a8062150",
+    "schema": "GOTHAM_TSHARK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/Gotham2025/extracted/processed/iotsim-air-quality-1.csv"
+    ]
+  },
+  {
+    "stratum": "GOTHAM_2025",
+    "client": "iotsim-building-monitor-1",
+    "manifest": "outputs/cache/clients/ca308241d790fd7e8d9806012e85fa4db805900f2278ae409b4b9ed48811f576/manifest.json",
+    "manifest_sha256": "d27172fc8752cd383f0cc327b342974af173ff492556b5324fbd8239a8062150",
+    "schema": "GOTHAM_TSHARK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/Gotham2025/extracted/processed/iotsim-building-monitor-1.csv"
+    ]
+  },
+  {
+    "stratum": "GOTHAM_2025",
+    "client": "iotsim-city-power-1",
+    "manifest": "outputs/cache/clients/ca308241d790fd7e8d9806012e85fa4db805900f2278ae409b4b9ed48811f576/manifest.json",
+    "manifest_sha256": "d27172fc8752cd383f0cc327b342974af173ff492556b5324fbd8239a8062150",
+    "schema": "GOTHAM_TSHARK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/Gotham2025/extracted/processed/iotsim-city-power-1.csv"
+    ]
+  },
+  {
+    "stratum": "GOTHAM_2025",
+    "client": "iotsim-combined-cycle-1",
+    "manifest": "outputs/cache/clients/ca308241d790fd7e8d9806012e85fa4db805900f2278ae409b4b9ed48811f576/manifest.json",
+    "manifest_sha256": "d27172fc8752cd383f0cc327b342974af173ff492556b5324fbd8239a8062150",
+    "schema": "GOTHAM_TSHARK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/Gotham2025/extracted/processed/iotsim-combined-cycle-1.csv"
+    ]
+  },
+  {
+    "stratum": "GOTHAM_2025",
+    "client": "iotsim-combined-cycle-10",
+    "manifest": "outputs/cache/clients/ca308241d790fd7e8d9806012e85fa4db805900f2278ae409b4b9ed48811f576/manifest.json",
+    "manifest_sha256": "d27172fc8752cd383f0cc327b342974af173ff492556b5324fbd8239a8062150",
+    "schema": "GOTHAM_TSHARK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/Gotham2025/extracted/processed/iotsim-combined-cycle-10.csv"
+    ]
+  },
+  {
+    "stratum": "GOTHAM_2025",
+    "client": "iotsim-domotic-monitor-1",
+    "manifest": "outputs/cache/clients/ca308241d790fd7e8d9806012e85fa4db805900f2278ae409b4b9ed48811f576/manifest.json",
+    "manifest_sha256": "d27172fc8752cd383f0cc327b342974af173ff492556b5324fbd8239a8062150",
+    "schema": "GOTHAM_TSHARK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/Gotham2025/extracted/processed/iotsim-domotic-monitor-1.csv"
+    ]
+  },
+  {
+    "stratum": "GOTHAM_2025",
+    "client": "iotsim-ip-camera-museum-1",
+    "manifest": "outputs/cache/clients/ca308241d790fd7e8d9806012e85fa4db805900f2278ae409b4b9ed48811f576/manifest.json",
+    "manifest_sha256": "d27172fc8752cd383f0cc327b342974af173ff492556b5324fbd8239a8062150",
+    "schema": "GOTHAM_TSHARK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/Gotham2025/extracted/processed/iotsim-ip-camera-museum-1.csv"
+    ]
+  },
+  {
+    "stratum": "GOTHAM_2025",
+    "client": "iotsim-ip-camera-street-1",
+    "manifest": "outputs/cache/clients/ca308241d790fd7e8d9806012e85fa4db805900f2278ae409b4b9ed48811f576/manifest.json",
+    "manifest_sha256": "d27172fc8752cd383f0cc327b342974af173ff492556b5324fbd8239a8062150",
+    "schema": "GOTHAM_TSHARK_ENGINEERED_V1",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/Gotham2025/extracted/processed/iotsim-ip-camera-street-1.csv"
+    ]
+  },
+  {
+    "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+    "client": "ec1a59832811",
+    "manifest": "outputs/cache/clients/8458dc7e80ca0182711d1ba04773b384bba98240d257229475e7e7786a8ad028/manifest.json",
+    "manifest_sha256": "43c53e865bc433225847e7eac16ea83bc32f2da7759666543eee6c36de79dc27",
+    "schema": "UNSW_MUD_G1_MINUTE_COUNTERS",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/UNSW-IoT-Attack-Flows/flowdata/flowdata/ec1a59832811_flowstats.csv"
+    ]
+  },
+  {
+    "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+    "client": "ec1a5979f489",
+    "manifest": "outputs/cache/clients/8458dc7e80ca0182711d1ba04773b384bba98240d257229475e7e7786a8ad028/manifest.json",
+    "manifest_sha256": "43c53e865bc433225847e7eac16ea83bc32f2da7759666543eee6c36de79dc27",
+    "schema": "UNSW_MUD_G1_MINUTE_COUNTERS",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/UNSW-IoT-Attack-Flows/flowdata/flowdata/ec1a5979f489_flowstats.csv"
+    ]
+  },
+  {
+    "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+    "client": "00166cab6b88",
+    "manifest": "outputs/cache/clients/8458dc7e80ca0182711d1ba04773b384bba98240d257229475e7e7786a8ad028/manifest.json",
+    "manifest_sha256": "43c53e865bc433225847e7eac16ea83bc32f2da7759666543eee6c36de79dc27",
+    "schema": "UNSW_MUD_G1_MINUTE_COUNTERS",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/UNSW-IoT-Attack-Flows/flowdata/flowdata/00166cab6b88_flowstats.csv"
+    ]
+  },
+  {
+    "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+    "client": "50c7bf005639",
+    "manifest": "outputs/cache/clients/8458dc7e80ca0182711d1ba04773b384bba98240d257229475e7e7786a8ad028/manifest.json",
+    "manifest_sha256": "43c53e865bc433225847e7eac16ea83bc32f2da7759666543eee6c36de79dc27",
+    "schema": "UNSW_MUD_G1_MINUTE_COUNTERS",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/UNSW-IoT-Attack-Flows/flowdata/flowdata/50c7bf005639_flowstats.csv"
+    ]
+  },
+  {
+    "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+    "client": "70ee50183443",
+    "manifest": "outputs/cache/clients/8458dc7e80ca0182711d1ba04773b384bba98240d257229475e7e7786a8ad028/manifest.json",
+    "manifest_sha256": "43c53e865bc433225847e7eac16ea83bc32f2da7759666543eee6c36de79dc27",
+    "schema": "UNSW_MUD_G1_MINUTE_COUNTERS",
+    "sources": [
+      "/home/naslouby/Projects/datp-shared-data/raw/UNSW-IoT-Attack-Flows/flowdata/flowdata/70ee50183443_flowstats.csv"
+    ]
+  }
+]

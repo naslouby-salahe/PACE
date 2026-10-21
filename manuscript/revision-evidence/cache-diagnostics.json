@@ -1,0 +1,63 @@
+{
+  "absent_labels": [
+    [
+      "CTU_13",
+      "CTU13-scenario-06",
+      "MENTI"
+    ],
+    [
+      "CTU_13",
+      "CTU13-scenario-08",
+      "MURLO"
+    ],
+    [
+      "CTU_13",
+      "CTU13-scenario-12",
+      "NSIS.AY"
+    ],
+    [
+      "GOTHAM_2025",
+      "iotsim-combined-cycle-1",
+      "COAP_AMPLIFICATION"
+    ],
+    [
+      "GOTHAM_2025",
+      "iotsim-combined-cycle-1",
+      "UDP_SCAN"
+    ],
+    [
+      "IOT_23",
+      "48-1",
+      "C_C_HEART_BEAT_ATTACK"
+    ],
+    [
+      "IOT_23",
+      "48-1",
+      "C_C_PART_OF_A_HORIZONTAL_PORT_SCAN"
+    ],
+    [
+      "TON_IOT",
+      "192.168.1.1",
+      "MAN_IN_THE_MIDDLE"
+    ],
+    [
+      "TON_IOT",
+      "192.168.1.193",
+      "RANSOMWARE"
+    ],
+    [
+      "UNSW_IOT_ATTACK_FLOWS_G1",
+      "00166cab6b88",
+      "SNMP_REFLECTION"
+    ],
+    [
+      "UNSW_IOT_ATTACK_FLOWS_G1",
+      "ec1a59832811",
+      "SSDP_REFLECTION"
+    ]
+  ],
+  "absent_count": 11,
+  "pairs": 258,
+  "calibration_size_spearman": -0.5755072585805634,
+  "iot23_7_1_outside_calibration_range": 0.6578156312625251
+}

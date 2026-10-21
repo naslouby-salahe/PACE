@@ -1,3 +1,5 @@
+> Historical preparation record. The current revision and submission status are maintained in [audit.md](audit.md), Revision Verification Status (21 October 2026).
+
 # PACE revision audit
 
 Revised 13 October 2026. **Editorial draft complete; author confirmation required before submission.** Governing request: attachment 48c252f8-fab8-4454-a1c9-bb65a59bc886/pasted-text-1.txt.

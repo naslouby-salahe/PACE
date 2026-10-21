@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: elsarticle-num.bst
+Database file #1: references.bib
+Warning--empty pages in kitsune2018
+You've used 37 entries,
+            2952 wiz_defined-function locations,
+            923 strings with 13477 characters,
+and the built_in function-call counts, 13594 in all, are:
+= -- 1344
+> -- 442
+< -- 10
++ -- 172
+- -- 135
+* -- 1061
+:= -- 1764
+add.period$ -- 74
+call.type$ -- 37
+change.case$ -- 38
+chr.to.int$ -- 0
+cite$ -- 38
+duplicate$ -- 417
+empty$ -- 1480
+format.name$ -- 169
+if$ -- 3503
+int.to.chr$ -- 0
+int.to.str$ -- 37
+missing$ -- 33
+newline$ -- 156
+num.names$ -- 37
+pop$ -- 221
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 922
+stack$ -- 0
+substring$ -- 773
+swap$ -- 192
+text.length$ -- 10
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 100
+width$ -- 39
+write$ -- 388
+(There was 1 warning)

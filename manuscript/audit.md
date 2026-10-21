@@ -1,5 +1,223 @@
 # PACE manuscript audit
 
+## Final Float-Placement Verification — 21 October 2026
+
+**Scope:** placement-only correction against the current 35-page manuscript. This supersedes the earlier general placement clearance for F1–F6; scientific finding statuses and author-dependent actions are unchanged.
+
+| ID | Original problem | Exact source location and minimal correction | Final PDF page | Visual verification |
+|---|---|---|---:|---|
+| F1 | Figure 1 interrupted the PCA variance-retention sentence across pp.9–11. | sections/methodology.tex:45: localized \FloatBarrier before §4.4; existing figure declaration at line 18 is unchanged. | 10 | FIXED. Full architecture precedes §4.4; complete PCA paragraph is continuous on p.11. |
+| F2 | Table 4 intervened before the final 5.43% value across pp.17–18. | sections/results.tex:8: changed only Table 4 placement to [!htbp]. | 18 | FIXED. The comparison continues directly from p.17 to p.18 and finishes before both table panels; no float intervenes in the sentence. |
+| F3 | Figure 2 interrupted the temporal-change/sample-selection/extrapolation sentence across pp.20–22. | sections/results.tex:52: localized \FloatBarrier after the opening complete §6.5 paragraph, before the Table 5 declaration; Figure 2 remains at line 44 near its introduction. | 21 | FIXED. Preceding paragraph finishes on p.20; the complete cause-related paragraph follows on p.22. |
+| F4 | Figure 4 interrupted the opening §7.1 sentence across pp.24–25. | sections/results.tex:89,95: [!htbp] and localized barrier before §6.8. | 25 | FIXED. Figure/caption finish within §6.7 before seed stability and Discussion; §7.1 continues normally to p.26 without an intervening float. |
+| F5 | Table 2 interrupted problem-formulation prose across pp.7–8. | sections/problem-formulation.tex:16: moved its input after the complete local-budget/preprocessing paragraph; tables/data-access.tex:1: [!htbp]. | 8 | FIXED. Prose continues directly across pp.7–8 and completes before the table, within §3. |
+| F6 | Table 3 interrupted the census explanation across pp.13–14. | tables/corpora.tex:1: changed only placement to [!htbp]; input remains sections/experimental-methodology.tex:10. | 14 | FIXED. The census paragraph finishes at the top of p.14 before the table; dataset enumeration remains contiguous on p.13. |
+
+**Build and visual checks:** fresh latexmk -norc -pdf -interaction=nonstopmode -halt-on-error build using the existing pdfLaTeX/BibTeX toolchain; 35 pages. All 35 pages rendered and inspected, with detailed checks around the six floats. The delivered PDF was rendered again and all page images match the inspected candidate pixel-for-pixel. No undefined citations/references, duplicate destinations, overfull/underfull boxes, clipping, split captions, missing floats, blank pages or newly interrupted sentences were found. All four figures and eight numbered tables (including appendix continuations) remain. The existing full-page figures are retained at their original dimensions; the localized Figure 2 flush leaves modest lower-page space on p.20 to preserve complete paragraphs, without adding a page. Figure 3 falls between complete sentences in the adjustment discussion; ordinary text-only page continuations remain acceptable. BibTeX retains only the existing empty pages in kitsune2018 warning; bibliography metadata was not changed. All 135 PDF links have valid internal destinations or retained external URIs; appendix table destinations and the ORCID link remain valid.
+
+**Integrity:** normalized before/after LaTeX comparisons match after removing only float-placement options, the three added barriers and the relocated Table 2 input. Every float body, caption, label, equation, numerical value, table cell and Algorithm 1 is unchanged. Main/front matter, author metadata, bibliography and figure assets are unchanged. Algorithm 1 remains before §5 on p.13; Eq. (2) on p.8 and its explanation on p.9 remain consecutive; the fixed-complete-local-branch abstract and prior bibliography corrections remain intact. The baseline hash comparison permits only five float-related TeX files, main.pdf and this canonical audit to change. Scientific implementation, configurations, frozen evidence, manuscript generators and private docs/ remain identical. No experiment, retraining, commit or push was performed. No new audit file was created. F1–F6 have no unresolved placement issue.
+
+## Final Independent Review — 21 October 2026
+
+**Scope and decision:** final S1-S4 corrections and a new read-only verification of the entire current manuscript, using the revised worktree as baseline. The earlier blanket bibliography and presentation clearance was not accepted as proof: S1/S2 were confirmed bibliographic defects and S4 was confirmed in the rendered PDF. All four corrections below are now independently verified. **The manuscript is scientifically and editorially ready for author approval.** This does not assert submission approval or resolve the existing author-dependent declarations/history/permissions.
+
+### Four surgical corrections
+
+| ID | Exact source location | Original issue | Correction applied | Independent verification | Final status |
+|---|---|---|---|---|---|
+| S1 | manuscript/references.bib:244 | Flood venue contained a literal escaped HTML entity. | Changed only EuroS\&amp;P to EuroS\&P; DOI, title, authors, year and pages unchanged. | Source/BibTeX/PDF entity scans and rendered Ref. 37 on p.35 show EuroS&P. No other amp/lt/gt/quot entity artifacts. | FIXED |
+| S2 | manuscript/references.bib:296 | UCI dataset entry omitted four identifiable creators. | Added Yael Mathov, Yisroel Mirsky, Dominik Breitenbacher and Asaf Shabtai after Yair Meidan and Michael Bohadana, following UCI creator/preferred-citation order; omitted the malformed standalone Asaf entry. Dataset DOI/year/title/repository unchanged. | Official UCI preferred citation and creator list independently consulted; names corroborated with the original author-submitted article. Six unique complete creators render in Ref. 31 on p.35. The separate seven-author research article is unchanged. | FIXED |
+| S3 | manuscript/main.tex:29 | Abstract named only the fixed expert bank. | Replaced only the opening clause with: With the complete local branch held fixed. The sentence remainder is byte-identical. | Matches Section 6.2 and arms.py, where context.local supplies the anchor and bank to the fused-peer arms; all stated gains/FPR tradeoffs unchanged. | FIXED |
+| S4 | manuscript/sections/methodology.tex:18; manuscript/main.tex:40 | Figure 1 separated Eq. (2) from its explanation; Algorithm 1 crossed into the dataset enumeration. | Moved the unchanged figure declaration after the evidence explanation and limited it to bottom/float-page placement. Added placeins and one localized FloatBarrier before the Section 5 input. No figure asset or pseudocode content changed. | Rendered pp.8-13: Eq. (2) p.8 and its explanation p.9 are consecutive, Figure 1 p.10 remains near the method; Algorithm 1 precedes the Section 5 heading on p.13 and all six corpora/seven strata are enumerated contiguously below it. No added page, blank page, clipping or box warning. | FIXED |
+
+**S2 source reconciliation:** the official [UCI dataset record](https://archive.ics.uci.edu/dataset/442/detection+of+iot+botnet+attacks+n+baiot) lists Yair Meidan, Michael Bohadana, Yael Mathov, Yisroel Mirsky, Dominik Breitenbacher, an incomplete “Asaf” record, and Asaf Shabtai. Its preferred citation likewise contains an empty-family “, A.” field. The corrected entry retains the six complete, identifiable creators in that order, without inventing a seventh person or duplicating Shabtai. The [author-submitted original research article](https://arxiv.org/abs/1805.03409) corroborates the complete names; its separate authorship includes Yuval Elovici, who is not thereby inferred to be a dataset creator. DOI 10.24432/C5RC8J, dataset title, 2018 date and UCI attribution are unchanged.
+
+### Recheck of every original stable finding
+
+Statuses below were reassessed against current source, newly reproduced reporting or current rendered pages. The three existing author-dependent requirements and user exclusions remain unchanged.
+
+| ID | Final status | Current location | Evidence in this pass |
+|---|---|---|---|
+| C1 | AUTHOR CONFIRMATION REQUIRED | manuscript/main.tex:19 | Title page visually and programmatically rechecked: exact authors/order, affiliations, three emails, corresponding marker and ORCID URI intact. Existing declaration confirmations remain explicit. |
+| M13 | FIXED | manuscript/sections/comparison-inventory.tex:1 | Fresh frozen-JSON aggregation directly checked all 60 current appendix rows: 15 definitions/rules, both alpha values and budgets, TPR/FPR, signed effect and paired CI. No omitted adverse arm. |
+| M12 | FIXED | manuscript/sections/results.tex:78 | Four adjusted gains/CIs and 47/28,49/20,12/24,9/19 endpoint counts reproduce. Current text explicitly states both clamping directions and nonidentification at exactly equal FPR. |
+| M14 | FIXED | manuscript/sections/results.tex:85 | Host -.362268 and other-14 -.004441 [-.009296,.000412] reproduce; singleton conditioning remains in Results and Figure 4 caption. |
+| M16 | AUTHOR CONFIRMATION REQUIRED | manuscript/sections/experimental-methodology.tex:50 | Git chronology and retained seed/cohort paragraph checked; exact private freezes/arm timing still require author confirmation. No preregistration is inferred. |
+| M5 | FIXED | manuscript/sections/results.tex:19 | Section 6.2, appendix, abstract and Discussion agree with fixed complete local branch. All eight nominal gains/positive descriptive CIs and higher FPR reproduce; no mechanism/equal-FPR overclaim. |
+| M1 | FIXED | manuscript/sections/results.tex:35 | Ex-TON values, three lower bounds below .001, 60-89% concentration and observed-outcome-selected top-five removals reproduce; high-budget adverse results retained. |
+| M20 | FIXED | manuscript/sections/results.tex:30 | Bank-without-anchor code assigns full B_L to the bank. Current Results correctly report reallocation, zero-crossing low-alpha CIs and higher detection/higher FPR at alpha .05. |
+| M2 | ALREADY SATISFIED | manuscript/sections/limitations.tex:13 | Related work and limitations still explicitly state MCDE/external competitors were not executed and claim no numerical superiority. New baselines remain excluded. |
+| M17 | FIXED | manuscript/sections/results.tex:62 | Cache-based diagnostics rerun: 65.7816% outside the calibration orig_ip_bytes range; confounded negative calibration-size association. Current prose asserts association, not causality or a proven repair. |
+| M19 | FIXED | manuscript/tables/primary.tex:14 | Both primary FPR panels directly checked against fresh outputs: signed effects/CIs, lower means at alpha .05, two-target contribution/exclusion and 32/23/3 count agree. |
+| M18 | FIXED | manuscript/sections/results.tex:41 | Fresh target seed means give 21/36/1 and 15/41/2 at N=400 with tolerance .001; dependence and descriptive interpretation remain explicit. |
+| m20 | FIXED | manuscript/sections/methodology.tex:83 | Single-local-union stored TPR/FPR comparisons reproduce; strict allocation and absence of row-mask/population-guarantee inference remain correct. |
+| m15 | FIXED | manuscript/sections/methodology.tex:83 | Equations and actual higher-quantile/union routines rechecked with unchanged passing numerical tests; individual floor(w*(n_j-1)) and joint floor(B*n_j) count limits remain distinct. |
+| m16 | FIXED | manuscript/sections/experimental-methodology.tex:19 | Actual foreign-peer labels, capture lengths and eligibility minima reconstructed again: 11 of 258 cells absent; label overlap not equated with identical attacks. |
+| m21 | FIXED | manuscript/sections/results.tex:39 | Scenario-12 seed-7 peer .189114 and PACE/comparator budget reversal reproduce. Negative target remains visible and no detector cause is invented. |
+| m17 | AUTHOR CONFIRMATION REQUIRED | manuscript/sections/dataset-provenance.tex:1 | Seven cache manifests and exact input-path/schema/hash inventory match fresh inspection; provenance appendix still distinguishes small IoT-23 flows, TON processed network, Gotham CSVs, CTU scenarios, original N-BaIoT and UNSW flowstats. Existing missing raw-release/permission facts remain author-dependent. |
+| m13 | FIXED | manuscript/scripts/generate_figures.py:1 | Existing manuscript-only generators, source-coordinate manifest and four figure assets were inspected and are unchanged in this pass. Source coordinates/labels/cohort definitions remain compatible with fresh frozen summaries; no figure regeneration or data change was needed. |
+| O4 | FIXED | manuscript/sections/discussion.tex:27 | Apruzzese/Flood attached claims and available primary texts remain aligned. Flood bibliographic rendering was re-opened and corrected under S1 rather than retaining the prior blanket clearance. |
+| O6 | FIXED | manuscript/sections/related-work.tex:31 | Rey and DI-NIDS information regimes, frozen-model distinction and final author lists checked against primary metadata/local texts; Rey final four-author record remains distinct from its five-author preprint. |
+| O7 | FIXED | manuscript/sections/related-work.tex:19 | Bridges threshold precedent remains narrowly and correctly attributed; no threshold-invention or imported conformal guarantee. DOI and rendered entry checked. |
+| W7 | FIXED | manuscript/sections/introduction.tex:7 | Introduction still states upper-tail ranks plus beyond-reference extrapolation, consistent with Eq. (2) and tie-inclusive implementation. |
+| O9 | FIXED | manuscript/sections/related-work.tex:53 | Nouman citation retains the calibration/evaluation-granularity distinction and does not attribute its external cause to PACE. Metadata/rendering and local version of record checked. |
+| M10 | FIXED | manuscript/sections/experimental-methodology.tex:52 | Fresh validation confirms 110 artifacts, 1824 records, 1416 unique keys and 408 identical repeats; explicit deduplication key remains correct. |
+| m14 | FIXED | manuscript/sections/experimental-methodology.tex:48 | Normal-approximation planning statement and .018393/.036787 values rechecked against NormalDist computation; not described as observed power. |
+| m19 | FIXED | README.md:7 | Public README preprocessing/target wording inspected and unchanged since this pass began; private docs remain untouched and excluded. |
+| m22 | FIXED | manuscript/references.bib:1 | Rechecked all 37 unique references, DOI mappings, authors, titles, venues, years, article/page numbering and emitted keys. Earlier clearance was insufficient for S1/S2; both are now corrected and rendered. No invented NDSS pages. |
+| O2 | DEFERRED BY USER | manuscript/main.tex:1 | Existing journal-neutral elsarticle class retained; venue selection remains explicitly deferred. |
+| O5 | ALREADY SATISFIED | manuscript/scripts/generate_figures.py:77 | All four ECDF panels visually checked: exact zeros and full .67 tail remain visible; optional inset remains unnecessary for the scoped correction. |
+| O8 | ALREADY SATISFIED | manuscript/sections/related-work.tex:1 | Existing selective citations/version distinctions retained, no new citations. Full-text access limitations remain candid; optional/excluded literature work was not reopened. |
+| W1 | FIXED | manuscript/main.tex:29 | Abstract retains the architectural result, primary gains and false-alert boundary; S3 corrects the fixed-component clause without altering the sentence remainder. |
+| W2 | FIXED | manuscript/sections/conclusion.tex:4 | Conclusion retains the precise contribution and independent false-alert-validation boundary; no new wording or scientific qualification needed. |
+
+**Reconciliation:** all 28 stable findings previously FIXED or ALREADY SATISFIED are rechecked and closed after S1-S4. There are no remaining confirmed manuscript defects. The stable-status counts remain 25 FIXED, 3 ALREADY SATISFIED, 1 DEFERRED BY USER, 3 AUTHOR CONFIRMATION REQUIRED, 0 BLOCKED and 0 UNRESOLVED. S1-S4 are four additional closed correction records, not replacements for the original finding IDs.
+
+The original proposal families were also checked: A1/A2/B1/B3 remain satisfied by the complete comparisons, explicit interpretation and unchanged per-seed export; B2/B4/B5 remain optional alternatives whose omission creates no contradiction in the bounded claims. E1-E6/D1 and O2 remain deferred under the user's explicit exclusions. Including these 14 proposal families, the existing 46-entry status totals remain unchanged. Private docs, the final GitHub URL and journal selection are not scientific defects and were not reopened.
+
+### Complete verification outcome
+
+- **Scientific/numerical — passed:** newly ran the existing manuscript-only reporting and cache verifiers in temporary directories, after inspecting their aggregation, deduplication and bootstrap logic. All 110 embedded content digests validate; 1824 records contain 1416 unique keys and 408 fully identical repeats. The fresh 60-row inventory was checked directly against every numeric field of the current LaTeX appendix, and the eight primary table rows were checked independently against frozen target means and paired intervals. The full 21,240 method-record export, reporting diagnostics and cache provenance match the existing evidence exactly. Both alpha values, budgets, 58 targets, primary gains/CIs and FPR signs are preserved. Concentration, adverse targets, peers-only qualification, local-exclusive coverage, singleton conditioning, calibration limitations and lack of external/equal-FPR superiority were re-read across abstract, methods, Results, Discussion, limitations and conclusion.
+- **Mathematics — passed:** Equations (1)-(8), Algorithm 1 and their explanatory conventions were compared with current core/evidence.py, core/decision.py, experiment/arms.py, models.py, runner.py and splitting.py. Reference ties/extrapolation, block partition, higher-quantile index, strict comparisons, multiplier search, anchor/bank allocations, rarity scores, own-peer exclusion, pooled benign preprocessing and final OR agree. All eight equation blocks and the full pseudocode are byte-identical to the pre-S1-S4 baseline. No new contradiction was confirmed. The 75 existing core-evidence/decision/reporting-metrics tests passed; no model was fitted or scored and no scientific experiment was rerun.
+- **Bibliography — passed after S1/S2:** 37 existing entries, 37 unique DOI mappings and all emitted citation keys checked against primary registry snapshots, available local source texts and targeted current UCI/article records. All publication years, author lists and venue/page fields were examined; legitimate ACM article-number pagination, name particles and NDSS's absent conventional pages were preserved. No entry was added or removed. Source, generated .bbl and final extracted PDF contain no accidentally rendered amp/lt/gt/quot HTML entities. Prior-pass JSON metadata/creator-count snapshots are historical evidence, not a competing final audit; this section records their S2 correction.
+- **Presentation — passed:** clean LaTeX/BibTeX compilation produced 35 pages. Every final page was rendered and visually inspected; title/author block, mathematical pages, affected float pages, primary table, complete comparison/provenance appendices and bibliography were also inspected at readable resolution. Figure 1 is on p.10; Eq. (2) and its explanation are consecutive on pp.8-9 with no intervening float. Algorithm 1 precedes Section 5 on p.13, and the complete dataset enumeration follows contiguously. No forced blank page, excessive new whitespace, clipping, overlap, overfull/underfull box, duplicate destination, undefined citation or undefined reference remains. Appendix labels A.1/A.2/B.1 and all figure/table/algorithm references resolve.
+- **Author/declaration preservation — passed:** title, all three supplied authors/order, numeric affiliation mapping, exact institutions, all three emails, corresponding marker, ORCID text/hyperlink and PDF-author metadata checked. Existing truthful Codex disclosure and author-dependent facts remain; no human approval, funding/conflict absence or public release is invented.
+- **Integrity — passed:** compared content hashes with a fresh pre-S1-S4 snapshot of 378 tracked/relevant files. Only manuscript/main.tex, manuscript/references.bib, manuscript/sections/methodology.tex, manuscript/main.pdf and this canonical audit are changed by this pass. All figure assets, equations, algorithm text, scientific implementation/configurations, frozen campaigns/results, earlier evidence exports, README and private docs remain identical. Implementation digest remains 7dd88ce13b0d32a3875db47869e5ac13f5cecfa0dc82c6d14322dc67419a8a3b. Git history was not changed; no commit/push was made.
+- **Warnings/access boundary:** final LaTeX log has no citation/reference/layout warnings. BibTeX retains the existing harmless empty-pages warning for Kitsune; no pagination was fabricated to silence it. Previously documented full-text limitations remain accurately recorded and were not recast as successful full-paper inspections.
+
+### Remaining author actions and explicit exclusions
+
+C1 still requires funding/conflicts, individual contributions/acknowledgements, final coauthor approval and responsibility; M16 still requires exact private design/criteria/arm chronology; m17 still requires unavailable raw-release/retrieval and permission facts. These are author-dependent facts, not newly confirmed manuscript defects. The final public repository URL/revision, venue formatting, ignored private documentation, new external baselines/cohorts/seeds/budgets/matched-FPR studies, deployment measurements and algorithm redesign remain intentionally deferred.
+
+---
+
+## Revision Verification Status
+
+**Revision date:** 21 October 2026 (Africa/Casablanca). **Literature cutoff:** publications available by 20 October 2026. The final independent review above supplies the current verification; this earlier revision reconciliation and the original 20 October assessment are retained as historical evidence.
+
+**Outcome:** authorized manuscript revisions implemented and independently rechecked against scientific source, frozen outputs, primary literature and rendered PDF. The manuscript has 35 pages; a fresh LaTeX/BibTeX build resolves all citations and references without LaTeX box, duplicate-destination or unresolved-reference warnings. BibTeX retains one legitimate empty-pages warning for Kitsune (NDSS does not supply a conventional page range). The supplied author block and ORCID hyperlink render correctly. No scientific implementation, configuration, frozen campaign result or private docs content changed.
+
+**Completion boundary:** all in-scope scientific/reporting findings are closed. C1, M16 and m17 retain precisely identified author-dependent facts below. Repository publication, journal choice, ignored private docs changes, new experiments and algorithm redesign are intentional exclusions. They are not failed scientific revisions. This document does not assert final human/coauthor approval or unconditional submission readiness.
+
+### Original stable findings
+
+| ID | Original priority | Final status | Exact current location | Change / verification evidence | Remaining action |
+|---|---|---|---|---|---|
+| C1 | P0 | AUTHOR CONFIRMATION REQUIRED | manuscript/main.tex:18 | All three supplied identities, numeric affiliations, emails, corresponding marker, ORCID text and URI verified in the rendered title page. Truthful declaration placeholders retained. | Funding/conflicts, contributions/acknowledgements, final coauthor approval and responsibility; release link intentionally deferred. |
+| M13 | P1 | FIXED | manuscript/sections/comparison-inventory.tex:1 | 15 rules x four primary configurations: 60 rows with TPR, FPR, paired effect/CI and precise definitions; independently recomputed from frozen JSON. Peers-only is prominent in Results. | None |
+| M12 | P1 | FIXED | manuscript/sections/results.tex:78 | Explicit clamping direction and nonidentification; all four original adjusted gains/CIs and 75/69/36/28 uncovered-cell counts reproduce. No zero-credit bound or exact-FPR claim. | None |
+| M14 | P1 | FIXED | manuscript/sections/results.tex:85 | Host change -0.362268 and other-14 change -0.004441 [-0.009296,0.000412] reproduced; Figure 4 caption conditions on singleton resampling. | None |
+| M16 | P1 | AUTHOR CONFIRMATION REQUIRED | manuscript/sections/experimental-methodology.tex:50 | Cohort reuse, 35-1 motivation and documented role of seeds 6-8 added. Commits 4528117/41b3a18/08346c8 establish repository order; dates use Africa/Casablanca. | Exact private architecture/criteria freeze and arm timing relative to inspected outcomes; repository commit dates do not establish these. |
+| M5 | P1 | FIXED | manuscript/sections/results.tex:19 | Dedicated Results subsection with all eight gains/CIs, fixed complete local branch and higher FPR; abstract/contribution 2 updated; Discussion cross-reference replaces duplicate numerical paragraph. | None |
+| M1 | P1 | FIXED | manuscript/sections/results.tex:35 | Ex-TON gains/CIs retained, three small lower bounds corrected, top-three shares 60.48-89.38% and exploratory top-five removals reproduced; negative targets and high-budget results retained. | None |
+| M20 | P1 | FIXED | manuscript/sections/results.tex:30 | Anchor removal explicitly reallocates B_L to bank; 35-1/.190 offset, zero-crossing low-alpha intervals and adverse high-alpha tradeoff agree with arms.py and frozen summaries. | None |
+| M2 | P1 | ALREADY SATISFIED | manuscript/sections/limitations.tex:13 | Current paper explicitly limits numerical comparisons to executed internal architectures and states MCDE was not rerun. The permitted alternative of precise bounded claims is satisfied. | External reimplementation is intentionally excluded by the user; see E2. |
+| M17 | P2 | FIXED | manuscript/sections/results.tex:62 | 65.7816% outside the orig_ip_bytes calibration range independently reproduced; negative calibration-size/FPR association documented without causal detector or repair claim. | None |
+| M19 | P2 | FIXED | manuscript/tables/primary.tex:14 | Both alpha levels now have paired FPR CIs. Lower alpha-.05 means retained; two-target contribution -0.008036, exclusion -0.002107 CI and 32/23/3 counts reproduced in Results. | None |
+| M18 | P2 | FIXED | manuscript/sections/results.tex:41 | Seed-averaged 21/36/1 and 15/41/2 counts at N=400 reproduced; tolerance and shared-peer dependence explicit; no sign-test inference added. | None |
+| m20 | P2 | FIXED | manuscript/sections/methodology.tex:81 | Single union respects total alpha and preserves pooled low-alpha TPR at stored precision, with FPR .033998/.032371; no record-mask identity or population guarantee inferred. | None |
+| m15 | P2 | FIXED | manuscript/sections/methodology.tex:81 | Different floor(B*n_j) union and floor(w*(n_j-1)) individual limits stated; actual routines checked at 250,350,385,399,400,401,418,436,464,495,499 rows; equations unchanged. | None |
+| m16 | P2 | FIXED | manuscript/sections/experimental-methodology.tex:19 | Reconstructed all actual foreign-peer development labels using cached capture lengths and executed minima; 11 absent of 258 cells verified. Label overlap is distinguished from shared instances/family holdout. | None |
+| m21 | P2 | FIXED | manuscript/sections/results.tex:39 | CTU scenario-12 seed 7 peer .189114, PACE .217712 vs comparator .312731 at N=400 and reversed contrast at N=100 reproduced; detector-level cause remains unclaimed. | None |
+| m17 | P2 | AUTHOR CONFIRMATION REQUIRED | manuscript/sections/dataset-provenance.tex:1 | Exact manifest paths, schemas, seven manifest hashes, archive/subset distinctions, authoritative links and confirmed source terms added; Gotham descriptor and N-BaIoT data DOI checked. | Missing numbered raw revisions/retrieval records and raw-archive checksums cannot be reconstructed from cache manifests; confirm additional permissions/citation obligations, particularly UNSW redistribution. No raw redistribution claimed. |
+| m13 | P2 | FIXED | manuscript/scripts/generate_figures.py:1 | Four manuscript-only figure generators, coordinate/source manifest and commands added. Temporary regeneration matches scientific content; two new-generator runs produce identical PDFs/coordinates. Prior source was absent, so earlier pixel identity is not asserted. | None |
+| O4 | P2 | FIXED | manuscript/sections/discussion.tex:27 | Apruzzese 2026 added for report triage; Flood 2024 for dataset construction. Relevant original passages and DOI metadata checked; newly retrieved 18-page institutional Flood copy closes its earlier full-text gap. | None |
+| O6 | P2 | FIXED | manuscript/sections/related-work.tex:31 | Rey and DI-NIDS added with correct information access and final-publication metadata. Rey preprint extra author distinguished from final four-author DOI record; no performance ranking. | None |
+| O7 | P2 | FIXED | manuscript/sections/related-work.tex:19 | Bridges precedent acknowledged with verified DOI and method text. PACE novelty remains its frozen-peer/local decision architecture; no imported conformal guarantee. | None |
+| W7 | P2 | FIXED | manuscript/sections/introduction.tex:7 | First transform description now specifies attack-minus-benign upper-tail ranks and extrapolation, matching Eq. (2) and searchsorted left ties. | None |
+| O9 | P2 | FIXED | manuscript/sections/related-work.tex:53 | Published 2026 DOI, title, authors and relevant granularity diagnosis checked against version of record; PACE row-level procedure distinguished. MEFA remains abstract-only and is not used for a detailed comparison. | None |
+| M10 | P3 | FIXED | manuscript/sections/experimental-methodology.tex:52 | 110 artifact digests validated: 1824 records, 1416 unique keys, 408 fully identical repeats. Deduplication key and manifest documented, all outcomes preserved. | None |
+| m14 | P3 | FIXED | manuscript/sections/experimental-methodology.tex:48 | Planning approximation explicitly named; normal quantiles reproduce MDE .018393/.036787, without observed-power claims. | None |
+| m19 | P3 | FIXED | README.md:7 | Two public README statements aligned with already correct manuscript: pooled benign preprocessing and 58 benchmark targets. All private docs hashes unchanged. | Ignored docs cleanup is DEFERRED BY USER and is not a manuscript defect. |
+| m22 | P3 | FIXED | manuscript/references.bib:1 | Removed duplicated DOI URL; preserved proper names, article numbering and legitimate absent NDSS pagination. All 37 entries rechecked in the final independent review; S1 rendering and S2 dataset-creator omissions corrected there. Harmless Kitsune empty-pages warning retained. | None |
+| O2 | P3 | DEFERRED BY USER | manuscript/main.tex:1 | Existing journal-neutral elsarticle retained. Concrete appendix references, unique hyperlink destinations and table numbering corrected without selecting a venue. | Select a target journal later; apply its actual template then. |
+| O5 | P3 | ALREADY SATISFIED | manuscript/scripts/generate_figures.py:77 | Full false-alert distribution, zeros and .67 tail remain visible. Optional inset omitted to preserve the established layout; numerical coordinate archive permits later views. | None |
+| O8 | P3 | ALREADY SATISFIED | manuscript/sections/related-work.tex:1 | Eight focused additions supply the needed arguments. CADES archival record and relevant Bonferroni text examined; no publication DOI invented. Redundant optional surveys/benchmark citations omitted with no unsupported exhaustive-novelty claim. | None |
+| W1 | P3 | FIXED | manuscript/main.tex:28 | Generic abstract close replaced by verified peer-fusion result and future-FPR boundary; nearby repeated guarantee wording removed while preserving primary gains. | None |
+| W2 | P3 | FIXED | manuscript/sections/conclusion.tex:4 | Requested concluding contribution/validation statement inserted; measured gains and adverse/heterogeneous results preserved. | None |
+
+**Counts for the 32 stable findings:** AUTHOR CONFIRMATION REQUIRED: 3, FIXED: 25, ALREADY SATISFIED: 3, DEFERRED BY USER: 1, BLOCKED: 0, UNRESOLVED: 0.
+
+### Recommended analysis / experiment families
+
+These 14 original proposal IDs are also adjudicated so that optional future work is not mistaken for an unresolved manuscript correction.
+
+| ID | Original priority | Final status | Evidence or scope decision |
+|---|---|---|---|
+| A1 | P1 | FIXED | Complete 60-row primary rule inventory; all outcomes and paired contrasts included. |
+| A2 | P1 | FIXED | Clamping direction/nonidentification and high-resource singleton conditioning added beside results. |
+| B1 | P2 | FIXED | target-seed-rates.csv exports 21,240 method rows from all 1416 unique frozen cells; no repeated observations counted twice. |
+| B2 | P2 | ALREADY SATISFIED | Coverage counts and approximate-estimand boundary are explicit. Optional covered-only deletion would select on realized outcomes and is unnecessary for the bounded claim. |
+| B3 | P1/P2 | FIXED | Top-five outcome-selected and singleton-host sensitivities reproduced and reported. |
+| B4 | P2 | ALREADY SATISFIED | Read-only calibration-size and benign-role diagnostics reported. Optional additional figure omitted; correlation is confounded and no repair claim is made. |
+| B5 | P3 | ALREADY SATISFIED | Target-macro weighting and per-seed outcomes are explicit. Equal-corpus weighting would answer a different optional question and is not substituted for the frozen estimand. |
+| E1 | P1 conditional | DEFERRED BY USER | No new matched-FPR sweep; exact equal-FPR superiority is not claimed. |
+| E2 | P1 conditional | DEFERRED BY USER | No MCDE or other external-baseline experiment; internal-study scope retained. |
+| E3 | P2 | DEFERRED BY USER | No new independent target/corpus cohort. |
+| E4 | P2 | DEFERRED BY USER | No additional learning seeds or campaigns. |
+| E5 | P2 | DEFERRED BY USER | No new detector/peer scoring traces or mechanism experiments. |
+| E6 | P2 conditional | DEFERRED BY USER | No deployment-resource or incident-workload benchmark. |
+| D1 | P3 | DEFERRED BY USER | No algorithm, calibration, allocation, preprocessing or protocol redesign. |
+
+**Combined reconciliation (46 entries):** AUTHOR CONFIRMATION REQUIRED: 3, FIXED: 29, ALREADY SATISFIED: 6, DEFERRED BY USER: 8, BLOCKED: 0, UNRESOLVED: 0.
+
+### Independent verification evidence
+
+- **Mathematics and source:** equations (1)-(8) and Algorithm 1 were compared with core/evidence.py, core/decision.py, experiment/arms.py, models.py, runner.py, inputs.py and splitting.py. Tie-inclusive tails, beyond-reference spread floor, higher-quantile indexing, balanced blocks, strict decisions, feasible-lower multiplier search, protected anchor allocation, bank allocation and final OR agree. The extra low-alpha allocation remains explicit. Own-peer exclusion, pooled full-benign-training standardization, additional target roles and attack-label restrictions remain accurately stated. No equation was changed.
+- **Numerics:** all 110 JSON content digests validate; all 408 repeated target records agree. 4248 scalar target-table values plus 212 distribution, seed and primary-stratum scalar values reproduce at printed precision, including adverse targets. The four primary TPR gains/CIs, all 60 comparison rows, FPR signs/CIs, 11/258 label coverage, role-shift diagnostic, concentration, high-resource and CTU seed findings independently reproduce. Low-alpha FPR CIs are [0.000621,0.008522] and [0.000537,0.003249]. Sweep gains remain .024659/.025735/.022176/.020718. Endpoint equality is handled explicitly before interpolation, as in the actual reporting implementation. **No discrepancy remains in the reported scientific numbers.**
+- **Statistical interpretation:** descriptive corpus conditioning, shared-peer dependence, exploratory removals and selection history are explicit. The high-resource TON singleton is fixed under the stated bootstrap. Nominal peer-fusion gains carry higher FPR; primary alpha-.05 means still improve detection and reduce mean FPR. No exact equal-FPR superiority, family-holdout benchmark, causal detector diagnosis or population FPR theorem is claimed.
+- **Repeatability:** reporting-verification.json, cache-diagnostics.json and numerical figure-inputs.json match separate temporary runs. All four reconstructed figure PDFs match a second generator run byte-for-byte after variable dates are omitted. Earlier figure source was absent; old-versus-new byte/pixel identity is not asserted. Plotted values, labels, legends, zeros, negative targets and complete FPR tails were checked. Commands and runtime versions are in REPRODUCIBILITY.md.
+- **Checks:** 75 existing core-evidence, decision and reporting-metrics unit tests passed. Quantile and union-count boundaries were checked at actual/relevant block lengths. These checks operate on mathematical/synthetic arrays and stored outcomes; no detector was retrained and no scientific evaluation was rerun.
+- **Literature:** all 37 final references have unique verified DOI identities and citation keys (34 research/preprint records plus three datasets). Eight focused references were added: Apruzzese 2026, Flood 2024, Rey 2022, Layeghy 2023, Bridges 2017, Belarbi 2026, Nouman 2026 and the N-BaIoT dataset DOI. The earlier revision removed MCDE's duplicate DOI URL. The final independent review found and corrected Flood's HTML entity and the incomplete UCI creator list under S1/S2; no pages were invented. Registry variants for van den Hengel, italic p, Zimek's position-paper suffix and the IoT/loT index typo were reconciled with actual published text rather than blindly copied.
+- **Access and versions:** 30 cited research PDFs are available locally and Xiang is readable in full publisher HTML. Three cited article full texts remain unavailable in this verification (LOF, TON_IoT, CTU-13); their narrow definitions/corpus attribution are supported by primary indexed or official dataset records, not represented as complete method inspections. MEFA's publisher full-text URL redirects to its abstract; no detailed MEFA comparison or exhaustive novelty claim was added. CADES' official PMLR record and relevant full text were examined; no publication DOI was verified, and the optional citation was omitted in favor of the sufficient DOI-verified thresholding precedent. Flood's previously missing article is now available as an 18-page institutional author copy (Added_Flood_2024_author.pdf); its metadata and relevant passages match. No unavailable source is represented as fully read.
+- **Updates/disclosures:** primary registry update fields and publisher version notes were checked where available; no cited corrective notice was identified in those records. This is not universal retraction clearance. The existing truthful Codex disclosure remains immediately before references. Elsevier's current [AI policy](https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals) supports disclosure and author responsibility; the eventual journal's policy and actual human approval still require author review. No additional tool use is inferred from directory names.
+- **Language/originality:** revisions are limited to the requested scientific/editorial points. Prose/source Unicode inspection found zero suspicious characters across the checked manuscript files. The revised body, excluding references, had no exact eight-word match against available local research texts in the limited literal-overlap check. No actionable close paraphrase was identified in the newly cited passages. This is not a plagiarism percentage, institutional similarity report or AI-authorship estimate; inaccessible texts and unindexed paraphrases are outside that check.
+- **PDF:** all 35 pages were rendered and visually inspected, with title, equations, primary table, four figures, appendix and declarations/bibliography additionally checked at readable resolution. Appendix labels are A.1/A.2/B.1 with unique hyperlink destinations; duplicated Appendix prefixes were corrected. All three authors, exact supplied institutions/emails, corresponding marker, ORCID text/URI and PDF-author metadata were checked. No clipped tables, missing figures, blank pages or unresolved references remain.
+- **Repository:** the current implementation digest remains 7dd88ce13b0d32a3875db47869e5ac13f5cecfa0dc82c6d14322dc67419a8a3b. Scientific source/configs, original results, campaigns and private docs are content-identical to the initial snapshot. Authorized changes are confined to manuscript material and two targeted README corrections for m19; no Git commit, reset, history change or push was made. A final integrity manifest records this comparison.
+
+### Remaining author-dependent actions
+
+1. C1: confirm funding/conflicts, individual contribution roles, acknowledgements if any, final coauthor approval and responsibility, and the factual extent of human review. Supplied identities are already complete; they are not requested again.
+2. M16: substantiate exact private architecture/acceptance freeze dates and comparison-arm timing relative to inspected results. Local file timestamps and first Git inclusion cannot prove preregistration.
+3. m17: supply missing retrieval/raw-version records or archive integrity records if available, and confirm rights/citation/redistribution obligations not established on source pages. Cache-manifest hashes are explicitly not raw-archive checksums.
+4. The permanent GitHub URL and immutable public revision remain intentionally author-supplied and deferred. Private docs, venue selection, external baselines, new cohorts/seeds/sweeps and deployment measurements remain outside this revision.
+
+### Applied edit crosswalk
+
+The following source anchors identify actual final locations. Detailed numerical evidence is in revision-evidence/; no competing audit document is created.
+
+| Edit ID | File and exact location | Action | Verification |
+|---|---|---|---|
+| 01 | manuscript/main.tex:28 | Replace abstract close; retain primary result | Eight nominal peer-fusion effects and higher FPR reproduced |
+| 02 | manuscript/sections/introduction.tex:7 | Clarify upper-tail ranks/extrapolation | Eq. (2), ties and implementation checked |
+| 03 | manuscript/sections/introduction.tex:11 | Add precise architecture distinction; remove redundancy | No new-estimator or threshold-invention claim |
+| 04 | manuscript/sections/introduction.tex:16 | Replace contribution 2 | Both fixed-component questions and 58-target scope checked |
+| 05 | manuscript/sections/comparison-inventory.tex:1 | Add complete comparison inventory | 60 rows, 15 definitions, all 12 executed arms |
+| 06 | manuscript/sections/results.tex:17 | Report peers-only | All four paired contrasts and FPR differences reproduced |
+| 07 | manuscript/sections/results.tex:19 | Move peer-fusion evidence to Results | Eight positive descriptive intervals; alert cost explicit |
+| 08 | manuscript/sections/results.tex:78 | Explain clamped adjustment | Original gains/CIs/coverage preserved |
+| 09 | manuscript/tables/primary.tex:14 | Add FPR CIs and concentration diagnostic | 10,000 paired replicates; two-target exclusion reproduced |
+| 10 | manuscript/sections/results.tex:35 | Quantify concentration and wins/ties/losses | Top-three shares, top-five removals and counts reproduced |
+| 11 | manuscript/sections/results.tex:85 | Explain host/singleton high-resource result and caption | Host/other-14 paired changes and cohort counts reproduced |
+| 12 | manuscript/sections/results.tex:30 | Describe anchor/bank reallocation | arms.py definition, target offsets and adverse tradeoff checked |
+| 13 | manuscript/sections/methodology.tex:81 | Connect single-union sensitivity and count resolution | Low-alpha equal pooled TPR; distinct integer count limits |
+| 14 | manuscript/sections/experimental-methodology.tex:19 | Quantify label-level peer overlap | Actual peer lists, capture lengths and minima reconstructed |
+| 15 | manuscript/sections/experimental-methodology.tex:50 | Add supported development chronology | Git order/specification checked; unknown timing remains labeled |
+| 16 | manuscript/sections/results.tex:62 | Add benign-role/FPR associations | 65.7816% range diagnostic and confounded association reproduced |
+| 17 | manuscript/sections/results.tex:39 | Localize CTU-13 regression | Seed 7 peer .189114 and budget reversal checked |
+| 18 | manuscript/sections/dataset-provenance.tex:1 | Add dataset provenance appendix | Seven cache manifests, exact input paths, source terms; gaps labeled |
+| 19 | manuscript/scripts/generate_figures.py:1 | Reconstruct Figures 1-4 and document commands | Scientific coordinates checked; repeat generation identical |
+| 20 | manuscript/main.tex:50 | Insert provisional code availability | No public release asserted; explicit pending link retained |
+| 21 | manuscript/main.tex:51 | Preserve honest declaration placeholders | No funding/conflict/contribution/approval facts invented |
+| 22 | manuscript/main.tex:55 | Retain truthful Codex disclosure | Current provisional Elsevier policy checked; journal choice deferred |
+| 23 | manuscript/sections/conclusion.tex:4 | Replace concluding sentence | Primary outcomes and deployment boundary retained |
+| 24 | manuscript/main.tex:46 | Targeted language/layout cleanup | No duplicated appendices/paragraphs; clean build, Unicode/overlap checks |
+
+---
+
+## Historical read-only assessment (20 October 2026)
+
+
 **Manuscript:** *PACE: Peer-Wise Calibrated Experts for IoT Intrusion Detection with Benign-Only Target Data*.
 **Assessment date:** 20 October 2026. **Verified draft:** `manuscript/main.tex` and matching 28-page `manuscript/main.pdf`, PDF build date 13 October 2026.
 **Project root:** `/home/naslouby/Projects/PACE`. Repository-relative evidence paths resolve under this root; section/page numbers refer to this unchanged draft.
@@ -21,6 +239,8 @@ The strongest supported results are:
 **Readiness:** not ready for submission until C1 is completed. Scientific revision should first report the complete arm set (M13), bound the interpretation of sweep adjustment (M12), explain singleton conditioning (M14) and substantiate design/arm chronology (M16). No confirmed algorithmic defect or wrong primary printed result was found. Essential reporting corrections require no retraining. External comparison and independent targets would add evidence and may be required by the chosen journal; they are not demonstrated implementation repairs.
 
 ## 2. Priority Action Dashboard
+
+**Historical dashboard; superseded by Revision Verification Status above.**
 
 | Priority | Finding | Required action | Change type | Effort | Expected benefit |
 |---|---|---|---|---|---|
@@ -1104,40 +1324,13 @@ A = manuscript only; B = analysis of existing artifacts; C = new experiment; D =
 
 For E1, adjusting to a comparator’s held-out FPR is a retrospective evaluation, not a label-free deployment policy; report the distinction. For E3, “leave one corpus out” cannot mean directly passing incompatible feature vectors through the same MLP. New experiments can improve or weaken the story and must be reported either way.
 
-## 18. Surgical Manuscript Fixes
+## 18. Surgical Manuscript Fixes (reconciled)
 
-Apply stable finding IDs as the authoritative edit specification. Source lines refer to this unchanged draft; use the quoted anchors because later edits shift line numbers. These actions are recommendations only.
+The former prospective checklist is superseded by Revision Verification Status and its applied-edit crosswalk above. Original finding descriptions and numerical evidence remain in Sections 3-14 for traceability; they are historical recommendations, not a second active action list.
 
-| Order / source | Exact operation | Finding / verification |
-|---|---|---|
-| 1. main.tex:17,25,35–42 | Replace author/declaration placeholders with author-approved facts; remove draft banner after approval | C1; no invented release or tool history |
-| 2. experimental-methodology.tex:31–35 and results.tex after the primary comparison | Add the complete-arm appendix/table and the peers-only paragraph in M13 | All 12 arms plus two recorded baselines, denominators and FPRs |
-| 3. results.tex:64, after the endpoint-count paragraph | Insert the M12 endpoint-direction/nonidentification paragraph | Avoid exact-matching/bound language |
-| 4. results.tex:71,77 and Figure 4 caption | Insert the dominant-host and singleton-interval explanation from M14; annotate bars or show descriptive target changes | Preserve the actual high-resource regression |
-| 5. experimental-methodology.tex:50 and limitations.tex:4 | Add author-substantiated design/criterion/arm chronology, using M16’s factual boundary | No unsupported exact private-session timing |
-| 6. discussion.tex:13 → a §6 results subsection | Move the peer-fusion values with their FPRs; retain one discussion cross-reference and M5’s interpretation | No duplicate long results paragraph |
-| 7. introduction.tex:14 and main.tex:19 | Give the peer-wise contrast appropriate scope; insert only M5’s concise abstract sentence if space permits | Primary mean-local comparison remains explicit |
-| 8. results.tex:27 | Replace “two lower bounds lie very close to zero” with M1’s numeric concentration wording | All four ex-TON intervals retained |
-| 9. results.tex:22 and discussion.tex:8 | Add M20’s bank-budget-reallocation/35-1 detail; retain the correct α=.05 tradeoff | No “worst-case protection” theorem implied |
-| 10. Table 4 lower panel; results.tex:6 | Add M19 FPR intervals and two-target/exclusion detail; retain lower-mean-FPR headline/highlight | No compulsory “slightly” substitution |
-| 11. results.tex:50 and §6.3 | Add selected M17/M18/m21 diagnostics; retain causal uncertainty and regressions | Associations and headroom are descriptive |
-| 12. methodology.tex:81 | Connect single-union sensitivity (m20); optionally give both resolution formulas (m15) | Never infer equal alert masks from equal rates |
-| 13. experimental-methodology.tex:19 | Add label-based 11/258 coverage sentence (m16) | Not a family-holdout claim |
-| 14. availability and experimental-methodology.tex:4 | Name exact archives/subsets/access conditions; add actual Gotham descriptor and N-BaIoT data DOI | m17; do not paste unverified raw checksums |
-| 15. related-work.tex §§2.2,2.4,2.6 | Add only the exact, claim-specific O4/O6/O7/O9 citations selected from §11 | Preserve current correct Xiang description; no fabricated DOI |
-| 16. introduction.tex:7; optional abstract/conclusion | Apply W7, then optional W1/W2; M5 contains the fourth wording opportunity | Precise transformation and preserved scientific meaning |
-| 17. release figure sources / README / docs | Later authorized figure/documentation bookkeeping (m13,m19,O5), outside frozen campaign code | Not an algorithm correction |
+## 19. Final Prioritized Implementation Plan (reconciled)
 
-No whole-abstract rewrite is required. In particular, keep the validated primary gains, lower α=.05 mean FPR, α=.01 alert cost, negative subgroups, anchor tradeoff, explicit .0125 allocation exception and external-comparison disclaimer. Accurate formal sentences should not be replaced solely to change style.
-
-## 19. Final Prioritized Implementation Plan
-
-1. **Essential correctness and completeness:** authors complete C1; report all executed rules (M13); add M12’s endpoint interpretation and M14’s singleton explanation. No algorithm changes are required by demonstrated evidence.
-2. **Scientific/statistical strengthening:** substantiate chronology (M16); report concentration and bank-budget reallocation (M1,M20); add the already computed FPR, win/loss, label-coverage and seed-localization details selectively (M17–M19,m16,m21). Preserve denominators and causal uncertainty.
-3. **Novelty and recent literature:** put the fusion experiment in results (M5), cite ensemble-thresholding and close transfer work (O6,O7), select current evaluation sources (O4,O9), and resolve MEFA access before making an exhaustive novelty statement. Treat current preprint versions accurately.
-4. **Results presentation:** complete-arm appendix, FPR intervals, conditional Figure 4 caption, data/input provenance and figure generators (m17,m13). An optional low-FPR inset can follow.
-5. **Wording and visual polish:** W7 first; W1/W2 only if useful; apply the chosen journal’s reference/layout style (m22,O2). Align release docs in a separately authorized edit (m19).
-6. **Optional experiments/extensions:** choose E1/E2/E3 against the intended claim and venue. Additional seeds, mechanism traces and systems measurements have narrower purposes. Prespecify the new protocol and report unfavorable outcomes. Do not tune this frozen rule merely to obtain a better headline.
+Implementation and independent verification are complete within the authorized scope. Only the precise author-dependent facts and user-deferred actions listed in the current status section remain.
 
 ## 20. Final Verification and Submission Readiness
 

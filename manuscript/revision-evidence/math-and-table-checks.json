@@ -1,0 +1,6 @@
+{
+  "target_table_scalar_checks": 4248,
+  "quantile_and_union_boundaries": "passed",
+  "current_implementation_digest": "7dd88ce13b0d32a3875db47869e5ac13f5cecfa0dc82c6d14322dc67419a8a3b",
+  "additional_distribution_seed_stratum_checks": 212
+}

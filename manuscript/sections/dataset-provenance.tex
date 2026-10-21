@@ -1,0 +1,20 @@
+\section{Dataset inputs and provenance}
+\label{app:data}
+\setcounter{table}{0}
+Table~\ref{tab:dataset-inputs} identifies the evaluated inputs from client-cache manifests and the adapters in \texttt{src/pace/datasets/adapters/}. A local directory name such as \texttt{IoT-23-v2} is not evidence of a publisher version 2. The input manifest in the manuscript supplement lists exact source paths, feature-schema identifiers, and independently recomputed SHA-256 digests of the seven cache manifests. These identify inspected metadata, not an independent checksum validation of every raw archive. Campaign content digests and the recorded input/preprocessing digests identify frozen evaluation provenance; they do not establish current raw-source byte identity.
+
+{\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.43\textwidth}>{\raggedright\arraybackslash}p{0.34\textwidth}}
+\caption{Dataset releases, evaluated subsets, and source access. Links refer to authoritative source pages or deposits; no third-party raw data are redistributed with the manuscript.}\label{tab:dataset-inputs}\\
+\toprule Dataset & Evaluated input and adapter & Source and conditions\\\midrule\endfirsthead
+\toprule Dataset & Evaluated input and adapter (continued) & Source and conditions\\\midrule\endhead
+\bottomrule\endfoot
+IoT-23 & \texttt{iot\_23\_datasets\_small.tar.gz}: labeled Zeek flows, not the full packet-capture collection. Dataset record v1.0.0; adapter \texttt{iot23.py}. & \href{https://www.stratosphereips.org/datasets-iot23}{Stratosphere source page}; \href{https://doi.org/10.5281/zenodo.4743746}{Zenodo record}, CC BY 4.0.\\
+TON\_IoT & \texttt{Processed\_datasets/}\allowbreak\texttt{Processed\_Network\_dataset}; network CSVs, not telemetry or OS traces. No numbered release recorded in the cache; adapter \texttt{ton\_iot.py}. & \href{https://research.unsw.edu.au/projects/toniot-datasets}{UNSW source page}: academic research use granted; commercial use requires the owner's permission; source citation conditions apply.\\
+Gotham & 2025 Zenodo deposit; eight device CSV inputs under \texttt{extracted/processed/}, seven reported targets plus one peer-only client. Adapter \texttt{gotham.py}; full-second features described in Section~\ref{sec:experiment}. & \href{https://doi.org/10.5281/zenodo.14502760}{Zenodo dataset}, CC BY 4.0; the 2026 descriptor cites this deposit~\cite{belarbi2026descriptor}.\\
+CTU-13 & \texttt{CTU-13-Dataset.tar.bz2}; 12 eligible scenario targets from the original 13-scenario collection. Adapter \texttt{ctu13.py} uses labeled Argus flows and discards Background. No separate archive revision is recorded. & \href{https://www.stratosphereips.org/datasets-ctu13}{Stratosphere CTU-13 page}; the \href{https://www.stratosphereips.org/datasets-faq}{source FAQ} permits use with attribution; separate raw redistribution terms are not verified here.\\
+N-BaIoT & Original 2018 nine-device release; extracted benign and Mirai/BASHLITE feature CSVs. Adapter \texttt{nbaiot.py}, including within-file exact-row deduplication. & \href{https://doi.org/10.24432/C5RC8J}{UCI dataset record}~\cite{nbaiotdata2018}, CC BY 4.0; distinct from the original research paper~\cite{nbaiot2018}.\\
+UNSW IoT attack flows & SOSR 2019 release: ten device \texttt{*\_flowstats.csv} files and associated annotation inputs under \texttt{flowdata/flowdata/}, split into G1/G2 compatible feature schemas. Adapter \texttt{unsw.py}. & \href{https://iotanalytics.unsw.edu.au/attack-data.html}{UNSW attack-traces page}: minute-level MUD flow counters and annotations; no explicit reuse licence verified on that page.\\
+\end{longtable}}
+
+The manifests do not record retrieval dates or numbered revisions for the TON\_IoT and UNSW inputs, nor independently verified raw-archive checksums. \textbf{Author confirmation required:} any additional archive-version or retrieval records and applicable redistribution permissions not established by the cited source terms. These gaps do not change the identity of the frozen campaign artifacts.

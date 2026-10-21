@@ -1,0 +1,17 @@
+{
+  "Flood_2024": {
+    "url": "https://distrinet.cs.kuleuven.be/news/bad_smells_euros_p_template-4.pdf",
+    "local_file": "references_pdf/Added_Flood_2024_author.pdf",
+    "version": "18-page author/institutional copy; not independently certified as publisher PDF",
+    "sha256": "c070c5a93f9e1f23ddcbe47c10cbe8c3d72f1d68daa64ac44267c9f4e8743920"
+  },
+  "MEFA": {
+    "doi": "10.1002/spy2.70069",
+    "status": "publisher full-text URL redirects to abstract; detailed comparison not added"
+  },
+  "Elsevier_AI_policy": {
+    "url": "https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals",
+    "checked": "2026-10-21",
+    "status": "truthful separate disclosure retained; human approval not asserted; eventual journal policy requires author review"
+  }
+}

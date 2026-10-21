@@ -1,0 +1,261 @@
+[
+  {
+    "key": "yue2026mcde",
+    "doi": "10.3390/e28091026",
+    "metadata_source": "https://api.crossref.org/works/10.3390/e28091026",
+    "author_count": 3,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "barber2023nonexchangeable",
+    "doi": "10.1214/23-AOS2276",
+    "metadata_source": "https://api.crossref.org/works/10.1214/23-AOS2276",
+    "author_count": 4,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "bates2023outliers",
+    "doi": "10.1214/22-AOS2244",
+    "metadata_source": "https://api.crossref.org/works/10.1214/22-AOS2244",
+    "author_count": 5,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "angelopoulos2023conformal",
+    "doi": "10.1561/2200000101",
+    "metadata_source": "https://api.crossref.org/works/10.1561/2200000101?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 2,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "liu2008isolation",
+    "doi": "10.1109/ICDM.2008.17",
+    "metadata_source": "https://api.crossref.org/works/10.1109/ICDM.2008.17",
+    "author_count": 3,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "breunig2000lof",
+    "doi": "10.1145/342009.335388",
+    "metadata_source": "https://api.crossref.org/works/10.1145/342009.335388",
+    "author_count": 4,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "pang2021review",
+    "doi": "10.1145/3439950",
+    "metadata_source": "https://api.crossref.org/works/10.1145/3439950",
+    "author_count": 4,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "diot2019",
+    "doi": "10.1109/icdcs.2019.00080",
+    "metadata_source": "https://api.crossref.org/works/10.1109/icdcs.2019.00080?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 6,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "kitsune2018",
+    "doi": "10.14722/ndss.2018.23204",
+    "metadata_source": "https://api.crossref.org/works/10.14722/ndss.2018.23204",
+    "author_count": 4,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "nbaiot2018",
+    "doi": "10.1109/mprv.2018.03367731",
+    "metadata_source": "https://api.crossref.org/works/10.1109/mprv.2018.03367731?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 7,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "osdn2024",
+    "doi": "10.1145/3639822",
+    "metadata_source": "https://api.crossref.org/works/10.1145/3639822",
+    "author_count": 6,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "talpini2025",
+    "doi": "10.5220/0013376600003890",
+    "metadata_source": "https://api.crossref.org/works/10.5220/0013376600003890?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 4,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "vim2022",
+    "doi": "10.1109/cvpr52688.2022.00487",
+    "metadata_source": "https://api.crossref.org/works/10.1109/cvpr52688.2022.00487",
+    "author_count": 4,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "zimek2014",
+    "doi": "10.1145/2594473.2594476",
+    "metadata_source": "https://api.crossref.org/works/10.1145/2594473.2594476?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 3,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "hyperids2025",
+    "doi": "10.1038/s41598-025-11659-7",
+    "metadata_source": "https://api.crossref.org/works/10.1038/s41598-025-11659-7?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 4,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "ecod2022",
+    "doi": "10.1109/tkde.2022.3159580",
+    "metadata_source": "https://api.crossref.org/works/10.1109/tkde.2022.3159580",
+    "author_count": 6,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "jin2026crossprotocol",
+    "doi": "10.3390/s26041184",
+    "metadata_source": "https://api.crossref.org/works/10.3390/s26041184?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 1,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "garcia2020iot23",
+    "doi": "10.5281/zenodo.4743746",
+    "metadata_source": "https://api.datacite.org/dois/10.5281/zenodo.4743746",
+    "author_count": 3,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "belarbi2025gothamdata",
+    "doi": "10.5281/zenodo.14502760",
+    "metadata_source": "https://api.datacite.org/dois/10.5281/zenodo.14502760",
+    "author_count": 6,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "vovk2020averaging",
+    "doi": "10.1093/biomet/asaa027",
+    "metadata_source": "https://api.crossref.org/works/10.1093/biomet/asaa027",
+    "author_count": 2,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "sommer2010closed",
+    "doi": "10.1109/SP.2010.25",
+    "metadata_source": "https://api.crossref.org/works/10.1109/SP.2010.25",
+    "author_count": 2,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "saito2015precision",
+    "doi": "10.1371/journal.pone.0118432",
+    "metadata_source": "https://api.crossref.org/works/10.1371/journal.pone.0118432?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 2,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "arp2024pitfalls",
+    "doi": "10.1145/3643456",
+    "metadata_source": "https://api.crossref.org/works/10.1145/3643456?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 8,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "hamza2019mud",
+    "doi": "10.1145/3314148.3314352",
+    "metadata_source": "https://api.crossref.org/works/10.1145/3314148.3314352",
+    "author_count": 4,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "garcia2014ctu",
+    "doi": "10.1016/j.cose.2014.05.011",
+    "metadata_source": "https://api.crossref.org/works/10.1016/j.cose.2014.05.011",
+    "author_count": 4,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "moustafa2021ton",
+    "doi": "10.1016/j.scs.2021.102994",
+    "metadata_source": "https://api.crossref.org/works/10.1016/j.scs.2021.102994?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 1,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "xiang2026can",
+    "doi": "10.20944/preprints202609.1557.v1",
+    "metadata_source": "https://api.crossref.org/works/10.20944/preprints202609.1557.v1?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 3,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "ha2026targetfpr",
+    "doi": "10.3390/app16052284",
+    "metadata_source": "https://api.crossref.org/works/10.3390/app16052284?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 2,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "nguyen2025fedmse",
+    "doi": "10.1016/j.cose.2025.104337",
+    "metadata_source": "https://api.crossref.org/works/10.1016/j.cose.2025.104337?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 2,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "apruzzese2026sok",
+    "doi": "10.1145/3779208.3807488",
+    "metadata_source": "https://api.crossref.org/works/10.1145/3779208.3807488?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 1,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "flood2024smells",
+    "doi": "10.1109/EuroSP60621.2024.00042",
+    "metadata_source": "https://api.crossref.org/works/10.1109/EuroSP60621.2024.00042",
+    "author_count": 4,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "rey2022federated",
+    "doi": "10.1016/j.comnet.2021.108693",
+    "metadata_source": "https://api.crossref.org/works/10.1016/j.comnet.2021.108693?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 4,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "layeghy2023dinids",
+    "doi": "10.1016/j.knosys.2023.110626",
+    "metadata_source": "https://api.crossref.org/works/10.1016/j.knosys.2023.110626?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 3,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "bridges2017threshold",
+    "doi": "10.1109/BigData.2017.8258031",
+    "metadata_source": "https://api.crossref.org/works/10.1109/BigData.2017.8258031?mailto=naslouby.salahe%40gmail.com",
+    "author_count": 3,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "belarbi2026descriptor",
+    "doi": "10.3390/data11080207",
+    "metadata_source": "https://api.crossref.org/works/10.3390/data11080207",
+    "author_count": 6,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "nouman2026granularity",
+    "doi": "10.3390/fi18090447",
+    "metadata_source": "https://api.crossref.org/works/10.3390/fi18090447",
+    "author_count": 3,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  },
+  {
+    "key": "nbaiotdata2018",
+    "doi": "10.24432/C5RC8J",
+    "metadata_source": "https://api.datacite.org/dois/10.24432/C5RC8J",
+    "author_count": 2,
+    "status": "verified identity; author versions and full-text limits recorded in audit"
+  }
+]

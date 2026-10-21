@@ -1,12 +1,14 @@
 \documentclass[preprint,12pt]{elsarticle}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage{amsmath,amssymb,booktabs,graphicx,array}
+\usepackage{amsmath,amssymb,booktabs,graphicx,array,longtable}
 \usepackage[margin=25mm]{geometry}
 \usepackage{microtype}
+\usepackage{placeins}
 \usepackage{hyperref}
-\hypersetup{hidelinks,pdftitle={PACE: Peer-Wise Calibrated Experts for IoT Intrusion Detection with Benign-Only Target Data}}
+\hypersetup{hidelinks,pdfauthor={Salaheddine Naslouby, Mohamed Lachgar, Hamid Hrimech},pdftitle={PACE: Peer-Wise Calibrated Experts for IoT Intrusion Detection with Benign-Only Target Data}}
 \journal{}
+\renewcommand{\theaffn}{\arabic{affn}}
 \makeatletter
 \let\ps@pprintTitle\ps@plain
 \makeatother
@@ -14,32 +16,47 @@
 \begin{document}
 \begin{frontmatter}
 \title{PACE: Peer-Wise Calibrated Experts for IoT Intrusion Detection with Benign-Only Target Data}
-\author{Author details pending confirmation}
+\author[aff1]{Salaheddine Naslouby\corref{cor1}}
+\ead{naslouby.salahe@gmail.com}
+\author[aff2]{Mohamed Lachgar}
+\ead{m.lachgar@uca.ac.ma}
+\author[aff1]{Hamid Hrimech}
+\ead{hamid.hrimech@uhp.ac.ma}
+\address[aff1]{Hassan First University, National School of Applied Sciences (ENSA), LAMSAD Laboratory, Berrechid, Morocco}
+\address[aff2]{Cadi Ayyad University, Higher Normal School (ENS), L2IS Laboratory, Marrakech, Morocco}
+\cortext[cor1]{Corresponding author: Salaheddine Naslouby. ORCID: \href{https://orcid.org/0009-0002-7295-7816}{0009-0002-7295-7816}.}
 \begin{abstract}
-Detecting intrusions at a newly monitored IoT target is difficult when only benign target observations are available but peer clients possess labeled attacks. Combining peer scores under a single calibrated threshold can obscure useful evidence from individual classifiers. PACE retains separately calibrated peer evidence and combines the resulting alert union with a protected local anchor and a heterogeneous bank of anomaly experts. The local branch incorporates feature-rarity and peer-response evidence without using target attack labels. We evaluate PACE on 58 targets spanning six corpora and seven study strata, using three learning seeds and local fitting budgets of 100 and 400 rows. Relative to an identical peer branch paired with a seven-detector mean local ensemble, PACE improves target-macro detection by 2.61 and 2.83 percentage points at nominal $\alpha=0.01$, and by 2.34 and 2.32 points at $\alpha=0.05$. At the latter operating parameter, PACE also reduces mean realized false-alert rates at both fitting budgets. Ablations identify rarity-based evidence as the largest measured complementary contribution among the tested expert families. Gains are strongest in TON\_IoT, with smaller improvements elsewhere. False-alert rates remain heterogeneous across targets and are not bounded by the nominal parameter. The results establish complementary detection benefits in the evaluated benign-only target setting while distinguishing those benefits from operational false-alert guarantees.
+Detecting intrusions at a newly monitored IoT target is difficult when only benign target observations are available but peer clients possess labeled attacks. Combining peer scores under a single calibrated threshold can obscure useful evidence from individual classifiers. PACE retains separately calibrated peer evidence and combines the resulting alert union with a protected local anchor and a heterogeneous bank of anomaly experts. The local branch incorporates feature-rarity and peer-response evidence without using target attack labels. We evaluate PACE on 58 targets spanning six corpora and seven study strata, using three learning seeds and local fitting budgets of 100 and 400 rows. Relative to an identical peer branch paired with a seven-detector mean local ensemble, PACE improves target-macro detection by 2.61 and 2.83 percentage points at nominal $\alpha=0.01$, and by 2.34 and 2.32 points at $\alpha=0.05$. At the latter operating parameter, PACE also reduces mean realized false-alert rates at both fitting budgets. Ablations identify rarity-based evidence as the largest measured complementary contribution among the tested expert families. Gains are strongest in TON\_IoT, with smaller improvements elsewhere. False-alert rates remain heterogeneous across targets. With the complete local branch held fixed, retaining separately thresholded peers improves detection by 3.0--7.3 percentage points over mean or maximum peer-score fusion at the tested nominal settings, with higher mean false-alert rates. PACE's gains therefore reflect complementary peer and local detection rather than a guarantee of future false-alert control.
 \end{abstract}
 \begin{keyword}
 IoT intrusion detection \sep peer models \sep benign-only learning \sep empirical calibration \sep anomaly ensembles \sep false alerts
 \end{keyword}
 \end{frontmatter}
-\noindent\textbf{Draft for author review.} Author details, declarations, and final human approval are pending.
+\noindent\textbf{Draft for author review.} Declaration confirmations and final human approval are pending.
 \input{sections/introduction}
 \input{sections/related-work}
 \input{sections/problem-formulation}
 \input{sections/methodology}
+\FloatBarrier
 \input{sections/experimental-methodology}
 \input{sections/results}
 \input{sections/discussion}
 \input{sections/limitations}
 \input{sections/conclusion}
+\clearpage
+\appendix
+\renewcommand{\theHtable}{\Alph{section}.\arabic{table}}
+\input{sections/comparison-inventory}
+\input{sections/dataset-provenance}
 \section*{Data and code availability}
-The evaluation uses the existing PACE implementation and frozen experimental outputs. A public code archive, immutable release identifier, dataset access links, and applicable redistribution conditions must be confirmed by the authors before submission. No public release is asserted in this draft.
+The implementation, experimental configurations, and frozen evaluation artifacts are maintained in the PACE project repository. The permanent public repository address and immutable revision identifier will be supplied before submission. Third-party datasets remain subject to their original access and redistribution conditions. Dataset inputs and access conditions are identified in \ref{app:data}. \textbf{Author-supplied release link and immutable revision: pending.}
 \section*{Funding and competing interests}
 Funding sources and competing-interest declarations require confirmation by the authors. No absence of funding or competing interests is inferred.
 \section*{Authorship and acknowledgements}
-Author names, affiliations, corresponding-author details, contribution statements, and acknowledgements remain to be supplied and approved by the authors.
+\textbf{Author confirmation required:} individual contribution roles, any acknowledgements, and approval of the final manuscript and declarations.
 \section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
 OpenAI Codex was used for repository inspection, literature assistance, manuscript drafting, and technical verification. This draft requires human scientific review and approval. The authors must confirm the extent of their review and responsibility for the final content before submission; this draft does not assert that such approval has already occurred.
+\setlength{\bibsep}{0pt}
 \bibliographystyle{elsarticle-num}
 \bibliography{references}
 \end{document}

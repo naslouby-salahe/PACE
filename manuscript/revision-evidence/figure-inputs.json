@@ -1,0 +1,3080 @@
+{
+  "sources": {
+    "targets.csv": "55ea7c23617d8175e5f5068682768e14ec1cc99e85e0d41705d6177772f78856",
+    "scaling.csv": "9cabde2aed00cf96d99c249c43b46f058e6338542a11e572de47f653db09de47"
+  },
+  "target_gains": [
+    {
+      "alpha": 0.01,
+      "N": 100,
+      "points": [
+        {
+          "rank": 1,
+          "stratum": "N_BAIOT",
+          "target": "Ennio_Doorbell",
+          "gain": -7e-06
+        },
+        {
+          "rank": 2,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-01",
+          "gain": 0.0
+        },
+        {
+          "rank": 3,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-04",
+          "gain": 0.0
+        },
+        {
+          "rank": 4,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-05",
+          "gain": 0.0
+        },
+        {
+          "rank": 5,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-06",
+          "gain": 0.0
+        },
+        {
+          "rank": 6,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-11",
+          "gain": 0.0
+        },
+        {
+          "rank": 7,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-13",
+          "gain": 0.0
+        },
+        {
+          "rank": 8,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-air-quality-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 9,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-city-power-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 10,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-ip-camera-museum-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 11,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-ip-camera-street-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 12,
+          "stratum": "IOT_23",
+          "target": "1-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 13,
+          "stratum": "IOT_23",
+          "target": "35-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 14,
+          "stratum": "IOT_23",
+          "target": "36-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 15,
+          "stratum": "IOT_23",
+          "target": "48-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 16,
+          "stratum": "IOT_23",
+          "target": "49-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 17,
+          "stratum": "IOT_23",
+          "target": "7-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 18,
+          "stratum": "IOT_23",
+          "target": "8-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 19,
+          "stratum": "IOT_23",
+          "target": "9-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 20,
+          "stratum": "N_BAIOT",
+          "target": "Ecobee_Thermostat",
+          "gain": 0.0
+        },
+        {
+          "rank": 21,
+          "stratum": "N_BAIOT",
+          "target": "Philips_B120N10_Baby_Monitor",
+          "gain": 0.0
+        },
+        {
+          "rank": 22,
+          "stratum": "N_BAIOT",
+          "target": "Provision_PT_737E_Security_Camera",
+          "gain": 0.0
+        },
+        {
+          "rank": 23,
+          "stratum": "N_BAIOT",
+          "target": "Samsung_SNH_1011_N_Webcam",
+          "gain": 0.0
+        },
+        {
+          "rank": 24,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.180",
+          "gain": 0.0
+        },
+        {
+          "rank": 25,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "00166cab6b88",
+          "gain": 0.0
+        },
+        {
+          "rank": 26,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "50c7bf005639",
+          "gain": 0.0
+        },
+        {
+          "rank": 27,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "70ee50183443",
+          "gain": 0.0
+        },
+        {
+          "rank": 28,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "0017882b9a25",
+          "gain": 0.0
+        },
+        {
+          "rank": 29,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "44650d56ccd3",
+          "gain": 0.0
+        },
+        {
+          "rank": 30,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "d073d5018308",
+          "gain": 0.0
+        },
+        {
+          "rank": 31,
+          "stratum": "N_BAIOT",
+          "target": "Danmini_Doorbell",
+          "gain": 1e-05
+        },
+        {
+          "rank": 32,
+          "stratum": "N_BAIOT",
+          "target": "Provision_PT_838_Security_Camera",
+          "gain": 1.3e-05
+        },
+        {
+          "rank": 33,
+          "stratum": "N_BAIOT",
+          "target": "SimpleHome_XCS7_1002_WHT_Security_Camera",
+          "gain": 1.7e-05
+        },
+        {
+          "rank": 34,
+          "stratum": "IOT_23",
+          "target": "34-1",
+          "gain": 4.6e-05
+        },
+        {
+          "rank": 35,
+          "stratum": "N_BAIOT",
+          "target": "SimpleHome_XCS7_1003_WHT_Security_Camera",
+          "gain": 5.3e-05
+        },
+        {
+          "rank": 36,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-10",
+          "gain": 6.7e-05
+        },
+        {
+          "rank": 37,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-09",
+          "gain": 0.000133
+        },
+        {
+          "rank": 38,
+          "stratum": "IOT_23",
+          "target": "60-1",
+          "gain": 0.000133
+        },
+        {
+          "rank": 39,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-02",
+          "gain": 0.0003
+        },
+        {
+          "rank": 40,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-03",
+          "gain": 0.0003
+        },
+        {
+          "rank": 41,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-domotic-monitor-1",
+          "gain": 0.000314
+        },
+        {
+          "rank": 42,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-08",
+          "gain": 0.000653
+        },
+        {
+          "rank": 43,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "f4f5d88f0a3c",
+          "gain": 0.001812
+        },
+        {
+          "rank": 44,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-building-monitor-1",
+          "gain": 0.002317
+        },
+        {
+          "rank": 45,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.1",
+          "gain": 0.003623
+        },
+        {
+          "rank": 46,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-combined-cycle-1",
+          "gain": 0.011021
+        },
+        {
+          "rank": 47,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.184",
+          "gain": 0.016932
+        },
+        {
+          "rank": 48,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.190",
+          "gain": 0.020549
+        },
+        {
+          "rank": 49,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "ec1a59832811",
+          "gain": 0.022222
+        },
+        {
+          "rank": 50,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.193",
+          "gain": 0.029772
+        },
+        {
+          "rank": 51,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "74c63b29d71d",
+          "gain": 0.044444
+        },
+        {
+          "rank": 52,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "ec1a5979f489",
+          "gain": 0.064815
+        },
+        {
+          "rank": 53,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-12",
+          "gain": 0.114084
+        },
+        {
+          "rank": 54,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.79",
+          "gain": 0.127832
+        },
+        {
+          "rank": 55,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.195",
+          "gain": 0.136482
+        },
+        {
+          "rank": 56,
+          "stratum": "IOT_23",
+          "target": "3-1",
+          "gain": 0.193224
+        },
+        {
+          "rank": 57,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.194",
+          "gain": 0.30132
+        },
+        {
+          "rank": 58,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.152",
+          "gain": 0.420522
+        }
+      ]
+    },
+    {
+      "alpha": 0.01,
+      "N": 400,
+      "points": [
+        {
+          "rank": 1,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-12",
+          "gain": -0.032595
+        },
+        {
+          "rank": 2,
+          "stratum": "N_BAIOT",
+          "target": "Ennio_Doorbell",
+          "gain": -3.3e-05
+        },
+        {
+          "rank": 3,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-01",
+          "gain": 0.0
+        },
+        {
+          "rank": 4,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-04",
+          "gain": 0.0
+        },
+        {
+          "rank": 5,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-05",
+          "gain": 0.0
+        },
+        {
+          "rank": 6,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-06",
+          "gain": 0.0
+        },
+        {
+          "rank": 7,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-11",
+          "gain": 0.0
+        },
+        {
+          "rank": 8,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-13",
+          "gain": 0.0
+        },
+        {
+          "rank": 9,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-air-quality-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 10,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-city-power-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 11,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-ip-camera-museum-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 12,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-ip-camera-street-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 13,
+          "stratum": "IOT_23",
+          "target": "34-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 14,
+          "stratum": "IOT_23",
+          "target": "35-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 15,
+          "stratum": "IOT_23",
+          "target": "36-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 16,
+          "stratum": "IOT_23",
+          "target": "48-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 17,
+          "stratum": "IOT_23",
+          "target": "49-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 18,
+          "stratum": "IOT_23",
+          "target": "7-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 19,
+          "stratum": "IOT_23",
+          "target": "8-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 20,
+          "stratum": "IOT_23",
+          "target": "9-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 21,
+          "stratum": "N_BAIOT",
+          "target": "Ecobee_Thermostat",
+          "gain": 0.0
+        },
+        {
+          "rank": 22,
+          "stratum": "N_BAIOT",
+          "target": "Philips_B120N10_Baby_Monitor",
+          "gain": 0.0
+        },
+        {
+          "rank": 23,
+          "stratum": "N_BAIOT",
+          "target": "Samsung_SNH_1011_N_Webcam",
+          "gain": 0.0
+        },
+        {
+          "rank": 24,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.180",
+          "gain": 0.0
+        },
+        {
+          "rank": 25,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "00166cab6b88",
+          "gain": 0.0
+        },
+        {
+          "rank": 26,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "70ee50183443",
+          "gain": 0.0
+        },
+        {
+          "rank": 27,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "ec1a5979f489",
+          "gain": 0.0
+        },
+        {
+          "rank": 28,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "44650d56ccd3",
+          "gain": 0.0
+        },
+        {
+          "rank": 29,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "d073d5018308",
+          "gain": 0.0
+        },
+        {
+          "rank": 30,
+          "stratum": "N_BAIOT",
+          "target": "Provision_PT_737E_Security_Camera",
+          "gain": 3e-06
+        },
+        {
+          "rank": 31,
+          "stratum": "N_BAIOT",
+          "target": "SimpleHome_XCS7_1002_WHT_Security_Camera",
+          "gain": 1e-05
+        },
+        {
+          "rank": 32,
+          "stratum": "N_BAIOT",
+          "target": "Provision_PT_838_Security_Camera",
+          "gain": 1.3e-05
+        },
+        {
+          "rank": 33,
+          "stratum": "N_BAIOT",
+          "target": "SimpleHome_XCS7_1003_WHT_Security_Camera",
+          "gain": 4e-05
+        },
+        {
+          "rank": 34,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-02",
+          "gain": 6.7e-05
+        },
+        {
+          "rank": 35,
+          "stratum": "N_BAIOT",
+          "target": "Danmini_Doorbell",
+          "gain": 7.3e-05
+        },
+        {
+          "rank": 36,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-09",
+          "gain": 0.0001
+        },
+        {
+          "rank": 37,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-03",
+          "gain": 0.000133
+        },
+        {
+          "rank": 38,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-building-monitor-1",
+          "gain": 0.001062
+        },
+        {
+          "rank": 39,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "f4f5d88f0a3c",
+          "gain": 0.001812
+        },
+        {
+          "rank": 40,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-10",
+          "gain": 0.002933
+        },
+        {
+          "rank": 41,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.1",
+          "gain": 0.003173
+        },
+        {
+          "rank": 42,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "ec1a59832811",
+          "gain": 0.003704
+        },
+        {
+          "rank": 43,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "0017882b9a25",
+          "gain": 0.003704
+        },
+        {
+          "rank": 44,
+          "stratum": "IOT_23",
+          "target": "1-1",
+          "gain": 0.004367
+        },
+        {
+          "rank": 45,
+          "stratum": "IOT_23",
+          "target": "60-1",
+          "gain": 0.004533
+        },
+        {
+          "rank": 46,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-combined-cycle-1",
+          "gain": 0.011541
+        },
+        {
+          "rank": 47,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.184",
+          "gain": 0.013841
+        },
+        {
+          "rank": 48,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "74c63b29d71d",
+          "gain": 0.022222
+        },
+        {
+          "rank": 49,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-domotic-monitor-1",
+          "gain": 0.028743
+        },
+        {
+          "rank": 50,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.193",
+          "gain": 0.032974
+        },
+        {
+          "rank": 51,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-08",
+          "gain": 0.067232
+        },
+        {
+          "rank": 52,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "50c7bf005639",
+          "gain": 0.074074
+        },
+        {
+          "rank": 53,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.79",
+          "gain": 0.08768
+        },
+        {
+          "rank": 54,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.195",
+          "gain": 0.125019
+        },
+        {
+          "rank": 55,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.190",
+          "gain": 0.159941
+        },
+        {
+          "rank": 56,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.194",
+          "gain": 0.297519
+        },
+        {
+          "rank": 57,
+          "stratum": "IOT_23",
+          "target": "3-1",
+          "gain": 0.307447
+        },
+        {
+          "rank": 58,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.152",
+          "gain": 0.420412
+        }
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "N": 100,
+      "points": [
+        {
+          "rank": 1,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "d073d5018308",
+          "gain": -0.008333
+        },
+        {
+          "rank": 2,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "ec1a59832811",
+          "gain": -0.002469
+        },
+        {
+          "rank": 3,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-domotic-monitor-1",
+          "gain": -0.000815
+        },
+        {
+          "rank": 4,
+          "stratum": "IOT_23",
+          "target": "1-1",
+          "gain": -0.000767
+        },
+        {
+          "rank": 5,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-01",
+          "gain": 0.0
+        },
+        {
+          "rank": 6,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-02",
+          "gain": 0.0
+        },
+        {
+          "rank": 7,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-04",
+          "gain": 0.0
+        },
+        {
+          "rank": 8,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-05",
+          "gain": 0.0
+        },
+        {
+          "rank": 9,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-06",
+          "gain": 0.0
+        },
+        {
+          "rank": 10,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-09",
+          "gain": 0.0
+        },
+        {
+          "rank": 11,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-11",
+          "gain": 0.0
+        },
+        {
+          "rank": 12,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-12",
+          "gain": 0.0
+        },
+        {
+          "rank": 13,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-13",
+          "gain": 0.0
+        },
+        {
+          "rank": 14,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-air-quality-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 15,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-city-power-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 16,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-ip-camera-museum-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 17,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-ip-camera-street-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 18,
+          "stratum": "IOT_23",
+          "target": "34-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 19,
+          "stratum": "IOT_23",
+          "target": "35-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 20,
+          "stratum": "IOT_23",
+          "target": "36-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 21,
+          "stratum": "IOT_23",
+          "target": "48-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 22,
+          "stratum": "IOT_23",
+          "target": "49-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 23,
+          "stratum": "IOT_23",
+          "target": "7-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 24,
+          "stratum": "IOT_23",
+          "target": "8-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 25,
+          "stratum": "IOT_23",
+          "target": "9-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 26,
+          "stratum": "N_BAIOT",
+          "target": "Danmini_Doorbell",
+          "gain": 0.0
+        },
+        {
+          "rank": 27,
+          "stratum": "N_BAIOT",
+          "target": "Ecobee_Thermostat",
+          "gain": 0.0
+        },
+        {
+          "rank": 28,
+          "stratum": "N_BAIOT",
+          "target": "Ennio_Doorbell",
+          "gain": 0.0
+        },
+        {
+          "rank": 29,
+          "stratum": "N_BAIOT",
+          "target": "Philips_B120N10_Baby_Monitor",
+          "gain": 0.0
+        },
+        {
+          "rank": 30,
+          "stratum": "N_BAIOT",
+          "target": "Provision_PT_737E_Security_Camera",
+          "gain": 0.0
+        },
+        {
+          "rank": 31,
+          "stratum": "N_BAIOT",
+          "target": "Samsung_SNH_1011_N_Webcam",
+          "gain": 0.0
+        },
+        {
+          "rank": 32,
+          "stratum": "N_BAIOT",
+          "target": "SimpleHome_XCS7_1003_WHT_Security_Camera",
+          "gain": 0.0
+        },
+        {
+          "rank": 33,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.180",
+          "gain": 0.0
+        },
+        {
+          "rank": 34,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.79",
+          "gain": 0.0
+        },
+        {
+          "rank": 35,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "00166cab6b88",
+          "gain": 0.0
+        },
+        {
+          "rank": 36,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "50c7bf005639",
+          "gain": 0.0
+        },
+        {
+          "rank": 37,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "70ee50183443",
+          "gain": 0.0
+        },
+        {
+          "rank": 38,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "44650d56ccd3",
+          "gain": 0.0
+        },
+        {
+          "rank": 39,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "74c63b29d71d",
+          "gain": 0.0
+        },
+        {
+          "rank": 40,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "f4f5d88f0a3c",
+          "gain": 0.0
+        },
+        {
+          "rank": 41,
+          "stratum": "N_BAIOT",
+          "target": "Provision_PT_838_Security_Camera",
+          "gain": 3e-06
+        },
+        {
+          "rank": 42,
+          "stratum": "N_BAIOT",
+          "target": "SimpleHome_XCS7_1002_WHT_Security_Camera",
+          "gain": 3e-06
+        },
+        {
+          "rank": 43,
+          "stratum": "IOT_23",
+          "target": "60-1",
+          "gain": 0.000133
+        },
+        {
+          "rank": 44,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-03",
+          "gain": 0.000533
+        },
+        {
+          "rank": 45,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "0017882b9a25",
+          "gain": 0.001235
+        },
+        {
+          "rank": 46,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-10",
+          "gain": 0.004533
+        },
+        {
+          "rank": 47,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "ec1a5979f489",
+          "gain": 0.005556
+        },
+        {
+          "rank": 48,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-building-monitor-1",
+          "gain": 0.006454
+        },
+        {
+          "rank": 49,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.194",
+          "gain": 0.01082
+        },
+        {
+          "rank": 50,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-combined-cycle-1",
+          "gain": 0.011626
+        },
+        {
+          "rank": 51,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.193",
+          "gain": 0.016381
+        },
+        {
+          "rank": 52,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.184",
+          "gain": 0.016987
+        },
+        {
+          "rank": 53,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.195",
+          "gain": 0.023164
+        },
+        {
+          "rank": 54,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-08",
+          "gain": 0.058094
+        },
+        {
+          "rank": 55,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.1",
+          "gain": 0.126533
+        },
+        {
+          "rank": 56,
+          "stratum": "IOT_23",
+          "target": "3-1",
+          "gain": 0.19546
+        },
+        {
+          "rank": 57,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.152",
+          "gain": 0.419443
+        },
+        {
+          "rank": 58,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.190",
+          "gain": 0.473697
+        }
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "N": 400,
+      "points": [
+        {
+          "rank": 1,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "d073d5018308",
+          "gain": -0.008333
+        },
+        {
+          "rank": 2,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "0017882b9a25",
+          "gain": -0.001852
+        },
+        {
+          "rank": 3,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-13",
+          "gain": -3.3e-05
+        },
+        {
+          "rank": 4,
+          "stratum": "IOT_23",
+          "target": "1-1",
+          "gain": -3.3e-05
+        },
+        {
+          "rank": 5,
+          "stratum": "N_BAIOT",
+          "target": "Provision_PT_737E_Security_Camera",
+          "gain": -1e-05
+        },
+        {
+          "rank": 6,
+          "stratum": "N_BAIOT",
+          "target": "Ecobee_Thermostat",
+          "gain": -7e-06
+        },
+        {
+          "rank": 7,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-01",
+          "gain": 0.0
+        },
+        {
+          "rank": 8,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-02",
+          "gain": 0.0
+        },
+        {
+          "rank": 9,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-03",
+          "gain": 0.0
+        },
+        {
+          "rank": 10,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-04",
+          "gain": 0.0
+        },
+        {
+          "rank": 11,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-05",
+          "gain": 0.0
+        },
+        {
+          "rank": 12,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-06",
+          "gain": 0.0
+        },
+        {
+          "rank": 13,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-09",
+          "gain": 0.0
+        },
+        {
+          "rank": 14,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-11",
+          "gain": 0.0
+        },
+        {
+          "rank": 15,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-12",
+          "gain": 0.0
+        },
+        {
+          "rank": 16,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-air-quality-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 17,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-city-power-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 18,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-ip-camera-museum-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 19,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-ip-camera-street-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 20,
+          "stratum": "IOT_23",
+          "target": "34-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 21,
+          "stratum": "IOT_23",
+          "target": "35-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 22,
+          "stratum": "IOT_23",
+          "target": "36-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 23,
+          "stratum": "IOT_23",
+          "target": "48-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 24,
+          "stratum": "IOT_23",
+          "target": "49-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 25,
+          "stratum": "IOT_23",
+          "target": "7-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 26,
+          "stratum": "IOT_23",
+          "target": "8-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 27,
+          "stratum": "IOT_23",
+          "target": "9-1",
+          "gain": 0.0
+        },
+        {
+          "rank": 28,
+          "stratum": "N_BAIOT",
+          "target": "Ennio_Doorbell",
+          "gain": 0.0
+        },
+        {
+          "rank": 29,
+          "stratum": "N_BAIOT",
+          "target": "Philips_B120N10_Baby_Monitor",
+          "gain": 0.0
+        },
+        {
+          "rank": 30,
+          "stratum": "N_BAIOT",
+          "target": "Provision_PT_838_Security_Camera",
+          "gain": 0.0
+        },
+        {
+          "rank": 31,
+          "stratum": "N_BAIOT",
+          "target": "Samsung_SNH_1011_N_Webcam",
+          "gain": 0.0
+        },
+        {
+          "rank": 32,
+          "stratum": "N_BAIOT",
+          "target": "SimpleHome_XCS7_1002_WHT_Security_Camera",
+          "gain": 0.0
+        },
+        {
+          "rank": 33,
+          "stratum": "N_BAIOT",
+          "target": "SimpleHome_XCS7_1003_WHT_Security_Camera",
+          "gain": 0.0
+        },
+        {
+          "rank": 34,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.180",
+          "gain": 0.0
+        },
+        {
+          "rank": 35,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.79",
+          "gain": 0.0
+        },
+        {
+          "rank": 36,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "00166cab6b88",
+          "gain": 0.0
+        },
+        {
+          "rank": 37,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "50c7bf005639",
+          "gain": 0.0
+        },
+        {
+          "rank": 38,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "70ee50183443",
+          "gain": 0.0
+        },
+        {
+          "rank": 39,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "44650d56ccd3",
+          "gain": 0.0
+        },
+        {
+          "rank": 40,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "74c63b29d71d",
+          "gain": 0.0
+        },
+        {
+          "rank": 41,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G2",
+          "target": "f4f5d88f0a3c",
+          "gain": 0.0
+        },
+        {
+          "rank": 42,
+          "stratum": "N_BAIOT",
+          "target": "Danmini_Doorbell",
+          "gain": 3e-06
+        },
+        {
+          "rank": 43,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-building-monitor-1",
+          "gain": 7e-05
+        },
+        {
+          "rank": 44,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "ec1a59832811",
+          "gain": 0.001235
+        },
+        {
+          "rank": 45,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-domotic-monitor-1",
+          "gain": 0.002412
+        },
+        {
+          "rank": 46,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.1",
+          "gain": 0.002615
+        },
+        {
+          "rank": 47,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-10",
+          "gain": 0.004533
+        },
+        {
+          "rank": 48,
+          "stratum": "IOT_23",
+          "target": "60-1",
+          "gain": 0.004533
+        },
+        {
+          "rank": 49,
+          "stratum": "UNSW_IOT_ATTACK_FLOWS_G1",
+          "target": "ec1a5979f489",
+          "gain": 0.005556
+        },
+        {
+          "rank": 50,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.195",
+          "gain": 0.007617
+        },
+        {
+          "rank": 51,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.194",
+          "gain": 0.009192
+        },
+        {
+          "rank": 52,
+          "stratum": "GOTHAM_2025",
+          "target": "iotsim-combined-cycle-1",
+          "gain": 0.011541
+        },
+        {
+          "rank": 53,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.193",
+          "gain": 0.016869
+        },
+        {
+          "rank": 54,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.184",
+          "gain": 0.021919
+        },
+        {
+          "rank": 55,
+          "stratum": "CTU_13",
+          "target": "CTU13-scenario-08",
+          "gain": 0.065165
+        },
+        {
+          "rank": 56,
+          "stratum": "IOT_23",
+          "target": "3-1",
+          "gain": 0.321872
+        },
+        {
+          "rank": 57,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.152",
+          "gain": 0.420338
+        },
+        {
+          "rank": 58,
+          "stratum": "TON_IOT",
+          "target": "192.168.1.190",
+          "gain": 0.461472
+        }
+      ]
+    }
+  ],
+  "false_alerts": [
+    {
+      "alpha": 0.01,
+      "N": 100,
+      "method": "PACE",
+      "x": [
+        0.0,
+        0.0,
+        5.8e-05,
+        0.000101,
+        0.000131,
+        0.000435,
+        0.000642,
+        0.000701,
+        0.000742,
+        0.000762,
+        0.000833,
+        0.000932,
+        0.001022,
+        0.001486,
+        0.001495,
+        0.001591,
+        0.002035,
+        0.002236,
+        0.002406,
+        0.002968,
+        0.00306,
+        0.003225,
+        0.003436,
+        0.003646,
+        0.00416,
+        0.004377,
+        0.004986,
+        0.005507,
+        0.006208,
+        0.006762,
+        0.006772,
+        0.007964,
+        0.008631,
+        0.009523,
+        0.010802,
+        0.011492,
+        0.011731,
+        0.011898,
+        0.015635,
+        0.016584,
+        0.017241,
+        0.017583,
+        0.019188,
+        0.022177,
+        0.02535,
+        0.025692,
+        0.028605,
+        0.030813,
+        0.034106,
+        0.043761,
+        0.053907,
+        0.053965,
+        0.080942,
+        0.083143,
+        0.142482,
+        0.191176,
+        0.255411,
+        0.669005
+      ],
+      "y": [
+        0.017241379310344827,
+        0.034482758620689655,
+        0.05172413793103448,
+        0.06896551724137931,
+        0.08620689655172414,
+        0.10344827586206896,
+        0.1206896551724138,
+        0.13793103448275862,
+        0.15517241379310345,
+        0.1724137931034483,
+        0.1896551724137931,
+        0.20689655172413793,
+        0.22413793103448276,
+        0.2413793103448276,
+        0.25862068965517243,
+        0.27586206896551724,
+        0.29310344827586204,
+        0.3103448275862069,
+        0.3275862068965517,
+        0.3448275862068966,
+        0.3620689655172414,
+        0.3793103448275862,
+        0.39655172413793105,
+        0.41379310344827586,
+        0.43103448275862066,
+        0.4482758620689655,
+        0.46551724137931033,
+        0.4827586206896552,
+        0.5,
+        0.5172413793103449,
+        0.5344827586206896,
+        0.5517241379310345,
+        0.5689655172413793,
+        0.5862068965517241,
+        0.603448275862069,
+        0.6206896551724138,
+        0.6379310344827587,
+        0.6551724137931034,
+        0.6724137931034483,
+        0.6896551724137931,
+        0.7068965517241379,
+        0.7241379310344828,
+        0.7413793103448276,
+        0.7586206896551724,
+        0.7758620689655172,
+        0.7931034482758621,
+        0.8103448275862069,
+        0.8275862068965517,
+        0.8448275862068966,
+        0.8620689655172413,
+        0.8793103448275862,
+        0.896551724137931,
+        0.9137931034482759,
+        0.9310344827586207,
+        0.9482758620689655,
+        0.9655172413793104,
+        0.9827586206896551,
+        1.0
+      ]
+    },
+    {
+      "alpha": 0.01,
+      "N": 100,
+      "method": "Mean local comparator",
+      "x": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        5e-05,
+        0.000131,
+        0.000266,
+        0.000536,
+        0.000642,
+        0.000767,
+        0.000877,
+        0.000881,
+        0.001117,
+        0.001535,
+        0.001933,
+        0.002244,
+        0.002406,
+        0.002506,
+        0.002568,
+        0.0026,
+        0.002725,
+        0.003265,
+        0.003492,
+        0.003672,
+        0.003686,
+        0.003917,
+        0.0051,
+        0.005695,
+        0.00622,
+        0.006762,
+        0.006772,
+        0.00732,
+        0.008567,
+        0.008942,
+        0.009277,
+        0.01145,
+        0.011898,
+        0.012986,
+        0.014116,
+        0.015635,
+        0.017241,
+        0.018295,
+        0.0191,
+        0.019124,
+        0.022177,
+        0.022282,
+        0.025683,
+        0.028605,
+        0.043394,
+        0.049192,
+        0.052918,
+        0.080428,
+        0.08238,
+        0.115152,
+        0.140063,
+        0.191176,
+        0.670174
+      ],
+      "y": [
+        0.017241379310344827,
+        0.034482758620689655,
+        0.05172413793103448,
+        0.06896551724137931,
+        0.08620689655172414,
+        0.10344827586206896,
+        0.1206896551724138,
+        0.13793103448275862,
+        0.15517241379310345,
+        0.1724137931034483,
+        0.1896551724137931,
+        0.20689655172413793,
+        0.22413793103448276,
+        0.2413793103448276,
+        0.25862068965517243,
+        0.27586206896551724,
+        0.29310344827586204,
+        0.3103448275862069,
+        0.3275862068965517,
+        0.3448275862068966,
+        0.3620689655172414,
+        0.3793103448275862,
+        0.39655172413793105,
+        0.41379310344827586,
+        0.43103448275862066,
+        0.4482758620689655,
+        0.46551724137931033,
+        0.4827586206896552,
+        0.5,
+        0.5172413793103449,
+        0.5344827586206896,
+        0.5517241379310345,
+        0.5689655172413793,
+        0.5862068965517241,
+        0.603448275862069,
+        0.6206896551724138,
+        0.6379310344827587,
+        0.6551724137931034,
+        0.6724137931034483,
+        0.6896551724137931,
+        0.7068965517241379,
+        0.7241379310344828,
+        0.7413793103448276,
+        0.7586206896551724,
+        0.7758620689655172,
+        0.7931034482758621,
+        0.8103448275862069,
+        0.8275862068965517,
+        0.8448275862068966,
+        0.8620689655172413,
+        0.8793103448275862,
+        0.896551724137931,
+        0.9137931034482759,
+        0.9310344827586207,
+        0.9482758620689655,
+        0.9655172413793104,
+        0.9827586206896551,
+        1.0
+      ]
+    },
+    {
+      "alpha": 0.01,
+      "N": 100,
+      "method": "Max-fusion baseline",
+      "x": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.7731439615582388e-05,
+        8.333333333333333e-05,
+        0.0005363700127903619,
+        0.0005484260173302622,
+        0.0009583333333333335,
+        0.001023242216050285,
+        0.0010271282701951542,
+        0.0010714285714285715,
+        0.0011886931507500654,
+        0.0013000520020800832,
+        0.0015290519877675841,
+        0.0015550890288469014,
+        0.001617616364015863,
+        0.00178491744756805,
+        0.0018387181507748885,
+        0.0023108442919763674,
+        0.002342068616280542,
+        0.002391280169057947,
+        0.002704128742909906,
+        0.0030303030303030303,
+        0.0032250633494586498,
+        0.003279436507257536,
+        0.0036719706242350062,
+        0.003833180006133088,
+        0.003917378917378918,
+        0.004568713450292397,
+        0.004682449134816504,
+        0.005142374702586538,
+        0.005271580532806176,
+        0.006989452281103062,
+        0.0070274068868587496,
+        0.007439134355275022,
+        0.00852837693131406,
+        0.009283333333333333,
+        0.011616666666666666,
+        0.011875452570601014,
+        0.012012355565724745,
+        0.013133208255159476,
+        0.013519706691109074,
+        0.01378696909050478,
+        0.016152716593245228,
+        0.017241379310344827,
+        0.017280582082764895,
+        0.022177419354838707,
+        0.02228195239764715,
+        0.03219171037745552,
+        0.03635014836795252,
+        0.041558441558441565,
+        0.07093821510297482,
+        0.10084121976866456,
+        0.6705076820307281
+      ],
+      "y": [
+        0.017241379310344827,
+        0.034482758620689655,
+        0.05172413793103448,
+        0.06896551724137931,
+        0.08620689655172414,
+        0.10344827586206896,
+        0.1206896551724138,
+        0.13793103448275862,
+        0.15517241379310345,
+        0.1724137931034483,
+        0.1896551724137931,
+        0.20689655172413793,
+        0.22413793103448276,
+        0.2413793103448276,
+        0.25862068965517243,
+        0.27586206896551724,
+        0.29310344827586204,
+        0.3103448275862069,
+        0.3275862068965517,
+        0.3448275862068966,
+        0.3620689655172414,
+        0.3793103448275862,
+        0.39655172413793105,
+        0.41379310344827586,
+        0.43103448275862066,
+        0.4482758620689655,
+        0.46551724137931033,
+        0.4827586206896552,
+        0.5,
+        0.5172413793103449,
+        0.5344827586206896,
+        0.5517241379310345,
+        0.5689655172413793,
+        0.5862068965517241,
+        0.603448275862069,
+        0.6206896551724138,
+        0.6379310344827587,
+        0.6551724137931034,
+        0.6724137931034483,
+        0.6896551724137931,
+        0.7068965517241379,
+        0.7241379310344828,
+        0.7413793103448276,
+        0.7586206896551724,
+        0.7758620689655172,
+        0.7931034482758621,
+        0.8103448275862069,
+        0.8275862068965517,
+        0.8448275862068966,
+        0.8620689655172413,
+        0.8793103448275862,
+        0.896551724137931,
+        0.9137931034482759,
+        0.9310344827586207,
+        0.9482758620689655,
+        0.9655172413793104,
+        0.9827586206896551,
+        1.0
+      ]
+    },
+    {
+      "alpha": 0.01,
+      "N": 400,
+      "method": "PACE",
+      "x": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.3e-05,
+        5e-05,
+        0.000222,
+        0.000619,
+        0.000623,
+        0.000758,
+        0.000857,
+        0.000975,
+        0.001141,
+        0.001401,
+        0.001687,
+        0.001754,
+        0.001903,
+        0.001977,
+        0.003336,
+        0.003496,
+        0.003627,
+        0.004168,
+        0.004336,
+        0.0051,
+        0.005116,
+        0.005529,
+        0.006054,
+        0.00626,
+        0.006579,
+        0.00699,
+        0.007687,
+        0.0078,
+        0.008631,
+        0.009404,
+        0.011135,
+        0.011558,
+        0.012399,
+        0.012937,
+        0.015805,
+        0.01626,
+        0.01785,
+        0.019188,
+        0.020009,
+        0.022177,
+        0.02565,
+        0.027536,
+        0.032911,
+        0.044392,
+        0.050661,
+        0.05212,
+        0.057122,
+        0.093059,
+        0.103775,
+        0.121212,
+        0.139537,
+        0.191176,
+        0.670842
+      ],
+      "y": [
+        0.017241379310344827,
+        0.034482758620689655,
+        0.05172413793103448,
+        0.06896551724137931,
+        0.08620689655172414,
+        0.10344827586206896,
+        0.1206896551724138,
+        0.13793103448275862,
+        0.15517241379310345,
+        0.1724137931034483,
+        0.1896551724137931,
+        0.20689655172413793,
+        0.22413793103448276,
+        0.2413793103448276,
+        0.25862068965517243,
+        0.27586206896551724,
+        0.29310344827586204,
+        0.3103448275862069,
+        0.3275862068965517,
+        0.3448275862068966,
+        0.3620689655172414,
+        0.3793103448275862,
+        0.39655172413793105,
+        0.41379310344827586,
+        0.43103448275862066,
+        0.4482758620689655,
+        0.46551724137931033,
+        0.4827586206896552,
+        0.5,
+        0.5172413793103449,
+        0.5344827586206896,
+        0.5517241379310345,
+        0.5689655172413793,
+        0.5862068965517241,
+        0.603448275862069,
+        0.6206896551724138,
+        0.6379310344827587,
+        0.6551724137931034,
+        0.6724137931034483,
+        0.6896551724137931,
+        0.7068965517241379,
+        0.7241379310344828,
+        0.7413793103448276,
+        0.7586206896551724,
+        0.7758620689655172,
+        0.7931034482758621,
+        0.8103448275862069,
+        0.8275862068965517,
+        0.8448275862068966,
+        0.8620689655172413,
+        0.8793103448275862,
+        0.896551724137931,
+        0.9137931034482759,
+        0.9310344827586207,
+        0.9482758620689655,
+        0.9655172413793104,
+        0.9827586206896551,
+        1.0
+      ]
+    },
+    {
+      "alpha": 0.01,
+      "N": 400,
+      "method": "Mean local comparator",
+      "x": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        5e-05,
+        0.000131,
+        0.000204,
+        0.00033,
+        0.000643,
+        0.000767,
+        0.000833,
+        0.000927,
+        0.001152,
+        0.001212,
+        0.001299,
+        0.001878,
+        0.0019,
+        0.001953,
+        0.0026,
+        0.002713,
+        0.00277,
+        0.002878,
+        0.003066,
+        0.003948,
+        0.00463,
+        0.004804,
+        0.005554,
+        0.005989,
+        0.006143,
+        0.006396,
+        0.007208,
+        0.007262,
+        0.007725,
+        0.007752,
+        0.008942,
+        0.011097,
+        0.011458,
+        0.013275,
+        0.014116,
+        0.015086,
+        0.015635,
+        0.017849,
+        0.021828,
+        0.022177,
+        0.02565,
+        0.027765,
+        0.032244,
+        0.043867,
+        0.047357,
+        0.056133,
+        0.083143,
+        0.103775,
+        0.117749,
+        0.139432,
+        0.191176,
+        0.670842
+      ],
+      "y": [
+        0.017241379310344827,
+        0.034482758620689655,
+        0.05172413793103448,
+        0.06896551724137931,
+        0.08620689655172414,
+        0.10344827586206896,
+        0.1206896551724138,
+        0.13793103448275862,
+        0.15517241379310345,
+        0.1724137931034483,
+        0.1896551724137931,
+        0.20689655172413793,
+        0.22413793103448276,
+        0.2413793103448276,
+        0.25862068965517243,
+        0.27586206896551724,
+        0.29310344827586204,
+        0.3103448275862069,
+        0.3275862068965517,
+        0.3448275862068966,
+        0.3620689655172414,
+        0.3793103448275862,
+        0.39655172413793105,
+        0.41379310344827586,
+        0.43103448275862066,
+        0.4482758620689655,
+        0.46551724137931033,
+        0.4827586206896552,
+        0.5,
+        0.5172413793103449,
+        0.5344827586206896,
+        0.5517241379310345,
+        0.5689655172413793,
+        0.5862068965517241,
+        0.603448275862069,
+        0.6206896551724138,
+        0.6379310344827587,
+        0.6551724137931034,
+        0.6724137931034483,
+        0.6896551724137931,
+        0.7068965517241379,
+        0.7241379310344828,
+        0.7413793103448276,
+        0.7586206896551724,
+        0.7758620689655172,
+        0.7931034482758621,
+        0.8103448275862069,
+        0.8275862068965517,
+        0.8448275862068966,
+        0.8620689655172413,
+        0.8793103448275862,
+        0.896551724137931,
+        0.9137931034482759,
+        0.9310344827586207,
+        0.9482758620689655,
+        0.9655172413793104,
+        0.9827586206896551,
+        1.0
+      ]
+    },
+    {
+      "alpha": 0.01,
+      "N": 400,
+      "method": "Max-fusion baseline",
+      "x": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.333333333333333e-05,
+        0.00020399836801305587,
+        0.00033007385402483805,
+        0.0003927255150746179,
+        0.0005851375073142189,
+        0.0008226390259953932,
+        0.0008571428571428572,
+        0.0009583333333333333,
+        0.0012837886028100704,
+        0.0013000520020800832,
+        0.0013386880856760374,
+        0.0013886858646396723,
+        0.0014773345774045565,
+        0.0018582046883933677,
+        0.001965923984272608,
+        0.0019963225636984504,
+        0.0021916092673763305,
+        0.002342068616280542,
+        0.0024915670039865074,
+        0.0025129342202512934,
+        0.0030339005408257483,
+        0.0030798186329027296,
+        0.0037815593371148923,
+        0.004528359812725459,
+        0.00462962962962963,
+        0.00501521201749382,
+        0.005130377482820295,
+        0.005210318973185919,
+        0.005482456140350877,
+        0.0055286800276434,
+        0.006968845162801593,
+        0.007266330120850544,
+        0.007439134355275022,
+        0.009358333333333333,
+        0.011211531861343096,
+        0.011583333333333334,
+        0.012261646150132754,
+        0.01302322028719829,
+        0.013133208255159476,
+        0.014317180616740088,
+        0.015086206896551725,
+        0.020009095043201457,
+        0.022177419354838707,
+        0.030020013342228157,
+        0.04761904761904762,
+        0.04846686449060336,
+        0.07170099160945842,
+        0.09523809523809525,
+        0.10052576235541537,
+        0.6708416833667336
+      ],
+      "y": [
+        0.017241379310344827,
+        0.034482758620689655,
+        0.05172413793103448,
+        0.06896551724137931,
+        0.08620689655172414,
+        0.10344827586206896,
+        0.1206896551724138,
+        0.13793103448275862,
+        0.15517241379310345,
+        0.1724137931034483,
+        0.1896551724137931,
+        0.20689655172413793,
+        0.22413793103448276,
+        0.2413793103448276,
+        0.25862068965517243,
+        0.27586206896551724,
+        0.29310344827586204,
+        0.3103448275862069,
+        0.3275862068965517,
+        0.3448275862068966,
+        0.3620689655172414,
+        0.3793103448275862,
+        0.39655172413793105,
+        0.41379310344827586,
+        0.43103448275862066,
+        0.4482758620689655,
+        0.46551724137931033,
+        0.4827586206896552,
+        0.5,
+        0.5172413793103449,
+        0.5344827586206896,
+        0.5517241379310345,
+        0.5689655172413793,
+        0.5862068965517241,
+        0.603448275862069,
+        0.6206896551724138,
+        0.6379310344827587,
+        0.6551724137931034,
+        0.6724137931034483,
+        0.6896551724137931,
+        0.7068965517241379,
+        0.7241379310344828,
+        0.7413793103448276,
+        0.7586206896551724,
+        0.7758620689655172,
+        0.7931034482758621,
+        0.8103448275862069,
+        0.8275862068965517,
+        0.8448275862068966,
+        0.8620689655172413,
+        0.8793103448275862,
+        0.896551724137931,
+        0.9137931034482759,
+        0.9310344827586207,
+        0.9482758620689655,
+        0.9655172413793104,
+        0.9827586206896551,
+        1.0
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "N": 100,
+      "method": "PACE",
+      "x": [
+        0.0,
+        0.00037,
+        0.000372,
+        0.001827,
+        0.002352,
+        0.002838,
+        0.00367,
+        0.00385,
+        0.005569,
+        0.006555,
+        0.007392,
+        0.008641,
+        0.009027,
+        0.009595,
+        0.010149,
+        0.010268,
+        0.010899,
+        0.011998,
+        0.012523,
+        0.012779,
+        0.013781,
+        0.014027,
+        0.015438,
+        0.015504,
+        0.016447,
+        0.017406,
+        0.018272,
+        0.018372,
+        0.019116,
+        0.01912,
+        0.019733,
+        0.021368,
+        0.022177,
+        0.023707,
+        0.028234,
+        0.029005,
+        0.029808,
+        0.03079,
+        0.03211,
+        0.0338,
+        0.037279,
+        0.03787,
+        0.042804,
+        0.047334,
+        0.048204,
+        0.050145,
+        0.054649,
+        0.070485,
+        0.081767,
+        0.090056,
+        0.114368,
+        0.154081,
+        0.180862,
+        0.192952,
+        0.24345,
+        0.257353,
+        0.271861,
+        0.671844
+      ],
+      "y": [
+        0.017241379310344827,
+        0.034482758620689655,
+        0.05172413793103448,
+        0.06896551724137931,
+        0.08620689655172414,
+        0.10344827586206896,
+        0.1206896551724138,
+        0.13793103448275862,
+        0.15517241379310345,
+        0.1724137931034483,
+        0.1896551724137931,
+        0.20689655172413793,
+        0.22413793103448276,
+        0.2413793103448276,
+        0.25862068965517243,
+        0.27586206896551724,
+        0.29310344827586204,
+        0.3103448275862069,
+        0.3275862068965517,
+        0.3448275862068966,
+        0.3620689655172414,
+        0.3793103448275862,
+        0.39655172413793105,
+        0.41379310344827586,
+        0.43103448275862066,
+        0.4482758620689655,
+        0.46551724137931033,
+        0.4827586206896552,
+        0.5,
+        0.5172413793103449,
+        0.5344827586206896,
+        0.5517241379310345,
+        0.5689655172413793,
+        0.5862068965517241,
+        0.603448275862069,
+        0.6206896551724138,
+        0.6379310344827587,
+        0.6551724137931034,
+        0.6724137931034483,
+        0.6896551724137931,
+        0.7068965517241379,
+        0.7241379310344828,
+        0.7413793103448276,
+        0.7586206896551724,
+        0.7758620689655172,
+        0.7931034482758621,
+        0.8103448275862069,
+        0.8275862068965517,
+        0.8448275862068966,
+        0.8620689655172413,
+        0.8793103448275862,
+        0.896551724137931,
+        0.9137931034482759,
+        0.9310344827586207,
+        0.9482758620689655,
+        0.9655172413793104,
+        0.9827586206896551,
+        1.0
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "N": 100,
+      "method": "Mean local comparator",
+      "x": [
+        0.0,
+        0.0,
+        0.000101,
+        0.000372,
+        0.000585,
+        0.000732,
+        0.000866,
+        0.002394,
+        0.004358,
+        0.007392,
+        0.007915,
+        0.007999,
+        0.009793,
+        0.010268,
+        0.010744,
+        0.0117,
+        0.01196,
+        0.01268,
+        0.014074,
+        0.014405,
+        0.015109,
+        0.017495,
+        0.01766,
+        0.019176,
+        0.019241,
+        0.019554,
+        0.019963,
+        0.020184,
+        0.020224,
+        0.020692,
+        0.022722,
+        0.024217,
+        0.025632,
+        0.026225,
+        0.026261,
+        0.03469,
+        0.035201,
+        0.035387,
+        0.036511,
+        0.038376,
+        0.042211,
+        0.043843,
+        0.046178,
+        0.052131,
+        0.053412,
+        0.055935,
+        0.066532,
+        0.066814,
+        0.081592,
+        0.100063,
+        0.121567,
+        0.163312,
+        0.171625,
+        0.181388,
+        0.254776,
+        0.257353,
+        0.277922,
+        0.671844
+      ],
+      "y": [
+        0.017241379310344827,
+        0.034482758620689655,
+        0.05172413793103448,
+        0.06896551724137931,
+        0.08620689655172414,
+        0.10344827586206896,
+        0.1206896551724138,
+        0.13793103448275862,
+        0.15517241379310345,
+        0.1724137931034483,
+        0.1896551724137931,
+        0.20689655172413793,
+        0.22413793103448276,
+        0.2413793103448276,
+        0.25862068965517243,
+        0.27586206896551724,
+        0.29310344827586204,
+        0.3103448275862069,
+        0.3275862068965517,
+        0.3448275862068966,
+        0.3620689655172414,
+        0.3793103448275862,
+        0.39655172413793105,
+        0.41379310344827586,
+        0.43103448275862066,
+        0.4482758620689655,
+        0.46551724137931033,
+        0.4827586206896552,
+        0.5,
+        0.5172413793103449,
+        0.5344827586206896,
+        0.5517241379310345,
+        0.5689655172413793,
+        0.5862068965517241,
+        0.603448275862069,
+        0.6206896551724138,
+        0.6379310344827587,
+        0.6551724137931034,
+        0.6724137931034483,
+        0.6896551724137931,
+        0.7068965517241379,
+        0.7241379310344828,
+        0.7413793103448276,
+        0.7586206896551724,
+        0.7758620689655172,
+        0.7931034482758621,
+        0.8103448275862069,
+        0.8275862068965517,
+        0.8448275862068966,
+        0.8620689655172413,
+        0.8793103448275862,
+        0.896551724137931,
+        0.9137931034482759,
+        0.9310344827586207,
+        0.9482758620689655,
+        0.9655172413793104,
+        0.9827586206896551,
+        1.0
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "N": 100,
+      "method": "Max-fusion baseline",
+      "x": [
+        0.0,
+        0.0,
+        0.0,
+        3.362927091740651e-05,
+        6.865774116031582e-05,
+        9.29022668153103e-05,
+        0.00013119783624491608,
+        0.0006737947053921308,
+        0.0009489623303214094,
+        0.0022916666666666662,
+        0.002342068616280542,
+        0.0032889928373044876,
+        0.003906806969515499,
+        0.004863754455924113,
+        0.005808333333333333,
+        0.006599008957499524,
+        0.00827966881324747,
+        0.008552989658657958,
+        0.008801656782453168,
+        0.009880395215808633,
+        0.011722272317403066,
+        0.011765544780376497,
+        0.012732206219995828,
+        0.013259893920848633,
+        0.013308857273978889,
+        0.014245014245014245,
+        0.01512017687754083,
+        0.015716374269005847,
+        0.015716666666666667,
+        0.015857142857142858,
+        0.01834369483459974,
+        0.01901901901901902,
+        0.02215641110014259,
+        0.023281596452328163,
+        0.024852946905067976,
+        0.025181541344577188,
+        0.0285586791610888,
+        0.02868400315208826,
+        0.029716655148583276,
+        0.03265980429533613,
+        0.03320227173438183,
+        0.03468979319546364,
+        0.03658722884204094,
+        0.037528030602822844,
+        0.03879310344827586,
+        0.0390702274975272,
+        0.04919236417033773,
+        0.05097755249818972,
+        0.054570259208731244,
+        0.059975,
+        0.08186773629538208,
+        0.09255784865540963,
+        0.10526315789473684,
+        0.10685483870967742,
+        0.1231335436382755,
+        0.25477634137970484,
+        0.2779220779220779,
+        0.6718436873747495
+      ],
+      "y": [
+        0.017241379310344827,
+        0.034482758620689655,
+        0.05172413793103448,
+        0.06896551724137931,
+        0.08620689655172414,
+        0.10344827586206896,
+        0.1206896551724138,
+        0.13793103448275862,
+        0.15517241379310345,
+        0.1724137931034483,
+        0.1896551724137931,
+        0.20689655172413793,
+        0.22413793103448276,
+        0.2413793103448276,
+        0.25862068965517243,
+        0.27586206896551724,
+        0.29310344827586204,
+        0.3103448275862069,
+        0.3275862068965517,
+        0.3448275862068966,
+        0.3620689655172414,
+        0.3793103448275862,
+        0.39655172413793105,
+        0.41379310344827586,
+        0.43103448275862066,
+        0.4482758620689655,
+        0.46551724137931033,
+        0.4827586206896552,
+        0.5,
+        0.5172413793103449,
+        0.5344827586206896,
+        0.5517241379310345,
+        0.5689655172413793,
+        0.5862068965517241,
+        0.603448275862069,
+        0.6206896551724138,
+        0.6379310344827587,
+        0.6551724137931034,
+        0.6724137931034483,
+        0.6896551724137931,
+        0.7068965517241379,
+        0.7241379310344828,
+        0.7413793103448276,
+        0.7586206896551724,
+        0.7758620689655172,
+        0.7931034482758621,
+        0.8103448275862069,
+        0.8275862068965517,
+        0.8448275862068966,
+        0.8620689655172413,
+        0.8793103448275862,
+        0.896551724137931,
+        0.9137931034482759,
+        0.9310344827586207,
+        0.9482758620689655,
+        0.9655172413793104,
+        0.9827586206896551,
+        1.0
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "N": 400,
+      "method": "PACE",
+      "x": [
+        0.0,
+        0.000101,
+        0.000372,
+        0.000796,
+        0.001155,
+        0.001762,
+        0.00224,
+        0.003608,
+        0.006918,
+        0.007075,
+        0.007246,
+        0.00806,
+        0.00817,
+        0.008408,
+        0.009857,
+        0.009862,
+        0.011029,
+        0.011231,
+        0.011282,
+        0.011387,
+        0.011628,
+        0.011913,
+        0.013822,
+        0.013969,
+        0.014098,
+        0.015534,
+        0.017073,
+        0.018309,
+        0.018427,
+        0.018428,
+        0.019108,
+        0.022177,
+        0.023148,
+        0.023453,
+        0.023547,
+        0.027653,
+        0.028899,
+        0.031609,
+        0.032547,
+        0.032575,
+        0.034467,
+        0.037362,
+        0.037792,
+        0.046073,
+        0.050023,
+        0.050985,
+        0.057864,
+        0.069016,
+        0.07982,
+        0.081642,
+        0.100063,
+        0.150982,
+        0.180015,
+        0.187277,
+        0.248516,
+        0.259191,
+        0.27013,
+        0.671844
+      ],
+      "y": [
+        0.017241379310344827,
+        0.034482758620689655,
+        0.05172413793103448,
+        0.06896551724137931,
+        0.08620689655172414,
+        0.10344827586206896,
+        0.1206896551724138,
+        0.13793103448275862,
+        0.15517241379310345,
+        0.1724137931034483,
+        0.1896551724137931,
+        0.20689655172413793,
+        0.22413793103448276,
+        0.2413793103448276,
+        0.25862068965517243,
+        0.27586206896551724,
+        0.29310344827586204,
+        0.3103448275862069,
+        0.3275862068965517,
+        0.3448275862068966,
+        0.3620689655172414,
+        0.3793103448275862,
+        0.39655172413793105,
+        0.41379310344827586,
+        0.43103448275862066,
+        0.4482758620689655,
+        0.46551724137931033,
+        0.4827586206896552,
+        0.5,
+        0.5172413793103449,
+        0.5344827586206896,
+        0.5517241379310345,
+        0.5689655172413793,
+        0.5862068965517241,
+        0.603448275862069,
+        0.6206896551724138,
+        0.6379310344827587,
+        0.6551724137931034,
+        0.6724137931034483,
+        0.6896551724137931,
+        0.7068965517241379,
+        0.7241379310344828,
+        0.7413793103448276,
+        0.7586206896551724,
+        0.7758620689655172,
+        0.7931034482758621,
+        0.8103448275862069,
+        0.8275862068965517,
+        0.8448275862068966,
+        0.8620689655172413,
+        0.8793103448275862,
+        0.896551724137931,
+        0.9137931034482759,
+        0.9310344827586207,
+        0.9482758620689655,
+        0.9655172413793104,
+        0.9827586206896551,
+        1.0
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "N": 400,
+      "method": "Mean local comparator",
+      "x": [
+        0.0,
+        0.0,
+        0.000101,
+        0.000465,
+        0.000595,
+        0.000732,
+        0.001073,
+        0.00364,
+        0.004471,
+        0.004752,
+        0.005525,
+        0.007394,
+        0.0074,
+        0.008056,
+        0.010482,
+        0.01122,
+        0.011861,
+        0.01196,
+        0.012333,
+        0.01268,
+        0.014398,
+        0.016095,
+        0.016233,
+        0.01766,
+        0.017886,
+        0.018829,
+        0.019371,
+        0.019575,
+        0.0205,
+        0.020963,
+        0.022792,
+        0.024186,
+        0.026901,
+        0.033038,
+        0.03469,
+        0.038008,
+        0.038122,
+        0.039268,
+        0.040948,
+        0.045241,
+        0.045758,
+        0.052207,
+        0.055025,
+        0.061573,
+        0.066532,
+        0.066814,
+        0.081225,
+        0.081567,
+        0.116948,
+        0.150365,
+        0.174676,
+        0.18938,
+        0.246061,
+        0.247019,
+        0.254776,
+        0.257353,
+        0.277056,
+        0.671844
+      ],
+      "y": [
+        0.017241379310344827,
+        0.034482758620689655,
+        0.05172413793103448,
+        0.06896551724137931,
+        0.08620689655172414,
+        0.10344827586206896,
+        0.1206896551724138,
+        0.13793103448275862,
+        0.15517241379310345,
+        0.1724137931034483,
+        0.1896551724137931,
+        0.20689655172413793,
+        0.22413793103448276,
+        0.2413793103448276,
+        0.25862068965517243,
+        0.27586206896551724,
+        0.29310344827586204,
+        0.3103448275862069,
+        0.3275862068965517,
+        0.3448275862068966,
+        0.3620689655172414,
+        0.3793103448275862,
+        0.39655172413793105,
+        0.41379310344827586,
+        0.43103448275862066,
+        0.4482758620689655,
+        0.46551724137931033,
+        0.4827586206896552,
+        0.5,
+        0.5172413793103449,
+        0.5344827586206896,
+        0.5517241379310345,
+        0.5689655172413793,
+        0.5862068965517241,
+        0.603448275862069,
+        0.6206896551724138,
+        0.6379310344827587,
+        0.6551724137931034,
+        0.6724137931034483,
+        0.6896551724137931,
+        0.7068965517241379,
+        0.7241379310344828,
+        0.7413793103448276,
+        0.7586206896551724,
+        0.7758620689655172,
+        0.7931034482758621,
+        0.8103448275862069,
+        0.8275862068965517,
+        0.8448275862068966,
+        0.8620689655172413,
+        0.8793103448275862,
+        0.896551724137931,
+        0.9137931034482759,
+        0.9310344827586207,
+        0.9482758620689655,
+        0.9655172413793104,
+        0.9827586206896551,
+        1.0
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "N": 400,
+      "method": "Max-fusion baseline",
+      "x": [
+        0.0,
+        0.0,
+        0.0,
+        3.362927091740651e-05,
+        6.865774116031582e-05,
+        0.000141289977494525,
+        0.0001858045336306206,
+        0.0011552584890869332,
+        0.0014198537852697722,
+        0.0018200728029121166,
+        0.002342068616280542,
+        0.002408333333333333,
+        0.003934400685598535,
+        0.004705278466934725,
+        0.005303957568339453,
+        0.005709523556217529,
+        0.006813417190775681,
+        0.006974999999999999,
+        0.007381961701505628,
+        0.007386672887022782,
+        0.00827966881324747,
+        0.011578650098842133,
+        0.012398557258791706,
+        0.012784387393028595,
+        0.012820512820512822,
+        0.013285714285714284,
+        0.013690815744438105,
+        0.01435941326106079,
+        0.014467725842351677,
+        0.015216666666666665,
+        0.015716374269005847,
+        0.01825572801182557,
+        0.01946390835279724,
+        0.023746846550400352,
+        0.026721953466943102,
+        0.027790911478854746,
+        0.031236055332440876,
+        0.03337290594908324,
+        0.03468979319546364,
+        0.034820180454949806,
+        0.03604193971166448,
+        0.036892758936755275,
+        0.041666666666666664,
+        0.043318649045521296,
+        0.05320600272851297,
+        0.0586053412462908,
+        0.059941666666666664,
+        0.07940969782150387,
+        0.10685483870967742,
+        0.10831426392067123,
+        0.10881801125703565,
+        0.13120926864590876,
+        0.13144058885383805,
+        0.167952278103466,
+        0.2453724950283004,
+        0.25477634137970484,
+        0.27705627705627706,
+        0.6718436873747495
+      ],
+      "y": [
+        0.017241379310344827,
+        0.034482758620689655,
+        0.05172413793103448,
+        0.06896551724137931,
+        0.08620689655172414,
+        0.10344827586206896,
+        0.1206896551724138,
+        0.13793103448275862,
+        0.15517241379310345,
+        0.1724137931034483,
+        0.1896551724137931,
+        0.20689655172413793,
+        0.22413793103448276,
+        0.2413793103448276,
+        0.25862068965517243,
+        0.27586206896551724,
+        0.29310344827586204,
+        0.3103448275862069,
+        0.3275862068965517,
+        0.3448275862068966,
+        0.3620689655172414,
+        0.3793103448275862,
+        0.39655172413793105,
+        0.41379310344827586,
+        0.43103448275862066,
+        0.4482758620689655,
+        0.46551724137931033,
+        0.4827586206896552,
+        0.5,
+        0.5172413793103449,
+        0.5344827586206896,
+        0.5517241379310345,
+        0.5689655172413793,
+        0.5862068965517241,
+        0.603448275862069,
+        0.6206896551724138,
+        0.6379310344827587,
+        0.6551724137931034,
+        0.6724137931034483,
+        0.6896551724137931,
+        0.7068965517241379,
+        0.7241379310344828,
+        0.7413793103448276,
+        0.7586206896551724,
+        0.7758620689655172,
+        0.7931034482758621,
+        0.8103448275862069,
+        0.8275862068965517,
+        0.8448275862068966,
+        0.8620689655172413,
+        0.8793103448275862,
+        0.896551724137931,
+        0.9137931034482759,
+        0.9310344827586207,
+        0.9482758620689655,
+        0.9655172413793104,
+        0.9827586206896551,
+        1.0
+      ]
+    }
+  ],
+  "budget_scaling": [
+    {
+      "alpha": 0.01,
+      "cohort": "universal_robustness",
+      "N": [
+        100,
+        400,
+        750
+      ],
+      "gain": [
+        0.026086,
+        0.028306,
+        0.024276
+      ],
+      "lower": [
+        0.011323,
+        0.012339,
+        0.009848
+      ],
+      "upper": [
+        0.043346,
+        0.047375,
+        0.041612
+      ]
+    },
+    {
+      "alpha": 0.01,
+      "cohort": "broad_scaling",
+      "N": [
+        100,
+        400,
+        2000
+      ],
+      "gain": [
+        0.027842,
+        0.028047,
+        0.019624
+      ],
+      "lower": [
+        0.011008,
+        0.011273,
+        0.003509
+      ],
+      "upper": [
+        0.047918,
+        0.047374,
+        0.040993
+      ]
+    },
+    {
+      "alpha": 0.01,
+      "cohort": "high_resource",
+      "N": [
+        100,
+        400,
+        2000,
+        20000
+      ],
+      "gain": [
+        0.007237,
+        0.020631,
+        0.030177,
+        0.005329
+      ],
+      "lower": [
+        0.001433,
+        0.011175,
+        0.003093,
+        -3.1e-05
+      ],
+      "upper": [
+        0.015878,
+        0.030551,
+        0.07849,
+        0.012555
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "cohort": "universal_robustness",
+      "N": [
+        100,
+        400,
+        750
+      ],
+      "gain": [
+        0.023418,
+        0.023219,
+        0.022614
+      ],
+      "lower": [
+        0.005777,
+        0.003116,
+        0.003583
+      ],
+      "upper": [
+        0.043968,
+        0.045968,
+        0.044764
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "cohort": "broad_scaling",
+      "N": [
+        100,
+        400,
+        2000
+      ],
+      "gain": [
+        0.02449,
+        0.021462,
+        0.007358
+      ],
+      "lower": [
+        0.004325,
+        0.001818,
+        8.3e-05
+      ],
+      "upper": [
+        0.049326,
+        0.047843,
+        0.02072
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "cohort": "high_resource",
+      "N": [
+        100,
+        400,
+        2000,
+        20000
+      ],
+      "gain": [
+        0.035643,
+        0.035559,
+        0.020489,
+        -0.001311
+      ],
+      "lower": [
+        0.031271,
+        0.030843,
+        0.019829,
+        -0.003778
+      ],
+      "upper": [
+        0.040016,
+        0.040275,
+        0.02087,
+        0.000337
+      ]
+    }
+  ]
+}

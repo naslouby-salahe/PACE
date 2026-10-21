@@ -2,12 +2,7 @@
 \label{sec:method}
 Figure~\ref{fig:architecture} separates the supervised peer route from the two target-local decisions. Algorithm~\ref{alg:pace} summarizes preparation and inference; the equations below specify the score and quantile conventions.
 
-\begin{figure}[tbp]
-\centering
-\includegraphics[width=\textwidth]{figures/architecture.pdf}
-\caption{PACE's information flow and final decision. Target benign training, reference, calibration, and test roles are distinct. The benchmark standardizes features using pooled complete benign training roles before restricting local fitting to $N$ rows. Target attack labels enter evaluation only. IF: isolation forest; LOF: local outlier factor; $k$NN: nearest-neighbor distance.}
-\label{fig:architecture}
-\end{figure}
+
 
 \subsection{Target-relative evidence}
 For an expert score $s$, let $r_1,\ldots,r_n$ be that expert's scores on the target reference role, $r_{\max}=\max_i r_i$, and $d_R=\max\{r_{\max}-\operatorname{median}_i r_i,10^{-6}\}$. The implemented transformation is
@@ -19,6 +14,13 @@ For an expert score $s$, let $r_1,\ldots,r_n$ be that expert's scores on the tar
  \label{eq:evidence}
 \end{equation}
 Ties are included in the upper-tail count. Values beyond the largest reference score receive an extrapolated value, rather than a saturated empirical rank. This extrapolation is a score convention, not an estimated tail probability with a distribution-free validity guarantee. For peer $k$, the evidence is $e_k(x)=E_{R,k}(m_k(x))$.
+
+\begin{figure}[bp]
+\centering
+\includegraphics[width=\textwidth]{figures/architecture.pdf}
+\caption{PACE's information flow and final decision. Target benign training, reference, calibration, and test roles are distinct. The benchmark standardizes features using pooled complete benign training roles before restricting local fitting to $N$ rows. Target attack labels enter evaluation only. IF: isolation forest; LOF: local outlier factor; $k$NN: nearest-neighbor distance.}
+\label{fig:architecture}
+\end{figure}
 
 \subsection{Blocks and thresholds}
 Let $M=|C|$ and let $b=250$ be the configured block-size parameter. The code constructs $J=\max\{1,\lfloor M/b\rfloor\}$ consecutive blocks using a balanced array partition: their lengths differ by at most one, and earlier blocks receive any surplus rows. They are not necessarily blocks of exactly 250 observations. For example, 350 calibration observations form one block of length 350. Write $n_j=|C_j|$ and let $z_{j,(1)}\leq\cdots\leq z_{j,(n_j)}$ be ordered evidence in block $j$. For allocation $w\in(0,1)$,
@@ -40,6 +42,7 @@ The calibrator measures this union on every calibration block. Starting at $\lam
 
 The retained multiplier is a numerical search result on a stepwise calibration function. It should not be interpreted as a unique population optimum. The peer branch applies this routine to the $K$ separate margin-evidence experts with allocation $B_P$. Separate thresholds avoid collapsing all peer evidence into one maximum before calibration. The common multiplier nevertheless couples the thresholds through the observed union, so an unstable peer can still affect their joint calibration.
 
+\FloatBarrier
 \subsection{Anchor and complementary local bank}
 The anchor averages the reference-transformed scores of six local detectors: PCA reconstruction error, isolation forest, local outlier factor, mean nearest-neighbor distance, histogram rarity, and regularized Gaussian distance. Evidence is computed separately for each detector before averaging. The anchor is not transformed a second time. PCA retains 95\% of explained variance and uses mean squared reconstruction error. Isolation forest~\cite{liu2008isolation} uses 100 trees, local outlier factor~\cite{breunig2000lof} uses 20 neighbors, and the distance score averages 10 neighbor distances from the fitted neighbor structure. Histogram scores sum negative log smoothed bin frequencies across features, with 20 equal-width training bins and additive-one smoothing. Values outside a feature's training range use its minimum fitted bin probability. The Gaussian score is a squared Mahalanobis distance using a pseudoinverse of the sample covariance plus $0.001I$.
 
@@ -78,7 +81,7 @@ The anchor is itself calibrated by the union-scaling routine as a singleton expe
 \end{equation}
 There is no final calibration pass over this three-way union.
 
-At $\alpha=0.01$ and $r=a=0.5$, these allocations are $B_P=0.005$, $B_A=0.005$, and $B_B=0.0025$. Their sum is 0.0125, rather than 0.01. At $\alpha=0.05$, they are 0.025, 0.0125, and 0.0125, whose sum is 0.05. Overlap and integer count resolution can make the observed calibration union smaller than the allocation sum, but do not justify presenting Eq.~\eqref{eq:allocation} as a strict partition of $\alpha$. The rule checks $1/b$, whereas the first possible nonzero exceedance for an individual higher quantile depends on its actual block length through $1/(n_j-1)$. The resolution rule is therefore an implemented heuristic, not an exact test of every block's quantile resolution.
+At $\alpha=0.01$ and $r=a=0.5$, these allocations are $B_P=0.005$, $B_A=0.005$, and $B_B=0.0025$. Their sum is 0.0125, rather than 0.01. An allocation-respecting alternative calibrates all local experts as a single union within the original total allocation. At $\alpha=0.01$, this alternative attains the same pooled detection as PACE to the precision of the stored results, with nearly identical mean FPR (\ref{app:inventory}). This sensitivity result indicates that the observed aggregate benefit does not require a measured detection advantage over the allocation-respecting alternative; it does not establish identical record-level decisions or a population FPR guarantee. At $\alpha=0.05$, they are 0.025, 0.0125, and 0.0125, whose sum is 0.05. Overlap and integer count resolution can make the observed calibration union smaller than the allocation sum, but do not justify presenting Eq.~\eqref{eq:allocation} as a strict partition of $\alpha$. The rule checks $1/b$, whereas the first possible nonzero exceedance for an individual higher quantile depends on its actual block length through $1/(n_j-1)$. The resolution rule is therefore an implemented heuristic, not an exact test of every block's quantile resolution. The joint criterion permits at most $\lfloor Bn_j\rfloor$ alerts per block, whereas an individual unscaled higher quantile admits at most $\lfloor w(n_j-1)\rfloor$ strict exceedances; these are different resolution limits.
 
 The protected anchor preserves a separate local decision path but does not prove non-inferiority to the primary comparator. That comparator averages seven detector evidences, including an autoencoder omitted from the six-member anchor, and uses a different threshold procedure. Target-level regressions must be assessed empirically.
 

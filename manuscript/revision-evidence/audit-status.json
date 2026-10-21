@@ -1,0 +1,508 @@
+{
+  "stable_findings": [
+    {
+      "id": "C1",
+      "priority": "P0",
+      "status": "AUTHOR CONFIRMATION REQUIRED",
+      "location": "manuscript/main.tex:18",
+      "verification": "All three supplied identities, numeric affiliations, emails, corresponding marker, ORCID text and URI verified in the rendered title page. Truthful declaration placeholders retained.",
+      "remaining": "Funding/conflicts, contributions/acknowledgements, final coauthor approval and responsibility; release link intentionally deferred."
+    },
+    {
+      "id": "M13",
+      "priority": "P1",
+      "status": "FIXED",
+      "location": "manuscript/sections/comparison-inventory.tex:1",
+      "verification": "15 rules x four primary configurations: 60 rows with TPR, FPR, paired effect/CI and precise definitions; independently recomputed from frozen JSON. Peers-only is prominent in Results.",
+      "remaining": "None"
+    },
+    {
+      "id": "M12",
+      "priority": "P1",
+      "status": "FIXED",
+      "location": "manuscript/sections/results.tex:78",
+      "verification": "Explicit clamping direction and nonidentification; all four original adjusted gains/CIs and 75/69/36/28 uncovered-cell counts reproduce. No zero-credit bound or exact-FPR claim.",
+      "remaining": "None"
+    },
+    {
+      "id": "M14",
+      "priority": "P1",
+      "status": "FIXED",
+      "location": "manuscript/sections/results.tex:85",
+      "verification": "Host change -0.362268 and other-14 change -0.004441 [-0.009296,0.000412] reproduced; Figure 4 caption conditions on singleton resampling.",
+      "remaining": "None"
+    },
+    {
+      "id": "M16",
+      "priority": "P1",
+      "status": "AUTHOR CONFIRMATION REQUIRED",
+      "location": "manuscript/sections/experimental-methodology.tex:50",
+      "verification": "Cohort reuse, 35-1 motivation and documented role of seeds 6-8 added. Commits 4528117/41b3a18/08346c8 establish repository order; dates use Africa/Casablanca.",
+      "remaining": "Exact private architecture/criteria freeze and arm timing relative to inspected outcomes; repository commit dates do not establish these."
+    },
+    {
+      "id": "M5",
+      "priority": "P1",
+      "status": "FIXED",
+      "location": "manuscript/sections/results.tex:19",
+      "verification": "Dedicated Results subsection with all eight gains/CIs, fixed complete local branch and higher FPR; abstract/contribution 2 updated; Discussion cross-reference replaces duplicate numerical paragraph.",
+      "remaining": "None"
+    },
+    {
+      "id": "M1",
+      "priority": "P1",
+      "status": "FIXED",
+      "location": "manuscript/sections/results.tex:35",
+      "verification": "Ex-TON gains/CIs retained, three small lower bounds corrected, top-three shares 60.48-89.38% and exploratory top-five removals reproduced; negative targets and high-budget results retained.",
+      "remaining": "None"
+    },
+    {
+      "id": "M20",
+      "priority": "P1",
+      "status": "FIXED",
+      "location": "manuscript/sections/results.tex:30",
+      "verification": "Anchor removal explicitly reallocates B_L to bank; 35-1/.190 offset, zero-crossing low-alpha intervals and adverse high-alpha tradeoff agree with arms.py and frozen summaries.",
+      "remaining": "None"
+    },
+    {
+      "id": "M2",
+      "priority": "P1",
+      "status": "ALREADY SATISFIED",
+      "location": "manuscript/sections/limitations.tex:13",
+      "verification": "Current paper explicitly limits numerical comparisons to executed internal architectures and states MCDE was not rerun. The permitted alternative of precise bounded claims is satisfied.",
+      "remaining": "External reimplementation is intentionally excluded by the user; see E2."
+    },
+    {
+      "id": "M17",
+      "priority": "P2",
+      "status": "FIXED",
+      "location": "manuscript/sections/results.tex:62",
+      "verification": "65.7816% outside the orig_ip_bytes calibration range independently reproduced; negative calibration-size/FPR association documented without causal detector or repair claim.",
+      "remaining": "None"
+    },
+    {
+      "id": "M19",
+      "priority": "P2",
+      "status": "FIXED",
+      "location": "manuscript/tables/primary.tex:14",
+      "verification": "Both alpha levels now have paired FPR CIs. Lower alpha-.05 means retained; two-target contribution -0.008036, exclusion -0.002107 CI and 32/23/3 counts reproduced in Results.",
+      "remaining": "None"
+    },
+    {
+      "id": "M18",
+      "priority": "P2",
+      "status": "FIXED",
+      "location": "manuscript/sections/results.tex:41",
+      "verification": "Seed-averaged 21/36/1 and 15/41/2 counts at N=400 reproduced; tolerance and shared-peer dependence explicit; no sign-test inference added.",
+      "remaining": "None"
+    },
+    {
+      "id": "m20",
+      "priority": "P2",
+      "status": "FIXED",
+      "location": "manuscript/sections/methodology.tex:81",
+      "verification": "Single union respects total alpha and preserves pooled low-alpha TPR at stored precision, with FPR .033998/.032371; no record-mask identity or population guarantee inferred.",
+      "remaining": "None"
+    },
+    {
+      "id": "m15",
+      "priority": "P2",
+      "status": "FIXED",
+      "location": "manuscript/sections/methodology.tex:81",
+      "verification": "Different floor(B*n_j) union and floor(w*(n_j-1)) individual limits stated; actual routines checked at 250,350,385,399,400,401,418,436,464,495,499 rows; equations unchanged.",
+      "remaining": "None"
+    },
+    {
+      "id": "m16",
+      "priority": "P2",
+      "status": "FIXED",
+      "location": "manuscript/sections/experimental-methodology.tex:19",
+      "verification": "Reconstructed all actual foreign-peer development labels using cached capture lengths and executed minima; 11 absent of 258 cells verified. Label overlap is distinguished from shared instances/family holdout.",
+      "remaining": "None"
+    },
+    {
+      "id": "m21",
+      "priority": "P2",
+      "status": "FIXED",
+      "location": "manuscript/sections/results.tex:39",
+      "verification": "CTU scenario-12 seed 7 peer .189114, PACE .217712 vs comparator .312731 at N=400 and reversed contrast at N=100 reproduced; detector-level cause remains unclaimed.",
+      "remaining": "None"
+    },
+    {
+      "id": "m17",
+      "priority": "P2",
+      "status": "AUTHOR CONFIRMATION REQUIRED",
+      "location": "manuscript/sections/dataset-provenance.tex:1",
+      "verification": "Exact manifest paths, schemas, seven manifest hashes, archive/subset distinctions, authoritative links and confirmed source terms added; Gotham descriptor and N-BaIoT data DOI checked.",
+      "remaining": "Missing numbered raw revisions/retrieval records and raw-archive checksums cannot be reconstructed from cache manifests; confirm additional permissions/citation obligations, particularly UNSW redistribution. No raw redistribution claimed."
+    },
+    {
+      "id": "m13",
+      "priority": "P2",
+      "status": "FIXED",
+      "location": "manuscript/scripts/generate_figures.py:1",
+      "verification": "Four manuscript-only figure generators, coordinate/source manifest and commands added. Temporary regeneration matches scientific content; two new-generator runs produce identical PDFs/coordinates. Prior source was absent, so earlier pixel identity is not asserted.",
+      "remaining": "None"
+    },
+    {
+      "id": "O4",
+      "priority": "P2",
+      "status": "FIXED",
+      "location": "manuscript/sections/discussion.tex:27",
+      "verification": "Apruzzese 2026 added for report triage; Flood 2024 for dataset construction. Relevant original passages and DOI metadata checked; newly retrieved 18-page institutional Flood copy closes its earlier full-text gap.",
+      "remaining": "None"
+    },
+    {
+      "id": "O6",
+      "priority": "P2",
+      "status": "FIXED",
+      "location": "manuscript/sections/related-work.tex:31",
+      "verification": "Rey and DI-NIDS added with correct information access and final-publication metadata. Rey preprint extra author distinguished from final four-author DOI record; no performance ranking.",
+      "remaining": "None"
+    },
+    {
+      "id": "O7",
+      "priority": "P2",
+      "status": "FIXED",
+      "location": "manuscript/sections/related-work.tex:19",
+      "verification": "Bridges precedent acknowledged with verified DOI and method text. PACE novelty remains its frozen-peer/local decision architecture; no imported conformal guarantee.",
+      "remaining": "None"
+    },
+    {
+      "id": "W7",
+      "priority": "P2",
+      "status": "FIXED",
+      "location": "manuscript/sections/introduction.tex:7",
+      "verification": "First transform description now specifies attack-minus-benign upper-tail ranks and extrapolation, matching Eq. (2) and searchsorted left ties.",
+      "remaining": "None"
+    },
+    {
+      "id": "O9",
+      "priority": "P2",
+      "status": "FIXED",
+      "location": "manuscript/sections/related-work.tex:53",
+      "verification": "Published 2026 DOI, title, authors and relevant granularity diagnosis checked against version of record; PACE row-level procedure distinguished. MEFA remains abstract-only and is not used for a detailed comparison.",
+      "remaining": "None"
+    },
+    {
+      "id": "M10",
+      "priority": "P3",
+      "status": "FIXED",
+      "location": "manuscript/sections/experimental-methodology.tex:52",
+      "verification": "110 artifact digests validated: 1824 records, 1416 unique keys, 408 fully identical repeats. Deduplication key and manifest documented, all outcomes preserved.",
+      "remaining": "None"
+    },
+    {
+      "id": "m14",
+      "priority": "P3",
+      "status": "FIXED",
+      "location": "manuscript/sections/experimental-methodology.tex:48",
+      "verification": "Planning approximation explicitly named; normal quantiles reproduce MDE .018393/.036787, without observed-power claims.",
+      "remaining": "None"
+    },
+    {
+      "id": "m19",
+      "priority": "P3",
+      "status": "FIXED",
+      "location": "README.md:7",
+      "verification": "Two public README statements aligned with already correct manuscript: pooled benign preprocessing and 58 benchmark targets. All private docs hashes unchanged.",
+      "remaining": "Ignored docs cleanup is DEFERRED BY USER and is not a manuscript defect."
+    },
+    {
+      "id": "m22",
+      "priority": "P3",
+      "status": "FIXED",
+      "location": "manuscript/references.bib:1",
+      "verification": "Removed duplicated DOI URL; preserved proper names, article numbering and legitimate absent NDSS pagination. All 37 final DOI identities/authors/metadata verified; harmless Kitsune empty-pages warning retained.",
+      "remaining": "None"
+    },
+    {
+      "id": "O2",
+      "priority": "P3",
+      "status": "DEFERRED BY USER",
+      "location": "manuscript/main.tex:1",
+      "verification": "Existing journal-neutral elsarticle retained. Concrete appendix references, unique hyperlink destinations and table numbering corrected without selecting a venue.",
+      "remaining": "Select a target journal later; apply its actual template then."
+    },
+    {
+      "id": "O5",
+      "priority": "P3",
+      "status": "ALREADY SATISFIED",
+      "location": "manuscript/scripts/generate_figures.py:77",
+      "verification": "Full false-alert distribution, zeros and .67 tail remain visible. Optional inset omitted to preserve the established layout; numerical coordinate archive permits later views.",
+      "remaining": "None"
+    },
+    {
+      "id": "O8",
+      "priority": "P3",
+      "status": "ALREADY SATISFIED",
+      "location": "manuscript/sections/related-work.tex:1",
+      "verification": "Eight focused additions supply the needed arguments. CADES archival record and relevant Bonferroni text examined; no publication DOI invented. Redundant optional surveys/benchmark citations omitted with no unsupported exhaustive-novelty claim.",
+      "remaining": "None"
+    },
+    {
+      "id": "W1",
+      "priority": "P3",
+      "status": "FIXED",
+      "location": "manuscript/main.tex:28",
+      "verification": "Generic abstract close replaced by verified peer-fusion result and future-FPR boundary; nearby repeated guarantee wording removed while preserving primary gains.",
+      "remaining": "None"
+    },
+    {
+      "id": "W2",
+      "priority": "P3",
+      "status": "FIXED",
+      "location": "manuscript/sections/conclusion.tex:4",
+      "verification": "Requested concluding contribution/validation statement inserted; measured gains and adverse/heterogeneous results preserved.",
+      "remaining": "None"
+    }
+  ],
+  "proposal_families": [
+    {
+      "id": "A1",
+      "priority": "P1",
+      "status": "FIXED",
+      "evidence": "Complete 60-row primary rule inventory; all outcomes and paired contrasts included."
+    },
+    {
+      "id": "A2",
+      "priority": "P1",
+      "status": "FIXED",
+      "evidence": "Clamping direction/nonidentification and high-resource singleton conditioning added beside results."
+    },
+    {
+      "id": "B1",
+      "priority": "P2",
+      "status": "FIXED",
+      "evidence": "target-seed-rates.csv exports 21,240 method rows from all 1416 unique frozen cells; no repeated observations counted twice."
+    },
+    {
+      "id": "B2",
+      "priority": "P2",
+      "status": "ALREADY SATISFIED",
+      "evidence": "Coverage counts and approximate-estimand boundary are explicit. Optional covered-only deletion would select on realized outcomes and is unnecessary for the bounded claim."
+    },
+    {
+      "id": "B3",
+      "priority": "P1/P2",
+      "status": "FIXED",
+      "evidence": "Top-five outcome-selected and singleton-host sensitivities reproduced and reported."
+    },
+    {
+      "id": "B4",
+      "priority": "P2",
+      "status": "ALREADY SATISFIED",
+      "evidence": "Read-only calibration-size and benign-role diagnostics reported. Optional additional figure omitted; correlation is confounded and no repair claim is made."
+    },
+    {
+      "id": "B5",
+      "priority": "P3",
+      "status": "ALREADY SATISFIED",
+      "evidence": "Target-macro weighting and per-seed outcomes are explicit. Equal-corpus weighting would answer a different optional question and is not substituted for the frozen estimand."
+    },
+    {
+      "id": "E1",
+      "priority": "P1 conditional",
+      "status": "DEFERRED BY USER",
+      "evidence": "No new matched-FPR sweep; exact equal-FPR superiority is not claimed."
+    },
+    {
+      "id": "E2",
+      "priority": "P1 conditional",
+      "status": "DEFERRED BY USER",
+      "evidence": "No MCDE or other external-baseline experiment; internal-study scope retained."
+    },
+    {
+      "id": "E3",
+      "priority": "P2",
+      "status": "DEFERRED BY USER",
+      "evidence": "No new independent target/corpus cohort."
+    },
+    {
+      "id": "E4",
+      "priority": "P2",
+      "status": "DEFERRED BY USER",
+      "evidence": "No additional learning seeds or campaigns."
+    },
+    {
+      "id": "E5",
+      "priority": "P2",
+      "status": "DEFERRED BY USER",
+      "evidence": "No new detector/peer scoring traces or mechanism experiments."
+    },
+    {
+      "id": "E6",
+      "priority": "P2 conditional",
+      "status": "DEFERRED BY USER",
+      "evidence": "No deployment-resource or incident-workload benchmark."
+    },
+    {
+      "id": "D1",
+      "priority": "P3",
+      "status": "DEFERRED BY USER",
+      "evidence": "No algorithm, calibration, allocation, preprocessing or protocol redesign."
+    }
+  ],
+  "stable_counts": {
+    "AUTHOR CONFIRMATION REQUIRED": 3,
+    "FIXED": 25,
+    "ALREADY SATISFIED": 3,
+    "DEFERRED BY USER": 1,
+    "BLOCKED": 0,
+    "UNRESOLVED": 0
+  },
+  "combined_counts": {
+    "AUTHOR CONFIRMATION REQUIRED": 3,
+    "FIXED": 29,
+    "ALREADY SATISFIED": 6,
+    "DEFERRED BY USER": 8,
+    "BLOCKED": 0,
+    "UNRESOLVED": 0
+  },
+  "edits": [
+    {
+      "id": "01",
+      "location": "manuscript/main.tex:28",
+      "action": "Replace abstract close; retain primary result",
+      "verification": "Eight nominal peer-fusion effects and higher FPR reproduced"
+    },
+    {
+      "id": "02",
+      "location": "manuscript/sections/introduction.tex:7",
+      "action": "Clarify upper-tail ranks/extrapolation",
+      "verification": "Eq. (2), ties and implementation checked"
+    },
+    {
+      "id": "03",
+      "location": "manuscript/sections/introduction.tex:11",
+      "action": "Add precise architecture distinction; remove redundancy",
+      "verification": "No new-estimator or threshold-invention claim"
+    },
+    {
+      "id": "04",
+      "location": "manuscript/sections/introduction.tex:16",
+      "action": "Replace contribution 2",
+      "verification": "Both fixed-component questions and 58-target scope checked"
+    },
+    {
+      "id": "05",
+      "location": "manuscript/sections/comparison-inventory.tex:1",
+      "action": "Add complete comparison inventory",
+      "verification": "60 rows, 15 definitions, all 12 executed arms"
+    },
+    {
+      "id": "06",
+      "location": "manuscript/sections/results.tex:17",
+      "action": "Report peers-only",
+      "verification": "All four paired contrasts and FPR differences reproduced"
+    },
+    {
+      "id": "07",
+      "location": "manuscript/sections/results.tex:19",
+      "action": "Move peer-fusion evidence to Results",
+      "verification": "Eight positive descriptive intervals; alert cost explicit"
+    },
+    {
+      "id": "08",
+      "location": "manuscript/sections/results.tex:78",
+      "action": "Explain clamped adjustment",
+      "verification": "Original gains/CIs/coverage preserved"
+    },
+    {
+      "id": "09",
+      "location": "manuscript/tables/primary.tex:14",
+      "action": "Add FPR CIs and concentration diagnostic",
+      "verification": "10,000 paired replicates; two-target exclusion reproduced"
+    },
+    {
+      "id": "10",
+      "location": "manuscript/sections/results.tex:35",
+      "action": "Quantify concentration and wins/ties/losses",
+      "verification": "Top-three shares, top-five removals and counts reproduced"
+    },
+    {
+      "id": "11",
+      "location": "manuscript/sections/results.tex:85",
+      "action": "Explain host/singleton high-resource result and caption",
+      "verification": "Host/other-14 paired changes and cohort counts reproduced"
+    },
+    {
+      "id": "12",
+      "location": "manuscript/sections/results.tex:30",
+      "action": "Describe anchor/bank reallocation",
+      "verification": "arms.py definition, target offsets and adverse tradeoff checked"
+    },
+    {
+      "id": "13",
+      "location": "manuscript/sections/methodology.tex:81",
+      "action": "Connect single-union sensitivity and count resolution",
+      "verification": "Low-alpha equal pooled TPR; distinct integer count limits"
+    },
+    {
+      "id": "14",
+      "location": "manuscript/sections/experimental-methodology.tex:19",
+      "action": "Quantify label-level peer overlap",
+      "verification": "Actual peer lists, capture lengths and minima reconstructed"
+    },
+    {
+      "id": "15",
+      "location": "manuscript/sections/experimental-methodology.tex:50",
+      "action": "Add supported development chronology",
+      "verification": "Git order/specification checked; unknown timing remains labeled"
+    },
+    {
+      "id": "16",
+      "location": "manuscript/sections/results.tex:62",
+      "action": "Add benign-role/FPR associations",
+      "verification": "65.7816% range diagnostic and confounded association reproduced"
+    },
+    {
+      "id": "17",
+      "location": "manuscript/sections/results.tex:39",
+      "action": "Localize CTU-13 regression",
+      "verification": "Seed 7 peer .189114 and budget reversal checked"
+    },
+    {
+      "id": "18",
+      "location": "manuscript/sections/dataset-provenance.tex:1",
+      "action": "Add dataset provenance appendix",
+      "verification": "Seven cache manifests, exact input paths, source terms; gaps labeled"
+    },
+    {
+      "id": "19",
+      "location": "manuscript/scripts/generate_figures.py:1",
+      "action": "Reconstruct Figures 1-4 and document commands",
+      "verification": "Scientific coordinates checked; repeat generation identical"
+    },
+    {
+      "id": "20",
+      "location": "manuscript/main.tex:50",
+      "action": "Insert provisional code availability",
+      "verification": "No public release asserted; explicit pending link retained"
+    },
+    {
+      "id": "21",
+      "location": "manuscript/main.tex:51",
+      "action": "Preserve honest declaration placeholders",
+      "verification": "No funding/conflict/contribution/approval facts invented"
+    },
+    {
+      "id": "22",
+      "location": "manuscript/main.tex:55",
+      "action": "Retain truthful Codex disclosure",
+      "verification": "Current provisional Elsevier policy checked; journal choice deferred"
+    },
+    {
+      "id": "23",
+      "location": "manuscript/sections/conclusion.tex:4",
+      "action": "Replace concluding sentence",
+      "verification": "Primary outcomes and deployment boundary retained"
+    },
+    {
+      "id": "24",
+      "location": "manuscript/main.tex:46",
+      "action": "Targeted language/layout cleanup",
+      "verification": "No duplicated appendices/paragraphs; clean build, Unicode/overlap checks"
+    }
+  ]
+}

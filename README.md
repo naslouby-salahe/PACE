@@ -4,11 +4,11 @@
 
 A newly deployed IoT device has only its own benign traffic. Peer devices hold labelled attacks and can share small supervised detectors. A common way to use them is to take the maximum of the peers' scores and put one threshold on it. That lets a single peer whose scores fire on the target's benign traffic raise the threshold above every other peer's attack evidence, so useful peers are suppressed ("drowning"). PACE keeps each peer as a separate expert, normalises and calibrates it on the target's own benign data, ORs the experts under a jointly calibrated false-alarm budget, and reserves part of the budget for a protected local branch, an anchored bank of benign-only experts fitted on the target's own traffic that adds evidence the peers cannot supply.
 
-No target attack labels and no raw peer data are used. PACE offers no false-positive guarantee: the calibration rule is empirical, and realised false-positive rates are reported next to every detection result.
+The target detector fits and calibrates without target attack labels; the centralized benchmark uses pooled benign preprocessing. PACE offers no false-positive guarantee: the calibration rule is empirical, and realised false-positive rates are reported next to every detection result.
 
 ## Status
 
-PACE is implemented end to end and validated on 58 devices from six IoT corpora (seven study strata) under strict provenance.
+PACE is implemented end to end and evaluated on 58 benchmark targets from six IoT corpora (seven study strata) under strict provenance.
 
 ## Repository layout
 
