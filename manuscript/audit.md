@@ -1,5 +1,15 @@
 # PACE manuscript audit
 
+## Surgical framing revision - 21 October 2026
+
+**Scope:** manuscript-only edits requested after the independent reviewer assessment. Six prose source files were revised, with a paragraph-level layout safeguard in related work. No scientific code, configuration, experiment, model, result, numerical table, figure asset or bibliography was changed. The earlier reviewer assessment remains a record of the pre-revision manuscript; the empirical limitations it identifies are not resolved by this editorial pass.
+
+**Changes:** the abstract and conclusion now lead with the strongest supported finding: higher target-macro detection with lower mean FPR at nominal alpha = 0.05 for the complete local-branch replacement. The introduction distinguishes architectural contribution from the motivating peer-drowning mechanism. The experimental methodology explicitly fixes the entire local branch in peer-fusion comparisons and distinguishes internal architectural comparisons from unexecuted external systems. Results and Discussion identify the mean-local comparator for sweep adjustment, distinguish retrospective test-FPR adjustment from deployable threshold selection, and separate the peer-fusion alert tradeoff from the primary local-branch improvement. Anchor protection is defined as preservation of a decision path, with its allocation change stated explicitly. Development-cohort reuse and the need for independent validation remain visible. All adverse outcomes, uncertainty statements, declarations and pending author confirmations are retained.
+
+**Verification:** numeric-token and inline-mathematics multisets and ordered citation commands match the pre-edit versions in all seven edited TeX files. The deterministic Unicode inspection and cleanup pass found no suspicious characters or required cleanup. Baseline file hashes confirm that all other tracked files remained unchanged before PDF delivery and this audit entry; all 110 frozen campaign artifact SHA-256 values also match the independent-audit manifest. No tests or scientific experiments were rerun for these prose edits.
+
+**PDF:** rebuilt with the existing latexmk/pdfLaTeX/BibTeX toolchain; 35 pages. The final LaTeX log has no unresolved warnings, references or box diagnostics. The existing BibTeX empty-pages warning for kitsune2018 remains; its bibliographic record is untouched. All pages were rendered and reviewed, with detailed checks around affected text and floats. A samepage paragraph wrapper prevents Table 1 from interrupting the Barber paragraph. No clipping, overlap, lost figure/table or added page was observed. The checked candidate replaces main.pdf; temporary verification material is under /tmp/pace-surgical-20261021 in Ubuntu.
+
 ## Final Float-Placement Verification — 21 October 2026
 
 **Scope:** placement-only correction against the current 35-page manuscript. This supersedes the earlier general placement clearance for F1–F6; scientific finding statuses and author-dependent actions are unchanged.
