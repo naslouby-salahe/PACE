@@ -1,0 +1,161 @@
+{
+  "baseline_commit": "49841daa9ca0c35dcf31a2e71ad45ead3c272d90",
+  "files": [
+    {
+      "status": " M",
+      "path": "manuscript/REPRODUCIBILITY.md"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/audit.md"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/main.pdf"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/main.tex"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/references.bib"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/reviewer-assessment-2026-10-21.md"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/revision-evidence/audit-status.json"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/revision-evidence/bibliography-build.log"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/revision-evidence/bibliography-verification.json"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/revision-evidence/compilation.log"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/revision-evidence/overlap-check.json"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/revision-evidence/repository-integrity.json"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/revision-evidence/source-access.json"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/revision-evidence/unicode-check.json"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/sections/comparison-inventory.tex"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/sections/conclusion.tex"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/sections/dataset-provenance.tex"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/sections/discussion.tex"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/sections/experimental-methodology.tex"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/sections/introduction.tex"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/sections/methodology.tex"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/sections/related-work.tex"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/sections/results.tex"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/tables/primary.tex"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/tables/prior-work.tex"
+    },
+    {
+      "status": " M",
+      "path": "manuscript/verification.md"
+    },
+    {
+      "status": "??",
+      "path": "manuscript/editorial_review.md"
+    },
+    {
+      "status": "??",
+      "path": "manuscript/revision-evidence/common-support.json"
+    },
+    {
+      "status": "??",
+      "path": "manuscript/revision-evidence/completion-audit.json"
+    },
+    {
+      "status": "??",
+      "path": "manuscript/revision-evidence/editorial-validation.json"
+    },
+    {
+      "status": "??",
+      "path": "manuscript/revision-evidence/final-bibliography-refresh.json"
+    },
+    {
+      "status": "??",
+      "path": "manuscript/revision-evidence/final-files.json"
+    },
+    {
+      "status": "??",
+      "path": "manuscript/revision-evidence/final-validation.json"
+    },
+    {
+      "status": "??",
+      "path": "manuscript/revision-evidence/nweke-metadata.json"
+    },
+    {
+      "status": "??",
+      "path": "manuscript/revision-evidence/word-count-after.json"
+    },
+    {
+      "status": "??",
+      "path": "manuscript/revision-evidence/word-count-before.json"
+    },
+    {
+      "status": "??",
+      "path": "manuscript/revision_report.md"
+    },
+    {
+      "status": "??",
+      "path": "manuscript/scripts/count_manuscript_words.py"
+    },
+    {
+      "status": "??",
+      "path": "manuscript/scripts/verify_common_support.py"
+    }
+  ]
+}

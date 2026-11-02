@@ -1,38 +1,38 @@
-\documentclass[preprint,12pt]{elsarticle}
+\documentclass[11pt]{article}
+\usepackage[numbers,sort&compress]{natbib}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb,booktabs,graphicx,array,longtable}
 \usepackage[margin=25mm]{geometry}
 \usepackage{microtype}
 \usepackage{placeins}
+\usepackage{needspace}
+\usepackage{xurl}
 \usepackage{hyperref}
 \hypersetup{hidelinks,pdfauthor={Salaheddine Naslouby, Mohamed Lachgar, Hamid Hrimech},pdftitle={PACE: Peer-Wise Calibrated Experts for IoT Intrusion Detection with Benign-Only Target Data}}
-\journal{}
-\renewcommand{\theaffn}{\arabic{affn}}
-\makeatletter
-\let\ps@pprintTitle\ps@plain
-\makeatother
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
 \newcounter{algorithm}
-\begin{document}
-\begin{frontmatter}
 \title{PACE: Peer-Wise Calibrated Experts for IoT Intrusion Detection with Benign-Only Target Data}
-\author[aff1]{Salaheddine Naslouby\corref{cor1}}
-\ead{naslouby.salahe@gmail.com}
-\author[aff2]{Mohamed Lachgar}
-\ead{m.lachgar@uca.ac.ma}
-\author[aff1]{Hamid Hrimech}
-\ead{hamid.hrimech@uhp.ac.ma}
-\address[aff1]{Hassan First University, National School of Applied Sciences (ENSA), LAMSAD Laboratory, Berrechid, Morocco}
-\address[aff2]{Cadi Ayyad University, Higher Normal School (ENS), L2IS Laboratory, Marrakech, Morocco}
-\cortext[cor1]{Corresponding author: Salaheddine Naslouby. ORCID: \href{https://orcid.org/0009-0002-7295-7816}{0009-0002-7295-7816}.}
+\author{Salaheddine Naslouby$^{1,*}$ \and Mohamed Lachgar$^2$ \and Hamid Hrimech$^1$}
+\date{}
+\begin{document}
+\maketitle
+\begin{center}\small
+$^1$Hassan First University, National School of Applied Sciences (ENSA),\\
+LAMSAD Laboratory, Berrechid, Morocco\\[3pt]
+$^2$Cadi Ayyad University, Higher Normal School (ENS),\\
+L2IS Laboratory, Marrakech, Morocco\\[5pt]
+$^*$Corresponding author: \href{mailto:naslouby.salahe@gmail.com}{naslouby.salahe@gmail.com}\\
+ORCID: \href{https://orcid.org/0009-0002-7295-7816}{0009-0002-7295-7816}\\
+\href{mailto:m.lachgar@uca.ac.ma}{m.lachgar@uca.ac.ma};
+\href{mailto:hamid.hrimech@uhp.ac.ma}{hamid.hrimech@uhp.ac.ma}
+\end{center}
 \begin{abstract}
-An IoT target with only benign observations can reuse labeled attack knowledge from peers, but score fusion can suppress useful peer evidence and peers can miss attacks detectable from local deviations. PACE combines separately calibrated frozen peer classifiers with a protected local anchor and a heterogeneous anomaly-expert bank. Feature-rarity and peer-response experts provide local evidence without target attack labels. We evaluate this architecture on 58 targets spanning six corpora and seven study strata, using three learning seeds and local fitting budgets of 100 and 400 rows. With the peer branch held fixed, replacing a seven-detector mean local ensemble improves target-macro detection by 2.34 and 2.32 percentage points at nominal $\alpha=0.05$, while reducing mean realized false-alert rates at both budgets. At $\alpha=0.01$, detection gains are 2.61 and 2.83 points, with higher mean false-alert rates. Rarity-family removal produces the largest detection loss among the tested expert-family ablations. Gains are strongest in TON\_IoT, with smaller improvements elsewhere and heterogeneous false-alert rates across targets. A separate comparison holds the complete local branch fixed: retaining separately thresholded peers improves detection by 3.0--7.3 percentage points over mean or maximum peer-score fusion, also with higher mean false-alert rates. These results establish complementary detection within the evaluated benchmark and distinguish the local-branch improvement from the peer-fusion operating tradeoff. Empirical calibration does not guarantee future false-alert control.
+An Internet of Things (IoT) target may have trusted benign observations but no labeled attacks, while supervised models trained at its peers provide attack evidence. PACE (Peer-wise Calibrated Experts) combines frozen supervised peer classifiers with a protected local anchor and a heterogeneous anomaly-expert bank. Each peer receives a target-relative threshold, while feature-rarity and peer-response experts detect deviations from target benign behavior. We evaluate 58 targets across six corpora and seven study strata, using three learning seeds and local fitting budgets of 100 and 400 rows. With the peer branch fixed, replacing a seven-detector mean local ensemble improves target-macro detection by 2.34 and 2.32 percentage points at nominal $\alpha=0.05$. Mean realized false-positive rates (FPRs) decrease from 5.74\% to 5.55\% and from 6.44\% to 5.43\%, respectively. At $\alpha=0.01$, detection gains of 2.61 and 2.83 points accompany higher mean FPRs. Rarity-family removal produces the largest loss among the tested expert-family ablations. Gains concentrate in TON\_IoT, with smaller gains elsewhere; local experts add detections when peers miss attacks. A separate comparison fixes the complete local branch: peer-wise decisions improve detection by 3.0--7.3 points over mean or maximum peer fusion, with higher mean FPR. The results support complementary peer and local detection on this benchmark, which also informed development. Coarse operating-point sweeps do not establish general equal-FPR superiority, and empirical calibration does not guarantee future false-alert control.
 \end{abstract}
-\begin{keyword}
-IoT intrusion detection \sep peer models \sep benign-only learning \sep empirical calibration \sep anomaly ensembles \sep false alerts
-\end{keyword}
-\end{frontmatter}
-\noindent\textbf{Draft for author review.} Declaration confirmations and final human approval are pending.
+\noindent\textbf{Keywords:} IoT intrusion detection; peer models; benign-only learning; empirical calibration; anomaly ensembles; false alerts.
 \input{sections/introduction}
 \input{sections/related-work}
 \input{sections/problem-formulation}
@@ -46,18 +46,15 @@ IoT intrusion detection \sep peer models \sep benign-only learning \sep empirica
 \clearpage
 \appendix
 \renewcommand{\theHtable}{\Alph{section}.\arabic{table}}
+\renewcommand{\thetable}{\Alph{section}.\arabic{table}}
 \input{sections/comparison-inventory}
 \input{sections/dataset-provenance}
 \section*{Data and code availability}
-The implementation, experimental configurations, and frozen evaluation artifacts are maintained in the PACE project repository. The permanent public repository address and immutable revision identifier will be supplied before submission. Third-party datasets remain subject to their original access and redistribution conditions. Dataset inputs and access conditions are identified in \ref{app:data}. \textbf{Author-supplied release link and immutable revision: pending.}
-\section*{Funding and competing interests}
-Funding sources and competing-interest declarations require confirmation by the authors. No absence of funding or competing interests is inferred.
-\section*{Authorship and acknowledgements}
-\textbf{Author confirmation required:} individual contribution roles, any acknowledgements, and approval of the final manuscript and declarations.
-\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
-OpenAI Codex was used for repository inspection, literature assistance, manuscript drafting, and technical verification. This draft requires human scientific review and approval. The authors must confirm the extent of their review and responsibility for the final content before submission; this draft does not assert that such approval has already occurred.
+The PACE implementation, configurations, and frozen result tables are available at \url{https://github.com/naslouby-salahe/pace}. The verified public revision is \href{https://github.com/naslouby-salahe/pace/tree/41b3a18c10422fc41d1785c35881ccd6323941fa}{\texttt{41b3a18c1042}}. The manuscript evidence inventory records the detailed campaign artifact digests and reporting procedures. Third-party datasets are obtained from the original sources in Appendix~\ref{app:data}, subject to their access and redistribution conditions.
 \setlength{\bibsep}{0pt}
-\bibliographystyle{elsarticle-num}
+\interlinepenalty=10000
+\small
+\bibliographystyle{unsrtnat}
 \bibliography{references}
 \end{document}
 

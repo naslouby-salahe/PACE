@@ -1,4 +1,138 @@
 {
-  "files": 20,
-  "suspicious": []
+  "script": "clean-user-facing-text/scripts/inspect_text.py and clean_text.py --no-normalize-spaces",
+  "changed_characters": 0,
+  "files": [
+    {
+      "path": "main.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "references.bib",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "audit.md",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "revision_report.md",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "REPRODUCIBILITY.md",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "sections/conclusion.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "sections/comparison-inventory.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "sections/discussion.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "sections/limitations.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "sections/problem-formulation.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "sections/experimental-methodology.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "sections/results.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "sections/methodology.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "sections/introduction.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "sections/related-work.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "sections/dataset-provenance.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "tables/primary.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "tables/false-alerts.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "tables/prior-work.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "tables/data-access.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "tables/corpora.tex",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    },
+    {
+      "path": "editorial_review.md",
+      "before_hits": 0,
+      "after_hits": 0,
+      "byte_identical_after_clean": true
+    }
+  ]
 }

@@ -1,8 +1,16 @@
 \section{PACE methodology}
 \label{sec:method}
-Figure~\ref{fig:architecture} separates the supervised peer route from the two target-local decisions. Algorithm~\ref{alg:pace} summarizes preparation and inference; the equations below specify the score and quantile conventions.
+Figure~\ref{fig:architecture} shows the supervised peer branch and the two target-local decision paths. Algorithm~\ref{alg:pace} summarizes preparation and inference; the equations below specify the score and quantile conventions.
 
 
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{figures/architecture.pdf}
+\caption{PACE's information flow and final decision. Target benign training, reference, calibration, and test roles are distinct. The benchmark standardizes features using pooled complete benign training roles before restricting local fitting to $N$ rows. Target attack labels enter evaluation only. IF: isolation forest; LOF: local outlier factor; $k$NN: nearest-neighbor distance.}
+\label{fig:architecture}
+\end{figure}
+\FloatBarrier
 
 \subsection{Target-relative evidence}
 For an expert score $s$, let $r_1,\ldots,r_n$ be that expert's scores on the target reference role, $r_{\max}=\max_i r_i$, and $d_R=\max\{r_{\max}-\operatorname{median}_i r_i,10^{-6}\}$. The implemented transformation is
@@ -15,12 +23,7 @@ For an expert score $s$, let $r_1,\ldots,r_n$ be that expert's scores on the tar
 \end{equation}
 Ties are included in the upper-tail count. Values beyond the largest reference score receive an extrapolated value, rather than a saturated empirical rank. This extrapolation is a score convention, not an estimated tail probability with a distribution-free validity guarantee. For peer $k$, the evidence is $e_k(x)=E_{R,k}(m_k(x))$.
 
-\begin{figure}[bp]
-\centering
-\includegraphics[width=\textwidth]{figures/architecture.pdf}
-\caption{PACE's information flow and final decision. Target benign training, reference, calibration, and test roles are distinct. The benchmark standardizes features using pooled complete benign training roles before restricting local fitting to $N$ rows. Target attack labels enter evaluation only. IF: isolation forest; LOF: local outlier factor; $k$NN: nearest-neighbor distance.}
-\label{fig:architecture}
-\end{figure}
+
 
 \subsection{Blocks and thresholds}
 Let $M=|C|$ and let $b=250$ be the configured block-size parameter. The code constructs $J=\max\{1,\lfloor M/b\rfloor\}$ consecutive blocks using a balanced array partition: their lengths differ by at most one, and earlier blocks receive any surplus rows. They are not necessarily blocks of exactly 250 observations. For example, 350 calibration observations form one block of length 350. Write $n_j=|C_j|$ and let $z_{j,(1)}\leq\cdots\leq z_{j,(n_j)}$ be ordered evidence in block $j$. For allocation $w\in(0,1)$,
@@ -38,7 +41,7 @@ For a collection of $L$ experts with allocation $B$, the default initial shares 
  z_\ell(x)>\tau_{z_\ell}(\lambda w_\ell)\right\}.
  \label{eq:union}
 \end{equation}
-The calibrator measures this union on every calibration block. Starting at $\lambda=1$, it doubles an upper search point until that point violates the block-rate criterion or reaches the allowed cap, returns immediately if the cap is feasible; otherwise it performs 20 bisections to retain a feasible lower point. The configured cap is 64. If the largest share times 64 is at least one, the implementation replaces the multiplier ceiling by $0.999/\max_\ell w_\ell$. If the initial union already violates $B$, the routine returns its initial thresholds; it does not claim to repair arbitrary supplied shares. PACE's equal-share initial unions satisfy the calibration criterion by the fixed-threshold count bound and the union bound.
+The calibrator measures this union on every calibration block. Starting at $\lambda=1$, it doubles an upper search point until the block-rate criterion is violated or the cap is reached. It returns immediately if the cap is feasible; otherwise, it performs 20 bisections and retains the feasible lower point. The configured cap is 64. If the largest share times 64 is at least one, the implementation replaces the multiplier ceiling by $0.999/\max_\ell w_\ell$. If the initial union already violates $B$, the routine returns its initial thresholds; it does not claim to repair arbitrary supplied shares. PACE's equal-share initial unions satisfy the calibration criterion by the fixed-threshold count bound and the union bound.
 
 The retained multiplier is a numerical search result on a stepwise calibration function. It should not be interpreted as a unique population optimum. The peer branch applies this routine to the $K$ separate margin-evidence experts with allocation $B_P$. Separate thresholds avoid collapsing all peer evidence into one maximum before calibration. The common multiplier nevertheless couples the thresholds through the observed union, so an unstable peer can still affect their joint calibration.
 
@@ -81,11 +84,22 @@ The anchor is itself calibrated by the union-scaling routine as a singleton expe
 \end{equation}
 There is no final calibration pass over this three-way union.
 
-At $\alpha=0.01$ and $r=a=0.5$, these allocations are $B_P=0.005$, $B_A=0.005$, and $B_B=0.0025$. Their sum is 0.0125, rather than 0.01. An allocation-respecting alternative calibrates all local experts as a single union within the original total allocation. At $\alpha=0.01$, this alternative attains the same pooled detection as PACE to the precision of the stored results, with nearly identical mean FPR (\ref{app:inventory}). This sensitivity result indicates that the observed aggregate benefit does not require a measured detection advantage over the allocation-respecting alternative; it does not establish identical record-level decisions or a population FPR guarantee. At $\alpha=0.05$, they are 0.025, 0.0125, and 0.0125, whose sum is 0.05. Overlap and integer count resolution can make the observed calibration union smaller than the allocation sum, but do not justify presenting Eq.~\eqref{eq:allocation} as a strict partition of $\alpha$. The rule checks $1/b$, whereas the first possible nonzero exceedance for an individual higher quantile depends on its actual block length through $1/(n_j-1)$. The resolution rule is therefore an implemented heuristic, not an exact test of every block's quantile resolution. The joint criterion permits at most $\lfloor Bn_j\rfloor$ alerts per block, whereas an individual unscaled higher quantile admits at most $\lfloor w(n_j-1)\rfloor$ strict exceedances; these are different resolution limits.
+At $\alpha=0.01$ and $r=a=0.5$, these allocations are $B_P=0.005$, $B_A=0.005$, and $B_B=0.0025$. Their sum is 0.0125, rather than 0.01. An allocation-respecting alternative calibrates all local experts as a single union within the original total allocation. At $\alpha=0.01$, this alternative attains the same pooled detection as PACE to the precision of the stored results, with nearly identical mean FPR (Appendix~\ref{app:inventory}). PACE therefore has no measured aggregate detection advantage over this alternative at the lower nominal setting. Equal pooled rates do not imply identical record-level decisions or a population FPR guarantee. At $\alpha=0.05$, they are 0.025, 0.0125, and 0.0125, whose sum is 0.05. Overlap and integer count resolution can make the observed calibration union smaller than the allocation sum, but do not justify presenting Eq.~\eqref{eq:allocation} as a strict partition of $\alpha$. The rule checks $1/b$, whereas the first possible nonzero exceedance for an individual higher quantile depends on its actual block length through $1/(n_j-1)$. The resolution rule is therefore an implemented heuristic, not an exact test of every block's quantile resolution. The joint criterion permits at most $\lfloor Bn_j\rfloor$ alerts per block, whereas an individual unscaled higher quantile admits at most $\lfloor w(n_j-1)\rfloor$ strict exceedances; these are different resolution limits.
 
 The protected anchor preserves a separate local decision path but does not prove non-inferiority to the primary comparator. That comparator averages seven detector evidences, including an autoencoder omitted from the six-member anchor, and uses a different threshold procedure. Target-level regressions must be assessed empirically.
 
-\begin{table}[tbp]
+
+
+\subsection{Training and computation}
+Each peer classifier has two ReLU hidden layers of widths 64 and 16 and two output logits. Training uses class-balanced cross-entropy, Adam updates, eight epochs, batch size 256, and learning rate 0.001. Target-local fitting uses the first $N$ retained training rows. The feature-space isolation-forest and neighbor-based fitting sample is limited to 8000 rows; other local components have their own full-$N$ fitting operations. Fitted score references and thresholds are fixed at inference: the evaluated rule has no online update.
+
+The benchmark's shared local ensemble also trains and scores an autoencoder for the mean-ensemble comparator, even though its score is excluded from PACE's anchor. It would therefore be inaccurate to describe the executed campaign as requiring no local neural training. The detection architecture requires $K$ peer forward evaluations plus local score computations; the response forest adds a model in $K$ dimensions. A peer MLP contains $64d+1138$ weights and biases for $d$ input features. This algebraic parameter count is not a measurement of serialization size, communication traffic, latency, energy use, or deployment memory. None of those operational quantities is established by the reported detection results.
+
+
+
+
+\FloatBarrier
+\begin{table}[!htbp]
 \centering
 \begin{minipage}{0.96\textwidth}
 \hrule\smallskip
@@ -106,11 +120,3 @@ The protected anchor preserves a separate local decision path but does not prove
 \smallskip\hrule
 \end{minipage}
 \end{table}
-
-\subsection{Training and computation}
-Each peer classifier has two ReLU hidden layers of widths 64 and 16 and two output logits. Training uses class-balanced cross-entropy, Adam updates, eight epochs, batch size 256, and learning rate 0.001. Target-local fitting uses the first $N$ retained training rows. The feature-space isolation-forest and neighbor-based fitting sample is limited to 8000 rows; other local components have their own full-$N$ fitting operations. Fitted score references and thresholds are fixed at inference: the evaluated rule has no online update.
-
-The benchmark's shared local ensemble also trains and scores an autoencoder for the mean-ensemble comparator, even though its score is excluded from PACE's anchor. It would therefore be inaccurate to describe the executed campaign as requiring no local neural training. The detection architecture requires $K$ peer forward evaluations plus local score computations; the response forest adds a model in $K$ dimensions. A peer MLP contains $64d+1138$ weights and biases for $d$ input features. This algebraic parameter count is not a measurement of serialization size, communication traffic, latency, energy use, or deployment memory. None of those operational quantities is established by the reported detection results.
-
-
-

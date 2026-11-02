@@ -1,0 +1,693 @@
+{
+  "status": "ok",
+  "message-type": "work",
+  "message-version": "1.0.0",
+  "message": {
+    "indexed": {
+      "date-parts": [
+        [
+          2026,
+          9,
+          19
+        ]
+      ],
+      "date-time": "2026-09-19T18:17:17Z",
+      "timestamp": 1789841837025,
+      "version": "4.0.1"
+    },
+    "reference-count": 49,
+    "publisher": "Springer Science and Business Media LLC",
+    "issue": "1",
+    "license": [
+      {
+        "start": {
+          "date-parts": [
+            [
+              2026,
+              7,
+              11
+            ]
+          ],
+          "date-time": "2026-07-11T00:00:00Z",
+          "timestamp": 1783728000000
+        },
+        "content-version": "tdm",
+        "delay-in-days": 0,
+        "URL": "https://creativecommons.org/licenses/by-nc-nd/4.0"
+      },
+      {
+        "start": {
+          "date-parts": [
+            [
+              2026,
+              7,
+              11
+            ]
+          ],
+          "date-time": "2026-07-11T00:00:00Z",
+          "timestamp": 1783728000000
+        },
+        "content-version": "vor",
+        "delay-in-days": 0,
+        "URL": "https://creativecommons.org/licenses/by-nc-nd/4.0"
+      }
+    ],
+    "funder": [
+      {
+        "name": "NTNU Norwegian University of Science and Technology"
+      }
+    ],
+    "content-domain": {
+      "domain": [
+        "link.springer.com"
+      ],
+      "crossmark-restriction": false
+    },
+    "short-container-title": [
+      "Discov Computing"
+    ],
+    "DOI": "10.1007/s10791-026-10343-2",
+    "type": "journal-article",
+    "created": {
+      "date-parts": [
+        [
+          2026,
+          7,
+          11
+        ]
+      ],
+      "date-time": "2026-07-11T07:24:46Z",
+      "timestamp": 1783754686000
+    },
+    "update-policy": "https://doi.org/10.1007/springer_crossmark_policy",
+    "source": "Crossref",
+    "is-referenced-by-count": 3,
+    "title": [
+      "Tail-calibrated mixture of experts for ultra-low false-alarm intrusion detection in IEC 61850 communications"
+    ],
+    "prefix": "10.1007",
+    "volume": "29",
+    "author": [
+      {
+        "given": "Livinus Obiora",
+        "family": "Nweke",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "member": "297",
+    "published-online": {
+      "date-parts": [
+        [
+          2026,
+          7,
+          11
+        ]
+      ]
+    },
+    "reference": [
+      {
+        "key": "10343_CR1",
+        "unstructured": "International Electrotechnical Commission (IEC). IEC 61850-8-1: communication networks and systems for power utility automation\u2014part 8-1: specific communication service mapping (SCSM)\u2014mappings to MMS and ISO/IEC 8802-3. IEC standard; 2011."
+      },
+      {
+        "key": "10343_CR2",
+        "unstructured": "International Electrotechnical Commission (IEC). IEC 61850-9-2: communication networks and systems for power utility automation\u2014part 9-2: specific communication service mapping (SCSM)\u2014sampled values over ISO/IEC 8802-3. IEC Standard; 2011."
+      },
+      {
+        "key": "10343_CR3",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Stouffer K, Pease M, Tang C, Zimmerman T, Pillitteri V, Lightman S, Hahn A, Saravia S, Sherule A, Thompson M. Guide to operational technology (OT) security. Technical report NIST special publication 800-82 revision 3, National Institute of Standards and Technology (NIST), Gaithersburg, MD; 2023. https://doi.org/10.6028/NIST.SP.800-82r3.",
+        "DOI": "10.6028/NIST.SP.800-82r3"
+      },
+      {
+        "issue": "4",
+        "key": "10343_CR4",
+        "doi-asserted-by": "publisher",
+        "first-page": "1554",
+        "DOI": "10.3390/s21041554",
+        "volume": "21",
+        "author": "HT Reda",
+        "year": "2021",
+        "unstructured": "Reda HT, Ray B, Peidaee P, Anwar A, Mahmood A, Kalam A, et al. Vulnerability and impact analysis of the IEC 61850 GOOSE protocol in the smart grid. Sensors. 2021;21(4):1554. https://doi.org/10.3390/s21041554.",
+        "journal-title": "Sensors"
+      },
+      {
+        "key": "10343_CR5",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Nweke LO, Kahsay\u00a0Weldehawaryat G, Wolthusen SD. Adversary model for attacks against iec 61850 real-time communication protocols. In: 2020 16th international conference on the design of reliable communication networks DRCN. IEEE, Milan; 2020, p. 1\u20138. https://doi.org/10.1109/drcn48652.2020.1570604241.",
+        "DOI": "10.1109/drcn48652.2020.1570604241"
+      },
+      {
+        "key": "10343_CR6",
+        "unstructured": "International Electrotechnical Commission (IEC). IEC 62351-6: security for power system management and associated information exchange\u2014part 6: Security for IEC 61850. IEC Standard; 2020."
+      },
+      {
+        "key": "10343_CR7",
+        "doi-asserted-by": "publisher",
+        "DOI": "10.1016/j.ijcip.2021.100466",
+        "volume": "35",
+        "author": "LO Nweke",
+        "year": "2021",
+        "unstructured": "Nweke LO, Weldehawaryat GK, Wolthusen SD. Threat modelling of cyber-physical systems using an applied pi-calculus. Int J Crit Infrastruct Protect. 2021;35:100466. https://doi.org/10.1016/j.ijcip.2021.100466.",
+        "journal-title": "Int J Crit Infrastruct Protect"
+      },
+      {
+        "key": "10343_CR8",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Alberto HdC, S\u00e1nchez G, Dembele JM, Diop I, Elbez G, Hagenmeyer V. Masquerading IEC 61850 goose protocol: cyber-physical experiments and detection. In: Proceedings of the 16th ACM international conference on future and sustainable energy systems. E-Energy \u201925. ACM, Rotterdam Netherlands; 2025, p. 1000\u20131001. https://doi.org/10.1145/3679240.3734685.",
+        "DOI": "10.1145/3679240.3734685"
+      },
+      {
+        "key": "10343_CR9",
+        "doi-asserted-by": "publisher",
+        "DOI": "10.1109/TDSC.2023.3336857",
+        "author": "SE Quincozes",
+        "year": "2024",
+        "unstructured": "Quincozes SE, Albuquerque C, Passos D, Moss\u00e9 D. Ereno: a framework for generating realistic IEC-61850 intrusion detection datasets for smart grids. IEEE Trans Dependable Secure Comput. 2024. https://doi.org/10.1109/TDSC.2023.3336857.",
+        "journal-title": "IEEE Trans Dependable Secure Comput"
+      },
+      {
+        "issue": "23",
+        "key": "10343_CR10",
+        "doi-asserted-by": "publisher",
+        "first-page": "6098",
+        "DOI": "10.3390/en17236098",
+        "volume": "17",
+        "author": "OA Tobar-Rosero",
+        "year": "2024",
+        "unstructured": "Tobar-Rosero OA, Roa-Romero OA, Rueda-Carvajal GD, Leal-Piedrahita A, Botero-Vega JF, Gutierrez-Betancur SA, et al. GOOSE secure: a comprehensive dataset for in-depth analysis of GOOSE spoofing attacks in digital substations. Energies. 2024;17(23):6098. https://doi.org/10.3390/en17236098.",
+        "journal-title": "Energies"
+      },
+      {
+        "key": "10343_CR11",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Biswas PP, Tan HC, Zhu Q, Li Y, Mashima D, Chen B. A synthesized dataset for cybersecurity study of iec 61850 based substation. In: 2019 IEEE international conference on communications, control, and computing technologies for smart grids (SmartGridComm). IEEE, Beijing; 2019, p. 1\u20137. https://doi.org/10.1109/smartgridcomm.2019.8909783.",
+        "DOI": "10.1109/smartgridcomm.2019.8909783"
+      },
+      {
+        "issue": "12",
+        "key": "10343_CR12",
+        "doi-asserted-by": "publisher",
+        "first-page": "2318",
+        "DOI": "10.3390/electronics13122318",
+        "volume": "13",
+        "author": "F Holik",
+        "year": "2024",
+        "unstructured": "Holik F, Yayilgan SY, Olsborg GB. Emulation of digital substations communication for cyber security awareness. Electronics. 2024;13(12):2318. https://doi.org/10.3390/electronics13122318.",
+        "journal-title": "Electronics"
+      },
+      {
+        "key": "10343_CR13",
+        "unstructured": "Delhomme A, Nweke LO, Yayilgan SY. Detecting denial of service attacks in smart grids using machine learning: a study of IEC 61850 protocols. In: SECURWARE 2024: the eighteenth international conference on emerging security information, systems and technologies. 2024."
+      },
+      {
+        "key": "10343_CR14",
+        "doi-asserted-by": "publisher",
+        "DOI": "10.1016/j.jisa.2025.104197",
+        "volume": "94",
+        "author": "JA Oliveira",
+        "year": "2025",
+        "unstructured": "Oliveira JA, Santos AFP, Salles RM. Rnn for intrusion detection in digital substations based on the IEC 61850. J Inf Secur Appl. 2025;94:104197. https://doi.org/10.1016/j.jisa.2025.104197.",
+        "journal-title": "J Inf Secur Appl"
+      },
+      {
+        "key": "10343_CR15",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Lozano-Paredes D, Bote-Curiel L, Feij\u00f3o-Mart\u00ednez JR, G\u00f3mez-Talal I, Rojo-\u00c1lvarez JL. Explainable autoencoder-based anomaly detection in IEC 61850 GOOSE networks. arXiv 2026. https://doi.org/10.48550/ARXIV.2601.09287.",
+        "DOI": "10.48550/ARXIV.2601.09287"
+      },
+      {
+        "key": "10343_CR16",
+        "doi-asserted-by": "publisher",
+        "DOI": "10.1016/j.comnet.2020.107679",
+        "volume": "184",
+        "author": "SE Quincozes",
+        "year": "2021",
+        "unstructured": "Quincozes SE, Albuquerque C, Passos D, Moss\u00e9 D. A survey on intrusion detection and prevention systems in digital substations. Comput Netw. 2021;184:107679. https://doi.org/10.1016/j.comnet.2020.107679.",
+        "journal-title": "Comput Netw"
+      },
+      {
+        "key": "10343_CR17",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Nweke LO, Wolthusen SD. Modelling adversarial flow in software-defined industrial control networks using a queueing network model. In: 2020 IEEE conference on communications and network security (CNS). Avignon: IEEE; 2020, p. 1\u20136. https://doi.org/10.1109/cns48642.2020.9162191.",
+        "DOI": "10.1109/cns48642.2020.9162191"
+      },
+      {
+        "key": "10343_CR18",
+        "doi-asserted-by": "publisher",
+        "DOI": "10.1016/j.compind.2022.103609",
+        "volume": "137",
+        "author": "B Liu",
+        "year": "2022",
+        "unstructured": "Liu B, Chen J, Hu Y. Mode division-based anomaly detection against integrity and availability attacks in industrial cyber-physical systems. Comput Ind. 2022;137:103609. https://doi.org/10.1016/j.compind.2022.103609.",
+        "journal-title": "Comput Ind"
+      },
+      {
+        "key": "10343_CR19",
+        "doi-asserted-by": "publisher",
+        "first-page": "131",
+        "DOI": "10.1007/978-3-031-57452-8_7",
+        "volume-title": "Opportunities and challenges of using artificial intelligence in securing cyber-physical systems",
+        "author": "LO Nweke",
+        "year": "2024",
+        "unstructured": "Nweke LO, Yayilgan SY. Opportunities and challenges of using artificial intelligence in securing cyber-physical systems. Springer; 2024. p. 131\u201364. https://doi.org/10.1007/978-3-031-57452-8_7."
+      },
+      {
+        "key": "10343_CR20",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Zemanek S, Hacker I, Wolsing K, Wagner E, Henze M, Serror M. Powerduck: a goose data set of cyberattacks in substations. In: proceedings of the 15th workshop on cyber security experimentation and test. CSET 2022. ACM, CA; 2022, p. 49\u201353. https://doi.org/10.1145/3546096.3546102.",
+        "DOI": "10.1145/3546096.3546102"
+      },
+      {
+        "issue": "11",
+        "key": "10343_CR21",
+        "doi-asserted-by": "publisher",
+        "first-page": "18951",
+        "DOI": "10.1109/jiot.2024.3349381",
+        "volume": "11",
+        "author": "Z Zhang",
+        "year": "2024",
+        "unstructured": "Zhang Z, Liu M, Sun M, Deng R, Cheng P, Niyato D, et al. Vulnerability of machine learning approaches applied in IoT-based smart grid: a review. IEEE Internet Things J. 2024;11(11):18951\u201375. https://doi.org/10.1109/jiot.2024.3349381.",
+        "journal-title": "IEEE Internet Things J"
+      },
+      {
+        "issue": "6",
+        "key": "10343_CR22",
+        "doi-asserted-by": "publisher",
+        "first-page": "5302",
+        "DOI": "10.1109/tpwrs.2022.3229667",
+        "volume": "38",
+        "author": "K-D Lu",
+        "year": "2023",
+        "unstructured": "Lu K-D, Wu Z-G. Resilient event-triggered load frequency control for cyber-physical power systems under dos attacks. IEEE Trans Power Syst. 2023;38(6):5302\u201313. https://doi.org/10.1109/tpwrs.2022.3229667.",
+        "journal-title": "IEEE Trans Power Syst"
+      },
+      {
+        "issue": "1",
+        "key": "10343_CR23",
+        "doi-asserted-by": "publisher",
+        "first-page": "921",
+        "DOI": "10.1109/tsg.2023.3275988",
+        "volume": "15",
+        "author": "Z Zhang",
+        "year": "2024",
+        "unstructured": "Zhang Z, Deng R, Yau DKY. Vulnerability of the load frequency control against the network parameter attack. IEEE Transa Smart Grid. 2024;15(1):921\u201333. https://doi.org/10.1109/tsg.2023.3275988.",
+        "journal-title": "IEEE Transa Smart Grid"
+      },
+      {
+        "key": "10343_CR24",
+        "doi-asserted-by": "publisher",
+        "DOI": "10.1109/tdsc.2026.3653015",
+        "author": "NI Haque",
+        "year": "2026",
+        "unstructured": "Haque NI, Mali P, Haider MZ, Rahman MA, Paudyal S. Misguide: security-aware attack analytics for smart grid load frequency control. IEEE Trans Dependable Secure Comput. 2026. https://doi.org/10.1109/tdsc.2026.3653015.",
+        "journal-title": "IEEE Trans Dependable Secure Comput"
+      },
+      {
+        "key": "10343_CR25",
+        "doi-asserted-by": "publisher",
+        "first-page": "581",
+        "DOI": "10.1109/tifs.2022.3226868",
+        "volume": "18",
+        "author": "Z Zhang",
+        "year": "2023",
+        "unstructured": "Zhang Z, Deng R, Tian Y, Cheng P, Ma J. Spma: stealthy physics-manipulated attack and countermeasures in cyber-physical smart grid. IEEE Trans Inf Forensics Secur. 2023;18:581\u201396. https://doi.org/10.1109/tifs.2022.3226868.",
+        "journal-title": "IEEE Trans Inf Forensics Secur"
+      },
+      {
+        "issue": "11",
+        "key": "10343_CR26",
+        "doi-asserted-by": "publisher",
+        "first-page": "5237",
+        "DOI": "10.3390/app16115237",
+        "volume": "16",
+        "author": "Y Alolabi",
+        "year": "2026",
+        "unstructured": "Alolabi Y, Nweke LO. Risk-observability mismatch in an IEC 61850 digital substation: a structured cyber-physical assessment. Appl Sci. 2026;16(11):5237.",
+        "journal-title": "Appl Sci"
+      },
+      {
+        "issue": "7",
+        "key": "10343_CR27",
+        "doi-asserted-by": "publisher",
+        "first-page": "1443",
+        "DOI": "10.1162/089976601750264965",
+        "volume": "13",
+        "author": "B Sch\u00f6lkopf",
+        "year": "2001",
+        "unstructured": "Sch\u00f6lkopf B, Platt JC, Shawe-Taylor J, Smola AJ, Williamson RC. Estimating the support of a high-dimensional distribution. Neural Comput. 2001;13(7):1443\u201371. https://doi.org/10.1162/089976601750264965.",
+        "journal-title": "Neural Comput"
+      },
+      {
+        "key": "10343_CR28",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Liu FT, Ting KM, Zhou Z-H. Isolation forest. In: 2008 eighth IEEE international conference on data mining. IEEE, Pisa; 2008, p. 413\u2013422. https://doi.org/10.1109/icdm.2008.17.",
+        "DOI": "10.1109/icdm.2008.17"
+      },
+      {
+        "key": "10343_CR29",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Malhotra P, Ramakrishnan A, Anand G, Vig L, Agarwal P, Shroff G. LSTM-based encoder-decoder for multi-sensor anomaly detection. arXiv 2016. https://doi.org/10.48550/ARXIV.1607.00148.",
+        "DOI": "10.48550/ARXIV.1607.00148"
+      },
+      {
+        "key": "10343_CR30",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Audibert J, Michiardi P, Guyard F, Marti S, Zuluaga MA. Usad: unsupervised anomaly detection on multivariate time series. In: Proceedings of the 26th ACM SIGKDD international conference on knowledge discovery & data mining. KDD \u201920. ACM, CA; 2020, p. 3395\u20133404. https://doi.org/10.1145/3394486.3403392.",
+        "DOI": "10.1145/3394486.3403392"
+      },
+      {
+        "issue": "6",
+        "key": "10343_CR31",
+        "doi-asserted-by": "publisher",
+        "first-page": "1201",
+        "DOI": "10.14778/3514061.3514067",
+        "volume": "15",
+        "author": "S Tuli",
+        "year": "2022",
+        "unstructured": "Tuli S, Casale G, Jennings NR. Tranad: deep transformer networks for anomaly detection in multivariate time series data. Proc VLDB Endow. 2022;15(6):1201\u201314. https://doi.org/10.14778/3514061.3514067.",
+        "journal-title": "Proc VLDB Endow"
+      },
+      {
+        "key": "10343_CR32",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Xu J, Wu H, Wang J, Long M. Anomaly transformer: time series anomaly detection with association discrepancy. arXiv 2021. https://doi.org/10.48550/ARXIV.2110.02642.",
+        "DOI": "10.48550/ARXIV.2110.02642"
+      },
+      {
+        "key": "10343_CR33",
+        "unstructured": "Ruff L, Vandermeulen R, G\u00f6rnitz N, Deecke L, Siddiqui S, Binder A, M\u00fcller E, Kloft M. Deep one-class classification. In: 35th international conference on machine learning (ICML). 2018, p. 80. arXiv:1801.05365."
+      },
+      {
+        "key": "10343_CR34",
+        "unstructured": "Zong B, Song Q, Min MR, Cheng W, Lumezanu C, Cho D-k, Chen H. DAGMM: deep autoencoding gaussian mixture model for unsupervised anomaly detection. In: International conference on learning representations (ICLR). 2018. arXiv:1802.04941"
+      },
+      {
+        "key": "10343_CR35",
+        "doi-asserted-by": "publisher",
+        "DOI": "10.1016/j.rineng.2024.103171",
+        "volume": "24",
+        "author": "YK Saheed",
+        "year": "2024",
+        "unstructured": "Saheed YK, Chukwuere JE. Xaiensembletl-IOVV: a new explainable artificial intelligence ensemble transfer learning for zero-day botnet attack detection in the internet of vehicles. Results Eng. 2024;24:103171. https://doi.org/10.1016/j.rineng.2024.103171.",
+        "journal-title": "Results Eng"
+      },
+      {
+        "issue": "7",
+        "key": "10343_CR36",
+        "doi-asserted-by": "publisher",
+        "first-page": "14213",
+        "DOI": "10.1109/jiot.2025.3648649",
+        "volume": "13",
+        "author": "YK Saheed",
+        "year": "2026",
+        "unstructured": "Saheed YK, Chukwuere JE. Autonomous LLM agent: a memory-augmented, edge-optimized SHAP explanations with zero-day attack resilience in iot/industrial iot networks. IEEE Internet Things J. 2026;13(7):14213\u201328. https://doi.org/10.1109/jiot.2025.3648649.",
+        "journal-title": "IEEE Internet Things J"
+      },
+      {
+        "key": "10343_CR37",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Saheed YK, Misra S, Chockalingam S. Autoencoder via dcnn and lstm models for intrusion detection in industrial control systems of critical infrastructures. In: 2023 IEEE/ACM 4th international workshop on engineering and cybersecurity of critical systems (EnCyCriS). IEEE; , 2023, p. 9\u201316. https://doi.org/10.1109/encycris59249.2023.00006.",
+        "DOI": "10.1109/encycris59249.2023.00006"
+      },
+      {
+        "issue": "1/2",
+        "key": "10343_CR38",
+        "doi-asserted-by": "publisher",
+        "first-page": "100",
+        "DOI": "10.2307/2333009",
+        "volume": "41",
+        "author": "ES Page",
+        "year": "1954",
+        "unstructured": "Page ES. Continuous inspection schemes. Biometrika. 1954;41(1/2):100. https://doi.org/10.2307/2333009.",
+        "journal-title": "Biometrika"
+      },
+      {
+        "key": "10343_CR39",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Elbez G, Nahrstedt K, Hagenmeyer V. Early detection of goose denial of service (dos) attacks in iec 61850 substations. In: 2022 IEEE international conference on communications, control, and computing technologies for smart grids (SmartGridComm). IEEE, Singapore; 2022, p. 367\u2013373. https://doi.org/10.1109/smartgridcomm52983.2022.9961042.",
+        "DOI": "10.1109/smartgridcomm52983.2022.9961042"
+      },
+      {
+        "key": "10343_CR40",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Siffer A, Fouque P-A, Termier A, Largouet C. Anomaly detection in streams with extreme value theory. In: Proceedings of the 23rd ACM SIGKDD international conference on knowledge discovery and data mining. KDD \u201917. ACM, Halifax NS; 2017, p. 1067\u20131075. https://doi.org/10.1145/3097983.3098144.",
+        "DOI": "10.1145/3097983.3098144"
+      },
+      {
+        "key": "10343_CR41",
+        "doi-asserted-by": "publisher",
+        "first-page": "66",
+        "DOI": "10.1007/978-1-4612-4380-9_6",
+        "volume-title": "Statistical methods for research workers",
+        "author": "RA Fisher",
+        "year": "1992",
+        "unstructured": "Fisher RA. Statistical methods for research workers. Springer; 1992. p. 66\u201370. https://doi.org/10.1007/978-1-4612-4380-9_6."
+      },
+      {
+        "issue": "4",
+        "key": "10343_CR42",
+        "doi-asserted-by": "publisher",
+        "first-page": "987",
+        "DOI": "10.2307/2529826",
+        "volume": "31",
+        "author": "MB Brown",
+        "year": "1975",
+        "unstructured": "Brown MB. 400: a method for combining non-independent, one-sided tests of significance. Biometrics. 1975;31(4):987. https://doi.org/10.2307/2529826.",
+        "journal-title": "Biometrics"
+      },
+      {
+        "issue": "2",
+        "key": "10343_CR43",
+        "doi-asserted-by": "publisher",
+        "first-page": "183",
+        "DOI": "10.1016/s0167-7152(02)00310-3",
+        "volume": "60",
+        "author": "JT Kost",
+        "year": "2002",
+        "unstructured": "Kost JT, McDermott MP. Combining dependent p-values. Stat Probab Lett. 2002;60(2):183\u201390. https://doi.org/10.1016/s0167-7152(02)00310-3.",
+        "journal-title": "Stat Probab Lett"
+      },
+      {
+        "key": "10343_CR44",
+        "doi-asserted-by": "publisher",
+        "unstructured": "Kaur R, Sridhar K, Park S, Yang Y, Jha S, Roy A, Sokolsky O, Lee I. Codit: conformal out-of-distribution detection in time-series data for cyber-physical systems. In: Proceedings of the ACM/IEEE 14th international conference on cyber-physical systems (with CPS-IoT Week 2023). ICCPS \u201923. ACM, San Antonio, TX; 2023, p. 120\u2013131. https://doi.org/10.1145/3576841.3585931.",
+        "DOI": "10.1145/3576841.3585931"
+      },
+      {
+        "issue": "4",
+        "key": "10343_CR45",
+        "doi-asserted-by": "publisher",
+        "first-page": "1",
+        "DOI": "10.1145/3648005",
+        "volume": "8",
+        "author": "R Kaur",
+        "year": "2024",
+        "unstructured": "Kaur R, Yang Y, Sokolsky O, Lee I. Out-of-distribution detection in dependent data for cyber-physical systems with conformal guarantees. ACM Trans Cyber-Phys Syst. 2024;8(4):1\u201327. https://doi.org/10.1145/3648005.",
+        "journal-title": "ACM Trans Cyber-Phys Syst"
+      },
+      {
+        "issue": "2",
+        "key": "10343_CR46",
+        "doi-asserted-by": "publisher",
+        "first-page": "1",
+        "DOI": "10.1145/3736575",
+        "volume": "58",
+        "author": "X Zhou",
+        "year": "2025",
+        "unstructured": "Zhou X, Chen B, Gui Y, Cheng L. Conformal prediction: a data perspective. ACM Comput Surv. 2025;58(2):1\u201337. https://doi.org/10.1145/3736575.",
+        "journal-title": "ACM Comput Surv"
+      },
+      {
+        "issue": "8",
+        "key": "10343_CR47",
+        "doi-asserted-by": "publisher",
+        "first-page": "7956",
+        "DOI": "10.1109/tcyb.2021.3054161",
+        "volume": "52",
+        "author": "H Hoeltgebaum",
+        "year": "2022",
+        "unstructured": "Hoeltgebaum H, Adams N, Fernandes C. Estimation, forecasting, and anomaly detection for nonstationary streams using adaptive estimation. IEEE Trans Cybern. 2022;52(8):7956\u201367. https://doi.org/10.1109/tcyb.2021.3054161.",
+        "journal-title": "IEEE Trans Cybern"
+      },
+      {
+        "key": "10343_CR48",
+        "doi-asserted-by": "publisher",
+        "DOI": "10.1016/j.jpowsour.2026.239258",
+        "volume": "667",
+        "author": "B Li",
+        "year": "2026",
+        "unstructured": "Li B, Ma F. An adaptive multi-scenario early fault detection framework for lithium-ion batteries based on the integration of generalized pareto distribution-peaks over threshold and local outlier factor. J Power Sources. 2026;667:239258. https://doi.org/10.1016/j.jpowsour.2026.239258.",
+        "journal-title": "J Power Sources"
+      },
+      {
+        "key": "10343_CR49",
+        "unstructured": "Vaswani A, Shazeer N, Parmar N, Uszkoreit J, Jones L, Gomez AN, Kaiser L, Polosukhin I. Attention is all you need. Adv Neural Inf Process Syst 2017; 30"
+      }
+    ],
+    "container-title": [
+      "Discover Computing"
+    ],
+    "original-title": [],
+    "language": "en",
+    "link": [
+      {
+        "URL": "https://link.springer.com/content/pdf/10.1007/s10791-026-10343-2.pdf",
+        "content-type": "application/pdf",
+        "content-version": "vor",
+        "intended-application": "text-mining"
+      },
+      {
+        "URL": "https://link.springer.com/article/10.1007/s10791-026-10343-2",
+        "content-type": "text/html",
+        "content-version": "vor",
+        "intended-application": "text-mining"
+      },
+      {
+        "URL": "https://link.springer.com/content/pdf/10.1007/s10791-026-10343-2.pdf",
+        "content-type": "application/pdf",
+        "content-version": "vor",
+        "intended-application": "similarity-checking"
+      }
+    ],
+    "deposited": {
+      "date-parts": [
+        [
+          2026,
+          7,
+          11
+        ]
+      ],
+      "date-time": "2026-07-11T07:24:49Z",
+      "timestamp": 1783754689000
+    },
+    "score": 1,
+    "resource": {
+      "primary": {
+        "URL": "https://link.springer.com/10.1007/s10791-026-10343-2"
+      }
+    },
+    "subtitle": [],
+    "short-title": [],
+    "issued": {
+      "date-parts": [
+        [
+          2026,
+          7,
+          11
+        ]
+      ]
+    },
+    "references-count": 49,
+    "journal-issue": {
+      "issue": "1",
+      "published-online": {
+        "date-parts": [
+          [
+            2026,
+            12
+          ]
+        ]
+      }
+    },
+    "alternative-id": [
+      "10343"
+    ],
+    "URL": "https://doi.org/10.1007/s10791-026-10343-2",
+    "relation": {},
+    "ISSN": [
+      "2948-2992"
+    ],
+    "issn-type": [
+      {
+        "value": "2948-2992",
+        "type": "electronic"
+      }
+    ],
+    "subject": [],
+    "published": {
+      "date-parts": [
+        [
+          2026,
+          7,
+          11
+        ]
+      ]
+    },
+    "assertion": [
+      {
+        "value": "27 February 2026",
+        "order": 1,
+        "name": "received",
+        "label": "Received",
+        "group": {
+          "name": "ArticleHistory",
+          "label": "Article History"
+        }
+      },
+      {
+        "value": "6 July 2026",
+        "order": 2,
+        "name": "accepted",
+        "label": "Accepted",
+        "group": {
+          "name": "ArticleHistory",
+          "label": "Article History"
+        }
+      },
+      {
+        "value": "11 July 2026",
+        "order": 3,
+        "name": "first_online",
+        "label": "First Online",
+        "group": {
+          "name": "ArticleHistory",
+          "label": "Article History"
+        }
+      },
+      {
+        "order": 1,
+        "name": "Ethics",
+        "group": {
+          "name": "EthicsHeading",
+          "label": "Declarations"
+        }
+      },
+      {
+        "value": "Not applicable.",
+        "order": 2,
+        "name": "Ethics",
+        "group": {
+          "name": "EthicsHeading",
+          "label": "Ethics approval and consent to participate"
+        }
+      },
+      {
+        "value": "Not applicable.",
+        "order": 3,
+        "name": "Ethics",
+        "group": {
+          "name": "EthicsHeading",
+          "label": "Consent for publication"
+        }
+      },
+      {
+        "value": "The author declares no conflict of interest.",
+        "order": 4,
+        "name": "Ethics",
+        "group": {
+          "name": "EthicsHeading",
+          "label": "Competing interests"
+        }
+      }
+    ],
+    "article-number": "434"
+  }
+}

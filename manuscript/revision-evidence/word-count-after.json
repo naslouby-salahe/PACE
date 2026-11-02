@@ -1,0 +1,20 @@
+{
+  "method": "TeXcount text words; headings, inline/display math, citations, float/table bodies and bibliography excluded from main prose. Captions counted separately by TeXcount. Table content and bibliography reported as inventories, not included in prose totals.",
+  "main_prose_by_section": {
+    "introduction": 377,
+    "related-work": 1207,
+    "problem-formulation": 402,
+    "methodology": 1272,
+    "experimental-methodology": 1880,
+    "results": 2252,
+    "discussion": 576,
+    "limitations": 443,
+    "conclusion": 142
+  },
+  "main_prose_total": 8551,
+  "abstract_prose": 222,
+  "appendix_prose": 377,
+  "captions": 474,
+  "bibliography_entries": 38,
+  "float_and_longtable_environments": 14
+}

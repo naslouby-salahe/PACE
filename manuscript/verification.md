@@ -1,3 +1,5 @@
+> Historical record: superseded by audit.md and revision_report.md for the final manuscript and submission status.
+
 > Historical preparation record. The current revision and submission status are maintained in [audit.md](audit.md), Revision Verification Status (21 October 2026).
 
 # PACE revision audit

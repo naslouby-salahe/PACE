@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-22",
+  "goal_complete": false,
+  "manuscript_revision_complete": true,
+  "requirements": [
+    {
+      "requirement": "1 scope/restrictions",
+      "status": "verified",
+      "evidence": "repository-integrity.json; Git changes confined to manuscript; protected tracked-file and 110 campaign byte hashes unchanged"
+    },
+    {
+      "requirement": "2 official journal comparison",
+      "status": "incomplete_external_access",
+      "evidence": "JISA/Cybersecurity/IEEE requirements and all candidate scopes checked; official IoT and Computer Networks guides repeatedly return403, including alternate publisher links; no invented limits"
+    },
+    {
+      "requirement": "3 length optimization",
+      "status": "verified",
+      "evidence": "word-count-before.json and word-count-after.json;31-page final render;25pages through conclusion;8551mainprosewords"
+    },
+    {
+      "requirement": "4 scientific contribution",
+      "status": "verified",
+      "evidence": "introduction findings A/B/C, method implementation inspection, Reviewer1/2"
+    },
+    {
+      "requirement": "5 primary evidence",
+      "status": "verified",
+      "evidence": "fresh reporting-verification.json matches archived data; independent Reviewer2 reproduces four detection/FPR contrasts and intervals"
+    },
+    {
+      "requirement": "6 concentrated gains",
+      "status": "verified",
+      "evidence": "results6.4,6.7,6.8; exTON/deletion/seed/budget diagnostics and complete target records retained"
+    },
+    {
+      "requirement": "7 false alerts",
+      "status": "verified",
+      "evidence": "results6.5, distributions, cache diagnostics and Reviewer3 correction recheck; no causal extrapolation claim"
+    },
+    {
+      "requirement": "8 operating points",
+      "status": "verified",
+      "evidence": "verify_common_support.py,common-support.json,results6.6; stable sorting,endpointprecedence,selectedsupport limitations explicit"
+    },
+    {
+      "requirement": "9 ablations",
+      "status": "verified",
+      "evidence": "all60appendix rows matched fresh summaries; reserve interpretation independently rechecked"
+    },
+    {
+      "requirement": "10 statistical rigor",
+      "status": "verified",
+      "evidence": "experimental5.4\u20135.5, limitations; paired corpus bootstrap, seed dependence and engineering acceptance qualified"
+    },
+    {
+      "requirement": "11 regime/reproducibility",
+      "status": "verified_with_stated_limits",
+      "evidence": "dataset/cache inventories and source inspection; public code SHA verified; missing raw-version/prospective timing and localcampaignaccess disclosed"
+    },
+    {
+      "requirement": "12 literature",
+      "status": "verified_with_access_limits",
+      "evidence": "38metadata identities; primary source passage checks; newNweke reference;12word overlap screen of accessible sources; no all-PDF access or comprehensive plagiarism claim"
+    },
+    {
+      "requirement": "13 authors/declarations",
+      "status": "verified",
+      "evidence": "user metadata exact; approval confirmed; nofunding/nointerests supplied; user requests omission of declarations androles; accurate submissionAI statement in report"
+    },
+    {
+      "requirement": "14 editorial pass",
+      "status": "verified",
+      "evidence": "revised abstract,introduction,relatedwork,results,discussion,conclusion; no draftmarkers; Reviewer4"
+    },
+    {
+      "requirement": "15 visual/supporting material",
+      "status": "verified",
+      "evidence": "fourfigures retained; appendicesA/B retained; all31pages rendered and visually inspected"
+    },
+    {
+      "requirement": "16 adversarial review",
+      "status": "verified",
+      "evidence": "four independent agents completed; Reviewer2/3 repeated checks; editor correction and final primary-agent recheck"
+    },
+    {
+      "requirement": "17 technical validation",
+      "status": "verified",
+      "evidence": "final-validation.json; successful build without warnings;38resolvedcitations; allpages inspected; unchangedprotectedfiles"
+    },
+    {
+      "requirement": "18 deliverables",
+      "status": "verified",
+      "evidence": "main.tex/main.pdf,audit.md,revision_report.md,optionalexperimentranking; exact changedpaths in final-files.json"
+    },
+    {
+      "requirement": "19 completion criteria",
+      "status": "manuscript_verified_goal_not_fully_complete",
+      "evidence": "manuscriptcriteria satisfied within disclosed scientific limits; mandatory all-journal guide verification remains incomplete"
+    }
+  ],
+  "remaining_required_work": "Verify official current Internet of Things and Computer Networks author-guide requirements. No journal selection is required.",
+  "blocker": "Repeated403 from official current/legacypublisherlinks and both web tools; localbrowserdisabled. User has not selected a journal and has not supplied guide text."
+}

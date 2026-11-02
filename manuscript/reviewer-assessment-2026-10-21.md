@@ -1,3 +1,5 @@
+> Historical record: superseded by audit.md and revision_report.md for the final manuscript and submission status.
+
 PACE manuscript: independent reviewer assessment
 
 Date: 21 October 2026. Overall grade: **76/100**. Recommendation: **major revision before journal submission**.

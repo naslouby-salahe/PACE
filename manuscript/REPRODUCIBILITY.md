@@ -5,6 +5,8 @@ Run from the PACE project root with the existing locked environment. These comma
 ```bash
 .venv/bin/python manuscript/scripts/verify_frozen_reporting.py --output-dir /tmp/pace-reporting
 .venv/bin/python manuscript/scripts/verify_cache_diagnostics.py --output-dir /tmp/pace-cache-diagnostics
+.venv/bin/python manuscript/scripts/verify_common_support.py --output /tmp/pace-common-support.json
+.venv/bin/python manuscript/scripts/count_manuscript_words.py --output /tmp/pace-word-count.json
 .venv/bin/python manuscript/scripts/generate_figures.py --output-dir /tmp/pace-figures
 cd manuscript
 latexmk -norc -pdf -interaction=nonstopmode -halt-on-error -outdir=/tmp/pace-build main.tex
@@ -25,7 +27,7 @@ For sweep adjustment, the verifier follows the explicit endpoint tests before in
 - reporting-verification.json: primary TPR/FPR intervals, sweep coverage, gain concentration, selected deletion sensitivities and high-resource/seed-localized diagnostics.
 - campaign-manifest.json: all frozen artifact paths, file SHA-256 values and embedded content/implementation digests.
 - dataset-input-manifest.json: exact cache source paths, feature schemas and recomputed cache-manifest hashes. These hashes verify the manifests, not all raw archives.
-- bibliography-records.json and bibliography-verification.json: primary DOI registry metadata and the mapping of all 37 final citations. Registry formatting is not blindly substituted for correctly published names, title acronyms or article numbering.
+- bibliography-records.json and bibliography-verification.json: primary DOI registry metadata and the mapping of all 38 final citations. Registry formatting is not blindly substituted for correctly published names, title acronyms or article numbering.
 - source-access.json: additional institutional full text and policy/access boundaries.
 
 ## Figure sources and verification
@@ -39,10 +41,12 @@ figure-inputs.json archives all plotted numerical coordinates and source hashes.
 
 The checked runtime is recorded in revision-evidence/runtime-versions.json. The existing uv.lock remains unchanged.
 
-## Submission facts still requiring authors
+## Public code and submission facts
 
-Author identities, order, affiliations, all three emails, corresponding author and supplied ORCID are inserted and checked. Funding, competing interests, individual contributions, acknowledgements, final human responsibility/approval, exact private design/criterion/arm timing, missing raw-release retrieval/version records and unverified redistribution permissions require author confirmation. The public repository URL and immutable release revision are intentionally deferred.
+The public repository is https://github.com/naslouby-salahe/pace. Its verified public revision is `41b3a18c10422fc41d1785c35881ccd6323941fa`; implementation, configuration, tests, dependencies and frozen result files at local starting revision `49841daa9ca0c35dcf31a2e71ad45ead3c272d90` match that public revision. Detailed campaign JSONs used locally are inventoried by path and digest; their presence in the public repository is not asserted. Reporting reproduction requires those JSONs and the cached manifests at the recorded paths. Public result tables support inspection but are not a substitute for the complete campaign inputs to the verifiers.
 
-The provisional Elsevier-style layout does not select a journal. The [Elsevier policy](https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals) was checked on 21 October 2026: truthful AI assistance disclosure and human responsibility remain relevant. The manuscript retains its separate disclosure without asserting human approval that has not been supplied. Authors must check the eventual journal's requirements.
+Author order, affiliations, emails, corresponding author and supplied ORCID are checked. The user confirms author approval, no funding and no competing interests, and requests that funding, interests and contribution-role sections remain absent from the neutral master. They are absent. Individual roles were not inferred. The revision report explains requirements that may apply when a journal is selected, and supplies an accurate AI-assistance disclosure for adaptation at submission.
 
-The canonical manuscript/audit.md contains the current verification statuses. The earlier verification.md is a historical preparation record.
+Missing raw-release retrieval/version records, unverified redistribution permissions and prospective protocol-freeze timing remain provenance limits, not invented facts. The master states these limits without author-confirmation placeholders.
+
+`audit.md` is the consolidated current audit; `revision_report.md` documents this final revision. `verification.md` and `reviewer-assessment-2026-10-21.md` are historical records and are superseded wherever they conflict with the current report. Older evidence logs are retained as provenance; current verification is summarized in `revision-evidence/final-validation.json`.
