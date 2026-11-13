@@ -1,0 +1,61 @@
+\documentclass[11pt]{article}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,booktabs,graphicx,array,longtable}
+\usepackage[margin=25mm]{geometry}
+\usepackage{microtype}
+\usepackage{placeins}
+\usepackage{needspace}
+\usepackage{xurl}
+\usepackage{hyperref}
+\hypersetup{hidelinks,pdfauthor={Salaheddine Naslouby, Mohamed Lachgar, Hamid Hrimech},pdftitle={PACE: Peer-Wise Calibrated Experts for IoT Intrusion Detection with Benign-Only Target Data}}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\newcounter{algorithm}
+\title{PACE: Peer-Wise Calibrated Experts for IoT Intrusion Detection with Benign-Only Target Data}
+\author{Salaheddine Naslouby$^{1,*}$ \and Mohamed Lachgar$^2$ \and Hamid Hrimech$^1$}
+\date{}
+\begin{document}
+\maketitle
+\begin{center}\small
+$^1$Hassan First University, National School of Applied Sciences (ENSA),\\
+LAMSAD Laboratory, Berrechid, Morocco\\[3pt]
+$^2$Cadi Ayyad University, Higher Normal School (ENS),\\
+L2IS Laboratory, Marrakech, Morocco\\[5pt]
+$^*$Corresponding author: \href{mailto:naslouby.salahe@gmail.com}{naslouby.salahe@gmail.com}\\
+ORCID: \href{https://orcid.org/0009-0002-7295-7816}{0009-0002-7295-7816}\\
+\href{mailto:m.lachgar@uca.ac.ma}{m.lachgar@uca.ac.ma};
+\href{mailto:hamid.hrimech@uhp.ac.ma}{hamid.hrimech@uhp.ac.ma}
+\end{center}
+\begin{abstract}
+IoT targets can possess observations known to be benign but lack any positive examples of attacks. Attack examples can be provided by training supervised learners on the data from their respective peers. PACE pools knowledge from multiple static peer learners, augments a local trusted learner, and adds several experts. Static peer learners are given calibrated cutoffs relative to each target, and multiple experts based on rarity of target features and responses of peer learners to target features complement this baseline model. We consider 58 IoT devices in our empirical study, spanning 6 datasets, under 7 different settings of interest, and for each replicate 3 times and train local learners on 100 and 400 records. When comparing to a mean of 7 detectors as the local model, we achieve 2.34 and 2.32 percentage point increases in target-wise macro-average performance when targeting $\alpha$ FPRs of 0.05. Our resulting mean FPRs are lower than these baselines at 5.74\% and 6.44\%, at 5.55\% and 5.43\%. We see similar uplift at $\alpha=0.01$, with FPRs on average increased compared to baselines. Ablating individual detector families shows the highest impact is obtained by removing all experts from one of the rarity families. Most performance increases arise in TON\_IoT and are more modest in the other datasets; however, local detectors help to flag some attacks undetected by peers. If we hold the local model to a full ensemble of detectors instead, then leveraging peer detections with a peer-wise approach improves performance by between 3.0 and 7.3 percentage points versus taking the mean or max peer decision, although at increased FPR. These findings show the promise of combining information from peers with the local detector for these study settings (and impacted model design). They do not demonstrate equivalent-FPR performance dominance at all operating regimes. Nor are we able to claim the learned thresholds will result in future FPR below desired levels.
+\end{abstract}
+\noindent\textbf{Keywords:} IoT intrusion detection; peer models; benign-only learning; empirical calibration; anomaly ensembles; false alerts.
+\input{sections/introduction}
+\input{sections/related-work}
+\input{sections/problem-formulation}
+\input{sections/methodology}
+\FloatBarrier
+\input{sections/experimental-methodology}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/limitations}
+\input{sections/conclusion}
+\clearpage
+\appendix
+\renewcommand{\theHtable}{\Alph{section}.\arabic{table}}
+\renewcommand{\thetable}{\Alph{section}.\arabic{table}}
+\input{sections/comparison-inventory}
+\input{sections/dataset-provenance}
+\section*{Data and code availability}
+The PACE implementation, configurations, and frozen result tables are available at \url{https://github.com/naslouby-salahe/pace}. The verified public revision is \href{https://github.com/naslouby-salahe/pace/tree/41b3a18c10422fc41d1785c35881ccd6323941fa}{\texttt{41b3a18c1042}}. The manuscript evidence inventory records the detailed campaign artifact digests and reporting procedures. Third-party datasets are obtained from the original sources in Appendix~\ref{app:data}, subject to their access and redistribution conditions.
+\setlength{\bibsep}{0pt}
+\interlinepenalty=10000
+\small
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+\end{document}
+
+

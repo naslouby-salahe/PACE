@@ -1,0 +1,17 @@
+\section{Introduction}
+\label{sec:intro}
+A newly introduced target may provide examples of legitimate operation but no labeled attacks. Other clients can supply supervised models trained on malicious traffic. Relying only on target-local anomaly detection discards that attack knowledge; relying only on transferred peer models can miss attacks they do not recognize. PACE combines these sources of evidence so that local detectors can recover attacks missed by the peers.
+
+A common fusion strategy takes the largest peer score and calibrates one threshold on target benign observations. If one peer dominates the benign tail of that maximum, the common threshold may exclude another peer's informative but smaller attack evidence. We call this task-specific failure mode peer drowning. Score normalization and domination by an extreme detector are established concerns in outlier ensembles~\cite{zimek2014}. Target-relative transformations address scale differences but do not make heterogeneous tails interchangeable.
+
+PACE (Peer-wise Calibrated Experts) combines frozen supervised peers with a protected local anchor and a heterogeneous anomaly-expert bank. It transforms each peer's attack-minus-benign margin into target-relative evidence, assigns a separate empirical threshold, and calibrates the peer union through a shared multiplier. The local branch supplies feature-rarity and peer-response evidence alongside conventional anomaly scores. Related calibrated hybrid detectors, particularly MCDE~\cite{yue2026mcde}, provide precedent; PACE's contribution is the integration of multiple foreign peers, separate target-relative thresholds, and complementary local decisions, rather than a new base estimator.
+
+The evaluation distinguishes three findings:
+\begin{enumerate}
+\item \textbf{Local-branch replacement:} whether the protected anchor and expert bank improve on a seven-detector mean local branch when the peer branch is identical.
+\item \textbf{Peer-wise versus fused decisions:} how separate peer thresholds change detection and false alerts relative to mean and maximum peer fusion when the complete local branch is fixed.
+\item \textbf{Complementary detection:} when local experts recover attacks missed by the peer union, and which expert-family removals reduce final detection most.
+\end{enumerate}
+Peer drowning motivates the second comparison; aggregate outcomes do not identify its mechanism causally.
+
+Across 58 targets from six corpora, PACE improves target-macro detection over the shared-peer mean-local comparator by 2.61--2.83 percentage points at nominal $\alpha=0.01$ and 2.32--2.34 points at $\alpha=0.05$. At $\alpha=0.05$, both fitting budgets also show lower mean realized false-alert rates. Ablations, target-level coverage, and comparisons across fitting budgets show which components contribute and where gains occur. The study evaluates benign-only target fitting and calibration on a benchmark that also informed development.
