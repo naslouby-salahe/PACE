@@ -19,6 +19,7 @@
 \title{PACE: Peer-Wise Calibrated Experts for IoT Intrusion Detection with Benign-Only Target Data}
 \author{Salaheddine Naslouby\,\orcidlink{0009-0002-7295-7816}$^{1,*}$ \and Mohamed Lachgar\,\orcidlink{0000-0002-6155-3309}$^2$ \and Hamid Hrimech\,\orcidlink{0000-0002-3980-1214}$^1$}
 \date{}
+\newcommand{\appendixtext}[1]{\ifdefined\withsupplement #1\fi}
 \begin{document}
 \maketitle
 \begin{center}\small
@@ -44,14 +45,15 @@ IoT targets can possess observations known to be benign but lack any positive ex
 \input{sections/discussion.tex}
 \input{sections/limitations.tex}
 \input{sections/conclusion.tex}
+\ifdefined\withsupplement
 \clearpage
 \appendix
 \renewcommand{\theHtable}{\Alph{section}.\arabic{table}}
 \renewcommand{\thetable}{\Alph{section}.\arabic{table}}
-\input{sections/comparison-inventory.tex}
-\input{sections/dataset-provenance.tex}
+\input{sections/supplement.tex}
+\fi
 \section*{Data and code availability}
-The PACE implementation, configurations, and result tables are available at \url{https://github.com/naslouby-salahe/pace}. Third-party datasets are obtained from the original sources in Appendix~\ref{app:data}, subject to their access and redistribution conditions.
+The PACE implementation, configurations, and result tables are available at \url{https://github.com/naslouby-salahe/pace}. Third-party datasets are obtained from the original sources\appendixtext{ in Appendix~\ref{app:data}}, subject to their access and redistribution conditions.
 \setlength{\bibsep}{0pt}
 \interlinepenalty=10000
 \small
