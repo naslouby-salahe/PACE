@@ -26,7 +26,7 @@ Ties are included in the upper-tail count. Values beyond the largest reference s
 
 
 \subsection{Blocks and thresholds}
-Let $M=|C|$ and let $b=250$ be the configured block-size parameter. The code constructs $J=\max\{1,\lfloor M/b\rfloor\}$ consecutive blocks using a balanced array partition: their lengths differ by at most one, and earlier blocks receive any surplus rows. They are not necessarily blocks of exactly 250 observations. For example, 350 calibration observations form one block of length 350. Write $n_j=|C_j|$ and let $z_{j,(1)}\leq\cdots\leq z_{j,(n_j)}$ be ordered evidence in block $j$. For allocation $w\in(0,1)$,
+Let $M=|C|$ and let $b=250$ be the configured block-size parameter. The method constructs $J=\max\{1,\lfloor M/b\rfloor\}$ consecutive blocks using a balanced partition: their lengths differ by at most one, and earlier blocks receive any surplus rows. They are not necessarily blocks of exactly 250 observations. For example, 350 calibration observations form one block of length 350. Write $n_j=|C_j|$ and let $z_{j,(1)}\leq\cdots\leq z_{j,(n_j)}$ be ordered evidence in block $j$. For allocation $w\in(0,1)$,
 \begin{equation}
  \tau_z(w)=\max_{1\leq j\leq J}
  z_{j,(1+\lceil(1-w)(n_j-1)\rceil)}.
