@@ -9,14 +9,14 @@ All entries below use the 58-target primary cohort and seeds 6--8. PACE is liste
 \toprule Rule & Definition\\\midrule\endfirsthead
 \toprule Rule & Definition (continued)\\\midrule\endhead
 \bottomrule\endfoot 
-PACE & Union of separate peer margins, separately-calibrated mean of the 6 detectors as an anchor, and 6 experts in the bank with non-uniform distribution ($r=a=0.5$).\\
+PACE & Union of separate peer margins, separately-calibrated mean of the 6 detectors as an anchor, and 6 experts in the bank ($r=a=0.5$).\\
 Mean local & As before but also mean local evidence from all 7 local detectors (incl. autoencoder) at cut $B_L$.\\
-No feature & Drop bank IF, hist and Gaussian model experts; re-fit remaining 3 experts + anchor into new bank.\\
-No response & Drop IF from bank (peer-response), leave the rest of bank experts + anchor intact and re-fit the bank.\\
-No rarity & Drop ECOD + pairwise surprisal experts, keep other experts + anchor in bank and re-fit the bank.\\
+No feature & Drop bank IF, hist and Gaussian model experts; retain the anchor and recalibrate the remaining bank experts.\\
+No response & Drop IF from bank (peer-response), leave the rest of bank experts + anchor intact and recalibrate the bank.\\
+No rarity & Drop ECOD + pairwise surprisal experts, keep other experts + anchor in bank and recalibrate the bank.\\
 Bank only & Drop anchor and fit all 6 experts in the bank to $B_L$ budget as a whole; keep PACE peer component.\\
 Single union & Anchor + all 6 bank experts fitted as a single unit to total local budget $B_L$. Anchor given initial share of budget $a$, with the remaining budget evenly divided amongst the 6 experts in the bank.\\
-Raw response & Use raw margins from peers (as opposed to margin from target detector) when fitting the peer-response IF, keep the rest of PACE unchanged.\\
+Raw response & Use raw margins from peers (as opposed to target-relative evidence) when fitting the peer-response IF, keep the rest of PACE unchanged.\\
 Reserve 0.25 & Change $r$ to $0.25$ when applying PACE rule (incl. additional anchoring rule used in implementation), thus giving budget of $0.75\alpha$ to peers.\\
 Peer mean & Average all evidence from separate peers to obtain 1 peer expert calibrated at $B_P$, keep rest of PACE anchor/bank unchanged.\\
 Peer max & Max fuse all peer evidence to obtain 1 peer expert calibrated at $B_P$, keep rest of PACE anchor/bank unchanged.\\
