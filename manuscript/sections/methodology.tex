@@ -1,122 +1,110 @@
-\section{PACE methodology}
-\label{sec:method}
-Figure~\ref{fig:architecture} shows the supervised peer branch and the two target-local decision paths. Algorithm~\ref{alg:pace} summarizes preparation and inference; the equations below specify the score and quantile conventions.
+\section{PACE methodology} 
+\label{sec:method} 
+Figure~\ref{fig:architecture} depicts the architecture: the supervised branch and the two sets of target-local branches feeding the final decision. Algorithm~\ref{alg:pace} describes the data processing performed prior to scoring and the steps at inference; further details on the scoring functions and choice of quantiles follow.
 
 
 
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=0.88\textwidth]{figures/architecture.pdf}
-\caption{PACE's information flow and final decision. Target benign training, reference, calibration, and test roles are distinct. The benchmark standardizes features using pooled complete benign training roles before restricting local fitting to $N$ rows. Target attack labels enter evaluation only. IF: isolation forest; LOF: local outlier factor; $k$NN: nearest-neighbor distance.}
-\label{fig:architecture}
-\end{figure}
-\FloatBarrier
+\begin{figure}[!htbp] 
+\centering 
+\includegraphics[width=0.88\textwidth]{figures/architecture.pdf} 
+\caption{PACE architecture and final decision. Benign target training set, target reference, calibration, and test roles. Features are scaled using all fully-available target benign training roles, and local components fit on the restricted size $N$ target training roles. Attack labels are used only for scoring the detected attacks. IF = isolation forest, LOF = local outlier factor, kNN = $k$-nearest neighbours.}
+\label{fig:architecture} 
+\end{figure} 
+\FloatBarrier 
 
-\subsection{Target-relative evidence}
-For an expert score $s$, let $r_1,\ldots,r_n$ be that expert's scores on the target reference role, $r_{\max}=\max_i r_i$, and $d_R=\max\{r_{\max}-\operatorname{median}_i r_i,10^{-6}\}$. The implemented transformation is
-\begin{equation}
- E_R(s)=\begin{cases}
- -\log\!\left(\dfrac{1+\sum_{i=1}^n\mathbf{1}\{r_i\geq s\}}{n+1}\right),&s\leq r_{\max},\\[6pt]
- \log(n+1)+\log\!\left(1+\dfrac{s-r_{\max}}{d_R}\right),&s>r_{\max}.
- \end{cases}
- \label{eq:evidence}
-\end{equation}
-Ties are included in the upper-tail count. Values beyond the largest reference score receive an extrapolated value, rather than a saturated empirical rank. This extrapolation is a score convention, not an estimated tail probability with a distribution-free validity guarantee. For peer $k$, the evidence is $e_k(x)=E_{R,k}(m_k(x))$.
+\subsection{Target-relative evidence} 
+Given an expert score $s$ with corresponding target reference scores $r_1,...,r_n$ and maximum $r_{\max}$, define $d_R=\max(r_{\max}-\textrm{median}_i r_i, 10^{-6})$, and
+\begin{equation} 
+E_R(s)=\begin{cases} 
+-\log((1+\sum_{i=1}^n \mathbf{1}(r_i\ge s))/(n+1)), &s \le r_{\max}\\ 
+\log(n+1)+\log(1+(s-r_{\max})/d_R) &s > r_{\max} 
+\end{cases} 
+\label{eq:evidence} 
+\end{equation} 
+We include tied values in this computation. Scores exceeding the reference maximum are assigned to this score extrapolation instead of being treated as tied. Note that this latter step does not constitute a principled tail estimation procedure with any guarantees of accuracy. Each peer score yields an evidence score $e_k(x) = E_{R,k}(m_k(x))$.
 
 
 
-\subsection{Blocks and thresholds}
-Let $M=|C|$ and let $b=250$ be the configured block-size parameter. The method constructs $J=\max\{1,\lfloor M/b\rfloor\}$ consecutive blocks using a balanced partition: their lengths differ by at most one, and earlier blocks receive any surplus rows. They are not necessarily blocks of exactly 250 observations. For example, 350 calibration observations form one block of length 350. Write $n_j=|C_j|$ and let $z_{j,(1)}\leq\cdots\leq z_{j,(n_j)}$ be ordered evidence in block $j$. For allocation $w\in(0,1)$,
-\begin{equation}
- \tau_z(w)=\max_{1\leq j\leq J}
- z_{j,(1+\lceil(1-w)(n_j-1)\rceil)}.
- \label{eq:threshold}
-\end{equation}
-This is NumPy's higher empirical quantile followed by a maximum over blocks. Every decision uses a strict comparison $z(x)>\tau_z(w)$; equality does not alert. For a fixed threshold obtained this way, the observed exceedance fraction within each calibration block is at most $w$. This statement concerns the observations used to choose the threshold and does not extend to future data without additional assumptions.
+\subsection{Blocks and quantiles} 
+Given the number of calibration samples $M = |C|$ and our parameter $b=250$, we construct $\lfloor M/b\rfloor$ (at least 1) contiguous blocks (i.e. block sizes will be no more than 1 apart, and preceding blocks take remaining samples if evenly divisible by $b$ is impossible -- these should thus not be interpreted as blocks of exactly 250, e.g. with 350 samples there would be 1 block of size 350). Letting $C_j$ denote calibration samples in the $j^{th}$ of these $J$ blocks with size $n_j$, and sorting the evidence scores within a block to obtain $z_{j,(1)},...,z_{j,(n_j)}$, we define for weight $w\in (0,1)$:
+\begin{equation} 
+\tau_z(w) = \max_{j = 1,..., J} z_{j, (1+\lceil(1-w)(n_j-1)\rceil)} 
+\label{eq:threshold} 
+\end{equation} 
+corresponding to the 'higher' empirical quantile and taking the maximum over these blocks. The PACE decision criteria then simply tests whether $z(x) > \tau_z(w)$. With these (fixed) quantiles, at most a $w$ proportion of points within each respective block of calibration data exceed this quantile, i.e. no more than a $w$ block-FPR. This applies to the calibration data themselves only.
 
-\subsection{Separately calibrated experts and union scaling}
-For a collection of $L$ experts with allocation $B$, the default initial shares are $w_\ell=B/L$. Given multiplier $\lambda$, the union is
+\subsection{Separately calibrated experts with joint weights scaling} 
+Consider a collection of $L$ experts and desired block-FPR weight $B$. Assign each $w_{\ell}= B/L$. Then defining a scaled joint alert rule as
 \begin{equation}
  U_{B,\lambda}(x)=\mathbf{1}\!\left\{\exists\ell:
  z_\ell(x)>\tau_{z_\ell}(\lambda w_\ell)\right\}.
  \label{eq:union}
 \end{equation}
-The calibrator measures this union on every calibration block. Starting at $\lambda=1$, it doubles an upper search point until the block-rate criterion is violated or the cap is reached. It returns immediately if the cap is feasible; otherwise, it performs 20 bisections and retains the feasible lower point. The configured cap is 64. If the largest share times 64 is at least one, the implementation replaces the multiplier ceiling by $0.999/\max_\ell w_\ell$. If the initial union already violates $B$, the routine returns its initial thresholds; it does not claim to repair arbitrary supplied shares. PACE's equal-share initial unions satisfy the calibration criterion by the fixed-threshold count bound and the union bound.
+Our calibration procedure computes this quantity within each block. It searches upward by factors of $\lambda \in [1,c]$ (by first computing at $2\lambda$ and then repeatedly doubling $\lambda$ until either the target block-wise union-FPR is exceeded or $c$ is reached; returning early if at $c$ the criterion is satisfied, and else bisection-searching for $\lambda$ between the previous feasible and current infeasible values for 20 iterations, returning at the highest feasible lower point found). Our implementation sets $c=64$, and if $64 \max_{\ell} w_{\ell} \ge 1$, sets $c = 0.999/\max_{\ell} w_{\ell}$. Note that if this scaled union-FPR at $\lambda=1$ does not satisfy $B$, we simply return the corresponding initial thresholds and provide no guarantee to subsequently fix (invalid) user-specified $w_\ell$'s. For PACE, our equally split choices guarantee satisfaction of this calibration with $w_\ell$ as described by combining the above fixed-quantile argument and Bonferroni.
 
-The retained multiplier is a numerical search result on a stepwise calibration function. It should not be interpreted as a unique population optimum. The peer branch applies this routine to the $K$ separate margin-evidence experts with allocation $B_P$. Separate thresholds avoid collapsing all peer evidence into one maximum before calibration. The common multiplier nevertheless couples the thresholds through the observed union, so an unstable peer can still affect their joint calibration.
+The returned $\lambda$ is purely the result of this numerical procedure on a discrete block-level FPR function and we do not view it as optimally representing the true block-wise FPR over some underlying population. This procedure is then run on each set of peer expert evidence scores, with $B_P$ allocated to this joint FPR of $K$ expert scores. Note that this entails $K$ separately threshold-calibrated score streams feeding the PACE decision, although with a common $\lambda$ that is informed by the *joint* behaviour of these experts - hence unstable experts may exert influence on the FPRs of their co-experts through this mechanism.
 
-\FloatBarrier
-\subsection{Anchor and complementary local bank}
-The anchor averages the reference-transformed scores of six local detectors: PCA reconstruction error, isolation forest, local outlier factor, mean nearest-neighbor distance, histogram rarity, and regularized Gaussian distance. Evidence is computed separately for each detector before averaging. The anchor is not transformed a second time. PCA retains 95\% of explained variance and uses mean squared reconstruction error. Isolation forest~\cite{liu2008isolation} uses 100 trees, local outlier factor~\cite{breunig2000lof} uses 20 neighbors, and the distance score averages 10 neighbor distances from the fitted neighbor structure. Histogram scores sum negative log smoothed bin frequencies across features, with 20 equal-width training bins and additive-one smoothing. Values outside a feature's training range use its minimum fitted bin probability. The Gaussian score is a squared Mahalanobis distance using a pseudoinverse of the sample covariance plus $0.001I$.
+\FloatBarrier 
+\subsection{Fixed anchor score and auxiliary local scores} 
+We create a composite average of six anomaly-detection methods: PCA reconstruction MSE, IF, LOF, mean k-NN distance, histograms, and shrinkage Gaussian. For each, we calculate an evidence score relative to the target reference, and then average the $6$ resulting evidence scores (without transforming this average again). We use a PCA explaining 95\% of variance with its reconstruction MSE, an IF with 100 trees \cite{liu2008isolation}, an LOF \cite{breunig2000lof} with 20 neighbours, k-NN with an averaged distance over 10 NN (using its learned nearest neighbours structure), and sum over the neglog smoothed empirical frequency of each sample's bin across features (for each feature with 20 bins constructed equi-distance over the training range and using an additive-one smoothing -- assigning the minimum observed training-range frequency if a test-value lies outside this range). Finally, a regularised Gaussian distance (pseudoinverse with penalty $0.001$ of the target training sample covariance) gives us its score (the squared Mahalanobis distance).
 
-The local bank contains six experts. Three reuse the anchor members' isolation-forest, histogram, and Gaussian evidence. Two score feature rarity, and one scores the joint response of the peers. These feature experts reuse fitted detector outputs; they are not three additional independently fitted copies.
-
-The first rarity expert sums two-sided empirical tail evidence. For feature $q$, let $a_q(v)$ count training values at most $v$ and $c_q(v)$ count training values strictly below $v$. Its raw score is
-\begin{equation}
- s_{\mathrm{tail}}(x)=\sum_{q=1}^{d}\max\left\{
- -\log\frac{a_q(x_q)+1}{N+1},
- -\log\frac{N-c_q(x_q)+1}{N+1}\right\}.
- \label{eq:tail}
-\end{equation}
-This ECOD-inspired two-tail rarity score is labeled ECOD-sum in the implementation. It differs from original ECOD~\cite{ecod2022}, which maximizes three aggregate scores formed from left, right, and skewness-selected tails. Here the featurewise larger negative-log tail is selected before summation; the equation specifies the implemented variant.
-
-For pair co-occurrence, 150 ordered feature-index pairs are drawn with replacement. Self-pairs are discarded when more than one feature is available; duplicate pairs can remain, so 150 is a draw count rather than a guaranteed count of distinct retained pairs. Each feature is coded using its unique internal training quantiles at levels $1/8,\ldots,7/8$, with left insertion at ties. Although these cut points give at most eight active codes, the implementation allocates a table of width $8+1=9$ in each dimension. If $h_{uv}(x)$ is the training count in the coded cell for retained pair $(u,v)$, the score is
+We additionally construct 6 bank scores. Three share scores with elements of the above anchored ensemble, namely the IF, histogram and Gaussian scores. A further two use neglog featurewise scores, and the final score is an IF fit to the peer evidence scores, as follows. First, we take the sum of feature neglog tail scores in the manner of ECOD:
+\begin{equation} 
+s_{tail}(x) = \sum_{q=1}^d \max\{-\log((A_q(x_q)+1)/(N+1)), -\log((N-C_q(x_q)+1)/(N+1))\}, 
+\label{eq:tail} 
+\end{equation} 
+where $A_q(\cdot)/C_q(\cdot)$ are counting functions over target-training samples for values less-than-or-equal-to / strictly-less-than, respectively. We label this score `ECOD sum'. Unlike the original ECOD paper \cite{ecod2022} which takes maxima over the sum of the respective neglog L/R/tail-skew tail scores, here we instead compute the elementwise max over the feature tails and then sum, as described above and in Equation~\ref{eq:tail}. Secondly, for each randomly-chosen (with-replacement) pair of feature indices (sampled $150$ times, and excluding self-comparisons if $d > 1$ and allowing duplicates - note these therefore refer to the number sampled), we assign categorical values to each sample based on its empirical target-training quantile membership (values are assigned to the left-side index where tied) among $1/8, ..., 7/8$-quantile cuts. Counting occurrences of each such (pair of) category values $h(x)$ and adding a Bayesian additive-half pseudo-count across all possible categories ($8+1$-levels per dimension), we sum the neglog occurrence scores over all sampled feature pairs (dividing by their number). Let $\mathcal P$ be the retained pairs and $h_{uv}(x)$ the training count in the coded cell for pair $(u,v)$.
 \begin{equation}
  s_{\mathrm{pair}}(x)=\frac{1}{|\mathcal P|}\sum_{(u,v)\in\mathcal P}
  -\log\frac{h_{uv}(x)+0.5}{N+0.5\times9^2}.
  \label{eq:pair}
 \end{equation}
-The reference transformation in Eq.~\eqref{eq:evidence} is applied to both rarity scores.
 
-The response expert fits a 100-tree isolation forest to vectors $\rho(x)=(e_1(x),\ldots,e_K(x))$ for $x\in T_N$. It uses the negative forest score as its anomaly score and then applies Eq.~\eqref{eq:evidence} relative to its scores on $R$. Thus it models how the collection of foreign classifiers responds to target benign data. It neither trains a gating network nor changes the supervised peer models.
-
-\subsection{Resolution rule and final decision}
-With anchor share $a=0.5$, the anchor allocation is
-\begin{equation}
- B_A=\begin{cases}aB_L,&aB_L\geq1/b,\\B_L,&aB_L<1/b,\end{cases}
- \qquad B_B=(1-a)B_L.
- \label{eq:allocation}
-\end{equation}
-The anchor is itself calibrated by the union-scaling routine as a singleton expert with allocation $B_A$. The bank is separately calibrated as a six-expert union with allocation $B_B$. In particular, the anchor threshold is not merely the unscaled quantile $\tau_A(B_A)$. Let the resulting decisions be $U_P$, $U_A$, and $U_B$. The final rule is
-\begin{equation}
- D(x)=U_P(x)\lor U_A(x)\lor U_B(x).
- \label{eq:final}
-\end{equation}
-There is no final calibration pass over this three-way union.
-
-At $\alpha=0.01$ and $r=a=0.5$, these allocations are $B_P=0.005$, $B_A=0.005$, and $B_B=0.0025$. Their sum is 0.0125, rather than 0.01. An allocation-respecting alternative calibrates all local experts as a single union within the original total allocation. At $\alpha=0.01$, this alternative attains the same pooled detection as PACE to the precision of the stored results, with nearly identical mean FPR (Appendix~\ref{app:inventory}). PACE therefore has no measured aggregate detection advantage over this alternative at the lower nominal setting. Equal pooled rates do not imply identical record-level decisions or a population FPR guarantee. At $\alpha=0.05$, they are 0.025, 0.0125, and 0.0125, whose sum is 0.05. Overlap and integer count resolution can make the observed calibration union smaller than the allocation sum, but do not justify presenting Eq.~\eqref{eq:allocation} as a strict partition of $\alpha$. The rule checks $1/b$, whereas the first possible nonzero exceedance for an individual higher quantile depends on its actual block length through $1/(n_j-1)$. The resolution rule is therefore an implemented heuristic, not an exact test of every block's quantile resolution. The joint criterion permits at most $\lfloor Bn_j\rfloor$ alerts per block, whereas an individual unscaled higher quantile admits at most $\lfloor w(n_j-1)\rfloor$ strict exceedances; these are different resolution limits.
-
-The protected anchor preserves a separate local decision path but does not prove non-inferiority to the primary comparator. That comparator averages seven detector evidences, including an autoencoder omitted from the six-member anchor, and uses a different threshold procedure. Target-level regressions must be assessed empirically.
+Finally, we train a 100-tree isolation forest on the vector $\rho(x)$ of the $K$ peer evidence scores on the target training set $x\in T_N$, and use its negative forest score as its anomaly score. Applying the transformation of Eq~\ref{eq:evidence} with respect to scores on $R$, this final score thus models the collective action of the non-target experts on the target data. No gating decision on experts or changes to the supervised expert score calculation is performed in any case.
 
 
+\subsection{Decision resolution} 
+With $r=a=0.5$, we assign an anchor and complementary local weight as
+\begin{equation} 
+B_A=\begin{cases} aB_L, & aB_L\ge 1/b\\ B_L,& aB_L < 1/b\end{cases}, B_B = (1-a)B_L,
+\label{eq:allocation} 
+\end{equation} 
+calibrating each of these as a joint criterion (as described above) with the former consisting of a single expert. Denote the respective expert FPRs by $U_P, U_A$ and $U_B$, so the overall PACE decision rule is
+\begin{equation} 
+D(x) = U_P(x) \vee U_A(x) \vee U_B(x). 
+\label{eq:decision} 
+\end{equation} 
+There is no subsequent global calibration of this joint decision. At nominal $\alpha=0.01$ (and with $r=a=0.5$), this corresponds to FPR weights $B_P=0.005$, $B_A=0.005$ and $B_B=0.0025$. Note that this amounts to an *oversplit* of the total desired $\alpha$-budget by a further $0.0025$. Alternatively, we could jointly consider all local scores under a single $\alpha_L$ budget. Doing this at $\alpha=0.01$, we observe equivalent performance to PACE to recorded precision (with near-identical MP-FPR, see Appendix~\ref{app:inventory}). As such, the above formulation offers no clear *aggregated* benefit over the single local joint FPR procedure for low nominal $\alpha$, and any divergence at target-level will need to be explored directly. Of course, similar *total* observed FPRs do not rule out differing sample detections / true population-level FPR. At $\alpha = 0.05$, $B_P, B_A, B_B$ become $0.025, 0.0125, 0.0125$. In practice, we observe these FPRs to be lower than the total implied by their sum due to overlapping decision regions and rounding of attainable block-level FPRs (at most $Bn_j$ detections per block), but this alone is insufficient to justify the above weighting. The quantile resolution of each individual local score (without joint $\lambda$ adjustment) may permit $w(n_j-1)$ (strictly greater than) detections per block -- depending on block size -- so the above is simply a heuristic resolution rule ensuring that the weighted-quantile criterion is applicable (with $1/b$) to all local scores.
 
-\subsection{Training and computation}
-Each peer classifier has two ReLU hidden layers of widths 64 and 16 and two output logits. Training uses class-balanced cross-entropy, Adam updates, eight epochs, batch size 256, and learning rate 0.001. Target-local fitting uses the first $N$ retained training rows. The feature-space isolation-forest and neighbor-based fitting sample is limited to 8000 rows; other local components have their own full-$N$ fitting operations. Fitted score references and thresholds are fixed at inference: the evaluated rule has no online update.
+The protected anchor preserves a separate local decision, but does not guarantee non-inferiority against the benchmark mean-ensemble detector (consisting of 7 evidence score means including an autoencoder and using a different threshold procedure).
 
-The benchmark's shared local ensemble also trains and scores an autoencoder for the mean-ensemble comparator, even though its score is excluded from PACE's anchor. It would therefore be inaccurate to describe the executed campaign as requiring no local neural training. The detection architecture requires $K$ peer forward evaluations plus local score computations; the response forest adds a model in $K$ dimensions. A peer MLP contains $64d+1138$ weights and biases for $d$ input features. This algebraic parameter count is not a measurement of serialization size, communication traffic, latency, energy use, or deployment memory. None of those operational quantities is established by the reported detection results.
+\subsection{Model fitting / computation requirements} 
+Peer experts comprise 2-hidden layer MLPs with widths $\{64,16\}$ and ReLUs, and class-balanced two-class (attack vs. rest) logistic losses. All parameters were updated using Adam for 8 epochs at a batch size of 256 and learning rate $10^{-3}$. Local scores were then computed on $T_N$ for $N$ as defined; except we used 8000 points for the local IF and k-NN constructions. Scores (and quantiles) are then fixed at inference -- the test procedure thus performs no dynamic updating.
+
+It is worth noting that the benchmark mean-ensemble detector likewise fits a local (target-train/test) neural net -- an autoencoder -- and includes it as one of its scores, albeit one we exclude from our mean-anchor score. As such, PACE involves local net-fitting/training at execution. Inference-time complexity involves the $K$ peer classifier inferences in addition to our collection of local scores (one of which is another model trained on $K$ inputs). Each peer net requires $64d + 1138$ trainable parameters, for input size $d$. While not a direct estimate of filesize / network transfer / run-time speed / compute-energy-cost / on-device space, the above is provided solely to provide intuition over the size of the required model parameters. Further insight into these properties is outside the scope of our presented inference performance metrics.
 
 
 
 
-\FloatBarrier
-\begin{table}[!htbp]
-\centering
-\begin{minipage}{0.96\textwidth}
-\hrule\smallskip
-\refstepcounter{algorithm}\textbf{Algorithm \thealgorithm. PACE preparation and inference}\label{alg:pace}
-\smallskip\hrule\smallskip
-\small
-\textbf{Input:} fixed peer classifiers; target benign roles $T_N,R,C$; nominal $\alpha$; $r=a=0.5$; block parameter $b=250$.
-\begin{enumerate}
-\setlength{\itemsep}{2pt}\setlength{\parskip}{0pt}
-\item Evaluate each peer's attack-minus-benign margins on $T_N,R,C$; construct reference transforms $E_{R,k}$ by Eq.~\eqref{eq:evidence}, including ties and beyond-reference extrapolation.
-\item Fit the local detectors and rarity models on $T_N$, and the response IF on $(e_1,\ldots,e_K)(T_N)$. Transform each local score against its scores on $R$. Form the six-evidence mean anchor and six-expert bank.
-\item Partition $C$ into $\max(1,\lfloor |C|/b\rfloor)$ balanced consecutive blocks. For each expert, use the maximum block higher quantile in Eq.~\eqref{eq:threshold}.
-\item Set $B_P=(1-r)\alpha$ and $B_L=r\alpha$. Compute $B_A,B_B$ with the resolution rule in Eq.~\eqref{eq:allocation}.
-\item Apply \textsc{CalibrateUnion} to the $K$ peers with $B_P$, the singleton anchor with $B_A$, and the six bank experts with $B_B$. Store all reference transforms and thresholds.
-\item For a query $x$, compute the same frozen evidences. Alert if any peer exceeds its threshold, the anchor exceeds its threshold, or any bank expert exceeds its threshold. All comparisons are strict $>$; no final recalibration is applied.
-\end{enumerate}
-\textbf{CalibrateUnion}$(Z,B)$: initialize equal shares $w_\ell=B/L$ and thresholds at $\lambda=1$. Use cap $c=64$, replaced by $0.999/\max_\ell w_\ell$ if $64\max_\ell w_\ell\geq1$. Return the initial thresholds if their worst block union rate exceeds $B$. Otherwise test $\min(2,c)$ and double up to $c$ while feasible; return immediately if $c$ is feasible. Once an infeasible upper point is found, perform 20 bisections, retaining the feasible lower point. Return its thresholds.
-\smallskip\hrule
-\end{minipage}
-\end{table}
+\FloatBarrier 
+\begin{table}[!htbp] 
+\centering 
+\begin{minipage}{0.96\textwidth} 
+\hrule\smallskip 
+\refstepcounter{algorithm}\textbf{Algorithm \thealgorithm. PACE pre- and inference steps}\label{alg:pace} 
+\smallskip\hrule\smallskip 
+\small 
+\textbf{Pre-input: } Pretrained peer classifiers, target local classes $T_N,R,C$, target nominal FPR level $\alpha$, $r=0.5, a=0.5$, and block-size parameter $b=250$.
+\begin{enumerate} 
+\setlength{\itemsep}{2pt}\setlength{\parskip}{0pt} 
+\item Compute peer class differences on $T_N,R,C$, and compute their scores $E_{R,k}$ as in \ref{eq:evidence} (with ties, and extrapolated if greater than reference maximum).
+\item Fit local score calculations (and ECOD, ECOD pairs) on $T_N$, as well as an IF over the set of peer evidence scores (transformed to target-reference on $R$). Compute the average (6-scores) anchor, and set aside the remaining (6) local scores.
+\item Divide $C$ into (minimum 1) $\lfloor M/b \rfloor$ balanced contiguous groups of local scores. Obtain individual local quantiles per Eq.~\ref{eq:threshold}.
+\item Determine $B_P$ and $B_L$, then $B_A$ and $B_B$ following Eq.~\ref{eq:allocation}.
+\item Compute block-wise FPRs and associated quantiles for each set of scores ($\{peer\}$, anchor, $\{other\}$), using $\textsc{CalibrateUnion}$. Record these local score-quantiles. 
+\item Repeat calculation of local score calculations (on $x$) for test, and determine if $x$ is scored as attack by \emph{any} of the $K$ peers, anchor score, or auxiliary local score set. Note that no global threshold is calculated here.
+\end{enumerate} 
+\textbf{CalibrateUnion} (score matrix $Z$, target block-FPR $B$): Set initial equal-weight $w_\ell$ and obtain $z$-score quantiles for $\lambda=1$. Search up to $c=64$ (or $c=0.999/\max w_\ell$) over $\lambda$, beginning with $2$ and increasing until the max-block union-FPR exceeds $B$; else return current $w_\ell$. Once exceeded, perform 20 bisections to return the feasible lower point.
+\smallskip\hrule 
+\end{minipage} 
+\end{table} 

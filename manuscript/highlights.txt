@@ -1,4 +1,0 @@
-- PACE retains separately calibrated supervised peers and complementary local experts.
-- Primary detection improves by 2.32-2.83 percentage points across 58 targets.
-- At nominal alpha 0.05, both fitting budgets also reduce mean realized FPR.
-- Rarity experts add coverage; target-level FPR remains heterogeneous.

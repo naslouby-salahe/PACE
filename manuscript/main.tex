@@ -13,6 +13,7 @@
 \clubpenalty=10000
 \widowpenalty=10000
 \displaywidowpenalty=10000
+\setlength{\belowcaptionskip}{6pt}
 \newcounter{algorithm}
 \title{PACE: Peer-Wise Calibrated Experts for IoT Intrusion Detection with Benign-Only Target Data}
 \author{Salaheddine Naslouby$^{1,*}$ \and Mohamed Lachgar$^2$ \and Hamid Hrimech$^1$}
@@ -30,27 +31,27 @@ ORCID: \href{https://orcid.org/0009-0002-7295-7816}{0009-0002-7295-7816}\\
 \href{mailto:hamid.hrimech@uhp.ac.ma}{hamid.hrimech@uhp.ac.ma}
 \end{center}
 \begin{abstract}
-An Internet of Things (IoT) target may have trusted benign observations but no labeled attacks, while supervised models trained at its peers provide attack evidence. PACE (Peer-wise Calibrated Experts) combines frozen supervised peer classifiers with a protected local anchor and a heterogeneous anomaly-expert bank. Each peer receives a target-relative threshold, while feature-rarity and peer-response experts detect deviations from target benign behavior. We evaluate 58 targets across six corpora and seven study strata, using three learning seeds and local fitting budgets of 100 and 400 rows. With the peer branch fixed, replacing a seven-detector mean local ensemble improves target-macro detection by 2.34 and 2.32 percentage points at nominal $\alpha=0.05$. Mean realized false-positive rates (FPRs) decrease from 5.74\% to 5.55\% and from 6.44\% to 5.43\%, respectively. At $\alpha=0.01$, detection gains of 2.61 and 2.83 points accompany higher mean FPRs. Rarity-family removal produces the largest loss among the tested expert-family ablations. Gains concentrate in TON\_IoT, with smaller gains elsewhere; local experts add detections when peers miss attacks. A separate comparison fixes the complete local branch: peer-wise decisions improve detection by 3.0--7.3 points over mean or maximum peer fusion, with higher mean FPR. The results support complementary peer and local detection on this benchmark, which also informed development. Coarse operating-point sweeps do not establish general equal-FPR superiority, and empirical calibration does not guarantee future false-alert control.
+IoT targets can possess observations known to be benign but lack any positive examples of attacks. Attack examples can be provided by training supervised learners on the data from their respective peers. PACE pools knowledge from multiple static peer learners, augments a local trusted learner, and adds several experts. Static peer learners are given calibrated cutoffs relative to each target, and multiple experts based on rarity of target features and responses of peer learners to target features complement this baseline model. We consider 58 targets in our empirical study, spanning 6 datasets and 7 study strata, and for each replicate 3 times and train local learners on 100 and 400 records. When comparing to a mean of 7 detectors as the local model, we achieve 2.34 and 2.32 percentage point increases in target-wise macro-average performance when targeting $\alpha$ FPRs of 0.05. At $N=100$ and 400, mean FPR decreases from 5.74\% to 5.55\% and from 6.44\% to 5.43\%, respectively. At $\alpha=0.01$, detection increases by 2.61 and 2.83 percentage points, with FPRs on average increased compared to baselines. Ablating individual detector families shows the highest impact is obtained by removing all experts from one of the rarity families. Most performance increases arise in TON\_IoT and are more modest in the other datasets; however, local detectors help to flag some attacks undetected by peers. If we hold the local model to a full ensemble of detectors instead, then leveraging peer detections with a peer-wise approach improves performance by between 3.0 and 7.3 percentage points versus taking the mean or max peer decision, although at increased FPR. These findings show the promise of combining information from peers with the local detector for these study settings (and impacted model design). They do not demonstrate equivalent-FPR performance dominance at all operating regimes. Nor are we able to claim the learned thresholds will result in future FPR below desired levels.
 \end{abstract}
 \noindent\textbf{Keywords:} IoT intrusion detection; peer models; benign-only learning; empirical calibration; anomaly ensembles; false alerts.
-\input{sections/introduction}
-\input{sections/related-work}
-\input{sections/problem-formulation}
-\input{sections/methodology}
+\input{sections/introduction.tex}
+\input{sections/related-work.tex}
+\input{sections/problem-formulation.tex}
+\input{sections/methodology.tex}
 \FloatBarrier
-\input{sections/experimental-methodology}
-\input{sections/results}
-\input{sections/discussion}
-\input{sections/limitations}
-\input{sections/conclusion}
+\input{sections/experimental-methodology.tex}
+\input{sections/results.tex}
+\input{sections/discussion.tex}
+\input{sections/limitations.tex}
+\input{sections/conclusion.tex}
 \clearpage
 \appendix
 \renewcommand{\theHtable}{\Alph{section}.\arabic{table}}
 \renewcommand{\thetable}{\Alph{section}.\arabic{table}}
-\input{sections/comparison-inventory}
-\input{sections/dataset-provenance}
+\input{sections/comparison-inventory.tex}
+\input{sections/dataset-provenance.tex}
 \section*{Data and code availability}
-The PACE implementation, configurations, and frozen result tables are available at \url{https://github.com/naslouby-salahe/pace}. The verified public revision is \href{https://github.com/naslouby-salahe/pace/tree/41b3a18c10422fc41d1785c35881ccd6323941fa}{\texttt{41b3a18c1042}}. Third-party datasets are obtained from the original sources in Appendix~\ref{app:data}, subject to their access and redistribution conditions.
+The PACE implementation, configurations, and result tables are available at \url{https://github.com/naslouby-salahe/pace}. Third-party datasets are obtained from the original sources in Appendix~\ref{app:data}, subject to their access and redistribution conditions.
 \setlength{\bibsep}{0pt}
 \interlinepenalty=10000
 \small
