@@ -8,23 +8,23 @@ All entries below use the 58-target primary cohort and seeds 6--8. PACE is liste
 \caption{Definitions of every recorded decision rule.}\label{tab:arm-definitions}\\
 \toprule Rule & Definition\\\midrule\endfirsthead
 \toprule Rule & Definition (continued)\\\midrule\endhead
-\bottomrule\endfoot
-PACE & Separate margin-evidence peer union, independently calibrated six-detector mean anchor, and heterogeneous six-expert bank; $r=a=0.5$.\\
-Mean local & Primary comparator: identical peer union plus the mean evidence of seven local detectors, including the autoencoder, thresholded at $B_L$.\\
-No feature & Remove the bank IF, histogram, and Gaussian experts; retain anchor, rarity and response experts, and recalibrate the bank.\\
-No response & Remove the peer-response IF, retaining the anchor and feature/rarity bank; recalibrate the bank.\\
-No rarity & Remove ECOD-sum and pair-surprisal experts; retain anchor, feature and response experts, and recalibrate the bank.\\
-Bank only & Remove the anchor and calibrate the six-expert bank at the entire local allocation $B_L$; the peer branch is unchanged.\\
-Single union & Jointly calibrate anchor and bank within $B_L$: initial anchor share $a$, with $(1-a)/6$ for each bank expert.\\
-Raw response & Fit the response IF on raw peer margins instead of target-relative evidence; retain the other components and tiers.\\
-Reserve 0.25 & Set $r=0.25$ for the tiered PACE rule, including the implemented anchor-resolution condition; peer allocation is $0.75\alpha$.\\
-Peer mean & Mean-fuse peer margin evidence into one calibrated expert at $B_P$; retain the complete PACE anchor and bank.\\
-Peer max & Maximum-fuse peer margin evidence into one calibrated expert at $B_P$; retain the complete PACE anchor and bank.\\
-Peers only & Remove the entire local branch and calibrate the separate-peer union at the full $\alpha$; this is not the extracted $B_P$ peer branch.\\
-Local only & Remove peers and threshold the seven-detector mean local ensemble at the full $\alpha$; this is not the extracted PACE local branch.\\
-Recorded max & Maximum of probability-tail peer evidence, thresholded once at $B_P$, plus the seven-detector mean local branch at $B_L$.\\
-Recorded Bonf. & Separate margin-evidence peers at fixed equal shares of $B_P$, multiplier one, plus the seven-detector mean local branch at $B_L$.\\
-\end{longtable}}
+\bottomrule\endfoot 
+PACE & Union of separate peer margins, separately-calibrated mean of the 6 detectors as an anchor, and 6 experts in the bank with non-uniform distribution ($r=a=0.5$).\\
+Mean local & As before but also mean local evidence from all 7 local detectors (incl. autoencoder) at cut $B_L$.\\
+No feature & Drop bank IF, hist and Gaussian model experts; re-fit remaining 3 experts + anchor into new bank.\\
+No response & Drop IF from bank (peer-response), leave the rest of bank experts + anchor intact and re-fit the bank.\\
+No rarity & Drop ECOD + pairwise surprisal experts, keep other experts + anchor in bank and re-fit the bank.\\
+Bank only & Drop anchor and fit all 6 experts in the bank to $B_L$ budget as a whole; keep PACE peer component.\\
+Single union & Anchor + all 6 bank experts fitted as a single unit to total local budget $B_L$. Anchor given initial share of budget $a$, with the remaining budget evenly divided amongst the 6 experts in the bank.\\
+Raw response & Use raw margins from peers (as opposed to margin from target detector) when fitting the peer-response IF, keep the rest of PACE unchanged.\\
+Reserve 0.25 & Change $r$ to $0.25$ when applying PACE rule (incl. additional anchoring rule used in implementation), thus giving budget of $0.75\alpha$ to peers.\\
+Peer mean & Average all evidence from separate peers to obtain 1 peer expert calibrated at $B_P$, keep rest of PACE anchor/bank unchanged.\\
+Peer max & Max fuse all peer evidence to obtain 1 peer expert calibrated at $B_P$, keep rest of PACE anchor/bank unchanged.\\
+Peers only & Drop local component entirely; use union of separate peers calibrated over full $\alpha$ budget. Different to using PACE peer component alone at its budget $B_P$.\\
+Local only & Drop peer component and use mean of the 7 local detectors thresholded to give $\alpha$ overall. Different to using the local PACE branch alone at its budget $B_L$.\\
+Max recorded & Max tail prob. across separate peers with overall calibration at $B_P$ combined with local ensemble (mean of 7 local detectors) calibrated at $B_L$.\\
+Bonf. recorded & Union of separate peers each given equal split of $B_P$ with multiplier=1 combined with local ensemble (mean of 7 local detectors) calibrated at $B_L$.\\
+\end{longtable}} 
 {\footnotesize\renewcommand{\arraystretch}{0.96}\setlength{\tabcolsep}{3.5pt}
 \begin{longtable}{rrlrrrrl}
 \caption{Complete nominal comparison results. $\Delta$ is PACE minus the listed rule's TPR.}\label{tab:all-arms}\\
