@@ -4,13 +4,12 @@ Figure~\ref{fig:architecture} depicts the architecture: the supervised branch an
 
 
 
-\begin{figure}[!htbp] 
+\begin{figure}[!htb]
 \centering 
 \includegraphics[width=0.88\textwidth]{figures/architecture.pdf} 
 \caption{PACE architecture and final decision. Benign target training set, target reference, calibration, and test roles. Features are scaled using all fully-available target benign training roles, and local components fit on the restricted size $N$ target training roles. Attack labels are used only for scoring the detected attacks. IF = isolation forest, LOF = local outlier factor, kNN = $k$-nearest neighbours.}
 \label{fig:architecture} 
 \end{figure} 
-\FloatBarrier 
 
 \subsection{Target-relative evidence} 
 Given an expert score $s$ with corresponding target reference scores $r_1,...,r_n$ and maximum $r_{\max}$, define $d_R=\max(r_{\max}-\textrm{median}_i r_i, 10^{-6})$, and
@@ -81,7 +80,7 @@ The protected anchor preserves a separate local decision, but does not guarantee
 \subsection{Model fitting / computation requirements} 
 Peer experts comprise 2-hidden layer MLPs with widths $\{64,16\}$ and ReLUs, and class-balanced two-class (attack vs. rest) logistic losses. All parameters were updated using Adam for 8 epochs at a batch size of 256 and learning rate $10^{-3}$. Local scores were then computed on $T_N$ for $N$ as defined; except 8000 points were used for the local IF and k-NN constructions. Scores (and quantiles) are then fixed at inference -- the test procedure thus performs no dynamic updating.
 
-It is worth noting that the benchmark mean-ensemble detector likewise fits a local (target-train/test) neural net -- an autoencoder -- and includes it as one of its scores, albeit one excluded from the mean-anchor score. As such, PACE involves local net-fitting/training at execution. Inference-time complexity involves the $K$ peer classifier inferences in addition to the collection of local scores (one of which is another model trained on $K$ inputs). Each peer net requires $64d + 1138$ trainable parameters, for input size $d$. While not a direct estimate of filesize / network transfer / run-time speed / compute-energy-cost / on-device space, the above is provided solely to provide intuition over the size of the required model parameters. Further insight into these properties is outside the scope of the presented inference performance metrics.
+Inference-time complexity involves the $K$ peer classifier inferences in addition to the collection of local scores (one of which is another model trained on $K$ inputs). Each peer net requires $64d + 1138$ trainable parameters, for input size $d$. While not a direct estimate of filesize / network transfer / run-time speed / compute-energy-cost / on-device space, the above is provided solely to provide intuition over the size of the required model parameters.
 
 
 
