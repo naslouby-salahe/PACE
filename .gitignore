@@ -1,0 +1,31 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+/dist/
+/build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.import_linter_cache/
+.pyright/
+.coverage
+htmlcov/
+.venv/
+venv/
+.env
+.idea/
+.vscode/
+.claude/
+.serena/
+.scannerwork/
+.DS_Store
+
+# Runtime data and generated outputs (only the data README is versioned)
+/data/*
+!/data/.gitignore
+!/data/README.md
+/outputs/
+graphify-out/
+
+# Docs (kept locally, not delivered)
+/docs/

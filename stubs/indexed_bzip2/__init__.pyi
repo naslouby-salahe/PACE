@@ -1,0 +1,3 @@
+from typing import BinaryIO
+
+def open(file: str, parallelization: int = ...) -> BinaryIO: ...
