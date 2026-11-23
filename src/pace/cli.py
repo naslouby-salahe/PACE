@@ -16,7 +16,12 @@ from pace.experiment.preflight import preflight_registered_dataset
 from pace.experiment.runner import run_registered_dataset_matrix_workflow
 from pace.experiment.smoke import run_synthetic_workflow
 from pace.experiment.status import inspect_matrix_status, run_doctor
-from pace.reporting.acceptance import acceptance_line
+from pace.reporting.acceptance import (
+    acceptance_line,
+    confirmation_evidence,
+    confirmation_notes,
+    diagnostic_line,
+)
 from pace.reporting.metrics import summarize_budget_power
 from pace.reporting.service import (
     ResultFiles,
@@ -36,6 +41,7 @@ from pace.types import (
     ExitStatus,
     LocalTrainingRowCount,
     LogEvent,
+    NumericalThreadCount,
     OptionalTargetArgument,
     OverwriteOption,
     PaceError,
@@ -293,7 +299,7 @@ def _run_stratum(
     typer.echo(f"{stratum.display_label} figures: {len(figures)} files written")
 
 
-def _limit_numeric_threads(threads: WorkerCount) -> None:
+def _limit_numeric_threads(threads: NumericalThreadCount) -> None:
     for variable in (
         EnvironmentVariable.OMP_THREADS,
         EnvironmentVariable.MKL_THREADS,
@@ -311,10 +317,13 @@ def _stratum_job(stratum: StudyStratum, policy: ReplacementPolicy) -> StudyStrat
 
 
 def _run_in_parallel(
-    strata: tuple[StudyStratum, ...], policy: ReplacementPolicy, workers: WorkerCount
+    strata: tuple[StudyStratum, ...],
+    policy: ReplacementPolicy,
+    workers: WorkerCount,
+    threads: NumericalThreadCount,
 ) -> None:
     pool_size = min(workers, len(strata))
-    _limit_numeric_threads(max(1, -(-(os.cpu_count() or 1) // pool_size)))
+    _limit_numeric_threads(threads)
     with ProcessPoolExecutor(
         max_workers=pool_size, mp_context=multiprocessing.get_context("spawn")
     ) as pool:
@@ -327,7 +336,12 @@ def run(
 ) -> ExitStatus:
     def operation(configuration: ResolvedConfiguration, logger: BoundLogger) -> ExitStatus:
         if workers > 1 and len(target.strata) > 1:
-            _run_in_parallel(target.strata, _policy(overwrite), workers)
+            _run_in_parallel(
+                target.strata,
+                _policy(overwrite),
+                workers,
+                configuration.scientific.numerical_threads,
+            )
             return ExitStatus.SUCCESS
         for stratum in target.strata:
             _run_stratum(stratum, configuration, _policy(overwrite), logger)
@@ -392,18 +406,26 @@ def accept(population: PopulationOption = PopulationScope.PRIMARY) -> ExitStatus
             "detection gain at comparable realised FPR"
         )
         if population is PopulationScope.CONFIRMATION:
-            typer.echo("Confirmation cohort: detection may be saturated by ceiling effects.")
-        for cell in acceptance.cells:
+            evidence = confirmation_evidence(
+                acceptance, configuration.protocol_matrix.power.minimum_meaningful_effect
+            )
+            typer.echo("Independent confirmation cohort (measured evidence, not an acceptance):")
+            for cell in acceptance.cells:
+                typer.echo(diagnostic_line(cell))
+            for note in confirmation_notes(acceptance):
+                typer.echo(f"Measured negative evidence: {note}")
+            typer.echo(f"INDEPENDENT CONFIRMATION: {evidence.label}")
+            return ExitStatus.SUCCESS
+        typer.echo("Primary cells (gating):")
+        for cell in acceptance.gating_cells:
             typer.echo(acceptance_line(cell))
-        heading = (
-            "OFFICIAL SCIENTIFIC ACCEPTANCE (primary)"
-            if population is PopulationScope.PRIMARY
-            else "CONFIRMATION COHORT ASSESSMENT"
-        )
         typer.echo(
-            f"{heading} against "
-            f"{acceptance.comparator.name}: "
-            f"{'ACCEPTED' if acceptance.is_accepted else 'REJECTED'}"
+            "Scaling and robustness diagnostics (measured evidence; no project-level verdict):"
+        )
+        for cell in acceptance.diagnostic_cells:
+            typer.echo(diagnostic_line(cell))
+        typer.echo(
+            f"PACE SCIENTIFIC ACCEPTANCE: {'ACCEPTED' if acceptance.is_accepted else 'REJECTED'}"
         )
         return ExitStatus.SUCCESS if acceptance.is_accepted else ExitStatus.FAILURE
 

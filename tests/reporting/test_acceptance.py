@@ -12,8 +12,9 @@ from pace.reporting.acceptance import (
     false_alert_margin_sensitivity_table,
     summarize_acceptance,
 )
-from pace.reporting.figures import headline_gain
+from pace.reporting.figures import budget_scaling, headline_gain
 from pace.reporting.fixed_fpr import (
+    TargetLevel,
     cell_results,
     direction_decomposition_table,
     fixed_fpr_comparison_table,
@@ -35,20 +36,31 @@ from pace.reporting.records import (
     VariantPerformances,
     records_of,
 )
+from pace.reporting.scaling import (
+    common_targets,
+    scaling_points,
+    scaling_strata_table,
+    scaling_table,
+)
 from pace.types import (
     AcceptanceCalibrationRule,
     AcceptanceCriterion,
     AlphaLevel,
     BudgetAnalysis,
     BudgetAnalysisKind,
+    ClientName,
     ColumnHeading,
     CoverageCause,
+    DatasetClientId,
+    DatasetName,
     FprLevel,
     InferenceMethod,
     MarginSensitivity,
     OperatingCurve,
     OperatingMethod,
     OperatingPoint,
+    ScalingCohort,
+    SeedRateDifference,
     StudyArm,
     StudyStratum,
     TableName,
@@ -426,3 +438,62 @@ def test_coverage_diagnosis_counts_every_target_exactly_once(
     assert {row[2]: int(row[counts]) for row in supported.rows}[
         CoverageCause.SUPPORTED.display_label
     ] == targets
+
+
+def test_scaling_points_use_matched_gains_with_available_and_common_cohorts(
+    configuration: ResolvedConfiguration, outcomes: tuple[TargetPerformance, ...]
+) -> None:
+    points = scaling_points(_inputs(configuration, _crafted(outcomes, 0.05, 1.0)))
+    available = next(point for point in points if point.cohort is ScalingCohort.AVAILABLE)
+    common = next(point for point in points if point.cohort is ScalingCohort.COMMON)
+    assert available.gain is not None
+    assert np.isclose(available.gain, 0.05)
+    assert available.supported == common.supported == available.target_count
+    assert available.interval is not None
+    assert available.harmed == 0
+    assert available.pace_detection is not None
+    assert available.comparator_detection is not None
+    assert np.isclose(available.pace_detection - available.comparator_detection, 0.05)
+    assert available.pace_false_alert is not None
+    assert available.comparator_false_alert is not None
+    assert sum(item.targets for item in available.strata) == available.supported
+    assert all(np.isclose(item.difference, 0.05) for item in available.seed_gains)
+    assert available.gain_without_excluded is not None
+
+
+def test_scaling_tables_and_figure_expose_matched_fpr_evidence(
+    configuration: ResolvedConfiguration, outcomes: tuple[TargetPerformance, ...]
+) -> None:
+    inputs = _inputs(configuration, _crafted(outcomes, 0.05, 1.0))
+    table = scaling_table(inputs)
+    assert ColumnHeading.SMALLEST_SEED_GAIN in table.columns
+    assert len(table.rows) == len(scaling_points(inputs))
+    strata = scaling_strata_table(inputs)
+    assert len(strata.rows) == sum(len(point.strata) for point in scaling_points(inputs))
+    figure = budget_scaling(inputs)
+    assert len(figure.axes) == len(inputs.alphas()) * len(ScalingCohort)
+    styles = {
+        (line.get_linestyle(), line.get_marker())
+        for axes in figure.axes
+        for line in axes.get_lines()
+    }
+    assert ("-", "o") in styles
+
+
+def _level(name: str) -> TargetLevel:
+    return TargetLevel(
+        DatasetClientId(DatasetName.TON_IOT, ClientName(name)),
+        StudyStratum.TON_IOT,
+        (SeedRateDifference(1, 0.1),),
+        0.9,
+        0.8,
+    )
+
+
+def test_a_target_unsupported_at_one_budget_leaves_the_common_cohort() -> None:
+    first, second = _level("a"), _level("b")
+    common = common_targets(
+        {100: {first.target: first, second.target: second}, 400: {first.target: first}}
+    )
+    assert common == frozenset({first.target})
+    assert common_targets({}) == frozenset()

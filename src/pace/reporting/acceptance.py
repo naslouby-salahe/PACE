@@ -25,6 +25,7 @@ from pace.reporting.records import (
     number,
     verdict_text,
 )
+from pace.reporting.text import semicolon_list, slash_list, spaced_semicolon_list
 from pace.types import (
     AcceptanceCalibrationRule,
     AcceptanceCell,
@@ -35,6 +36,7 @@ from pace.types import (
     AcceptanceRule,
     AlphaLevel,
     ColumnHeading,
+    ConfirmationEvidence,
     CriterionSatisfied,
     CriterionVerdict,
     DisplayText,
@@ -51,6 +53,7 @@ from pace.types import (
     TableName,
     TargetPairedDifference,
     TargetPerformance,
+    Threshold,
     UnavailableReading,
 )
 
@@ -434,12 +437,14 @@ def _level_text(item: LevelGain) -> DisplayText:
 
 
 def acceptance_line(cell: AcceptanceCell) -> DisplayText:
-    failed = " / ".join(
-        verdict.criterion.name.lower() for verdict in cell.verdicts if not verdict.satisfied
+    failed = slash_list(
+        DisplayText(verdict.criterion.name.lower())
+        for verdict in cell.verdicts
+        if not verdict.satisfied
     )
     outcome = "accepted" if cell.is_accepted else f"failed [{failed}]"
     gating = "gating " if cell.is_gating else ""
-    levels = " ; ".join(_level_text(item) for item in cell.levels)
+    levels = spaced_semicolon_list(_level_text(item) for item in cell.levels)
     return DisplayText(
         f"{cell.kind.name.lower()} alpha={cell.alpha.fraction:.2f} rows={cell.local_training_rows} "
         f"targets={cell.target_count}: fixed-FPR gain {levels}; "
@@ -447,6 +452,65 @@ def acceptance_line(cell: AcceptanceCell) -> DisplayText:
         f"FPR difference {cell.false_alert_difference:+.4f} "
         f"(upper {cell.false_alert_interval.upper_bound:+.4f}), {gating}{outcome}"
     )
+
+
+def _limitation_text(check: _Check) -> DisplayText:
+    return DisplayText(
+        f"{check.criterion.name.lower()} ({check.measure.label} "
+        f"{_measured_text(check.measured)} against {number(check.threshold)})"
+    )
+
+
+def diagnostic_line(cell: AcceptanceCell) -> DisplayText:
+    limitations = semicolon_list(
+        _limitation_text(check) for check in _checks(cell) if not check.satisfied
+    )
+    levels = spaced_semicolon_list(_level_text(item) for item in cell.levels)
+    seed_minimum = min((item.difference for item in cell.seed_gains), default=None)
+    return DisplayText(
+        f"{cell.kind.name.lower()} alpha={cell.alpha.fraction:.2f} rows={cell.local_training_rows} "
+        f"targets={cell.target_count}: fixed-FPR gain {levels}; "
+        f"smallest seed gain {_measured_text(seed_minimum)}; "
+        f"harmed {cell.harmed_target_count}, severe {cell.severe_target_count}, "
+        f"FPR difference {cell.false_alert_difference:+.4f} "
+        f"(upper {cell.false_alert_interval.upper_bound:+.4f}); "
+        f"measured limitations: {limitations or 'none'}"
+    )
+
+
+def _headroom(cell: AcceptanceCell) -> RateDifference:
+    primary = next(item for item in cell.levels if item.level is FprLevel.ALPHA)
+    if primary.reference_detection is None:
+        return 1.0
+    return 1.0 - primary.reference_detection
+
+
+def confirmation_evidence(
+    report: AcceptanceReport, minimum_effect: Threshold
+) -> ConfirmationEvidence:
+    gating = report.gating_cells
+    if gating and all(_headroom(cell) < minimum_effect for cell in gating):
+        return ConfirmationEvidence.DETECTION_CEILING
+    if report.is_accepted:
+        return ConfirmationEvidence.CONFIRMED
+    return ConfirmationEvidence.NOT_ESTABLISHED
+
+
+def confirmation_notes(report: AcceptanceReport) -> tuple[DisplayText, ...]:
+    notes: list[DisplayText] = []
+    for cell in report.gating_cells:
+        primary = next(item for item in cell.levels if item.level is FprLevel.ALPHA)
+        negative = primary.gain is not None and primary.gain < 0.0
+        if negative or cell.harmed_target_count > 0:
+            gain = _measured_text(primary.gain)
+            notes.append(
+                DisplayText(
+                    f"alpha={cell.alpha.fraction:.2f} rows={cell.local_training_rows}: "
+                    f"pooled gain {gain}, harmed targets {cell.harmed_target_count}, "
+                    f"worst target difference {_measured_text(cell.worst_target_difference)}"
+                )
+            )
+    return tuple(notes)
 
 
 def acceptance_tables(inputs: ReportInputs) -> tuple[ResultTable, ...]:

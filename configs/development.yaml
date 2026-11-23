@@ -5,6 +5,7 @@ scientific:
   minimum_peer_count: 4
   seed: 17
   learning_seeds: [6, 7, 8]
+  numerical_threads: 1
   joint_scale_cap: 64.0
   joint_scale_iterations: 20
   budget_sweep_multipliers:

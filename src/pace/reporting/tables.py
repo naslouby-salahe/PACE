@@ -39,6 +39,8 @@ from pace.reporting.records import (
     sensitivity_rows,
     summarize_budget_effects,
 )
+from pace.reporting.scaling import scaling_strata_table, scaling_table
+from pace.reporting.text import semicolon_list
 from pace.types import (
     AcceptanceRule,
     AlphaLevel,
@@ -218,47 +220,6 @@ def ablations_table(inputs: ReportInputs) -> ResultTable:
 
 
 logger = structlog.get_logger()
-
-
-def scaling_table(inputs: ReportInputs) -> ResultTable:
-    settings = inputs.configuration.reporting
-    rows: list[tuple[DisplayText, ...]] = []
-    for kind in BudgetAnalysisKind:
-        cohort = inputs.cohort(kind)
-        for alpha in inputs.alphas():
-            for budget in inputs.budgets(kind):
-                members = inputs.store.select(alpha, budget, cohort)
-                if not members:
-                    continue
-                gain, interval = pooled_difference(members, lambda item: item.gain, settings)
-                rows.append(
-                    (
-                        analysis_text(kind),
-                        alpha_text(alpha),
-                        count(budget),
-                        count(len(members)),
-                        number(mean_of(tuple(item.pace.detection for item in members))),
-                        number(mean_of(tuple(item.mean_ensemble.detection for item in members))),
-                        number(gain),
-                        number(interval.lower_bound),
-                        number(interval.upper_bound),
-                    )
-                )
-    return ResultTable(
-        TableName.SCALING,
-        (
-            ColumnHeading.ANALYSIS,
-            ColumnHeading.ALPHA,
-            ColumnHeading.LOCAL_ROWS,
-            ColumnHeading.TARGETS,
-            ColumnHeading.PACE_DETECTION,
-            ColumnHeading.MEAN_ENSEMBLE_DETECTION,
-            ColumnHeading.GAIN,
-            ColumnHeading.LOWER,
-            ColumnHeading.UPPER,
-        ),
-        tuple(rows),
-    )
 
 
 def false_alert_rates_table(inputs: ReportInputs) -> ResultTable:
@@ -511,7 +472,7 @@ def _setting_value(value: JsonValue) -> DisplayText:
             )
         )
     if isinstance(value, list):
-        return DisplayText("; ".join(_setting_value(item) for item in value))
+        return semicolon_list(_setting_value(item) for item in value)
     if isinstance(value, str):
         return _setting_text(DisplayText(value))
     return DisplayText(f"{value}")
@@ -645,6 +606,7 @@ def build_tables(inputs: ReportInputs) -> tuple[ResultTable, ...]:
         targets_table(inputs),
         ablations_table(inputs),
         scaling_table(inputs),
+        scaling_strata_table(inputs),
         false_alert_rates_table(inputs),
         seeds_table(inputs),
         sensitivity_table(inputs),

@@ -36,6 +36,8 @@ from pace.types import (
     LearningSeed,
     LocalTrainingRowCount,
     ObservationCount,
+    OperatingMethod,
+    OperatingPoint,
     RateConfidenceInterval,
     RateDifference,
     ReportedMethod,
@@ -112,6 +114,28 @@ def _mean_detection(
     return _mean(rate(item) for item in result.attack_types)
 
 
+def _comparator_point(result: TargetPerformance, alpha: AlphaLevel) -> OperatingPoint:
+    curve = next(
+        (item for item in result.curves if item.method is OperatingMethod.MEAN_ENSEMBLE_MATCHED),
+        None,
+    )
+    if curve is None:
+        raise DatasetValidationError("A result has no same-calibration comparator curve")
+    return next(point for point in curve.points if np.isclose(point.nominal_budget, alpha.fraction))
+
+
+def _comparator_detection(result: TargetPerformance, alpha: AlphaLevel) -> DetectionRate:
+    return _mean(_comparator_point(result, alpha).detection_rates)
+
+
+def _comparator_rates(results: list[TargetPerformance], alpha: AlphaLevel) -> MethodRates:
+    return _rates(
+        results,
+        lambda result: _comparator_detection(result, alpha),
+        lambda result: _comparator_point(result, alpha).false_alert_rate,
+    )
+
+
 def _arm_detection(result: TargetPerformance, arm: StudyArm) -> DetectionRate:
     return _mean(next(item for item in result.arms if item.arm is arm).detection_rates)
 
@@ -136,17 +160,13 @@ def _rates(
     return MethodRates(_mean(map(detection, results)), _mean(map(false_alert, results)))
 
 
-def _families(results: list[TargetPerformance]) -> tuple[FamilyRates, ...]:
-    mean_ensemble = StudyArm.MEAN_ENSEMBLE_LOCAL_BRANCH
+def _families(results: list[TargetPerformance], alpha: AlphaLevel) -> tuple[FamilyRates, ...]:
     return tuple(
         FamilyRates(
             attack_type=first.attack_type,
             pace=_mean(result.attack_types[index].detection_rate for result in results),
             mean_ensemble=_mean(
-                next(item for item in result.arms if item.arm is mean_ensemble).detection_rates[
-                    index
-                ]
-                for result in results
+                _comparator_point(result, alpha).detection_rates[index] for result in results
             ),
             local=_mean(result.attack_types[index].local_detection_rate for result in results),
             peer_union=_mean(
@@ -173,7 +193,6 @@ def _sweep(results: list[TargetPerformance]) -> tuple[BudgetSweepPerformance, ..
 def target_record(
     results: list[TargetPerformance], alpha: AlphaLevel, rows: LocalTrainingRowCount
 ) -> TargetRecord:
-    mean_ensemble = StudyArm.MEAN_ENSEMBLE_LOCAL_BRANCH
     first = results[0]
     return TargetRecord(
         stratum=first.study_stratum,
@@ -187,7 +206,7 @@ def target_record(
             lambda result: _mean_detection(result, lambda item: item.detection_rate),
             lambda result: result.realized_false_alert_rate,
         ),
-        mean_ensemble=_arm_rates(results, mean_ensemble),
+        mean_ensemble=_comparator_rates(results, alpha),
         local=_rates(
             results,
             lambda result: _mean_detection(result, lambda item: item.local_detection_rate),
@@ -212,13 +231,13 @@ def target_record(
             ArmRates(performance.arm, _arm_rates(results, performance.arm))
             for performance in first.arms
         ),
-        families=_families(results),
+        families=_families(results, alpha),
         sweep=_sweep(results),
         seed_gains=tuple(
             SeedRateDifference(
                 result.seed,
                 _mean_detection(result, lambda item: item.detection_rate)
-                - _arm_detection(result, mean_ensemble),
+                - _comparator_detection(result, alpha),
             )
             for result in results
         ),

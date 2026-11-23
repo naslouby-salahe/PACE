@@ -518,7 +518,7 @@ def build_local_bank(
 ) -> LocalBankEvidence:
     calibration_evidence = local_detector_evidence(detectors.reference, detectors.calibration)
     query_evidence = local_detector_evidence(detectors.reference, detectors.query)
-    anchor_rows = anchor_detector_rows()
+    anchor_rows = anchor_detector_rows(settings.anchor_members)
     ecod = fit_ecod_sum(features.training)
     pair = fit_pair_cooccurrence(
         features.training,

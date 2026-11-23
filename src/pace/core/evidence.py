@@ -4,6 +4,7 @@ from dataclasses import dataclass
 import numpy as np
 
 from pace.types import (
+    AnchorMembers,
     CountSmoothing,
     DetectorScoreMatrix,
     FeatureCount,
@@ -90,9 +91,11 @@ def _validated(features: FloatMatrix) -> None:
         raise ValueError("Local bank features must be a finite, non-empty row-by-feature matrix")
 
 
-def anchor_detector_rows() -> RowIndexArray:
+def anchor_detector_rows(
+    members: AnchorMembers = AnchorMembers.WITHOUT_AUTOENCODER,
+) -> RowIndexArray:
     return np.asarray(
-        [kind.row for kind in LocalDetectorKind if kind.is_anchor_member], dtype=np.int64
+        [kind.row for kind in LocalDetectorKind if kind.is_anchor_member(members)], dtype=np.int64
     )
 
 

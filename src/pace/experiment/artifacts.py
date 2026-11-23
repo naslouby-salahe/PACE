@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 
 import structlog
+import torch
 from pydantic import ValidationError, model_validator
 from structlog.stdlib import BoundLogger
 
@@ -38,6 +39,7 @@ from pace.types import (
     DigestComponentName,
     DigestNamespace,
     EnvironmentFile,
+    EnvironmentVariable,
     ExecutionDevice,
     FalseAlertRate,
     FixtureKind,
@@ -50,6 +52,8 @@ from pace.types import (
     LogEvent,
     MachineArchitecture,
     MissingRuntimePackage,
+    NumericalPolicyError,
+    NumericalThreadCount,
     ObservationCount,
     OutputDirectory,
     PlatformName,
@@ -497,12 +501,32 @@ def reused_campaign(
     )
 
 
+def require_numerical_policy(threads: NumericalThreadCount) -> None:
+    expected = f"{threads}"
+    mismatched = [
+        variable
+        for variable in (
+            EnvironmentVariable.OMP_THREADS,
+            EnvironmentVariable.MKL_THREADS,
+            EnvironmentVariable.OPENBLAS_THREADS,
+        )
+        if os.environ.get(variable) != expected
+    ]
+    if mismatched or torch.get_num_threads() != threads:
+        raise NumericalPolicyError(
+            f"The scientific configuration requires {threads} numerical thread(s) per process; "
+            f"set {', '.join(mismatched) or 'the thread environment'} to {expected} before "
+            f"starting (PyTorch reports {torch.get_num_threads()})"
+        )
+
+
 def campaign_provenance(
     configuration: ResolvedConfiguration,
     input_digest: ScientificDigest,
     identity: tuple[DatasetName, StudyStratum],
     clients: tuple[DatasetClientData, ...] | Callable[[], tuple[DatasetClientData, ...]],
 ) -> Provenance:
+    require_numerical_policy(configuration.scientific.numerical_threads)
     dataset, stratum = identity
     return Provenance(
         configuration.scientific,

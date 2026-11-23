@@ -1,6 +1,7 @@
 from collections import defaultdict
 from collections.abc import Callable
 from pathlib import Path
+from textwrap import fill
 
 import numpy as np
 import structlog
@@ -8,6 +9,7 @@ from matplotlib.figure import Figure
 
 from pace.reporting.calibration import calibration_sensitivity
 from pace.reporting.figure_canvas import (
+    axes_center,
     horizontal_guide,
     legend_beside,
     legend_outside,
@@ -28,12 +30,14 @@ from pace.reporting.records import (
     pooled_difference,
     sensitivity_rows,
 )
+from pace.reporting.scaling import scaling_points
 from pace.types import (
     BudgetAnalysisKind,
     DatasetName,
     DetectionContribution,
     DisplayText,
     FalseAlertGuide,
+    FigureExtent,
     FigureName,
     FigureResolution,
     FloatArray,
@@ -53,6 +57,7 @@ from pace.types import (
     RateDifference,
     ReferenceAnnotation,
     ReportedMethod,
+    ScalingCohort,
     SeedPanel,
     StudyStratum,
     UnavailableReading,
@@ -62,7 +67,7 @@ logger = structlog.get_logger()
 
 
 def _nominal_gain_label() -> DisplayText:
-    return DisplayText("Gain vs block-max mean ensemble\n(nominal α)")
+    return DisplayText("Gain vs same-calibration\nmean ensemble (nominal α)")
 
 
 def save_figure(figure: Figure, name: FigureName, directory: Path) -> tuple[Path, ...]:
@@ -228,7 +233,7 @@ def family_gains(inputs: ReportInputs) -> Figure:
             axes.scatter(index + jitter, gains, s=6, color=stratum.color, alpha=0.7)
         stratum_ticks(axes, range(len(strata)), [item.display_label for item in strata])
         axes.axhline(0.0, color=PlotInk.BLACK, linewidth=0.8)
-        axes.set_ylabel("Attack-family gain\nvs block-max mean\nensemble (nominal α)")
+        axes.set_ylabel("Attack-family gain vs\nsame-calibration mean\nensemble (nominal α)")
     return figure
 
 
@@ -419,7 +424,9 @@ def stratum_gains(inputs: ReportInputs) -> Figure:
             )
         stratum_ticks(axes, range(len(strata)), [item.display_label for item in strata])
         confidence = settings.confidence_level
-        axes.set_ylabel(f"Gain vs block-max\nmean ensemble\n(nominal α; {confidence:.0%} CI)")
+        axes.set_ylabel(
+            f"Gain vs same-calibration\nmean ensemble\n(nominal α; {confidence:.0%} CI)"
+        )
         axes.axhline(0.0, color=PlotInk.BLACK, linewidth=0.8)
     return figure
 
@@ -442,7 +449,11 @@ def ablations(inputs: ReportInputs) -> Figure:
                 color=PlotInk.BLACK,
                 capsize=3,
             )
-        axes.set_yticks(range(len(arms)), [arm.display_label for arm in arms], fontsize=7)
+        axes.set_yticks(
+            range(len(arms)),
+            [fill(arm.display_label, width=34) for arm in arms],
+            fontsize=7,
+        )
         axes.axvline(0.0, color=PlotInk.BLACK, linewidth=0.8)
         axes.set_xlabel(
             f"PACE detection rate minus arm\n(nominal α; {settings.confidence_level:.0%} CI)"
@@ -450,34 +461,74 @@ def ablations(inputs: ReportInputs) -> Figure:
     return figure
 
 
+def _scaling_style(
+    kind: BudgetAnalysisKind,
+) -> tuple[PlotInk, PlotMarker, PlotLineStyle, FigureExtent]:
+    match kind:
+        case BudgetAnalysisKind.UNIVERSAL_PRIMARY:
+            return PlotInk.CYCLE_0, PlotMarker.CIRCLE, PlotLineStyle.SOLID, 9.0
+        case BudgetAnalysisKind.UNIVERSAL_ROBUSTNESS:
+            return PlotInk.CYCLE_1, PlotMarker.SQUARE, PlotLineStyle.DASHED, 6.5
+        case BudgetAnalysisKind.BROAD_SCALING:
+            return PlotInk.CYCLE_2, PlotMarker.TRIANGLE, PlotLineStyle.DASHDOT, 6.0
+        case BudgetAnalysisKind.HIGH_RESOURCE:
+            return PlotInk.CYCLE_3, PlotMarker.DIAMOND, PlotLineStyle.DOTTED, 5.0
+
+
 def budget_scaling(inputs: ReportInputs) -> Figure:
     settings = inputs.configuration.reporting
-    figure = new_figure(9.0, 3.6)
-    for index, alpha in enumerate(inputs.alphas(), start=1):
-        axes = figure.add_subplot(1, len(inputs.alphas()), index)
-        axes.set_title(DisplayText(f"α = {alpha.fraction}"))
-        axes.grid(alpha=0.25)
-        for kind in BudgetAnalysisKind:
-            cohort = inputs.cohort(kind)
-            budgets = [b for b in inputs.budgets(kind) if inputs.store.select(alpha, b, cohort)]
-            summaries = [
-                pooled_difference(inputs.store.select(alpha, b, cohort), lambda r: r.gain, settings)
-                for b in budgets
-            ]
-            if not summaries:
-                continue
-            gains = np.asarray([gain for gain, _ in summaries])
-            lower = np.asarray([interval.lower_bound for _, interval in summaries])
-            upper = np.asarray([interval.upper_bound for _, interval in summaries])
-            axes.plot(budgets, gains, marker=PlotMarker.CIRCLE, label=kind.title)
-            axes.fill_between(budgets, lower, upper, alpha=0.15)
-        axes.set_xscale("log")
-        axes.axhline(0.0, color=PlotInk.BLACK, linewidth=0.8)
-        axes.set_xlabel("Local training rows")
-        axes.set_ylabel(
-            "Gain vs block-max mean ensemble\n"
-            f"(nominal α; {settings.confidence_level:.0%} CI bands)"
-        )
+    points = scaling_points(inputs)
+    alphas = inputs.alphas()
+    cohorts = tuple(ScalingCohort)
+    figure = new_figure(4.6 * len(alphas) + 2.6, 3.6 * len(cohorts))
+    for row, cohort in enumerate(cohorts):
+        for column, alpha in enumerate(alphas):
+            axes = figure.add_subplot(len(cohorts), len(alphas), row * len(alphas) + column + 1)
+            axes.set_title(DisplayText(f"α = {alpha.fraction}\n{cohort.label}"))
+            axes.grid(alpha=0.25)
+            for kind in BudgetAnalysisKind:
+                ink, marker, style, size = _scaling_style(kind)
+                chosen = sorted(
+                    (
+                        point
+                        for point in points
+                        if point.kind is kind
+                        and point.alpha is alpha
+                        and point.cohort is cohort
+                        and point.gain is not None
+                        and point.interval is not None
+                    ),
+                    key=lambda point: point.rows,
+                )
+                if not chosen:
+                    continue
+                rows = [point.rows for point in chosen]
+                gains = [point.gain for point in chosen if point.gain is not None]
+                bounds = [point.interval for point in chosen if point.interval is not None]
+                axes.plot(
+                    rows,
+                    gains,
+                    color=ink,
+                    marker=marker,
+                    linestyle=style,
+                    markersize=size,
+                    markerfacecolor="none",
+                    label=DisplayText(f"{kind.title} ({chosen[0].target_count} targets)"),
+                )
+                axes.fill_between(
+                    rows,
+                    [item.lower_bound for item in bounds],
+                    [item.upper_bound for item in bounds],
+                    color=ink,
+                    alpha=0.10,
+                )
+            axes.set_xscale("log")
+            axes.axhline(0.0, color=PlotInk.BLACK, linewidth=0.8)
+            axes.set_xlabel("Local training rows")
+            axes.set_ylabel(
+                "Matched-FPR gain at FPR = α\n"
+                f"(PACE − same-calibration comparator;\n{settings.confidence_level:.0%} CI bands)"
+            )
     return figure
 
 
@@ -595,7 +646,10 @@ def draw(name: FigureName, inputs: ReportInputs) -> Figure:
         confirmation = inputs.evidence and all(
             item.stratum.is_confirmation for item in inputs.evidence
         )
-        figure.suptitle("Confirmation cohort" if confirmation else "Primary population")
+        figure.suptitle(
+            "Confirmation cohort" if confirmation else "Primary population",
+            x=axes_center(figure),
+        )
     return figure
 
 

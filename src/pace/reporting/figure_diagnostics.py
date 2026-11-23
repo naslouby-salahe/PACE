@@ -50,7 +50,7 @@ def power(inputs: ReportInputs) -> Figure:
         width=0.8,
         label=DisplayText("meaningful effect"),
     )
-    observed_gain = DisplayText("observed gain vs block-max mean ensemble (nominal α)")
+    observed_gain = DisplayText("observed gain vs same-calibration mean ensemble (nominal α)")
     labeled_observed_gain = False
     for panel in primary_panels(inputs):
         gain = np.mean([item.gain for item in panel.records]).item()

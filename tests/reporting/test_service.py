@@ -23,7 +23,7 @@ from pace.experiment.artifacts import (
 from pace.experiment.preflight import matrix_variants
 from pace.experiment.runner import run_dataset_study
 from pace.reporting.acceptance import summarize_acceptance
-from pace.reporting.figure_canvas import Panel
+from pace.reporting.figure_canvas import Panel, axes_center, new_figure  # noqa
 from pace.reporting.figures import write_figures
 from pace.reporting.metrics import summarize_campaign
 from pace.reporting.operating import mean_operating_points
@@ -653,7 +653,7 @@ def test_confirmation_panels_do_not_show_unavailable_exclusions(
     monkeypatch.setattr(reporting_figures, "panel_grid", Mock(return_value=((panel, axes),)))
     reporting_figures.seed_stability(inputs)
     assert axes.plot.call_count == 1
-    assert "block-max" in axes.set_ylabel.call_args.args[0]
+    assert "same-calibration" in axes.set_ylabel.call_args.args[0]
     axes.reset_mock()
     reporting_figures.sensitivity(inputs)
     labels = axes.set_xticks.call_args.args[1]
@@ -687,8 +687,9 @@ def test_report_figures_identify_the_population(
         "pace.reporting.figures._builders",
         Mock(return_value={FigureName.HEADLINE_GAIN: Mock(return_value=figure)}),
     )
+    monkeypatch.setattr("pace.reporting.figures.axes_center", Mock(return_value=0.42))
     reporting_figures.draw(FigureName.HEADLINE_GAIN, inputs)
-    figure.suptitle.assert_called_with("Primary population")
+    figure.suptitle.assert_called_with("Primary population", x=0.42)
     confirmation = dataclasses.replace(
         inputs,
         evidence=tuple(
@@ -696,7 +697,18 @@ def test_report_figures_identify_the_population(
         ),
     )
     reporting_figures.draw(FigureName.HEADLINE_GAIN, confirmation)
-    figure.suptitle.assert_called_with("Confirmation cohort")
+    figure.suptitle.assert_called_with("Confirmation cohort", x=0.42)
+
+
+def test_figure_titles_are_centred_over_the_axes_span() -> None:
+    figure = new_figure(6.0, 3.0)
+    wide = figure.add_subplot(1, 2, 1)
+    wide.set_ylabel("A deliberately long vertical label\nacross two lines")
+    figure.add_subplot(1, 2, 2)
+    centre = axes_center(figure)
+    positions = [axes.get_position() for axes in figure.axes]
+    assert centre == (positions[0].x0 + positions[1].x1) / 2.0
+    assert 0.0 < centre < 1.0
 
 
 def test_tables_are_exported_as_csv_and_latex(inputs: ReportInputs, tmp_path: Path) -> None:

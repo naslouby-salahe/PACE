@@ -40,6 +40,12 @@ def primary_panels(inputs: ReportInputs) -> tuple[Panel, ...]:
     )
 
 
+def axes_center(figure: Figure) -> FigureExtent:
+    figure.draw_without_rendering()
+    positions = [axes.get_position() for axes in figure.axes]
+    return (min(item.x0 for item in positions) + max(item.x1 for item in positions)) / 2.0
+
+
 def new_figure(width: FigureExtent, height: FigureExtent) -> Figure:
     return Figure(figsize=(width, height), layout=FigureLayout.CONSTRAINED)
 

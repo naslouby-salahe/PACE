@@ -12,7 +12,7 @@ from pace.core.evidence import (
     probability_tail_evidence,
     target_relative_evidence,
 )
-from pace.types import DetectorScoreMatrix, LocalDetectorKind, LocalDetectorSeed
+from pace.types import AnchorMembers, DetectorScoreMatrix, LocalDetectorKind, LocalDetectorSeed
 
 BINS = 8
 PAIRS = 150
@@ -201,6 +201,12 @@ def test_anchor_excludes_only_the_autoencoder_row() -> None:
     rows = anchor_detector_rows()
     assert len(rows) == len(LocalDetectorKind) - 1
     assert LocalDetectorKind.AUTOENCODER.row not in rows
+
+
+def test_the_all_detector_anchor_includes_the_autoencoder_row() -> None:
+    rows = anchor_detector_rows(AnchorMembers.ALL_DETECTORS)
+    assert len(rows) == len(LocalDetectorKind)
+    assert LocalDetectorKind.AUTOENCODER.row in rows
 
 
 def test_detector_evidence_matrix_averages_to_the_legacy_ensemble_evidence() -> None:

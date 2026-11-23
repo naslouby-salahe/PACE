@@ -8,6 +8,7 @@ from pydantic import ValidationError, field_validator, model_validator
 from pace.types import (
     AlphaLevel,
     AnchorBudgetPolicy,
+    AnchorMembers,
     AnchorShare,
     AttackRowsPerHalfCap,
     BankDesign,
@@ -53,6 +54,7 @@ from pace.types import (
     MinimumPeerCount,
     ModeRowCount,
     NegligibleSpread,
+    NumericalThreadCount,
     ObservationCount,
     PairCount,
     PairedDifferenceSd,
@@ -149,6 +151,7 @@ class LocalBankSettings(FrozenStrictModel, frozen=True):
     anchor_share: AnchorShare
     anchor_budget_policy: AnchorBudgetPolicy
     design: BankDesign = BankDesign.PER_EXPERT
+    anchor_members: AnchorMembers = AnchorMembers.WITHOUT_AUTOENCODER
 
 
 class BudgetSweepSettings(FrozenStrictModel, frozen=True):
@@ -253,6 +256,7 @@ class ScientificSettings(FrozenStrictModel, frozen=True):
     baselines: BaselineSettings
     study_arms: tuple[StudyArm, ...] = ()
     target_clients: tuple[ClientName, ...] = ()
+    numerical_threads: NumericalThreadCount = 1
 
     def for_variant(
         self,
@@ -282,6 +286,7 @@ class ScientificSettings(FrozenStrictModel, frozen=True):
             baselines=self.baselines,
             study_arms=self.study_arms,
             target_clients=target_clients,
+            numerical_threads=self.numerical_threads,
         )
 
     @field_validator("learning_seeds", mode="after")

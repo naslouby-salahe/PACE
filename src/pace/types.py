@@ -98,6 +98,7 @@ ResolutionRows = PositiveInt
 BudgetRatio = Annotated[float, Field(ge=0.0, allow_inf_nan=False)]
 ReplicateCount = PositiveInt
 WorkerCount = PositiveInt
+NumericalThreadCount = PositiveInt
 RepeatCount = PositiveInt
 ElapsedSeconds = Annotated[float, Field(ge=0.0, allow_inf_nan=False)]
 MegabyteCount = Annotated[float, Field(ge=0.0, allow_inf_nan=False)]
@@ -344,13 +345,17 @@ class LocalDetectorKind(Enum):
     def row(self) -> DetectorRow:
         return tuple(LocalDetectorKind).index(self)
 
-    @property
-    def is_anchor_member(self) -> bool:
-        return self is not LocalDetectorKind.AUTOENCODER
+    def is_anchor_member(self, members: "AnchorMembers") -> bool:
+        return members is AnchorMembers.ALL_DETECTORS or self is not LocalDetectorKind.AUTOENCODER
 
 
 class PcaSolver(StrEnum):
     FULL = "full"
+
+
+class AnchorMembers(Enum):
+    WITHOUT_AUTOENCODER = "WITHOUT_AUTOENCODER"
+    ALL_DETECTORS = "ALL_DETECTORS"
 
 
 class BankDesign(Enum):
@@ -499,7 +504,7 @@ class StudyArm(Enum):
     @property
     def display_label(self) -> "DisplayText":
         if self is StudyArm.MEAN_ENSEMBLE_LOCAL_BRANCH:
-            return ReportedMethod.MEAN_ENSEMBLE.display_label
+            return DisplayText("Mean-ensemble local branch (block-max calibration arm)")
         return DisplayText(self.name.replace("_", " ").capitalize())
 
     @property
@@ -824,9 +829,9 @@ class OperatingMethod(Enum):
             case OperatingMethod.JOINT_CHANNELS_PACE:
                 return DisplayText("PACE with joint channel calibration")
             case OperatingMethod.MEAN_ENSEMBLE:
-                return ReportedMethod.MEAN_ENSEMBLE.display_label
+                return DisplayText("Mean-ensemble local branch (block-max calibration)")
             case OperatingMethod.MEAN_ENSEMBLE_MATCHED:
-                return DisplayText("Mean-ensemble local branch (same calibration as PACE)")
+                return ReportedMethod.MEAN_ENSEMBLE.display_label
             case OperatingMethod.KITNET:
                 return ExternalBaseline.KITNET.display_label
             case OperatingMethod.DIOT:
@@ -1053,6 +1058,11 @@ class ColumnHeading(StrEnum):
     LOWER = "lower"
     UPPER = "upper"
     MEDIAN_GAIN = "median_gain"
+    COHORT = "cohort"
+    SUPPORTED_TARGETS = "supported_targets"
+    HARMED_TARGETS = "harmed_targets"
+    SEED_GAINS = "seed_gains"
+    SMALLEST_SEED_GAIN = "smallest_seed_gain"
     WINS = "wins"
     TIES = "ties"
     LOSSES = "losses"
@@ -1160,6 +1170,7 @@ class TableName(StrEnum):
     TARGETS = "targets"
     ABLATIONS = "ablations"
     SCALING = "scaling"
+    SCALING_STRATA = "scaling-strata"
     FALSE_ALERT_RATES = "false-alert-rates"
     SEEDS = "seeds"
     SENSITIVITY = "sensitivity"
@@ -1249,7 +1260,7 @@ class ReportedMethod(Enum):
             case ReportedMethod.PACE:
                 return DisplayText("PACE")
             case ReportedMethod.MEAN_ENSEMBLE:
-                return DisplayText("Mean-ensemble local branch (block-max calibration)")
+                return DisplayText("Mean-ensemble local branch (same calibration as PACE)")
             case ReportedMethod.LOCAL_BRANCH:
                 return DisplayText("PACE local branch")
             case ReportedMethod.PEER_UNION:
@@ -1303,10 +1314,6 @@ class AcceptanceRule(Enum):
 
 class AcceptanceDesign(Enum):
     PROTOCOL = "PROTOCOL"
-
-    @property
-    def comparator(self) -> StudyArm:
-        return StudyArm.MEAN_ENSEMBLE_LOCAL_BRANCH
 
     @property
     def excluded_dataset(self) -> "DatasetName":
@@ -1425,13 +1432,18 @@ class PlotInk(StrEnum):
 
 
 class PlotLineStyle(StrEnum):
+    SOLID = "-"
     DASHED = "--"
+    DASHDOT = "-."
     DOTTED = ":"
 
 
 class PlotMarker(StrEnum):
     CIRCLE = "o"
     CROSS = "x"
+    SQUARE = "s"
+    TRIANGLE = "^"
+    DIAMOND = "D"
 
 
 class PlotStepWhere(StrEnum):
@@ -1679,6 +1691,10 @@ class PaceError(Exception):
 
 
 class ConfigurationError(PaceError):
+    pass
+
+
+class NumericalPolicyError(PaceError):
     pass
 
 
@@ -3472,6 +3488,14 @@ class BudgetAnalysisKind(Enum):
                 return DisplayText("Extreme high-resource analysis")
 
 
+class ScalingCohort(Enum):
+    AVAILABLE = DisplayText("all supported targets")
+    COMMON = DisplayText("targets supported at every budget")
+
+    def __init__(self, label: DisplayText) -> None:
+        self.label = label
+
+
 class BudgetOutcome(Enum):
     PACE_TPR = "PACE_TPR"
     LOCAL_TPR = "LOCAL_TPR"
@@ -3964,12 +3988,29 @@ class AcceptanceCell:
         return all(verdict.satisfied for verdict in self.verdicts)
 
 
+class ConfirmationEvidence(Enum):
+    CONFIRMED = DisplayText("CONFIRMED")
+    DETECTION_CEILING = DisplayText("LIMITED EVIDENCE — DETECTION CEILING")
+    NOT_ESTABLISHED = DisplayText("SUPERIORITY NOT ESTABLISHED")
+
+    def __init__(self, label: DisplayText) -> None:
+        self.label = label
+
+
 @dataclass(frozen=True, slots=True)
 class AcceptanceReport:
     comparator: OperatingMethod
     cells: tuple[AcceptanceCell, ...]
 
     @property
+    def gating_cells(self) -> tuple[AcceptanceCell, ...]:
+        return tuple(cell for cell in self.cells if cell.is_gating)
+
+    @property
+    def diagnostic_cells(self) -> tuple[AcceptanceCell, ...]:
+        return tuple(cell for cell in self.cells if not cell.is_gating)
+
+    @property
     def is_accepted(self) -> bool:
-        gating = tuple(cell for cell in self.cells if cell.is_gating)
+        gating = self.gating_cells
         return len(gating) > 0 and all(cell.is_accepted for cell in gating)

@@ -5,6 +5,7 @@ scientific:
   minimum_peer_count: 4
   seed: 17
   learning_seeds: [31, 32, 33]
+  numerical_threads: 1
   joint_scale_cap: 64.0
   joint_scale_iterations: 20
   budget_sweep_multipliers:
@@ -37,6 +38,7 @@ scientific:
     anchor_share: 0.5
     anchor_budget_policy: SHARE_CONSERVING
     design: PER_EXPERT
+    anchor_members: WITHOUT_AUTOENCODER
   calibration_mode: CROSS_FITTED
   cross_fit_folds: 5
   resolution_rows: 2

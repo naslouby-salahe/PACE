@@ -375,8 +375,9 @@ def test_run_cli_fans_strata_out_to_bounded_workers(
 
     assert ran.call_count == len(CommandTarget.ALL.strata)
     assert capsys.readouterr().out.count("worker finished") == len(CommandTarget.ALL.strata)
-    expected = -(-(os.cpu_count() or 1) // 3)
-    assert os.environ["OMP_NUM_THREADS"] == f"{max(1, expected)}"
+    assert os.environ["OMP_NUM_THREADS"] == "1"
+    assert os.environ["MKL_NUM_THREADS"] == "1"
+    assert os.environ["OPENBLAS_NUM_THREADS"] == "1"
 
 
 def test_run_cli_stays_sequential_for_a_single_stratum_even_with_workers(
@@ -489,21 +490,28 @@ def test_calibration_study_cli_writes_the_sensitivity_table_and_figure(
     assert (tmp_path / "results" / "figures" / "calibration-sensitivity.pdf").is_file()
 
 
-def _acceptance_report(accepted: bool) -> AcceptanceReport:
+def _acceptance_report(
+    accepted: bool,
+    reference_detection: float = 0.87,
+    diagnostic: bool = False,
+    gain: float = 0.03,
+) -> AcceptanceReport:
     interval = RateConfidenceInterval(lower_bound=0.01, upper_bound=0.05, confidence_level=0.95)
     levels = tuple(
         LevelGain(
             level=level,
             matched_targets=40,
-            gain=0.03,
+            gain=gain,
             interval=interval,
             subject_detection=0.9,
-            reference_detection=0.87,
+            reference_detection=reference_detection,
         )
         for level in FprLevel
     )
     cell = AcceptanceCell(
-        kind=BudgetAnalysisKind.UNIVERSAL_PRIMARY,
+        kind=(
+            BudgetAnalysisKind.BROAD_SCALING if diagnostic else BudgetAnalysisKind.UNIVERSAL_PRIMARY
+        ),
         alpha=AlphaLevel.ALPHA_001,
         local_training_rows=100,
         target_count=58,
@@ -517,9 +525,20 @@ def _acceptance_report(accepted: bool) -> AcceptanceReport:
         exceedance_increase=0.01,
         seed_gains=(SeedRateDifference(6, 0.03),),
         minimum_stratum_left_out_gain=0.01,
-        verdicts=(CriterionVerdict(AcceptanceCriterion.FIXED_FPR_GAIN, accepted),),
+        verdicts=tuple(
+            CriterionVerdict(
+                criterion, accepted or criterion is not AcceptanceCriterion.FIXED_FPR_GAIN
+            )
+            for criterion in AcceptanceCriterion
+        ),
     )
     return AcceptanceReport(OperatingMethod.MEAN_ENSEMBLE_MATCHED, (cell,))
+
+
+def _mixed_report() -> AcceptanceReport:
+    gating = _acceptance_report(True).cells[0]
+    diagnostic = _acceptance_report(False, diagnostic=True).cells[0]
+    return AcceptanceReport(OperatingMethod.MEAN_ENSEMBLE_MATCHED, (gating, diagnostic))
 
 
 @pytest.mark.parametrize(
@@ -545,11 +564,26 @@ def test_accept_cli_reports_the_verdict_and_sets_the_exit_status(
     assert "Official protocol; population: primary" in rendered
     assert "same-calibration mean-ensemble local branch" in rendered
     assert "comparable realised FPR" in rendered
+    assert f"PACE SCIENTIFIC ACCEPTANCE: {verdict}" in rendered
+    assert ("failed [fixed_fpr_gain]" in rendered) is (not accepted)
+
+
+def test_diagnostic_cells_carry_measured_limitations_and_no_verdict(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    _config(tmp_path, monkeypatch)
+    monkeypatch.setattr("pace.cli.report_acceptance", Mock(return_value=_mixed_report()))
+    assert main(["accept"]) == ExitStatus.SUCCESS
+    rendered = capsys.readouterr().out
     assert (
-        f"OFFICIAL SCIENTIFIC ACCEPTANCE (primary) against MEAN_ENSEMBLE_MATCHED: {verdict}"
+        "Scaling and robustness diagnostics (measured evidence; no project-level verdict)"
         in rendered
     )
-    assert ("failed [fixed_fpr_gain]" in rendered) is (not accepted)
+    diagnostic = next(line for line in rendered.splitlines() if line.startswith("broad_scaling"))
+    assert "measured limitations: fixed_fpr_gain (fixed-FPR gain lower bound" in diagnostic
+    assert "failed" not in diagnostic
+    assert "REJECTED" not in rendered
+    assert rendered.rstrip().endswith("PACE SCIENTIFIC ACCEPTANCE: ACCEPTED")
 
 
 def test_accept_cli_passes_the_population_scope_to_the_reporting_service(
@@ -560,7 +594,33 @@ def test_accept_cli_passes_the_population_scope_to_the_reporting_service(
     monkeypatch.setattr("pace.cli.report_acceptance", reported)
     assert main(["accept", "--population", "confirmation"]) == ExitStatus.SUCCESS
     assert reported.call_args.args[2] is PopulationScope.CONFIRMATION
-    assert "ceiling effects" in capsys.readouterr().out
+    assert "INDEPENDENT CONFIRMATION: CONFIRMED" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize(
+    ("accepted", "reference_detection", "gain", "label"),
+    [
+        (True, 0.999, -0.002, "LIMITED EVIDENCE — DETECTION CEILING"),
+        (False, 0.87, 0.0, "SUPERIORITY NOT ESTABLISHED"),
+    ],
+)
+def test_confirmation_is_classified_by_headroom_and_never_rejected(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    accepted: bool,
+    reference_detection: float,
+    gain: float,
+    label: str,
+) -> None:
+    _config(tmp_path, monkeypatch)
+    report = _acceptance_report(accepted, reference_detection, gain=gain)
+    monkeypatch.setattr("pace.cli.report_acceptance", Mock(return_value=report))
+    assert main(["accept", "--population", "confirmation"]) == ExitStatus.SUCCESS
+    rendered = capsys.readouterr().out
+    assert f"INDEPENDENT CONFIRMATION: {label}" in rendered
+    assert "REJECTED" not in rendered
+    assert ("Measured negative evidence" in rendered) is (gain < 0.0)
 
 
 @pytest.mark.parametrize("command", ["accept-legacy", "accept-revised"])
