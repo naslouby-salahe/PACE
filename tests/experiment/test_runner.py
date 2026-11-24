@@ -535,7 +535,11 @@ def test_campaign_artifact_is_verified_reused_and_overwritten_only_when_requeste
     assert repeated.target_count == 1
     assert sha256(repeated.artifact_path.path.read_bytes()).hexdigest() == artifact_hash
     assert repeated.artifact_path.path.stat().st_mtime_ns == artifact_mtime
-    assert len(tuple(first.artifact_path.path.parent.iterdir())) == 1
+    assert [
+        path.name
+        for path in first.artifact_path.path.parent.iterdir()
+        if not path.name.endswith(".lock")
+    ] == ["results.json"]
     first.artifact_path.path.write_text("{}", encoding="utf-8")
     with (
         pytest.raises(ArtifactValidationError),

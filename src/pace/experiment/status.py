@@ -11,13 +11,13 @@ from pace.experiment.artifacts import (
     CampaignOutcome,
     Provenance,
     campaign_artifact_path,
-    digest_implementation,
-    digest_source_files,
     execution_log_path,
     read_verified_artifact,
 )
+from pace.experiment.implementation import digest_implementation
 from pace.experiment.logging_setup import configure_logging
 from pace.experiment.preflight import matrix_variants, read_budget_plan_summary
+from pace.experiment.sources import digest_source_files
 from pace.types import (
     ArtifactConflictError,
     ArtifactKind,

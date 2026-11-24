@@ -74,6 +74,18 @@ def designed_decisions(
     peer_budget: FalseAlarmBudget,
     rule: TieredCalibrationRule,
 ) -> ChannelDecisions:
+    if rule.design is BankDesign.NO_ANCHOR:
+        return apply_local_union_peer_rule(
+            local.bank_calibration,
+            local.bank_evaluation,
+            peer_calibration_evidence,
+            peer_query_evidence,
+            scientific.calibration_block_size,
+            local_budget,
+            peer_budget,
+            rule.union,
+            local.bank_shares,
+        )
     decide = (
         apply_joint_local_peer_rule
         if rule.design is BankDesign.JOINT_CHANNELS

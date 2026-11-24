@@ -485,10 +485,18 @@ def _headroom(cell: AcceptanceCell) -> RateDifference:
     return 1.0 - primary.reference_detection
 
 
+def _has_adverse_evidence(cell: AcceptanceCell) -> bool:
+    primary = next(item for item in cell.levels if item.level is FprLevel.ALPHA)
+    inferior = primary.interval is not None and primary.interval.upper_bound < 0.0
+    return inferior or any(not check.satisfied for check in _safeguard_checks(cell))
+
+
 def confirmation_evidence(
     report: AcceptanceReport, minimum_effect: Threshold
 ) -> ConfirmationEvidence:
     gating = report.gating_cells
+    if any(_has_adverse_evidence(cell) for cell in gating):
+        return ConfirmationEvidence.NOT_ESTABLISHED
     if gating and all(_headroom(cell) < minimum_effect for cell in gating):
         return ConfirmationEvidence.DETECTION_CEILING
     if report.is_accepted:

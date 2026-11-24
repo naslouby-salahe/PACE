@@ -13,11 +13,11 @@ from pace.experiment.artifacts import (
     CampaignOutcome,
     Provenance,
     campaign_artifact_path,
-    digest_files,
-    digest_implementation,
     reuse_or_write_artifact,
 )
+from pace.experiment.implementation import digest_implementation
 from pace.experiment.runner import run_dataset_workflow
+from pace.experiment.sources import digest_files
 from pace.experiment.status import (
     inspect_dataset_campaign_status,
     inspect_matrix_status,
@@ -337,7 +337,7 @@ def test_campaign_status_marks_changed_input_provenance_stale(
         return "a" * 64
 
     monkeypatch.setattr(
-        "pace.experiment.artifacts.digest_files",
+        "pace.experiment.sources.digest_files",
         changed_input_digest,
     )
 

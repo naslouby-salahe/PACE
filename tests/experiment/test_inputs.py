@@ -1,3 +1,4 @@
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -7,7 +8,7 @@ from pace.config import PeerTrainingSettings, load_configuration
 from pace.core.evidence import FloatArray
 from pace.experiment.inputs import build_target_frame, train_peer_mlp
 from pace.experiment.runner import prepare_clients
-from pace.types import DatasetValidationError, EvaluationRole
+from pace.types import DatasetValidationError, DevelopmentBenignRows, EvaluationRole
 from tests.support import REPOSITORY_ROOT, campaign_configuration, campaign_devices
 
 
@@ -89,8 +90,19 @@ def test_held_out_role_uses_the_test_partition_and_held_out_attacks() -> None:
 
 
 def test_development_role_needs_training_rows_beyond_the_local_budget() -> None:
-    device = prepare_clients(campaign_devices(), campaign_configuration())[0]
+    prepared = prepare_clients(campaign_devices(), campaign_configuration())[0]
+    minimum = DevelopmentBenignRows.MINIMUM
+    rows = 2 * minimum
+    device = replace(
+        prepared, training=np.zeros((rows, prepared.training.shape[1]), dtype=np.float64)
+    )
     with pytest.raises(DatasetValidationError, match="beyond the local budget"):
-        build_target_frame(device, EvaluationRole.DEVELOPMENT, device.training.shape[0])
-    frame = build_target_frame(device, EvaluationRole.DEVELOPMENT, 5)
-    assert frame.benign_count == device.training.shape[0] - 5
+        build_target_frame(device, EvaluationRole.DEVELOPMENT, rows)
+    with pytest.raises(DatasetValidationError, match="beyond the local budget"):
+        build_target_frame(
+            device, EvaluationRole.DEVELOPMENT, rows - DevelopmentBenignRows.MINIMUM + 1
+        )
+    frame = build_target_frame(
+        device, EvaluationRole.DEVELOPMENT, rows - DevelopmentBenignRows.MINIMUM
+    )
+    assert frame.benign_count == DevelopmentBenignRows.MINIMUM

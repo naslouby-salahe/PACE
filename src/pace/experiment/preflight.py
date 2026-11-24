@@ -16,12 +16,9 @@ from pace.datasets.registry import (
     load_dataset,
     resolve_study_stratum,
 )
-from pace.experiment.artifacts import (
-    digest_source_files,
-    execution_log_path,
-    write_bytes_atomically,
-)
+from pace.experiment.artifacts import execution_log_path, write_bytes_atomically
 from pace.experiment.logging_setup import configure_logging
+from pace.experiment.sources import digest_source_files
 from pace.experiment.splitting import assess_target_eligibility, plan_client_split
 from pace.types import (
     AlphaLevel,

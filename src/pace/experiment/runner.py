@@ -32,9 +32,7 @@ from pace.experiment.artifacts import (
     campaign_artifact_path,
     campaign_provenance,
     derive_learning_seed,
-    digest_source_files,
     execution_log_path,
-    require_unchanged_sources,
     reuse_or_write_artifact,
     reused_campaign,
     workflow_result,
@@ -60,6 +58,12 @@ from pace.experiment.preflight import (
     persist_budget_plan,
     plan_stratum_budgets,
 )
+from pace.experiment.sources import (
+    SourceBaseline,
+    baseline_source_files,
+    digest_source_files,
+    require_unchanged_sources,
+)
 from pace.experiment.splitting import (
     assess_target_eligibility,
     digest_split_plan,
@@ -81,12 +85,12 @@ from pace.types import (
     DatasetName,
     DatasetValidationError,
     ExecutionDevice,
+    ExecutionPhase,
     LearningSeed,
     LogEvent,
     MaxFusionDecisions,
     ModelSeedProvenance,
     ReplacementPolicy,
-    ScientificDigest,
     SeedDomain,
     StudyStratum,
     TargetCohortRole,
@@ -133,7 +137,7 @@ class MatrixTrainingCache:
     peer_training: PeerTrainingSettings
     splitting: SplitSettings
     prepared: tuple[PreparedDevice, ...] | None = None
-    input_digest: ScientificDigest | None = None
+    source_baseline: SourceBaseline | None = None
     frames: dict[DatasetClientId, TargetFrame] = field(
         default_factory=dict[DatasetClientId, TargetFrame]
     )
@@ -566,9 +570,10 @@ def run_dataset_matrix_workflow(
         clients, configuration.scientific.peer_training, configuration.splitting
     )
     raw_data_root = configuration.runtime.raw_data_root
-    matrix_cache.input_digest = digest_source_files(source_files, raw_data_root)
+    baseline = baseline_source_files(source_files, raw_data_root)
+    matrix_cache.source_baseline = baseline
     plan = plan_stratum_budgets(clients, configuration)
-    persist_budget_plan(configuration.runtime.output_root, plan, matrix_cache.input_digest)
+    persist_budget_plan(configuration.runtime.output_root, plan, baseline.digest)
     results: list[MatrixRunResult] = []
     for variant in matrix_variants(plan.analyses, configuration.protocol_matrix.alpha_levels):
         logger.info(
@@ -592,8 +597,7 @@ def run_dataset_matrix_workflow(
                 ),
             )
         )
-        if digest_source_files(source_files, raw_data_root) != matrix_cache.input_digest:
-            raise DatasetValidationError("Dataset sources changed during matrix execution")
+        require_unchanged_sources(source_files, raw_data_root, baseline, ExecutionPhase.MATRIX)
     return tuple(results)
 
 
@@ -631,10 +635,11 @@ def _execute_dataset_workflow(
     matrix_cache: MatrixTrainingCache | None = None,
 ) -> CampaignWorkflowResult:
     dataset, stratum = identity
-    shared_digest = None if matrix_cache is None else matrix_cache.input_digest
-    input_digest = shared_digest or digest_source_files(
+    shared_baseline = None if matrix_cache is None else matrix_cache.source_baseline
+    baseline = shared_baseline or baseline_source_files(
         source_files, configuration.runtime.raw_data_root
     )
+    input_digest = baseline.digest
     provenance = campaign_provenance(configuration, input_digest, identity, clients)
     logger = initial_logger.bind(
         input_digest=input_digest,
@@ -654,7 +659,7 @@ def _execute_dataset_workflow(
         if matrix_cache is None
         else run_dataset_study(resolved_clients, configuration, matrix_cache)
     )
-    require_unchanged_sources(source_files, configuration, input_digest)
+    require_unchanged_sources(source_files, configuration.runtime.raw_data_root, baseline)
     outcome = CampaignOutcome.from_targets(targets)
     artifact, reuse_state = reuse_or_write_artifact(
         destination.path, outcome, provenance, replacement_policy

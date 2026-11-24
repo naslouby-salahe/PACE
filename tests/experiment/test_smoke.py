@@ -5,8 +5,10 @@ from pathlib import Path
 
 import pytest
 
+import pace.experiment.implementation as implementation
 from pace.config import ResolvedConfiguration, load_configuration
-from pace.experiment.artifacts import Provenance, digest_implementation, validate_artifact
+from pace.experiment.artifacts import Provenance, validate_artifact
+from pace.experiment.implementation import digest_implementation
 from pace.experiment.smoke import run_synthetic_workflow
 from pace.types import (
     ArtifactConflictError,
@@ -27,6 +29,14 @@ def _configuration(repository_root: Path, output_root: Path) -> ResolvedConfigur
     )
 
 
+def _new_process_digest(scope: ImplementationScope = ImplementationScope.CAMPAIGN) -> str:
+    implementation._implementation_snapshot.cache_clear()  # pyright: ignore[reportPrivateUsage]
+    try:
+        return digest_implementation(scope)
+    finally:
+        implementation._implementation_snapshot.cache_clear()  # pyright: ignore[reportPrivateUsage]
+
+
 def test_implementation_digest_includes_locked_dependency_environment(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -34,18 +44,18 @@ def test_implementation_digest_includes_locked_dependency_environment(
     package_root = repository_root / "src" / "pace"
     package_directory = package_root / "experiment"
     package_directory.mkdir(parents=True)
-    module_path = package_directory / "artifacts.py"
+    module_path = package_directory / "implementation.py"
     module_path.write_text("", encoding="utf-8")
     (package_root / "core.py").write_text("value = 1\n", encoding="utf-8")
     (repository_root / "pyproject.toml").write_text("[project]\n", encoding="utf-8")
     lock_file = repository_root / "uv.lock"
     lock_file.write_text("version = 1\n", encoding="utf-8")
-    monkeypatch.setattr("pace.experiment.artifacts.__file__", str(module_path))
+    monkeypatch.setattr("pace.experiment.implementation.__file__", str(module_path))
 
-    first_digest = digest_implementation()
-    repeated_digest = digest_implementation()
+    first_digest = _new_process_digest()
+    repeated_digest = _new_process_digest()
     lock_file.write_text("version = 2\n", encoding="utf-8")
-    updated_digest = digest_implementation()
+    updated_digest = _new_process_digest()
 
     assert repeated_digest == first_digest
     assert updated_digest != first_digest
@@ -71,7 +81,9 @@ def test_smoke_artifact_is_verified_and_reused_without_rewrite(tmp_path: Path) -
     assert second.verification.state is VerificationState.VERIFIED
     assert hashlib.sha256(artifact_path.read_bytes()).hexdigest() == original_hash
     assert artifact_path.stat().st_mtime_ns == original_mtime
-    assert len(tuple(artifact_path.parent.iterdir())) == 1
+    assert [path.name for path in artifact_path.parent.iterdir() if path.suffix != ".lock"] == [
+        artifact_path.name
+    ]
 
 
 def test_corrupt_artifact_is_rejected_and_replaced_only_on_overwrite(tmp_path: Path) -> None:
@@ -97,7 +109,9 @@ def test_corrupt_artifact_is_rejected_and_replaced_only_on_overwrite(tmp_path: P
     assert overwritten.reuse_state is ArtifactReuseState.CREATED
     artifact_text = artifact_path.read_text(encoding="utf-8")
     assert artifact_text.count('"verification_state":"VERIFIED"') == 1
-    assert len(tuple(artifact_path.parent.iterdir())) == 1
+    assert [path.name for path in artifact_path.parent.iterdir() if path.suffix != ".lock"] == [
+        artifact_path.name
+    ]
 
 
 def test_artifact_validation_checks_schema_provenance_and_content(tmp_path: Path) -> None:
@@ -202,15 +216,15 @@ def test_implementation_digest_scopes_ignore_unrelated_modules(
     package_root = tmp_path / "repository" / "src" / "pace"
     (package_root / "experiment").mkdir(parents=True)
     (package_root / "reporting").mkdir()
-    module_path = package_root / "experiment" / "artifacts.py"
+    module_path = package_root / "experiment" / "implementation.py"
     module_path.write_text("", encoding="utf-8")
-    monkeypatch.setattr("pace.experiment.artifacts.__file__", str(module_path))
+    monkeypatch.setattr("pace.experiment.implementation.__file__", str(module_path))
 
     def digests() -> tuple[str, str, str]:
         return (
-            digest_implementation(ImplementationScope.CAMPAIGN),
-            digest_implementation(ImplementationScope.SYNTHETIC),
-            digest_implementation(ImplementationScope.REPORT),
+            _new_process_digest(ImplementationScope.CAMPAIGN),
+            _new_process_digest(ImplementationScope.SYNTHETIC),
+            _new_process_digest(ImplementationScope.REPORT),
         )
 
     baseline = digests()

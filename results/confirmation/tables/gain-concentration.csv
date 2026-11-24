@@ -1,0 +1,5 @@
+alpha,local_rows,stratum,targets,gain,share_of_total_gain,matched_targets,matched_gain
+0.01,100,IoT-23 untouched captures,5,0.000029,1.000000,4,-0.000013
+0.05,100,IoT-23 untouched captures,5,0.000174,1.000000,5,0.000174
+0.01,400,IoT-23 untouched captures,5,0.000174,1.000000,3,-0.000025
+0.05,400,IoT-23 untouched captures,5,0.000000,,5,0.000000

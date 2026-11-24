@@ -4,6 +4,7 @@ import numpy as np
 import pytest
 
 from pace.core.evidence import (
+    alternative_anchor_evidence,
     anchor_detector_rows,
     fit_ecod_sum,
     fit_pair_cooccurrence,
@@ -12,7 +13,13 @@ from pace.core.evidence import (
     probability_tail_evidence,
     target_relative_evidence,
 )
-from pace.types import AnchorMembers, DetectorScoreMatrix, LocalDetectorKind, LocalDetectorSeed
+from pace.types import (
+    AnchorMembers,
+    BankDesign,
+    DetectorScoreMatrix,
+    LocalDetectorKind,
+    LocalDetectorSeed,
+)
 
 BINS = 8
 PAIRS = 150
@@ -216,3 +223,62 @@ def test_detector_evidence_matrix_averages_to_the_legacy_ensemble_evidence() -> 
     matrix = local_detector_evidence(reference, query)
     assert matrix.shape == (len(LocalDetectorKind), 60)
     np.testing.assert_allclose(matrix.mean(axis=0), local_ensemble_evidence(reference, query))
+
+
+def _detector_evidence_with_one_extreme_detector() -> np.ndarray:
+    evidence = np.tile(np.asarray([[0.5], [1.0], [1.5], [2.0], [2.5], [3.0], [3.5]]), (1, 4))
+    evidence[LocalDetectorKind.GAUSSIAN.row] = [3.5, 40.0, 3.5, 3.5]
+    return evidence
+
+
+def test_alternative_anchor_aggregations_match_hand_calculation() -> None:
+    evidence = _detector_evidence_with_one_extreme_detector()
+    members = anchor_detector_rows()
+    bank_rows = np.asarray(
+        [
+            LocalDetectorKind.ISOLATION_FOREST.row,
+            LocalDetectorKind.HISTOGRAM_BASED_OUTLIER_SCORE.row,
+            LocalDetectorKind.GAUSSIAN.row,
+        ],
+        dtype=np.int64,
+    )
+    member_values = evidence[members]
+
+    np.testing.assert_allclose(
+        alternative_anchor_evidence(evidence, members, bank_rows, BankDesign.MEDIAN_ANCHOR),
+        np.median(member_values, axis=0),
+    )
+    np.testing.assert_allclose(
+        alternative_anchor_evidence(evidence, members, bank_rows, BankDesign.TRIMMED_ANCHOR),
+        (member_values.sum(axis=0) - member_values.max(axis=0) - member_values.min(axis=0)) / 4,
+    )
+    complement = [
+        LocalDetectorKind.PCA.row,
+        LocalDetectorKind.LOCAL_OUTLIER_FACTOR.row,
+        LocalDetectorKind.K_NEAREST_NEIGHBORS.row,
+    ]
+    np.testing.assert_allclose(
+        alternative_anchor_evidence(evidence, members, bank_rows, BankDesign.COMPLEMENTARY_ANCHOR),
+        evidence[complement].mean(axis=0),
+    )
+
+
+def test_robust_aggregations_ignore_one_extreme_detector_that_moves_the_mean() -> None:
+    evidence = _detector_evidence_with_one_extreme_detector()
+    members = anchor_detector_rows()
+    bank_rows = np.asarray([LocalDetectorKind.GAUSSIAN.row], dtype=np.int64)
+    mean = evidence[members].mean(axis=0)
+    median = alternative_anchor_evidence(evidence, members, bank_rows, BankDesign.MEDIAN_ANCHOR)
+    trimmed = alternative_anchor_evidence(evidence, members, bank_rows, BankDesign.TRIMMED_ANCHOR)
+
+    assert mean[1] - mean[0] > 5.0
+    assert abs(median[1] - median[0]) < 1.0
+    assert abs(trimmed[1] - trimmed[0]) < 1.0
+
+
+def test_only_anchor_alternative_designs_define_an_alternative_anchor() -> None:
+    evidence = _detector_evidence_with_one_extreme_detector()
+    with pytest.raises(ValueError, match="alternative anchor"):
+        alternative_anchor_evidence(
+            evidence, anchor_detector_rows(), np.asarray([0], dtype=np.int64), BankDesign.NO_ANCHOR
+        )

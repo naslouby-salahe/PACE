@@ -1,0 +1,361 @@
+local_rows,method,nominal_budget,targets,false_alert_rate,detection_rate
+100,PACE with anchor collapse,0.0005,5,0.003095,0.996593
+100,PACE with anchor collapse,0.001,5,0.003095,0.996593
+100,PACE with anchor collapse,0.0025,5,0.003095,0.996593
+100,PACE with anchor collapse,0.005,5,0.003095,0.996593
+100,PACE with anchor collapse,0.01,5,0.003209,0.996613
+100,PACE with anchor collapse,0.02,5,0.003790,0.996787
+100,PACE with anchor collapse,0.035,5,0.013430,0.996919
+100,PACE with anchor collapse,0.05,5,0.016922,0.998083
+100,PACE with anchor collapse,0.075,5,0.025017,0.998083
+100,PACE with anchor collapse,0.1,5,0.032738,0.998083
+100,PACE with anchor collapse,0.15,5,0.046789,0.998083
+100,PACE with anchor collapse,0.25,5,0.083659,0.998083
+100,DIoT (flow-symbol adaptation),0.0005,5,0.000686,0.217787
+100,DIoT (flow-symbol adaptation),0.001,5,0.001254,0.219806
+100,DIoT (flow-symbol adaptation),0.0025,5,0.003012,0.219865
+100,DIoT (flow-symbol adaptation),0.005,5,0.004037,0.229301
+100,DIoT (flow-symbol adaptation),0.01,5,0.006975,0.264403
+100,DIoT (flow-symbol adaptation),0.02,5,0.015700,0.336812
+100,DIoT (flow-symbol adaptation),0.035,5,0.024568,0.344243
+100,DIoT (flow-symbol adaptation),0.05,5,0.033519,0.476197
+100,DIoT (flow-symbol adaptation),0.075,5,0.047918,0.480804
+100,DIoT (flow-symbol adaptation),0.1,5,0.057413,0.546515
+100,DIoT (flow-symbol adaptation),0.15,5,0.092126,0.559710
+100,DIoT (flow-symbol adaptation),0.25,5,0.150810,0.651115
+100,PACE with hierarchical family budgets,0.0005,5,0.003186,0.996593
+100,PACE with hierarchical family budgets,0.001,5,0.003186,0.996593
+100,PACE with hierarchical family budgets,0.0025,5,0.003186,0.996593
+100,PACE with hierarchical family budgets,0.005,5,0.003186,0.996593
+100,PACE with hierarchical family budgets,0.01,5,0.003263,0.996613
+100,PACE with hierarchical family budgets,0.02,5,0.003704,0.996613
+100,PACE with hierarchical family budgets,0.035,5,0.012547,0.996919
+100,PACE with hierarchical family budgets,0.05,5,0.015177,0.998083
+100,PACE with hierarchical family budgets,0.075,5,0.023329,0.998083
+100,PACE with hierarchical family budgets,0.1,5,0.032443,0.998083
+100,PACE with hierarchical family budgets,0.15,5,0.047213,0.998083
+100,PACE with hierarchical family budgets,0.25,5,0.084203,0.998083
+100,KitNET,0.0005,5,0.000005,0.400000
+100,KitNET,0.001,5,0.000277,0.400000
+100,KitNET,0.0025,5,0.000277,0.400000
+100,KitNET,0.005,5,0.001509,0.400543
+100,KitNET,0.01,5,0.003278,0.600523
+100,KitNET,0.02,5,0.009011,0.642643
+100,KitNET,0.035,5,0.034039,0.706271
+100,KitNET,0.05,5,0.039822,0.706329
+100,KitNET,0.075,5,0.048659,0.706387
+100,KitNET,0.1,5,0.069313,0.728762
+100,KitNET,0.15,5,0.126693,0.731986
+100,KitNET,0.25,5,0.193888,0.735365
+100,Original PACE (legacy anchor fallback),0.0005,5,0.003186,0.996593
+100,Original PACE (legacy anchor fallback),0.001,5,0.003186,0.996593
+100,Original PACE (legacy anchor fallback),0.0025,5,0.003186,0.996593
+100,Original PACE (legacy anchor fallback),0.005,5,0.003186,0.996593
+100,Original PACE (legacy anchor fallback),0.01,5,0.003300,0.996613
+100,Original PACE (legacy anchor fallback),0.02,5,0.003790,0.996787
+100,Original PACE (legacy anchor fallback),0.035,5,0.013430,0.996919
+100,Original PACE (legacy anchor fallback),0.05,5,0.016922,0.998083
+100,Original PACE (legacy anchor fallback),0.075,5,0.025017,0.998083
+100,Original PACE (legacy anchor fallback),0.1,5,0.032738,0.998083
+100,Original PACE (legacy anchor fallback),0.15,5,0.046789,0.998083
+100,Original PACE (legacy anchor fallback),0.25,5,0.083659,0.998083
+100,MCDE (primary-source adaptation),0.0005,5,0.000050,0.526294
+100,MCDE (primary-source adaptation),0.001,5,0.000200,0.648623
+100,MCDE (primary-source adaptation),0.0025,5,0.000601,0.653540
+100,MCDE (primary-source adaptation),0.005,5,0.002000,0.843293
+100,MCDE (primary-source adaptation),0.01,5,0.003320,0.924066
+100,MCDE (primary-source adaptation),0.02,5,0.008498,0.954629
+100,MCDE (primary-source adaptation),0.035,5,0.021787,0.955625
+100,MCDE (primary-source adaptation),0.05,5,0.029136,0.990672
+100,MCDE (primary-source adaptation),0.075,5,0.041790,0.996003
+100,MCDE (primary-source adaptation),0.1,5,0.071999,1.000000
+100,MCDE (primary-source adaptation),0.15,5,0.109760,1.000000
+100,MCDE (primary-source adaptation),0.25,5,0.175442,1.000000
+100,Mean-ensemble local branch (block-max calibration),0.0005,5,0.003095,0.996564
+100,Mean-ensemble local branch (block-max calibration),0.001,5,0.003095,0.996564
+100,Mean-ensemble local branch (block-max calibration),0.0025,5,0.003095,0.996564
+100,Mean-ensemble local branch (block-max calibration),0.005,5,0.003095,0.996564
+100,Mean-ensemble local branch (block-max calibration),0.01,5,0.003183,0.996584
+100,Mean-ensemble local branch (block-max calibration),0.02,5,0.005496,0.996613
+100,Mean-ensemble local branch (block-max calibration),0.035,5,0.012999,0.996744
+100,Mean-ensemble local branch (block-max calibration),0.05,5,0.017948,0.997908
+100,Mean-ensemble local branch (block-max calibration),0.075,5,0.030096,0.997908
+100,Mean-ensemble local branch (block-max calibration),0.1,5,0.035388,0.999739
+100,Mean-ensemble local branch (block-max calibration),0.15,5,0.051800,1.000000
+100,Mean-ensemble local branch (block-max calibration),0.25,5,0.118267,1.000000
+100,Mean-ensemble local branch (same calibration as PACE),0.0005,5,0.003095,0.996564
+100,Mean-ensemble local branch (same calibration as PACE),0.001,5,0.003106,0.996564
+100,Mean-ensemble local branch (same calibration as PACE),0.0025,5,0.003253,0.996584
+100,Mean-ensemble local branch (same calibration as PACE),0.005,5,0.003815,0.996613
+100,Mean-ensemble local branch (same calibration as PACE),0.01,5,0.004830,0.996613
+100,Mean-ensemble local branch (same calibration as PACE),0.02,5,0.008725,0.996613
+100,Mean-ensemble local branch (same calibration as PACE),0.035,5,0.018782,0.997908
+100,Mean-ensemble local branch (same calibration as PACE),0.05,5,0.027008,0.997908
+100,Mean-ensemble local branch (same calibration as PACE),0.075,5,0.051699,1.000000
+100,Mean-ensemble local branch (same calibration as PACE),0.1,5,0.058907,1.000000
+100,Mean-ensemble local branch (same calibration as PACE),0.15,5,0.080341,1.000000
+100,Mean-ensemble local branch (same calibration as PACE),0.25,5,0.152039,1.000000
+100,PACE without the Gaussian bank expert,0.0005,5,0.003186,0.996593
+100,PACE without the Gaussian bank expert,0.001,5,0.003186,0.996593
+100,PACE without the Gaussian bank expert,0.0025,5,0.003186,0.996593
+100,PACE without the Gaussian bank expert,0.005,5,0.003186,0.996593
+100,PACE without the Gaussian bank expert,0.01,5,0.003263,0.996613
+100,PACE without the Gaussian bank expert,0.02,5,0.003790,0.996787
+100,PACE without the Gaussian bank expert,0.035,5,0.013430,0.996919
+100,PACE without the Gaussian bank expert,0.05,5,0.017187,0.998083
+100,PACE without the Gaussian bank expert,0.075,5,0.025028,0.998083
+100,PACE without the Gaussian bank expert,0.1,5,0.033742,0.998083
+100,PACE without the Gaussian bank expert,0.15,5,0.049022,0.998083
+100,PACE without the Gaussian bank expert,0.25,5,0.085877,0.998083
+100,PACE,0.0005,5,0.003186,0.996593
+100,PACE,0.001,5,0.003186,0.996593
+100,PACE,0.0025,5,0.003265,0.996600
+100,PACE,0.005,5,0.003650,0.996613
+100,PACE,0.01,5,0.004566,0.996613
+100,PACE,0.02,5,0.006821,0.996787
+100,PACE,0.035,5,0.015254,0.998083
+100,PACE,0.05,5,0.022403,0.998083
+100,PACE,0.075,5,0.041846,0.998083
+100,PACE,0.1,5,0.051240,0.998083
+100,PACE,0.15,5,0.072096,0.998083
+100,PACE,0.25,5,0.119502,1.000000
+100,PACE with pooled conformal-rank calibration,0.0005,5,0.003186,0.996593
+100,PACE with pooled conformal-rank calibration,0.001,5,0.003186,0.996593
+100,PACE with pooled conformal-rank calibration,0.0025,5,0.003197,0.996593
+100,PACE with pooled conformal-rank calibration,0.005,5,0.003231,0.996613
+100,PACE with pooled conformal-rank calibration,0.01,5,0.003353,0.996613
+100,PACE with pooled conformal-rank calibration,0.02,5,0.004654,0.996613
+100,PACE with pooled conformal-rank calibration,0.035,5,0.005222,0.996613
+100,PACE with pooled conformal-rank calibration,0.05,5,0.009338,0.996787
+100,PACE with pooled conformal-rank calibration,0.075,5,0.013140,0.997136
+100,PACE with pooled conformal-rank calibration,0.1,5,0.020390,0.998083
+100,PACE with pooled conformal-rank calibration,0.15,5,0.031891,0.998083
+100,PACE with pooled conformal-rank calibration,0.25,5,0.065005,1.000000
+100,"Previous PACE (budget-conserving, block-maximum)",0.0005,5,0.003186,0.996593
+100,"Previous PACE (budget-conserving, block-maximum)",0.001,5,0.003186,0.996593
+100,"Previous PACE (budget-conserving, block-maximum)",0.0025,5,0.003186,0.996593
+100,"Previous PACE (budget-conserving, block-maximum)",0.005,5,0.003186,0.996593
+100,"Previous PACE (budget-conserving, block-maximum)",0.01,5,0.003263,0.996613
+100,"Previous PACE (budget-conserving, block-maximum)",0.02,5,0.003790,0.996787
+100,"Previous PACE (budget-conserving, block-maximum)",0.035,5,0.013430,0.996919
+100,"Previous PACE (budget-conserving, block-maximum)",0.05,5,0.016922,0.998083
+100,"Previous PACE (budget-conserving, block-maximum)",0.075,5,0.025017,0.998083
+100,"Previous PACE (budget-conserving, block-maximum)",0.1,5,0.032738,0.998083
+100,"Previous PACE (budget-conserving, block-maximum)",0.15,5,0.046789,0.998083
+100,"Previous PACE (budget-conserving, block-maximum)",0.25,5,0.083659,0.998083
+100,PACE with resolution-aware blocks,0.0005,5,0.003186,0.996593
+100,PACE with resolution-aware blocks,0.001,5,0.003212,0.996593
+100,PACE with resolution-aware blocks,0.0025,5,0.003265,0.996593
+100,PACE with resolution-aware blocks,0.005,5,0.003342,0.996613
+100,PACE with resolution-aware blocks,0.01,5,0.003873,0.996787
+100,PACE with resolution-aware blocks,0.02,5,0.004198,0.996787
+100,PACE with resolution-aware blocks,0.035,5,0.013430,0.996919
+100,PACE with resolution-aware blocks,0.05,5,0.016922,0.998083
+100,PACE with resolution-aware blocks,0.075,5,0.025017,0.998083
+100,PACE with resolution-aware blocks,0.1,5,0.032738,0.998083
+100,PACE with resolution-aware blocks,0.15,5,0.046789,0.998083
+100,PACE with resolution-aware blocks,0.25,5,0.083659,0.998083
+100,PACE with second-order bank aggregation,0.0005,5,0.003095,0.996593
+100,PACE with second-order bank aggregation,0.001,5,0.003095,0.996593
+100,PACE with second-order bank aggregation,0.0025,5,0.003095,0.996593
+100,PACE with second-order bank aggregation,0.005,5,0.003095,0.996593
+100,PACE with second-order bank aggregation,0.01,5,0.003172,0.996613
+100,PACE with second-order bank aggregation,0.02,5,0.003651,0.996613
+100,PACE with second-order bank aggregation,0.035,5,0.012679,0.996744
+100,PACE with second-order bank aggregation,0.05,5,0.014663,0.997908
+100,PACE with second-order bank aggregation,0.075,5,0.022691,0.997908
+100,PACE with second-order bank aggregation,0.1,5,0.032009,0.997908
+100,PACE with second-order bank aggregation,0.15,5,0.045863,0.997908
+100,PACE with second-order bank aggregation,0.25,5,0.083477,0.998083
+100,PACE with forward-chaining cross-fitted calibration,0.0005,5,0.003186,0.996593
+100,PACE with forward-chaining cross-fitted calibration,0.001,5,0.003235,0.996600
+100,PACE with forward-chaining cross-fitted calibration,0.0025,5,0.003338,0.996613
+100,PACE with forward-chaining cross-fitted calibration,0.005,5,0.003438,0.996613
+100,PACE with forward-chaining cross-fitted calibration,0.01,5,0.004596,0.996613
+100,PACE with forward-chaining cross-fitted calibration,0.02,5,0.008068,0.996613
+100,PACE with forward-chaining cross-fitted calibration,0.035,5,0.010622,0.996613
+100,PACE with forward-chaining cross-fitted calibration,0.05,5,0.014756,0.998083
+100,PACE with forward-chaining cross-fitted calibration,0.075,5,0.028614,0.998083
+100,PACE with forward-chaining cross-fitted calibration,0.1,5,0.043620,0.998083
+100,PACE with forward-chaining cross-fitted calibration,0.15,5,0.066458,0.998083
+100,PACE with forward-chaining cross-fitted calibration,0.25,5,0.114088,1.000000
+400,PACE with anchor collapse,0.0005,5,0.002517,0.996419
+400,PACE with anchor collapse,0.001,5,0.002517,0.996419
+400,PACE with anchor collapse,0.0025,5,0.002517,0.996419
+400,PACE with anchor collapse,0.005,5,0.002517,0.996419
+400,PACE with anchor collapse,0.01,5,0.003792,0.996439
+400,PACE with anchor collapse,0.02,5,0.004722,0.997312
+400,PACE with anchor collapse,0.035,5,0.012674,0.997341
+400,PACE with anchor collapse,0.05,5,0.016196,0.997908
+400,PACE with anchor collapse,0.075,5,0.024406,0.997908
+400,PACE with anchor collapse,0.1,5,0.031235,0.997908
+400,PACE with anchor collapse,0.15,5,0.044525,0.997908
+400,PACE with anchor collapse,0.25,5,0.088842,1.000000
+400,DIoT (flow-symbol adaptation),0.0005,5,0.000686,0.217739
+400,DIoT (flow-symbol adaptation),0.001,5,0.001256,0.219815
+400,DIoT (flow-symbol adaptation),0.0025,5,0.003017,0.219863
+400,DIoT (flow-symbol adaptation),0.005,5,0.004042,0.223596
+400,DIoT (flow-symbol adaptation),0.01,5,0.006971,0.248459
+400,DIoT (flow-symbol adaptation),0.02,5,0.015825,0.337097
+400,DIoT (flow-symbol adaptation),0.035,5,0.025259,0.462192
+400,DIoT (flow-symbol adaptation),0.05,5,0.033955,0.596330
+400,DIoT (flow-symbol adaptation),0.075,5,0.051195,0.611128
+400,DIoT (flow-symbol adaptation),0.1,5,0.062687,0.663836
+400,DIoT (flow-symbol adaptation),0.15,5,0.095424,0.738390
+400,DIoT (flow-symbol adaptation),0.25,5,0.158582,0.839358
+400,PACE with hierarchical family budgets,0.0005,5,0.003281,0.996564
+400,PACE with hierarchical family budgets,0.001,5,0.003281,0.996564
+400,PACE with hierarchical family budgets,0.0025,5,0.003281,0.996564
+400,PACE with hierarchical family budgets,0.005,5,0.003281,0.996564
+400,PACE with hierarchical family budgets,0.01,5,0.003359,0.996584
+400,PACE with hierarchical family budgets,0.02,5,0.005152,0.996715
+400,PACE with hierarchical family budgets,0.035,5,0.013137,0.997341
+400,PACE with hierarchical family budgets,0.05,5,0.016126,0.997908
+400,PACE with hierarchical family budgets,0.075,5,0.024385,0.997908
+400,PACE with hierarchical family budgets,0.1,5,0.031378,0.997908
+400,PACE with hierarchical family budgets,0.15,5,0.045947,0.997908
+400,PACE with hierarchical family budgets,0.25,5,0.089042,1.000000
+400,KitNET,0.0005,5,0.000031,0.400000
+400,KitNET,0.001,5,0.000303,0.400000
+400,KitNET,0.0025,5,0.000381,0.422660
+400,KitNET,0.005,5,0.001944,0.422660
+400,KitNET,0.01,5,0.005061,0.585049
+400,KitNET,0.02,5,0.008136,0.585049
+400,KitNET,0.035,5,0.022851,0.634923
+400,KitNET,0.05,5,0.040425,0.710627
+400,KitNET,0.075,5,0.052816,0.710627
+400,KitNET,0.1,5,0.064028,0.710627
+400,KitNET,0.15,5,0.118997,0.777293
+400,KitNET,0.25,5,0.185591,0.777293
+400,Original PACE (legacy anchor fallback),0.0005,5,0.003281,0.996564
+400,Original PACE (legacy anchor fallback),0.001,5,0.003281,0.996564
+400,Original PACE (legacy anchor fallback),0.0025,5,0.003281,0.996564
+400,Original PACE (legacy anchor fallback),0.005,5,0.003281,0.996564
+400,Original PACE (legacy anchor fallback),0.01,5,0.003999,0.996584
+400,Original PACE (legacy anchor fallback),0.02,5,0.004722,0.997312
+400,Original PACE (legacy anchor fallback),0.035,5,0.012674,0.997341
+400,Original PACE (legacy anchor fallback),0.05,5,0.016196,0.997908
+400,Original PACE (legacy anchor fallback),0.075,5,0.024406,0.997908
+400,Original PACE (legacy anchor fallback),0.1,5,0.031235,0.997908
+400,Original PACE (legacy anchor fallback),0.15,5,0.044525,0.997908
+400,Original PACE (legacy anchor fallback),0.25,5,0.088842,1.000000
+400,MCDE (primary-source adaptation),0.0005,5,0.000072,0.541431
+400,MCDE (primary-source adaptation),0.001,5,0.000206,0.663741
+400,MCDE (primary-source adaptation),0.0025,5,0.000781,0.749126
+400,MCDE (primary-source adaptation),0.005,5,0.001873,0.843293
+400,MCDE (primary-source adaptation),0.01,5,0.003847,0.924066
+400,MCDE (primary-source adaptation),0.02,5,0.007788,0.954629
+400,MCDE (primary-source adaptation),0.035,5,0.020701,0.955625
+400,MCDE (primary-source adaptation),0.05,5,0.024081,0.957340
+400,MCDE (primary-source adaptation),0.075,5,0.047373,0.998503
+400,MCDE (primary-source adaptation),0.1,5,0.073572,1.000000
+400,MCDE (primary-source adaptation),0.15,5,0.124086,1.000000
+400,MCDE (primary-source adaptation),0.25,5,0.171756,1.000000
+400,Mean-ensemble local branch (block-max calibration),0.0005,5,0.003074,0.996419
+400,Mean-ensemble local branch (block-max calibration),0.001,5,0.003074,0.996419
+400,Mean-ensemble local branch (block-max calibration),0.0025,5,0.003074,0.996419
+400,Mean-ensemble local branch (block-max calibration),0.005,5,0.003074,0.996419
+400,Mean-ensemble local branch (block-max calibration),0.01,5,0.003209,0.996439
+400,Mean-ensemble local branch (block-max calibration),0.02,5,0.005608,0.996613
+400,Mean-ensemble local branch (block-max calibration),0.035,5,0.012940,0.996744
+400,Mean-ensemble local branch (block-max calibration),0.05,5,0.018718,0.997908
+400,Mean-ensemble local branch (block-max calibration),0.075,5,0.029931,0.997908
+400,Mean-ensemble local branch (block-max calibration),0.1,5,0.036621,1.000000
+400,Mean-ensemble local branch (block-max calibration),0.15,5,0.055234,1.000000
+400,Mean-ensemble local branch (block-max calibration),0.25,5,0.117377,1.000000
+400,Mean-ensemble local branch (same calibration as PACE),0.0005,5,0.003074,0.996419
+400,Mean-ensemble local branch (same calibration as PACE),0.001,5,0.003074,0.996419
+400,Mean-ensemble local branch (same calibration as PACE),0.0025,5,0.003253,0.996426
+400,Mean-ensemble local branch (same calibration as PACE),0.005,5,0.003761,0.996439
+400,Mean-ensemble local branch (same calibration as PACE),0.01,5,0.004951,0.996744
+400,Mean-ensemble local branch (same calibration as PACE),0.02,5,0.009235,0.996744
+400,Mean-ensemble local branch (same calibration as PACE),0.035,5,0.019070,0.997908
+400,Mean-ensemble local branch (same calibration as PACE),0.05,5,0.026968,1.000000
+400,Mean-ensemble local branch (same calibration as PACE),0.075,5,0.059684,1.000000
+400,Mean-ensemble local branch (same calibration as PACE),0.1,5,0.067855,1.000000
+400,Mean-ensemble local branch (same calibration as PACE),0.15,5,0.095722,1.000000
+400,Mean-ensemble local branch (same calibration as PACE),0.25,5,0.166329,1.000000
+400,PACE without the Gaussian bank expert,0.0005,5,0.003281,0.996564
+400,PACE without the Gaussian bank expert,0.001,5,0.003281,0.996564
+400,PACE without the Gaussian bank expert,0.0025,5,0.003281,0.996564
+400,PACE without the Gaussian bank expert,0.005,5,0.003281,0.996564
+400,PACE without the Gaussian bank expert,0.01,5,0.003359,0.996584
+400,PACE without the Gaussian bank expert,0.02,5,0.004700,0.997312
+400,PACE without the Gaussian bank expert,0.035,5,0.013157,0.997341
+400,PACE without the Gaussian bank expert,0.05,5,0.016964,0.997908
+400,PACE without the Gaussian bank expert,0.075,5,0.025137,0.997908
+400,PACE without the Gaussian bank expert,0.1,5,0.031371,0.997908
+400,PACE without the Gaussian bank expert,0.15,5,0.047401,0.997908
+400,PACE without the Gaussian bank expert,0.25,5,0.091171,1.000000
+400,PACE,0.0005,5,0.003281,0.996564
+400,PACE,0.001,5,0.003281,0.996564
+400,PACE,0.0025,5,0.003410,0.996571
+400,PACE,0.005,5,0.003818,0.996584
+400,PACE,0.01,5,0.004420,0.996613
+400,PACE,0.02,5,0.007153,0.996744
+400,PACE,0.035,5,0.015949,0.997908
+400,PACE,0.05,5,0.021894,0.997908
+400,PACE,0.075,5,0.040630,0.997908
+400,PACE,0.1,5,0.049462,0.997908
+400,PACE,0.15,5,0.078735,1.000000
+400,PACE,0.25,5,0.130006,1.000000
+400,PACE with pooled conformal-rank calibration,0.0005,5,0.003281,0.996564
+400,PACE with pooled conformal-rank calibration,0.001,5,0.003281,0.996564
+400,PACE with pooled conformal-rank calibration,0.0025,5,0.003307,0.996564
+400,PACE with pooled conformal-rank calibration,0.005,5,0.003365,0.996564
+400,PACE with pooled conformal-rank calibration,0.01,5,0.003633,0.996613
+400,PACE with pooled conformal-rank calibration,0.02,5,0.004330,0.996613
+400,PACE with pooled conformal-rank calibration,0.035,5,0.005507,0.996613
+400,PACE with pooled conformal-rank calibration,0.05,5,0.008390,0.997777
+400,PACE with pooled conformal-rank calibration,0.075,5,0.015048,0.997777
+400,PACE with pooled conformal-rank calibration,0.1,5,0.020823,0.997908
+400,PACE with pooled conformal-rank calibration,0.15,5,0.032573,1.000000
+400,PACE with pooled conformal-rank calibration,0.25,5,0.071962,1.000000
+400,"Previous PACE (budget-conserving, block-maximum)",0.0005,5,0.003281,0.996564
+400,"Previous PACE (budget-conserving, block-maximum)",0.001,5,0.003281,0.996564
+400,"Previous PACE (budget-conserving, block-maximum)",0.0025,5,0.003281,0.996564
+400,"Previous PACE (budget-conserving, block-maximum)",0.005,5,0.003281,0.996564
+400,"Previous PACE (budget-conserving, block-maximum)",0.01,5,0.003359,0.996584
+400,"Previous PACE (budget-conserving, block-maximum)",0.02,5,0.004722,0.997312
+400,"Previous PACE (budget-conserving, block-maximum)",0.035,5,0.012674,0.997341
+400,"Previous PACE (budget-conserving, block-maximum)",0.05,5,0.016196,0.997908
+400,"Previous PACE (budget-conserving, block-maximum)",0.075,5,0.024406,0.997908
+400,"Previous PACE (budget-conserving, block-maximum)",0.1,5,0.031235,0.997908
+400,"Previous PACE (budget-conserving, block-maximum)",0.15,5,0.044525,0.997908
+400,"Previous PACE (budget-conserving, block-maximum)",0.25,5,0.088842,1.000000
+400,PACE with resolution-aware blocks,0.0005,5,0.003281,0.996564
+400,PACE with resolution-aware blocks,0.001,5,0.003307,0.996564
+400,PACE with resolution-aware blocks,0.0025,5,0.003382,0.996564
+400,PACE with resolution-aware blocks,0.005,5,0.003489,0.996577
+400,PACE with resolution-aware blocks,0.01,5,0.003974,0.997341
+400,PACE with resolution-aware blocks,0.02,5,0.004647,0.997341
+400,PACE with resolution-aware blocks,0.035,5,0.012674,0.997341
+400,PACE with resolution-aware blocks,0.05,5,0.016196,0.997908
+400,PACE with resolution-aware blocks,0.075,5,0.024406,0.997908
+400,PACE with resolution-aware blocks,0.1,5,0.031235,0.997908
+400,PACE with resolution-aware blocks,0.15,5,0.044525,0.997908
+400,PACE with resolution-aware blocks,0.25,5,0.088842,1.000000
+400,PACE with second-order bank aggregation,0.0005,5,0.003074,0.996419
+400,PACE with second-order bank aggregation,0.001,5,0.003074,0.996419
+400,PACE with second-order bank aggregation,0.0025,5,0.003074,0.996419
+400,PACE with second-order bank aggregation,0.005,5,0.003074,0.996419
+400,PACE with second-order bank aggregation,0.01,5,0.003151,0.996439
+400,PACE with second-order bank aggregation,0.02,5,0.004228,0.996919
+400,PACE with second-order bank aggregation,0.035,5,0.012109,0.996948
+400,PACE with second-order bank aggregation,0.05,5,0.015630,0.997908
+400,PACE with second-order bank aggregation,0.075,5,0.023363,0.997908
+400,PACE with second-order bank aggregation,0.1,5,0.030410,0.997908
+400,PACE with second-order bank aggregation,0.15,5,0.045071,0.997908
+400,PACE with second-order bank aggregation,0.25,5,0.086860,1.000000
+400,PACE with forward-chaining cross-fitted calibration,0.0005,5,0.003281,0.996564
+400,PACE with forward-chaining cross-fitted calibration,0.001,5,0.003299,0.996571
+400,PACE with forward-chaining cross-fitted calibration,0.0025,5,0.003538,0.996584
+400,PACE with forward-chaining cross-fitted calibration,0.005,5,0.003659,0.996584
+400,PACE with forward-chaining cross-fitted calibration,0.01,5,0.004475,0.996613
+400,PACE with forward-chaining cross-fitted calibration,0.02,5,0.007923,0.996613
+400,PACE with forward-chaining cross-fitted calibration,0.035,5,0.010493,0.996744
+400,PACE with forward-chaining cross-fitted calibration,0.05,5,0.015078,0.997908
+400,PACE with forward-chaining cross-fitted calibration,0.075,5,0.027545,0.997908
+400,PACE with forward-chaining cross-fitted calibration,0.1,5,0.040885,0.997908
+400,PACE with forward-chaining cross-fitted calibration,0.15,5,0.066505,1.000000
+400,PACE with forward-chaining cross-fitted calibration,0.25,5,0.124612,1.000000

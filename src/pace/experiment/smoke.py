@@ -11,11 +11,11 @@ from pace.experiment.artifacts import (
     Provenance,
     SyntheticOutcome,
     artifact_path,
-    digest_implementation,
     digest_inputs,
     execution_log_path,
     reuse_or_write_artifact,
 )
+from pace.experiment.implementation import digest_implementation
 from pace.experiment.inputs import PeerMLP, train_peer_mlp
 from pace.experiment.logging_setup import configure_logging, execute_with_failure_logging
 from pace.experiment.models import fit_local_ensemble, select_local_training_rows

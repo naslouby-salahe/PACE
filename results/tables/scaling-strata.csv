@@ -1,0 +1,321 @@
+analysis,alpha,local_rows,cohort,stratum,supported_targets,gain
+universal_primary,0.01,100,all supported targets,CTU_13,8,0.003961
+universal_primary,0.01,100,all supported targets,GOTHAM_2025,4,0.032882
+universal_primary,0.01,100,all supported targets,IOT_23,4,0.000991
+universal_primary,0.01,100,all supported targets,N_BAIOT,7,0.000004
+universal_primary,0.01,100,all supported targets,TON_IOT,4,0.220102
+universal_primary,0.01,100,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004515
+universal_primary,0.01,100,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,2,0.009922
+universal_primary,0.01,100,targets supported at every budget,CTU_13,8,0.003961
+universal_primary,0.01,100,targets supported at every budget,GOTHAM_2025,4,0.032882
+universal_primary,0.01,100,targets supported at every budget,IOT_23,4,0.000991
+universal_primary,0.01,100,targets supported at every budget,N_BAIOT,7,0.000004
+universal_primary,0.01,100,targets supported at every budget,TON_IOT,3,0.205670
+universal_primary,0.01,100,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004515
+universal_primary,0.01,100,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,2,0.009922
+universal_primary,0.01,400,all supported targets,CTU_13,8,0.002431
+universal_primary,0.01,400,all supported targets,GOTHAM_2025,4,0.032390
+universal_primary,0.01,400,all supported targets,IOT_23,4,0.007051
+universal_primary,0.01,400,all supported targets,N_BAIOT,8,0.000002
+universal_primary,0.01,400,all supported targets,TON_IOT,3,0.225245
+universal_primary,0.01,400,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004646
+universal_primary,0.01,400,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,2,0.000811
+universal_primary,0.01,400,targets supported at every budget,CTU_13,8,0.002431
+universal_primary,0.01,400,targets supported at every budget,GOTHAM_2025,4,0.032390
+universal_primary,0.01,400,targets supported at every budget,IOT_23,4,0.007051
+universal_primary,0.01,400,targets supported at every budget,N_BAIOT,7,0.000003
+universal_primary,0.01,400,targets supported at every budget,TON_IOT,3,0.225245
+universal_primary,0.01,400,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004646
+universal_primary,0.01,400,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,2,0.000811
+universal_primary,0.05,100,all supported targets,CTU_13,10,0.000000
+universal_primary,0.05,100,all supported targets,GOTHAM_2025,6,0.007195
+universal_primary,0.05,100,all supported targets,IOT_23,8,0.033740
+universal_primary,0.05,100,all supported targets,N_BAIOT,9,0.000000
+universal_primary,0.05,100,all supported targets,TON_IOT,6,0.139146
+universal_primary,0.05,100,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.016235
+universal_primary,0.05,100,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,5,0.007766
+universal_primary,0.05,100,targets supported at every budget,CTU_13,10,0.000000
+universal_primary,0.05,100,targets supported at every budget,GOTHAM_2025,6,0.007195
+universal_primary,0.05,100,targets supported at every budget,IOT_23,8,0.033740
+universal_primary,0.05,100,targets supported at every budget,N_BAIOT,9,0.000000
+universal_primary,0.05,100,targets supported at every budget,TON_IOT,5,0.125798
+universal_primary,0.05,100,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.016235
+universal_primary,0.05,100,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,5,0.007766
+universal_primary,0.05,400,all supported targets,CTU_13,10,0.000000
+universal_primary,0.05,400,all supported targets,GOTHAM_2025,6,-0.000029
+universal_primary,0.05,400,all supported targets,IOT_23,8,0.056862
+universal_primary,0.05,400,all supported targets,N_BAIOT,9,-0.000003
+universal_primary,0.05,400,all supported targets,TON_IOT,5,0.133105
+universal_primary,0.05,400,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.032580
+universal_primary,0.05,400,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,5,0.013586
+universal_primary,0.05,400,targets supported at every budget,CTU_13,10,0.000000
+universal_primary,0.05,400,targets supported at every budget,GOTHAM_2025,6,-0.000029
+universal_primary,0.05,400,targets supported at every budget,IOT_23,8,0.056862
+universal_primary,0.05,400,targets supported at every budget,N_BAIOT,9,-0.000003
+universal_primary,0.05,400,targets supported at every budget,TON_IOT,5,0.133105
+universal_primary,0.05,400,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.032580
+universal_primary,0.05,400,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,5,0.013586
+universal_robustness,0.01,100,all supported targets,CTU_13,8,0.003961
+universal_robustness,0.01,100,all supported targets,GOTHAM_2025,4,0.032882
+universal_robustness,0.01,100,all supported targets,IOT_23,4,0.000991
+universal_robustness,0.01,100,all supported targets,N_BAIOT,7,0.000004
+universal_robustness,0.01,100,all supported targets,TON_IOT,4,0.220102
+universal_robustness,0.01,100,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004515
+universal_robustness,0.01,100,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,2,0.009922
+universal_robustness,0.01,100,targets supported at every budget,CTU_13,8,0.003961
+universal_robustness,0.01,100,targets supported at every budget,GOTHAM_2025,4,0.032882
+universal_robustness,0.01,100,targets supported at every budget,IOT_23,4,0.000991
+universal_robustness,0.01,100,targets supported at every budget,N_BAIOT,7,0.000004
+universal_robustness,0.01,100,targets supported at every budget,TON_IOT,3,0.205670
+universal_robustness,0.01,100,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004515
+universal_robustness,0.01,100,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,2,0.009922
+universal_robustness,0.01,400,all supported targets,CTU_13,8,0.002431
+universal_robustness,0.01,400,all supported targets,GOTHAM_2025,4,0.032390
+universal_robustness,0.01,400,all supported targets,IOT_23,4,0.007051
+universal_robustness,0.01,400,all supported targets,N_BAIOT,8,0.000002
+universal_robustness,0.01,400,all supported targets,TON_IOT,3,0.225245
+universal_robustness,0.01,400,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004646
+universal_robustness,0.01,400,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,2,0.000811
+universal_robustness,0.01,400,targets supported at every budget,CTU_13,8,0.002431
+universal_robustness,0.01,400,targets supported at every budget,GOTHAM_2025,4,0.032390
+universal_robustness,0.01,400,targets supported at every budget,IOT_23,4,0.007051
+universal_robustness,0.01,400,targets supported at every budget,N_BAIOT,7,0.000003
+universal_robustness,0.01,400,targets supported at every budget,TON_IOT,3,0.225245
+universal_robustness,0.01,400,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004646
+universal_robustness,0.01,400,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,2,0.000811
+universal_robustness,0.01,750,all supported targets,CTU_13,8,0.002775
+universal_robustness,0.01,750,all supported targets,GOTHAM_2025,4,0.026589
+universal_robustness,0.01,750,all supported targets,IOT_23,4,0.005214
+universal_robustness,0.01,750,all supported targets,N_BAIOT,8,-0.000001
+universal_robustness,0.01,750,all supported targets,TON_IOT,4,0.183124
+universal_robustness,0.01,750,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.008863
+universal_robustness,0.01,750,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,2,-0.003188
+universal_robustness,0.01,750,targets supported at every budget,CTU_13,8,0.002775
+universal_robustness,0.01,750,targets supported at every budget,GOTHAM_2025,4,0.026589
+universal_robustness,0.01,750,targets supported at every budget,IOT_23,4,0.005214
+universal_robustness,0.01,750,targets supported at every budget,N_BAIOT,7,-0.000001
+universal_robustness,0.01,750,targets supported at every budget,TON_IOT,3,0.167342
+universal_robustness,0.01,750,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.008863
+universal_robustness,0.01,750,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,2,-0.003188
+universal_robustness,0.05,100,all supported targets,CTU_13,10,0.000000
+universal_robustness,0.05,100,all supported targets,GOTHAM_2025,6,0.007195
+universal_robustness,0.05,100,all supported targets,IOT_23,8,0.033740
+universal_robustness,0.05,100,all supported targets,N_BAIOT,9,0.000000
+universal_robustness,0.05,100,all supported targets,TON_IOT,6,0.139146
+universal_robustness,0.05,100,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.016235
+universal_robustness,0.05,100,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,5,0.007766
+universal_robustness,0.05,100,targets supported at every budget,CTU_13,10,0.000000
+universal_robustness,0.05,100,targets supported at every budget,GOTHAM_2025,6,0.007195
+universal_robustness,0.05,100,targets supported at every budget,IOT_23,7,0.037908
+universal_robustness,0.05,100,targets supported at every budget,N_BAIOT,9,0.000000
+universal_robustness,0.05,100,targets supported at every budget,TON_IOT,5,0.125798
+universal_robustness,0.05,100,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.016235
+universal_robustness,0.05,100,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,5,0.007766
+universal_robustness,0.05,400,all supported targets,CTU_13,10,0.000000
+universal_robustness,0.05,400,all supported targets,GOTHAM_2025,6,-0.000029
+universal_robustness,0.05,400,all supported targets,IOT_23,8,0.056862
+universal_robustness,0.05,400,all supported targets,N_BAIOT,9,-0.000003
+universal_robustness,0.05,400,all supported targets,TON_IOT,5,0.133105
+universal_robustness,0.05,400,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.032580
+universal_robustness,0.05,400,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,5,0.013586
+universal_robustness,0.05,400,targets supported at every budget,CTU_13,10,0.000000
+universal_robustness,0.05,400,targets supported at every budget,GOTHAM_2025,6,-0.000029
+universal_robustness,0.05,400,targets supported at every budget,IOT_23,7,0.064309
+universal_robustness,0.05,400,targets supported at every budget,N_BAIOT,9,-0.000003
+universal_robustness,0.05,400,targets supported at every budget,TON_IOT,5,0.133105
+universal_robustness,0.05,400,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.032580
+universal_robustness,0.05,400,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,5,0.013586
+universal_robustness,0.05,750,all supported targets,CTU_13,10,0.000000
+universal_robustness,0.05,750,all supported targets,GOTHAM_2025,6,-0.000659
+universal_robustness,0.05,750,all supported targets,IOT_23,7,0.070083
+universal_robustness,0.05,750,all supported targets,N_BAIOT,9,-0.000004
+universal_robustness,0.05,750,all supported targets,TON_IOT,6,0.137214
+universal_robustness,0.05,750,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.006877
+universal_robustness,0.05,750,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,5,0.006402
+universal_robustness,0.05,750,targets supported at every budget,CTU_13,10,0.000000
+universal_robustness,0.05,750,targets supported at every budget,GOTHAM_2025,6,-0.000659
+universal_robustness,0.05,750,targets supported at every budget,IOT_23,7,0.070083
+universal_robustness,0.05,750,targets supported at every budget,N_BAIOT,9,-0.000004
+universal_robustness,0.05,750,targets supported at every budget,TON_IOT,5,0.123842
+universal_robustness,0.05,750,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.006877
+universal_robustness,0.05,750,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,5,0.006402
+broad_scaling,0.01,100,all supported targets,CTU_13,7,0.004527
+broad_scaling,0.01,100,all supported targets,GOTHAM_2025,4,0.032882
+broad_scaling,0.01,100,all supported targets,IOT_23,3,0.001322
+broad_scaling,0.01,100,all supported targets,N_BAIOT,7,0.000004
+broad_scaling,0.01,100,all supported targets,TON_IOT,4,0.220102
+broad_scaling,0.01,100,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004515
+broad_scaling,0.01,100,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,2,0.009922
+broad_scaling,0.01,100,targets supported at every budget,CTU_13,7,0.004527
+broad_scaling,0.01,100,targets supported at every budget,GOTHAM_2025,4,0.032882
+broad_scaling,0.01,100,targets supported at every budget,IOT_23,3,0.001322
+broad_scaling,0.01,100,targets supported at every budget,N_BAIOT,7,0.000004
+broad_scaling,0.01,100,targets supported at every budget,TON_IOT,2,0.245139
+broad_scaling,0.01,100,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004515
+broad_scaling,0.01,100,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,1,0.001662
+broad_scaling,0.01,400,all supported targets,CTU_13,7,0.002779
+broad_scaling,0.01,400,all supported targets,GOTHAM_2025,4,0.032390
+broad_scaling,0.01,400,all supported targets,IOT_23,3,0.009401
+broad_scaling,0.01,400,all supported targets,N_BAIOT,8,0.000002
+broad_scaling,0.01,400,all supported targets,TON_IOT,3,0.225245
+broad_scaling,0.01,400,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004646
+broad_scaling,0.01,400,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,2,0.000811
+broad_scaling,0.01,400,targets supported at every budget,CTU_13,7,0.002779
+broad_scaling,0.01,400,targets supported at every budget,GOTHAM_2025,4,0.032390
+broad_scaling,0.01,400,targets supported at every budget,IOT_23,3,0.009401
+broad_scaling,0.01,400,targets supported at every budget,N_BAIOT,7,0.000003
+broad_scaling,0.01,400,targets supported at every budget,TON_IOT,2,0.295515
+broad_scaling,0.01,400,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004646
+broad_scaling,0.01,400,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,1,0.001897
+broad_scaling,0.01,2000,all supported targets,CTU_13,7,0.003957
+broad_scaling,0.01,2000,all supported targets,GOTHAM_2025,4,-0.004682
+broad_scaling,0.01,2000,all supported targets,IOT_23,3,0.009364
+broad_scaling,0.01,2000,all supported targets,N_BAIOT,8,-0.000003
+broad_scaling,0.01,2000,all supported targets,TON_IOT,3,0.096307
+broad_scaling,0.01,2000,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.005001
+broad_scaling,0.01,2000,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,1,-0.000324
+broad_scaling,0.01,2000,targets supported at every budget,CTU_13,7,0.003957
+broad_scaling,0.01,2000,targets supported at every budget,GOTHAM_2025,4,-0.004682
+broad_scaling,0.01,2000,targets supported at every budget,IOT_23,3,0.009364
+broad_scaling,0.01,2000,targets supported at every budget,N_BAIOT,7,-0.000003
+broad_scaling,0.01,2000,targets supported at every budget,TON_IOT,2,0.103745
+broad_scaling,0.01,2000,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.005001
+broad_scaling,0.01,2000,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,1,-0.000324
+broad_scaling,0.05,100,all supported targets,CTU_13,9,0.000000
+broad_scaling,0.05,100,all supported targets,GOTHAM_2025,5,0.008633
+broad_scaling,0.05,100,all supported targets,IOT_23,3,0.012567
+broad_scaling,0.05,100,all supported targets,N_BAIOT,9,0.000000
+broad_scaling,0.05,100,all supported targets,TON_IOT,6,0.139146
+broad_scaling,0.05,100,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.016235
+broad_scaling,0.05,100,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,5,0.007766
+broad_scaling,0.05,100,targets supported at every budget,CTU_13,9,0.000000
+broad_scaling,0.05,100,targets supported at every budget,GOTHAM_2025,5,0.008633
+broad_scaling,0.05,100,targets supported at every budget,IOT_23,3,0.012567
+broad_scaling,0.05,100,targets supported at every budget,N_BAIOT,8,0.000000
+broad_scaling,0.05,100,targets supported at every budget,TON_IOT,4,0.157248
+broad_scaling,0.05,100,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.016235
+broad_scaling,0.05,100,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,5,0.007766
+broad_scaling,0.05,400,all supported targets,CTU_13,9,0.000000
+broad_scaling,0.05,400,all supported targets,GOTHAM_2025,5,-0.000035
+broad_scaling,0.05,400,all supported targets,IOT_23,3,0.008741
+broad_scaling,0.05,400,all supported targets,N_BAIOT,9,-0.000003
+broad_scaling,0.05,400,all supported targets,TON_IOT,5,0.133105
+broad_scaling,0.05,400,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.032580
+broad_scaling,0.05,400,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,5,0.013586
+broad_scaling,0.05,400,targets supported at every budget,CTU_13,9,0.000000
+broad_scaling,0.05,400,targets supported at every budget,GOTHAM_2025,5,-0.000035
+broad_scaling,0.05,400,targets supported at every budget,IOT_23,3,0.008741
+broad_scaling,0.05,400,targets supported at every budget,N_BAIOT,8,-0.000003
+broad_scaling,0.05,400,targets supported at every budget,TON_IOT,4,0.160613
+broad_scaling,0.05,400,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.032580
+broad_scaling,0.05,400,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,5,0.013586
+broad_scaling,0.05,2000,all supported targets,CTU_13,9,0.000000
+broad_scaling,0.05,2000,all supported targets,GOTHAM_2025,5,-0.001570
+broad_scaling,0.05,2000,all supported targets,IOT_23,3,-0.000514
+broad_scaling,0.05,2000,all supported targets,N_BAIOT,8,-0.000008
+broad_scaling,0.05,2000,all supported targets,TON_IOT,5,0.100896
+broad_scaling,0.05,2000,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.007490
+broad_scaling,0.05,2000,all supported targets,UNSW_IOT_ATTACK_FLOWS_G2,5,0.007152
+broad_scaling,0.05,2000,targets supported at every budget,CTU_13,9,0.000000
+broad_scaling,0.05,2000,targets supported at every budget,GOTHAM_2025,5,-0.001570
+broad_scaling,0.05,2000,targets supported at every budget,IOT_23,3,-0.000514
+broad_scaling,0.05,2000,targets supported at every budget,N_BAIOT,8,-0.000008
+broad_scaling,0.05,2000,targets supported at every budget,TON_IOT,4,0.113506
+broad_scaling,0.05,2000,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.007490
+broad_scaling,0.05,2000,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G2,5,0.007152
+high_resource,0.01,100,all supported targets,CTU_13,2,0.015251
+high_resource,0.01,100,all supported targets,GOTHAM_2025,1,0.000000
+high_resource,0.01,100,all supported targets,IOT_23,2,0.001137
+high_resource,0.01,100,all supported targets,N_BAIOT,3,-0.000001
+high_resource,0.01,100,all supported targets,TON_IOT,1,0.343535
+high_resource,0.01,100,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004515
+high_resource,0.01,100,targets supported at every budget,CTU_13,2,0.015251
+high_resource,0.01,100,targets supported at every budget,GOTHAM_2025,1,0.000000
+high_resource,0.01,100,targets supported at every budget,IOT_23,2,0.001137
+high_resource,0.01,100,targets supported at every budget,N_BAIOT,3,-0.000001
+high_resource,0.01,100,targets supported at every budget,TON_IOT,1,0.343535
+high_resource,0.01,100,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004515
+high_resource,0.01,400,all supported targets,CTU_13,2,0.008456
+high_resource,0.01,400,all supported targets,GOTHAM_2025,1,0.000000
+high_resource,0.01,400,all supported targets,IOT_23,2,0.013214
+high_resource,0.01,400,all supported targets,N_BAIOT,3,0.000001
+high_resource,0.01,400,all supported targets,TON_IOT,1,0.477782
+high_resource,0.01,400,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004646
+high_resource,0.01,400,targets supported at every budget,CTU_13,2,0.008456
+high_resource,0.01,400,targets supported at every budget,GOTHAM_2025,1,0.000000
+high_resource,0.01,400,targets supported at every budget,IOT_23,2,0.013214
+high_resource,0.01,400,targets supported at every budget,N_BAIOT,3,0.000001
+high_resource,0.01,400,targets supported at every budget,TON_IOT,1,0.477782
+high_resource,0.01,400,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.004646
+high_resource,0.01,2000,all supported targets,CTU_13,2,0.010531
+high_resource,0.01,2000,all supported targets,GOTHAM_2025,1,0.000000
+high_resource,0.01,2000,all supported targets,IOT_23,2,0.013809
+high_resource,0.01,2000,all supported targets,N_BAIOT,3,-0.000002
+high_resource,0.01,2000,all supported targets,TON_IOT,1,0.219394
+high_resource,0.01,2000,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.005001
+high_resource,0.01,2000,targets supported at every budget,CTU_13,2,0.010531
+high_resource,0.01,2000,targets supported at every budget,GOTHAM_2025,1,0.000000
+high_resource,0.01,2000,targets supported at every budget,IOT_23,2,0.013809
+high_resource,0.01,2000,targets supported at every budget,N_BAIOT,3,-0.000002
+high_resource,0.01,2000,targets supported at every budget,TON_IOT,1,0.219394
+high_resource,0.01,2000,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.005001
+high_resource,0.01,20000,all supported targets,CTU_13,2,0.005390
+high_resource,0.01,20000,all supported targets,GOTHAM_2025,1,0.000000
+high_resource,0.01,20000,all supported targets,IOT_23,2,0.013139
+high_resource,0.01,20000,all supported targets,N_BAIOT,3,-0.000003
+high_resource,0.01,20000,all supported targets,TON_IOT,1,0.019078
+high_resource,0.01,20000,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,-0.000974
+high_resource,0.01,20000,targets supported at every budget,CTU_13,2,0.005390
+high_resource,0.01,20000,targets supported at every budget,GOTHAM_2025,1,0.000000
+high_resource,0.01,20000,targets supported at every budget,IOT_23,2,0.013139
+high_resource,0.01,20000,targets supported at every budget,N_BAIOT,3,-0.000003
+high_resource,0.01,20000,targets supported at every budget,TON_IOT,1,0.019078
+high_resource,0.01,20000,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,-0.000974
+high_resource,0.05,100,all supported targets,CTU_13,2,0.000000
+high_resource,0.05,100,all supported targets,GOTHAM_2025,2,0.000000
+high_resource,0.05,100,all supported targets,IOT_23,2,0.018845
+high_resource,0.05,100,all supported targets,N_BAIOT,3,0.000002
+high_resource,0.05,100,all supported targets,TON_IOT,1,0.426380
+high_resource,0.05,100,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.016235
+high_resource,0.05,100,targets supported at every budget,CTU_13,2,0.000000
+high_resource,0.05,100,targets supported at every budget,GOTHAM_2025,2,0.000000
+high_resource,0.05,100,targets supported at every budget,IOT_23,2,0.018845
+high_resource,0.05,100,targets supported at every budget,N_BAIOT,3,0.000002
+high_resource,0.05,100,targets supported at every budget,TON_IOT,1,0.426380
+high_resource,0.05,100,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.016235
+high_resource,0.05,400,all supported targets,CTU_13,2,0.000000
+high_resource,0.05,400,all supported targets,GOTHAM_2025,2,0.000000
+high_resource,0.05,400,all supported targets,IOT_23,2,0.013103
+high_resource,0.05,400,all supported targets,N_BAIOT,3,0.000002
+high_resource,0.05,400,all supported targets,TON_IOT,1,0.426338
+high_resource,0.05,400,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.032580
+high_resource,0.05,400,targets supported at every budget,CTU_13,2,0.000000
+high_resource,0.05,400,targets supported at every budget,GOTHAM_2025,2,0.000000
+high_resource,0.05,400,targets supported at every budget,IOT_23,2,0.013103
+high_resource,0.05,400,targets supported at every budget,N_BAIOT,3,0.000002
+high_resource,0.05,400,targets supported at every budget,TON_IOT,1,0.426338
+high_resource,0.05,400,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.032580
+high_resource,0.05,2000,all supported targets,CTU_13,2,0.000000
+high_resource,0.05,2000,all supported targets,GOTHAM_2025,2,0.000000
+high_resource,0.05,2000,all supported targets,IOT_23,2,-0.000771
+high_resource,0.05,2000,all supported targets,N_BAIOT,3,-0.000007
+high_resource,0.05,2000,all supported targets,TON_IOT,1,0.313507
+high_resource,0.05,2000,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,0.007490
+high_resource,0.05,2000,targets supported at every budget,CTU_13,2,0.000000
+high_resource,0.05,2000,targets supported at every budget,GOTHAM_2025,2,0.000000
+high_resource,0.05,2000,targets supported at every budget,IOT_23,2,-0.000771
+high_resource,0.05,2000,targets supported at every budget,N_BAIOT,3,-0.000007
+high_resource,0.05,2000,targets supported at every budget,TON_IOT,1,0.313507
+high_resource,0.05,2000,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,0.007490
+high_resource,0.05,20000,all supported targets,CTU_13,2,0.000159
+high_resource,0.05,20000,all supported targets,GOTHAM_2025,2,0.000000
+high_resource,0.05,20000,all supported targets,IOT_23,2,0.003330
+high_resource,0.05,20000,all supported targets,N_BAIOT,3,-0.000003
+high_resource,0.05,20000,all supported targets,TON_IOT,1,0.378128
+high_resource,0.05,20000,all supported targets,UNSW_IOT_ATTACK_FLOWS_G1,4,-0.001374
+high_resource,0.05,20000,targets supported at every budget,CTU_13,2,0.000159
+high_resource,0.05,20000,targets supported at every budget,GOTHAM_2025,2,0.000000
+high_resource,0.05,20000,targets supported at every budget,IOT_23,2,0.003330
+high_resource,0.05,20000,targets supported at every budget,N_BAIOT,3,-0.000003
+high_resource,0.05,20000,targets supported at every budget,TON_IOT,1,0.378128
+high_resource,0.05,20000,targets supported at every budget,UNSW_IOT_ATTACK_FLOWS_G1,4,-0.001374

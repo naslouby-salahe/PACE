@@ -1,0 +1,21 @@
+alpha,local_rows,scope,inference_method,targets,estimate,lower,upper,adjusted_p
+0.01,100,all supported targets,target bootstrap within datasets (primary),4,0.000218,0.000000,0.000654,
+0.01,100,all supported targets,two-stage dataset-cluster bootstrap,4,0.000218,0.000000,0.000654,
+0.01,100,all supported targets,"equal-weight dataset means, dataset bootstrap",4,0.000218,0.000000,0.000654,
+0.01,100,all targets,unsupported targets counted as zero gain,5,0.000174,0.000000,0.000523,
+0.01,100,IOT_23,"target bootstrap in one dataset, Holm adjusted",4,0.000218,0.000000,0.000654,0.6325
+0.01,400,all supported targets,target bootstrap within datasets (primary),4,0.000247,0.000000,0.000742,
+0.01,400,all supported targets,two-stage dataset-cluster bootstrap,4,0.000247,0.000000,0.000742,
+0.01,400,all supported targets,"equal-weight dataset means, dataset bootstrap",4,0.000247,0.000000,0.000742,
+0.01,400,all targets,unsupported targets counted as zero gain,5,0.000198,0.000000,0.000594,
+0.01,400,IOT_23,"target bootstrap in one dataset, Holm adjusted",4,0.000247,0.000000,0.000742,0.6325
+0.05,100,all supported targets,target bootstrap within datasets (primary),4,-0.002397,-0.007190,0.000000,
+0.05,100,all supported targets,two-stage dataset-cluster bootstrap,4,-0.002397,-0.007190,0.000000,
+0.05,100,all supported targets,"equal-weight dataset means, dataset bootstrap",4,-0.002397,-0.007190,0.000000,
+0.05,100,all targets,unsupported targets counted as zero gain,5,-0.001917,-0.005752,0.000000,
+0.05,100,IOT_23,"target bootstrap in one dataset, Holm adjusted",4,-0.002397,-0.007190,0.000000,0.6325
+0.05,400,all supported targets,target bootstrap within datasets (primary),4,-0.002614,-0.007843,0.000000,
+0.05,400,all supported targets,two-stage dataset-cluster bootstrap,4,-0.002614,-0.007843,0.000000,
+0.05,400,all supported targets,"equal-weight dataset means, dataset bootstrap",4,-0.002614,-0.007843,0.000000,
+0.05,400,all targets,unsupported targets counted as zero gain,5,-0.002092,-0.006275,0.000000,
+0.05,400,IOT_23,"target bootstrap in one dataset, Holm adjusted",4,-0.002614,-0.007843,0.000000,0.6325

@@ -3,8 +3,9 @@ from pathlib import Path
 import numpy as np
 
 from pace.config import LocalBankSettings, load_configuration
-from pace.core.decision import TieredLocalEvidence
+from pace.core.decision import TieredLocalEvidence, apply_local_union_peer_rule
 from pace.core.joint import apply_joint_local_peer_rule
+from pace.experiment.arms import calibration_rule, designed_decisions
 from pace.experiment.inputs import LocalEvidence, second_order_evidence
 from pace.experiment.models import (
     LocalBankDetectorScores,
@@ -214,3 +215,55 @@ def test_shrinkage_bounds_the_gaussian_precision_that_a_near_constant_feature_in
         axis=1,
     )
     assert shrunk_shift.mean() < 0.1 * ridge_shift.mean()
+
+
+def test_anchor_alternatives_replace_only_the_anchor_and_leave_the_bank_untouched() -> None:
+    local = _local_evidence()
+    primary = local.tiered()
+    for design in (
+        BankDesign.MEDIAN_ANCHOR,
+        BankDesign.TRIMMED_ANCHOR,
+        BankDesign.COMPLEMENTARY_ANCHOR,
+    ):
+        alternative = local.tiered(design=design)
+        np.testing.assert_array_equal(alternative.bank_calibration, primary.bank_calibration)
+        np.testing.assert_array_equal(alternative.bank_evaluation, primary.bank_evaluation)
+        assert not np.array_equal(alternative.anchor_calibration, primary.anchor_calibration)
+        assert alternative.anchor_calibration.shape == primary.anchor_calibration.shape
+    for design in (BankDesign.PER_EXPERT, BankDesign.NO_ANCHOR):
+        np.testing.assert_array_equal(
+            local.tiered(design=design).anchor_calibration, primary.anchor_calibration
+        )
+
+
+def test_the_no_anchor_design_gives_the_whole_local_budget_to_the_bank_union() -> None:
+    local = _local_evidence()
+    generator = np.random.default_rng(21)
+    peer_calibration = np.abs(generator.normal(size=(4, 140)))
+    peer_query = np.abs(generator.normal(size=(4, 160)))
+    configuration = load_configuration(REPOSITORY_ROOT / "configs" / "default.yaml", Path.cwd())
+    scientific = configuration.scientific
+    rule = calibration_rule(scientific, design=BankDesign.NO_ANCHOR)
+    decisions = designed_decisions(
+        local.tiered(design=BankDesign.NO_ANCHOR),
+        peer_calibration,
+        peer_query,
+        scientific,
+        0.005,
+        0.005,
+        rule,
+    )
+    reference = apply_local_union_peer_rule(
+        local.bank.calibration,
+        local.bank.query,
+        peer_calibration,
+        peer_query,
+        scientific.calibration_block_size,
+        0.005,
+        0.005,
+        rule.union,
+        None,
+    )
+    np.testing.assert_array_equal(decisions.local_alerts, reference.local_alerts)
+    assert decisions.anchor_budget is None
+    assert len(decisions.bank_thresholds) == len(LocalExpertKind) - 1

@@ -129,11 +129,12 @@ def resolution_mechanism(inputs: ReportInputs) -> Figure:
         width=0.8,
         label=ReferenceAnnotation.ONE_ALERT_PER_BLOCK.label,
     )
-    for alpha in AlphaLevel:
+    for alpha, style in zip(AlphaLevel, (PlotLineStyle.DASHED, PlotLineStyle.DASHDOT), strict=True):
         vertical_guide(
             axes,
             BudgetGuide.HALF_LOCAL.budget(alpha, reserve),
             ink=PlotInk.CYCLE_3,
+            style=style,
             width=0.8,
             label=BudgetGuide.HALF_LOCAL.text(alpha),
         )
@@ -141,6 +142,7 @@ def resolution_mechanism(inputs: ReportInputs) -> Figure:
             axes,
             BudgetGuide.LOCAL.budget(alpha, reserve),
             ink=PlotInk.CYCLE_2,
+            style=style,
             width=0.8,
             label=BudgetGuide.LOCAL.text(alpha),
         )

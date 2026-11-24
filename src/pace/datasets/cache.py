@@ -1,6 +1,9 @@
+import fcntl
 import shutil
 import tempfile
-from collections.abc import Callable
+from collections.abc import Callable, Generator
+from contextlib import contextmanager
+from functools import cache
 from pathlib import Path
 
 import numpy as np
@@ -16,6 +19,7 @@ from pace.types import (
     AttackCapture,
     AttackType,
     AttackTypeName,
+    CacheEntryIdle,
     CacheFileName,
     CacheSlot,
     ClientName,
@@ -29,6 +33,8 @@ from pace.types import (
     FrozenStrictModel,
     LabNetwork,
     LengthPrefixedHasher,
+    LockFileSuffix,
+    LockMode,
     LogEvent,
     ObservationCount,
     OutputDirectory,
@@ -88,6 +94,7 @@ def _load_order(path: Path) -> RowIndexArray:
     return np.load(path)
 
 
+@cache
 def _digest_loader_code() -> ScientificDigest:
     package_root = Path(pace.__file__).resolve().parent
     hasher = LengthPrefixedHasher()
@@ -113,6 +120,27 @@ def cache_key(
     hasher.framed(ArtifactPayload(lab_network.with_prefixlen.encode(TextEncoding.UTF8)))
     hasher.framed_label(_digest_loader_code())
     return hasher.hexdigest()
+
+
+@contextmanager
+def _entry_lock(cache_root: Path, key: ScientificDigest, mode: LockMode) -> Generator[None]:
+    cache_root.mkdir(parents=True, exist_ok=True)
+    with (cache_root / f".{key}{LockFileSuffix.LOCK}").open("ab") as handle:
+        fcntl.flock(handle, fcntl.LOCK_SH if mode is LockMode.SHARED else fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(handle, fcntl.LOCK_UN)
+
+
+def _entry_is_idle(cache_root: Path, key: ScientificDigest) -> CacheEntryIdle:
+    with (cache_root / f".{key}{LockFileSuffix.LOCK}").open("ab") as handle:
+        try:
+            fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            return False
+        fcntl.flock(handle, fcntl.LOCK_UN)
+        return True
 
 
 def store_clients(
@@ -155,8 +183,9 @@ def store_clients(
             manifest.model_dump_json(), encoding=TextEncoding.UTF8
         )
         destination = cache_root / key
-        shutil.rmtree(destination, ignore_errors=True)
-        staging.replace(destination)
+        with _entry_lock(cache_root, key, LockMode.EXCLUSIVE):
+            shutil.rmtree(destination, ignore_errors=True)
+            staging.replace(destination)
         logger.info(LogEvent.CLIENT_CACHE_STORED, cache_key=key, client_count=len(clients))
         prune_superseded(cache_root, key, clients[0].study_stratum)
     finally:
@@ -179,9 +208,12 @@ def prune_superseded(cache_root: Path, key: ScientificDigest, stratum: StudyStra
             entry.name == key
             or entry.name.startswith(CacheFileName.STAGING)
             or _cached_stratum(entry) is not stratum
+            or not _entry_is_idle(cache_root, entry.name)
         ):
             continue
-        shutil.rmtree(entry, ignore_errors=True)
+        with _entry_lock(cache_root, entry.name, LockMode.EXCLUSIVE):
+            shutil.rmtree(entry, ignore_errors=True)
+        (cache_root / f".{entry.name}{LockFileSuffix.LOCK}").unlink(missing_ok=True)
         logger.info(LogEvent.CLIENT_CACHE_PRUNED, cache_key=entry.name, stratum=stratum.name)
 
 
@@ -189,47 +221,51 @@ def load_cached_clients(
     cache_root: Path, key: ScientificDigest
 ) -> tuple[DatasetClientData, ...] | None:
     directory = cache_root / key
-
+    if not directory.is_dir():
+        return None
     try:
-        manifest = CachedClients.model_validate_json(
-            (directory / CacheFileName.MANIFEST).read_bytes(), strict=True
-        )
-        return tuple(
-            DatasetClientData(
-                DatasetClientId(entry.dataset, entry.client),
-                entry.study_stratum,
-                entry.feature_schema,
-                entry.feature_names,
-                _load_matrix(_benign_path(directory, CacheSlot(index))),
-                _load_order(_order_path(directory, CacheSlot(index))),
-                tuple(
-                    AttackCapture(
-                        AttackType(capture.attack_type),
-                        capture.source_file,
-                        _load_matrix(
-                            _capture_features_path(
-                                directory, CacheSlot(index), CacheSlot(capture_index)
-                            )
-                        ),
-                        _load_order(
-                            _capture_order_path(
-                                directory, CacheSlot(index), CacheSlot(capture_index)
-                            )
-                        ),
-                        capture.source_population_rows,
-                    )
-                    for capture_index, capture in enumerate(entry.captures)
-                ),
-                entry.target_cohort_role,
-                entry.benign_source_population_rows,
-            )
-            for index, entry in enumerate(manifest.clients)
-        )
+        with _entry_lock(cache_root, key, LockMode.SHARED):
+            return _read_cached_clients(directory)
     except (OSError, ValueError, ValidationError) as error:
         logger.warning(
             LogEvent.CLIENT_CACHE_REJECTED, cache_key=key, failure_type=type(error).__name__
         )
         return None
+
+
+def _read_cached_clients(directory: Path) -> tuple[DatasetClientData, ...]:
+    manifest = CachedClients.model_validate_json(
+        (directory / CacheFileName.MANIFEST).read_bytes(), strict=True
+    )
+    return tuple(
+        DatasetClientData(
+            DatasetClientId(entry.dataset, entry.client),
+            entry.study_stratum,
+            entry.feature_schema,
+            entry.feature_names,
+            _load_matrix(_benign_path(directory, CacheSlot(index))),
+            _load_order(_order_path(directory, CacheSlot(index))),
+            tuple(
+                AttackCapture(
+                    AttackType(capture.attack_type),
+                    capture.source_file,
+                    _load_matrix(
+                        _capture_features_path(
+                            directory, CacheSlot(index), CacheSlot(capture_index)
+                        )
+                    ),
+                    _load_order(
+                        _capture_order_path(directory, CacheSlot(index), CacheSlot(capture_index))
+                    ),
+                    capture.source_population_rows,
+                )
+                for capture_index, capture in enumerate(entry.captures)
+            ),
+            entry.target_cohort_role,
+            entry.benign_source_population_rows,
+        )
+        for index, entry in enumerate(manifest.clients)
+    )
 
 
 def validate_dataset_clients(clients: tuple[DatasetClientData, ...]) -> DatasetName:

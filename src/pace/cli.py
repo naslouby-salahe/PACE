@@ -36,6 +36,7 @@ from pace.types import (
     CommandName,
     CommandTarget,
     ConfigurationFile,
+    ConfirmationEvidence,
     DisplayText,
     EnvironmentVariable,
     ExitStatus,
@@ -415,7 +416,13 @@ def accept(population: PopulationOption = PopulationScope.PRIMARY) -> ExitStatus
             for note in confirmation_notes(acceptance):
                 typer.echo(f"Measured negative evidence: {note}")
             typer.echo(f"INDEPENDENT CONFIRMATION: {evidence.label}")
-            return ExitStatus.SUCCESS
+            match evidence:
+                case ConfirmationEvidence.CONFIRMED:
+                    return ExitStatus.SUCCESS
+                case ConfirmationEvidence.DETECTION_CEILING:
+                    return ExitStatus.INCONCLUSIVE
+                case ConfirmationEvidence.NOT_ESTABLISHED:
+                    return ExitStatus.FAILURE
         typer.echo("Primary cells (gating):")
         for cell in acceptance.gating_cells:
             typer.echo(acceptance_line(cell))

@@ -1,0 +1,6 @@
+stratum,target,training_rows,attack_families,benign_test_rows,peers
+IOT_23_FRESH,17-1,12575,4,6288,15
+IOT_23_FRESH,33-1,15499,3,7750,15
+IOT_23_FRESH,39-1,2934,3,1468,15
+IOT_23_FRESH,43-1,80000,4,40000,15
+IOT_23_FRESH,52-1,717,1,359,15

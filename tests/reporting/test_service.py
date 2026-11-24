@@ -16,12 +16,12 @@ from pace.experiment.artifacts import (
     CampaignOutcome,
     Provenance,
     campaign_artifact_path,
-    digest_files,
-    digest_implementation,
     reuse_or_write_artifact,
 )
+from pace.experiment.implementation import digest_implementation
 from pace.experiment.preflight import matrix_variants
 from pace.experiment.runner import run_dataset_study
+from pace.experiment.sources import digest_files
 from pace.reporting.acceptance import summarize_acceptance
 from pace.reporting.figure_canvas import Panel, axes_center, new_figure  # noqa
 from pace.reporting.figures import write_figures

@@ -217,7 +217,7 @@ def test_atomic_writes_clean_up_and_reject_failed_validation(tmp_path: Path) -> 
     with pytest.raises(ArtifactValidationError, match="rejected"):
         write_bytes_atomically(target, ArtifactPayload_input, reject)
     assert not target.exists()
-    assert tuple(target.parent.iterdir()) == ()
+    assert tuple(path.name for path in target.parent.iterdir()) == (".artifact.json.lock",)
     blocked = tmp_path / "file"
     blocked.write_text("x", encoding="utf-8")
     ArtifactPayload_input = ArtifactPayload(b"data")

@@ -96,8 +96,8 @@ def comparable_operating_curves(inputs: ReportInputs) -> Figure:
             if limit < 1.0:
                 axes.set_xlim(0.0, limit)
             axes.set_ylim(0.0, 1.02)
-            axes.set_xlabel("Mean FPR across target-seed runs (nominal-budget sweep)")
-            axes.set_ylabel("Mean detection rate across target-seed runs")
+            axes.set_xlabel("Mean FPR (target-seed runs;\nnominal-budget sweep)")
+            axes.set_ylabel("Mean detection rate\n(target-seed runs)")
     handles, labels = figure.axes[0].get_legend_handles_labels()
     variant_handles, variant_labels = figure.axes[2 * len(grouped)].get_legend_handles_labels()
     handles.extend(

@@ -1,0 +1,65 @@
+alpha,local_rows,scope,inference_method,targets,estimate,lower,upper,adjusted_p
+0.01,100,all supported targets,target bootstrap within datasets (primary),33,0.032894,0.022131,0.044430,
+0.01,100,all supported targets,two-stage dataset-cluster bootstrap,33,0.032894,0.001828,0.102977,
+0.01,100,all supported targets,"equal-weight dataset means, dataset bootstrap",33,0.044043,0.001817,0.122199,
+0.01,100,all targets,unsupported targets counted as zero gain,58,0.018716,0.006794,0.032226,
+0.01,100,CTU_13,"target bootstrap in one dataset, Holm adjusted",8,0.003961,0.000024,0.011586,0.0856
+0.01,100,GOTHAM_2025,"target bootstrap in one dataset, Holm adjusted",4,0.032882,0.000000,0.065764,0.3900
+0.01,100,IOT_23,"target bootstrap in one dataset, Holm adjusted",4,0.000991,0.000000,0.001982,0.3900
+0.01,100,N_BAIOT,"target bootstrap in one dataset, Holm adjusted",7,0.000004,-0.000003,0.000010,0.3900
+0.01,100,TON_IOT,"target bootstrap in one dataset, Holm adjusted",4,0.220102,0.136737,0.303468,0.0012
+0.01,100,UNSW_IOT_ATTACK_FLOWS,"target bootstrap in one dataset, Holm adjusted",6,0.006317,0.002282,0.011562,0.0012
+0.01,100,without CTU_13,target bootstrap without one dataset,25,0.042153,0.028086,0.057227,
+0.01,100,without GOTHAM_2025,target bootstrap without one dataset,29,0.032896,0.021056,0.045310,
+0.01,100,without IOT_23,target bootstrap without one dataset,29,0.037295,0.024842,0.050319,
+0.01,100,without N_BAIOT,target bootstrap without one dataset,26,0.041750,0.028146,0.056434,
+0.01,100,without TON_IOT,target bootstrap without one dataset,29,0.007073,0.002230,0.012063,
+0.01,100,without UNSW_IOT_ATTACK_FLOWS,target bootstrap without one dataset,27,0.038801,0.025663,0.052959,
+0.01,400,all supported targets,target bootstrap within datasets (primary),33,0.026460,0.010397,0.047062,
+0.01,400,all supported targets,two-stage dataset-cluster bootstrap,33,0.026460,0.001420,0.093447,
+0.01,400,all supported targets,"equal-weight dataset means, dataset bootstrap",33,0.045081,0.001580,0.134548,
+0.01,400,all targets,unsupported targets counted as zero gain,58,0.015055,0.002940,0.032478,
+0.01,400,CTU_13,"target bootstrap in one dataset, Holm adjusted",8,0.002431,0.000071,0.006641,0.0040
+0.01,400,GOTHAM_2025,"target bootstrap in one dataset, Holm adjusted",4,0.032390,0.000000,0.096641,0.3900
+0.01,400,IOT_23,"target bootstrap in one dataset, Holm adjusted",4,0.007051,0.000000,0.019821,0.3900
+0.01,400,N_BAIOT,"target bootstrap in one dataset, Holm adjusted",8,0.000002,-0.000005,0.000009,0.5153
+0.01,400,TON_IOT,"target bootstrap in one dataset, Holm adjusted",3,0.225245,0.084705,0.477782,0.0012
+0.01,400,UNSW_IOT_ATTACK_FLOWS,"target bootstrap in one dataset, Holm adjusted",6,0.003368,0.001011,0.006091,0.0012
+0.01,400,without CTU_13,target bootstrap without one dataset,25,0.034149,0.013086,0.061075,
+0.01,400,without GOTHAM_2025,target bootstrap without one dataset,29,0.025642,0.010758,0.051028,
+0.01,400,without IOT_23,target bootstrap without one dataset,29,0.029137,0.010985,0.054668,
+0.01,400,without N_BAIOT,target bootstrap without one dataset,25,0.034926,0.013731,0.061987,
+0.01,400,without TON_IOT,target bootstrap without one dataset,30,0.006581,0.001000,0.015185,
+0.01,400,without UNSW_IOT_ATTACK_FLOWS,target bootstrap without one dataset,27,0.031591,0.011905,0.056581,
+0.05,100,all supported targets,target bootstrap within datasets (primary),48,0.026078,0.008902,0.044420,
+0.05,100,all supported targets,two-stage dataset-cluster bootstrap,48,0.026078,0.002255,0.074069,
+0.05,100,all supported targets,"equal-weight dataset means, dataset bootstrap",48,0.031935,0.002600,0.086220,
+0.05,100,all targets,unsupported targets counted as zero gain,58,0.021582,0.006789,0.039805,
+0.05,100,CTU_13,"target bootstrap in one dataset, Holm adjusted",10,0.000000,0.000000,0.000000,1.0000
+0.05,100,GOTHAM_2025,"target bootstrap in one dataset, Holm adjusted",6,0.007195,0.000000,0.018506,0.5153
+0.05,100,IOT_23,"target bootstrap in one dataset, Holm adjusted",8,0.033740,0.000571,0.090653,0.0340
+0.05,100,N_BAIOT,"target bootstrap in one dataset, Holm adjusted",9,0.000000,-0.000001,0.000002,1.0000
+0.05,100,TON_IOT,"target bootstrap in one dataset, Holm adjusted",6,0.139146,0.032852,0.280075,0.0344
+0.05,100,UNSW_IOT_ATTACK_FLOWS,"target bootstrap in one dataset, Holm adjusted",9,0.011530,0.004626,0.018682,0.0012
+0.05,100,without CTU_13,target bootstrap without one dataset,38,0.032941,0.011258,0.056420,
+0.05,100,without GOTHAM_2025,target bootstrap without one dataset,42,0.028776,0.009208,0.049669,
+0.05,100,without IOT_23,target bootstrap without one dataset,40,0.024545,0.007616,0.045274,
+0.05,100,without N_BAIOT,target bootstrap without one dataset,39,0.032096,0.010963,0.054815,
+0.05,100,without TON_IOT,target bootstrap without one dataset,42,0.009925,0.002690,0.021141,
+0.05,100,without UNSW_IOT_ATTACK_FLOWS,target bootstrap without one dataset,39,0.029435,0.008169,0.052072,
+0.05,400,all supported targets,target bootstrap within datasets (primary),47,0.028053,0.007772,0.052306,
+0.05,400,all supported targets,two-stage dataset-cluster bootstrap,47,0.028053,0.000930,0.077532,
+0.05,400,all supported targets,"equal-weight dataset means, dataset bootstrap",47,0.035327,0.000951,0.093753,
+0.05,400,all targets,unsupported targets counted as zero gain,58,0.022732,0.005355,0.045354,
+0.05,400,CTU_13,"target bootstrap in one dataset, Holm adjusted",10,0.000000,0.000000,0.000000,1.0000
+0.05,400,GOTHAM_2025,"target bootstrap in one dataset, Holm adjusted",6,-0.000029,-0.001407,0.001321,1.0000
+0.05,400,IOT_23,"target bootstrap in one dataset, Holm adjusted",8,0.056862,0.000592,0.162845,0.0272
+0.05,400,N_BAIOT,"target bootstrap in one dataset, Holm adjusted",9,-0.000003,-0.000011,0.000003,1.0000
+0.05,400,TON_IOT,"target bootstrap in one dataset, Holm adjusted",5,0.133105,0.008679,0.296402,0.0030
+0.05,400,UNSW_IOT_ATTACK_FLOWS,"target bootstrap in one dataset, Holm adjusted",9,0.022028,0.006610,0.040682,0.0012
+0.05,400,without CTU_13,target bootstrap without one dataset,37,0.035634,0.009567,0.065670,
+0.05,400,without GOTHAM_2025,target bootstrap without one dataset,41,0.032162,0.008763,0.059874,
+0.05,400,without IOT_23,target bootstrap without one dataset,39,0.022143,0.005448,0.042804,
+0.05,400,without N_BAIOT,target bootstrap without one dataset,38,0.034697,0.009399,0.064376,
+0.05,400,without TON_IOT,target bootstrap without one dataset,42,0.015546,0.002755,0.036415,
+0.05,400,without UNSW_IOT_ATTACK_FLOWS,target bootstrap without one dataset,38,0.029480,0.003582,0.057979,

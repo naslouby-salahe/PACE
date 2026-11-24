@@ -12,7 +12,7 @@ from pace.core.decision import block_max_threshold, consecutive_blocks
 from pace.datasets.cache import resolve_clients
 from pace.datasets.registry import dataset_source_files, load_dataset
 from pace.experiment.arms import protected_channel_decisions
-from pace.experiment.artifacts import derive_learning_seed, digest_source_files
+from pace.experiment.artifacts import derive_learning_seed
 from pace.experiment.baselines.diot import fine_tune_detector, fit_alphabet, fit_federated_profile
 from pace.experiment.baselines.kitnet import fit_kitnet
 from pace.experiment.baselines.mcde import McdeDetector, PeerSupervision, fit_modes, fit_supervised
@@ -25,6 +25,7 @@ from pace.experiment.inputs import (
 )
 from pace.experiment.models import fit_local_ensemble, select_local_training_rows
 from pace.experiment.runner import fit_peer_experts, prepare_clients
+from pace.experiment.sources import digest_source_files
 from pace.types import (
     ComputeMeasurement,
     ComputePhase,

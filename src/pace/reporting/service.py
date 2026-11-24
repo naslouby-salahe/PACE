@@ -16,14 +16,14 @@ from pace.experiment.artifacts import (
     CampaignOutcome,
     Provenance,
     campaign_artifact_path,
-    digest_implementation,
-    digest_source_files,
     execution_log_path,
     read_verified_artifact,
     write_bytes_atomically,
 )
+from pace.experiment.implementation import digest_implementation
 from pace.experiment.logging_setup import configure_logging
 from pace.experiment.preflight import MatrixVariant, matrix_variants, read_budget_plan_summary
+from pace.experiment.sources import digest_source_files
 from pace.reporting.acceptance import summarize_acceptance
 from pace.reporting.figures import write_figures
 from pace.reporting.metrics import summarize_campaign
@@ -159,16 +159,35 @@ def build_campaign_report(
 def validate_campaign_report(report: PersistedCampaignReport, provenance: ReportProvenance) -> None:
     if report.schema_version != CURRENT_ARTIFACT_SCHEMA:
         raise ArtifactValidationError("Campaign report schema is not supported")
-    if provenance.provenance_active and (
-        report.configuration_digest != provenance.configuration_digest
-        or report.reporting_configuration != provenance.reporting_configuration
-        or report.reporting_digest != provenance.reporting_digest
-        or report.input_digest != provenance.input_digest
-        or report.implementation_digest != provenance.implementation_digest
-        or report.source_artifact_digest != provenance.source_artifact_digest
-        or report.sources != provenance.sources
-    ):
-        raise ArtifactConflictError("Campaign report provenance does not match verified evidence")
+    differing = tuple(
+        field
+        for field, matches in (
+            (
+                "configuration_digest",
+                report.configuration_digest == provenance.configuration_digest,
+            ),
+            (
+                "reporting_configuration",
+                report.reporting_configuration == provenance.reporting_configuration,
+            ),
+            ("reporting_digest", report.reporting_digest == provenance.reporting_digest),
+            ("input_digest", report.input_digest == provenance.input_digest),
+            (
+                "implementation_digest",
+                report.implementation_digest == provenance.implementation_digest,
+            ),
+            (
+                "source_artifact_digest",
+                report.source_artifact_digest == provenance.source_artifact_digest,
+            ),
+            ("sources", report.sources == provenance.sources),
+        )
+        if not matches
+    )
+    if provenance.provenance_active and differing:
+        raise ArtifactConflictError(
+            f"Campaign report provenance does not match verified evidence: {', '.join(differing)}"
+        )
     if report.content_digest != _content_digest(report):
         raise ArtifactValidationError("Campaign report content hash does not match its contents")
 

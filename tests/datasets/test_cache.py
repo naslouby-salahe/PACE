@@ -1,9 +1,12 @@
+import threading
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import numpy as np
 
+import pace.datasets.cache as cache_module
 from pace.datasets.cache import cache_key, load_cached_clients, store_clients
-from pace.types import CacheFileName, DatasetName, LabNetwork, StudyStratum
+from pace.types import CacheFileName, DatasetName, LabNetwork, LockMode, StudyStratum
 from tests.support import campaign_devices
 
 LAN = LabNetwork("192.168.1.0/24")
@@ -69,8 +72,48 @@ def test_storing_a_cache_prunes_superseded_copies_of_the_same_stratum_only(
 
     store_clients(tmp_path, new, clients)
 
-    assert sorted(path.name for path in tmp_path.iterdir()) == sorted(
+    names = sorted(path.name for path in tmp_path.iterdir())
+    assert [name for name in names if not name.endswith(".lock")] == sorted(
         (new, foreign, f"{CacheFileName.STAGING}crashed", "unreadable")
     )
+    assert f".{old}.lock" not in names
     assert load_cached_clients(tmp_path, new) is not None
     assert (tmp_path / foreign / "manifest.json").is_file()
+
+
+def test_simultaneous_stores_of_one_key_always_leave_a_complete_loadable_entry(
+    tmp_path: Path,
+) -> None:
+    clients = campaign_devices()
+    key = cache_key(DatasetName.N_BAIOT, StudyStratum.N_BAIOT, "4" * 64, LAN)
+    gate = threading.Barrier(5)
+
+    def store(_worker: int) -> None:
+        gate.wait()
+        store_clients(tmp_path, key, clients)
+
+    with ThreadPoolExecutor(max_workers=5) as pool:
+        list(pool.map(store, range(5)))
+
+    restored = load_cached_clients(tmp_path, key)
+    assert restored is not None
+    for original, loaded in zip(clients, restored, strict=True):
+        np.testing.assert_array_equal(original.benign_features, loaded.benign_features)
+
+
+def test_a_reader_holding_an_entry_blocks_pruning_until_it_is_done(tmp_path: Path) -> None:
+    clients = campaign_devices()
+    old = cache_key(DatasetName.N_BAIOT, StudyStratum.N_BAIOT, "1" * 64, LAN)
+    new = cache_key(DatasetName.N_BAIOT, StudyStratum.N_BAIOT, "2" * 64, LAN)
+    newest = cache_key(DatasetName.N_BAIOT, StudyStratum.N_BAIOT, "3" * 64, LAN)
+    store_clients(tmp_path, old, clients)
+
+    with cache_module._entry_lock(tmp_path, old, LockMode.SHARED):  # pyright: ignore[reportPrivateUsage]
+        store_clients(tmp_path, new, clients)
+        assert load_cached_clients(tmp_path, old) is not None
+
+    store_clients(tmp_path, newest, clients)
+
+    assert load_cached_clients(tmp_path, old) is None
+    assert load_cached_clients(tmp_path, new) is None
+    assert load_cached_clients(tmp_path, newest) is not None

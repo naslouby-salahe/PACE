@@ -1,20 +1,23 @@
+import fcntl
 import hashlib
-import importlib.metadata
 import os
-import platform
-import sys
 import tempfile
-from collections.abc import Callable, Iterator, Sequence
+from collections.abc import Callable, Generator
+from contextlib import contextmanager
 from dataclasses import dataclass
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 
 import structlog
-import torch
 from pydantic import ValidationError, model_validator
 from structlog.stdlib import BoundLogger
 
 from pace.config import ResolvedConfiguration, ScientificSettings, SplitSettings
 from pace.datasets.common import digest_dataset_clients
+from pace.experiment.implementation import (
+    digest_implementation,
+    require_implementation_unchanged,
+    require_numerical_policy,
+)
 from pace.types import (
     CURRENT_ARTIFACT_SCHEMA,
     AlertDecision,
@@ -28,7 +31,6 @@ from pace.types import (
     ArtifactSerializationMode,
     ArtifactValidationError,
     ArtifactVerification,
-    ByteBlockSize,
     CampaignWorkflowResult,
     CommandName,
     DatasetClientData,
@@ -36,32 +38,22 @@ from pace.types import (
     DatasetName,
     DatasetValidationError,
     DetectionRate,
-    DigestComponentName,
-    DigestNamespace,
-    EnvironmentFile,
-    EnvironmentVariable,
     ExecutionDevice,
     FalseAlertRate,
     FixtureKind,
     FrozenStrictModel,
-    ImplementationScope,
     InputDigestMaterial,
     JointMultiplier,
     LearningSeed,
     LengthPrefixedHasher,
+    LockFileSuffix,
     LogEvent,
-    MachineArchitecture,
-    MissingRuntimePackage,
-    NumericalPolicyError,
-    NumericalThreadCount,
     ObservationCount,
     OutputDirectory,
-    PlatformName,
     ProvenanceActive,
-    PythonVersionText,
+    ProvenanceDifference,
+    ProvenanceField,
     ReplacementPolicy,
-    RuntimePackage,
-    RuntimePackageVersion,
     ScientificDigest,
     SeedDomain,
     StudyStratum,
@@ -78,13 +70,6 @@ from pace.types import (
 )
 
 logger = structlog.get_logger()
-
-
-class RuntimeEnvironment(FrozenStrictModel, frozen=True):
-    python: PythonVersionText
-    platform: PlatformName
-    machine: MachineArchitecture
-    distributions: dict[RuntimePackage, RuntimePackageVersion | MissingRuntimePackage]
 
 
 class SyntheticOutcome(FrozenStrictModel, frozen=True):
@@ -187,91 +172,6 @@ def _content_digest(artifact: EvidenceArtifact) -> ScientificDigest:
     return payload_digest(canonical_json(artifact, ArtifactSerializationMode.OMIT_DIGEST))
 
 
-def _runtime_environment() -> RuntimeEnvironment:
-    versions: dict[RuntimePackage, RuntimePackageVersion | MissingRuntimePackage] = {}
-    for package in RuntimePackage:
-        try:
-            versions[package] = RuntimePackageVersion(importlib.metadata.version(package))
-        except importlib.metadata.PackageNotFoundError:
-            versions[package] = MissingRuntimePackage.UNAVAILABLE
-    return RuntimeEnvironment(
-        python=PythonVersionText(sys.version),
-        platform=PlatformName(platform.system()),
-        machine=MachineArchitecture(platform.machine()),
-        distributions=versions,
-    )
-
-
-def _implementation_components(
-    scope: ImplementationScope,
-) -> Iterator[tuple[DigestComponentName, ArtifactPayload]]:
-    package_root = Path(__file__).resolve().parents[1]
-    excluded = scope.excluded_sources
-    for source_path in sorted(package_root.rglob("*.py")):
-        relative_path = PurePosixPath(source_path.relative_to(package_root).as_posix())
-        if not any(relative_path.is_relative_to(prefix) for prefix in excluded):
-            yield (
-                DigestComponentName(f"{DigestNamespace.SOURCE}/{relative_path}"),
-                ArtifactPayload(source_path.read_bytes()),
-            )
-    repository_root = next(
-        (
-            parent
-            for parent in package_root.parents
-            if (parent / EnvironmentFile.PYPROJECT).is_file()
-        ),
-        None,
-    )
-    if repository_root is not None:
-        for environment_file in (EnvironmentFile.PYPROJECT, EnvironmentFile.LOCK):
-            configuration_path = repository_root / environment_file
-            if configuration_path.is_file():
-                yield (
-                    DigestComponentName(f"{DigestNamespace.ENVIRONMENT}/{environment_file}"),
-                    ArtifactPayload(configuration_path.read_bytes()),
-                )
-    yield (
-        DigestComponentName(f"{DigestNamespace.ENVIRONMENT}/{EnvironmentFile.RUNTIME}"),
-        canonical_json(_runtime_environment()),
-    )
-
-
-def digest_implementation(
-    scope: ImplementationScope = ImplementationScope.CAMPAIGN,
-) -> ScientificDigest:
-    hasher = LengthPrefixedHasher()
-    for name, content in _implementation_components(scope):
-        hasher.framed_label(name)
-        hasher.framed(content)
-    return hasher.hexdigest()
-
-
-def digest_files(paths: Sequence[Path], root: Path) -> ScientificDigest:
-    hasher = LengthPrefixedHasher()
-    for path in sorted(paths):
-        hasher.framed_path(path.relative_to(root))
-        with path.open("rb") as source:
-            while chunk := source.read(ByteBlockSize.DIGEST):
-                hasher.framed(ArtifactPayload(chunk))
-    return hasher.hexdigest()
-
-
-def digest_source_files(source_files: Sequence[Path], data_root: Path) -> ScientificDigest:
-    resolved_root = data_root.resolve()
-    resolved_files = {path.resolve() for path in source_files}
-    if (
-        not source_files
-        or len(resolved_files) != len(source_files)
-        or any(
-            not path.is_file() or not path.is_relative_to(resolved_root) for path in resolved_files
-        )
-    ):
-        raise DatasetValidationError(
-            "Dataset source files must be unique and exist under the configured raw data root"
-        )
-    return digest_files(source_files, data_root)
-
-
 def _validate_kind_specific(artifact: EvidenceArtifact, provenance: Provenance) -> None:
     if provenance.artifact_kind is ArtifactKind.SYNTHETIC_DECISION:
         if not isinstance(artifact.outcome, SyntheticOutcome):
@@ -286,6 +186,56 @@ def _validate_kind_specific(artifact: EvidenceArtifact, provenance: Provenance) 
         _validate_campaign_outcome(artifact.outcome, provenance)
 
 
+def _digest_difference(
+    field: ProvenanceField, recorded: ScientificDigest | None, expected: ScientificDigest | None
+) -> ProvenanceDifference | None:
+    if recorded == expected:
+        return None
+    return ProvenanceDifference(
+        f"{field} (artifact {(recorded or 'none')[:12]}, operation {(expected or 'none')[:12]})"
+    )
+
+
+def provenance_differences(
+    artifact: EvidenceArtifact, provenance: Provenance
+) -> tuple[ProvenanceDifference, ...]:
+    differences = (
+        _digest_difference(
+            ProvenanceField.CONFIGURATION_DIGEST,
+            artifact.configuration_digest,
+            provenance.configuration_digest,
+        ),
+        _digest_difference(
+            ProvenanceField.INPUT_DIGEST, artifact.input_digest, provenance.input_digest
+        ),
+        _digest_difference(
+            ProvenanceField.IMPLEMENTATION_DIGEST,
+            artifact.implementation_digest,
+            provenance.implementation_digest,
+        ),
+        None
+        if provenance.preprocessing_digest is None
+        else _digest_difference(
+            ProvenanceField.PREPROCESSING_DIGEST,
+            artifact.preprocessing_digest,
+            provenance.preprocessing_digest,
+        ),
+        None
+        if artifact.scientific_configuration == provenance.scientific
+        else ProvenanceDifference(ProvenanceField.SCIENTIFIC_CONFIGURATION),
+        None
+        if artifact.splitting_configuration == provenance.splitting
+        else ProvenanceDifference(ProvenanceField.SPLITTING_CONFIGURATION),
+        None
+        if artifact.execution_device is provenance.execution_device
+        else ProvenanceDifference(
+            f"{ProvenanceField.EXECUTION_DEVICE} (artifact {artifact.execution_device.name}, "
+            f"operation {provenance.execution_device.name})"
+        ),
+    )
+    return tuple(difference for difference in differences if difference is not None)
+
+
 def validate_artifact(artifact: EvidenceArtifact, provenance: Provenance) -> None:
     if (
         artifact.schema_version != CURRENT_ARTIFACT_SCHEMA
@@ -296,19 +246,13 @@ def validate_artifact(artifact: EvidenceArtifact, provenance: Provenance) -> Non
     campaign_stratum = provenance.campaign_stratum
     if campaign_stratum is not None and artifact.campaign_stratum is not campaign_stratum:
         raise ArtifactConflictError("Existing artifact belongs to a different study stratum")
-    if provenance.provenance_active and (
-        artifact.scientific_configuration != provenance.scientific
-        or artifact.splitting_configuration != provenance.splitting
-        or artifact.configuration_digest != provenance.configuration_digest
-        or artifact.input_digest != provenance.input_digest
-        or artifact.implementation_digest != provenance.implementation_digest
-        or artifact.execution_device is not provenance.execution_device
-        or (
-            provenance.preprocessing_digest is not None
-            and artifact.preprocessing_digest != provenance.preprocessing_digest
+    differences = (
+        provenance_differences(artifact, provenance) if provenance.provenance_active else ()
+    )
+    if differences:
+        raise ArtifactConflictError(
+            f"Existing artifact provenance does not match this operation: {'; '.join(differences)}"
         )
-    ):
-        raise ArtifactConflictError("Existing artifact provenance does not match this operation")
     if artifact.verification_state is not VerificationState.VERIFIED:
         raise ArtifactValidationError("Artifact has no successful verification state")
     if artifact.content_digest != _content_digest(artifact):
@@ -395,21 +339,54 @@ def reuse_or_write_artifact(
 ) -> tuple[EvidenceArtifact, ArtifactReuseState]:
     if path.exists() and replacement_policy is ReplacementPolicy.PRESERVE_VALID:
         return read_verified_artifact(path, provenance), ArtifactReuseState.REUSED
+    if provenance.provenance_active and provenance.artifact_kind is ArtifactKind.DATASET_CAMPAIGN:
+        require_implementation_unchanged()
     artifact = _build_artifact(outcome, provenance)
 
     def validate_written(path_to_validate: Path) -> None:
         if read_verified_artifact(path_to_validate, provenance) != artifact:
             raise ArtifactValidationError("Serialized artifact changed during validation")
 
-    write_bytes_atomically(
-        path,
-        ArtifactPayload(canonical_json(artifact) + b"\n"),
-        validate_written,
-    )
+    with _exclusive_destination(path):
+        if path.exists() and replacement_policy is ReplacementPolicy.PRESERVE_VALID:
+            concurrent = read_verified_artifact(path, provenance)
+            if concurrent.content_digest != artifact.content_digest:
+                raise ArtifactConflictError(
+                    "A concurrent writer persisted different content for identical provenance "
+                    f"(existing {concurrent.content_digest[:12]}, computed "
+                    f"{artifact.content_digest[:12]}); the computation is not deterministic"
+                )
+            return concurrent, ArtifactReuseState.REUSED
+        _write_atomically(path, ArtifactPayload(canonical_json(artifact) + b"\n"), validate_written)
     return artifact, ArtifactReuseState.CREATED
 
 
+@contextmanager
+def _exclusive_destination(path: Path) -> Generator[None]:
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        handle = (path.parent / f".{path.name}{LockFileSuffix.LOCK}").open("ab")
+    except OSError as error:
+        raise ArtifactValidationError(f"Could not write artifact atomically: {path}") from error
+    with handle:
+        fcntl.flock(handle, fcntl.LOCK_EX)
+        try:
+            for stale in path.parent.glob(f".{path.name}.*"):
+                if stale.suffix != LockFileSuffix.LOCK:
+                    stale.unlink(missing_ok=True)
+            yield
+        finally:
+            fcntl.flock(handle, fcntl.LOCK_UN)
+
+
 def write_bytes_atomically(
+    path: Path, serialized: ArtifactPayload, validate: Callable[[Path], None]
+) -> None:
+    with _exclusive_destination(path):
+        _write_atomically(path, serialized, validate)
+
+
+def _write_atomically(
     path: Path, serialized: ArtifactPayload, validate: Callable[[Path], None]
 ) -> None:
     temporary_path: Path | None = None
@@ -501,25 +478,6 @@ def reused_campaign(
     )
 
 
-def require_numerical_policy(threads: NumericalThreadCount) -> None:
-    expected = f"{threads}"
-    mismatched = [
-        variable
-        for variable in (
-            EnvironmentVariable.OMP_THREADS,
-            EnvironmentVariable.MKL_THREADS,
-            EnvironmentVariable.OPENBLAS_THREADS,
-        )
-        if os.environ.get(variable) != expected
-    ]
-    if mismatched or torch.get_num_threads() != threads:
-        raise NumericalPolicyError(
-            f"The scientific configuration requires {threads} numerical thread(s) per process; "
-            f"set {', '.join(mismatched) or 'the thread environment'} to {expected} before "
-            f"starting (PyTorch reports {torch.get_num_threads()})"
-        )
-
-
 def campaign_provenance(
     configuration: ResolvedConfiguration,
     input_digest: ScientificDigest,
@@ -541,15 +499,6 @@ def campaign_provenance(
         stratum,
         configuration.runtime.provenance_active,
     )
-
-
-def require_unchanged_sources(
-    source_files: tuple[Path, ...],
-    configuration: ResolvedConfiguration,
-    input_digest: ScientificDigest,
-) -> None:
-    if digest_files(source_files, configuration.runtime.raw_data_root) != input_digest:
-        raise DatasetValidationError("Dataset source files changed during campaign execution")
 
 
 def workflow_result(

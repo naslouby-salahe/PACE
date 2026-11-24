@@ -4,9 +4,9 @@ import structlog
 from pace.config import ResolvedConfiguration
 from pace.datasets.cache import resolve_clients
 from pace.datasets.registry import dataset_source_files, load_dataset
-from pace.experiment.artifacts import digest_source_files
 from pace.experiment.inputs import PreparedDevice
 from pace.experiment.runner import prepare_clients
+from pace.experiment.sources import digest_source_files
 from pace.types import (
     ChronologicalIndices,
     CriterionSatisfied,

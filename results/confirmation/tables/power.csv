@@ -1,0 +1,17 @@
+analysis,targets,assumed_sd,minimum_detectable_effect,power_at_meaningful_effect
+universal_primary,5,0.050000,0.062645,0.145473
+universal_primary,5,0.100000,0.125291,0.073210
+universal_primary,5,0.150000,0.187936,0.060244
+universal_primary,5,0.200000,0.250581,0.055747
+universal_robustness,4,0.050000,0.070040,0.125922
+universal_robustness,4,0.100000,0.140079,0.068523
+universal_robustness,4,0.150000,0.210119,0.058185
+universal_robustness,4,0.200000,0.280159,0.054595
+broad_scaling,4,0.050000,0.070040,0.125922
+broad_scaling,4,0.100000,0.140079,0.068523
+broad_scaling,4,0.150000,0.210119,0.058185
+broad_scaling,4,0.200000,0.280159,0.054595
+high_resource,1,0.050000,0.140079,0.068523
+high_resource,1,0.100000,0.280159,0.054595
+high_resource,1,0.150000,0.420238,0.052039
+high_resource,1,0.200000,0.560317,0.051146

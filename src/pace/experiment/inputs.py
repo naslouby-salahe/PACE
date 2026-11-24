@@ -36,6 +36,7 @@ from pace.types import (
     DatasetSplitPlan,
     DatasetValidationError,
     DetectionRate,
+    DevelopmentBenignRows,
     EvaluationRole,
     FalseAlertRate,
     FeatureCount,
@@ -338,7 +339,10 @@ def build_target_frame(
         case EvaluationRole.HELD_OUT:
             benign, attacks = target.test, target.held_out
         case EvaluationRole.DEVELOPMENT:
-            if local_rows is None or target.training.shape[0] < 2 * local_rows:
+            if (
+                local_rows is None
+                or target.training.shape[0] < local_rows + DevelopmentBenignRows.MINIMUM
+            ):
                 raise DatasetValidationError(
                     "Development evaluation needs benign training rows beyond the local budget"
                 )
@@ -440,16 +444,17 @@ class LocalEvidence:
         selected = self.bank if bank is None else bank
         if design is BankDesign.NO_GAUSSIAN:
             selected = selected.without_kind(LocalExpertKind.FEATURE_GAUSSIAN)
+        anchor_calibration, anchor_query = selected.anchor_for(design)
         if design is BankDesign.SECOND_ORDER:
             return TieredLocalEvidence(
-                selected.anchor_calibration,
-                selected.anchor_query,
+                anchor_calibration,
+                anchor_query,
                 second_order_evidence(selected.calibration),
                 second_order_evidence(selected.query),
             )
         return TieredLocalEvidence(
-            selected.anchor_calibration,
-            selected.anchor_query,
+            anchor_calibration,
+            anchor_query,
             selected.calibration,
             selected.query,
             selected.family_shares() if design is BankDesign.FAMILY_BUDGETS else None,

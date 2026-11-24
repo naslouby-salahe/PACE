@@ -70,8 +70,23 @@ def _nominal_gain_label() -> DisplayText:
     return DisplayText("Gain vs same-calibration\nmean ensemble (nominal α)")
 
 
+def _settle_noise_only_axes(figure: Figure) -> None:
+    for axes in figure.axes:
+        bottom, top = axes.get_ylim()
+        if top - bottom < 1e-9:
+            axes.set_ylim(-0.04, 0.04)
+        elif top - bottom < 1e-3:
+            centre = (top + bottom) / 2.0
+            axes.set_ylim(centre - 5e-4, centre + 5e-4)
+        left, right = axes.get_xlim()
+        if 0.0 < right - left < 1e-3:
+            centre = (left + right) / 2.0
+            axes.set_xlim(centre - 5e-4, centre + 5e-4)
+
+
 def save_figure(figure: Figure, name: FigureName, directory: Path) -> tuple[Path, ...]:
     directory.mkdir(parents=True, exist_ok=True)
+    _settle_noise_only_axes(figure)
     pdf = directory / f"{name}.{ImageFormat.PDF}"
     png = directory / f"{name}.{ImageFormat.PNG}"
     figure.savefig(

@@ -135,6 +135,9 @@ RuntimePackageVersion = NewType("RuntimePackageVersion", str)
 PythonVersionText = NewType("PythonVersionText", str)
 PlatformName = NewType("PlatformName", str)
 MachineArchitecture = NewType("MachineArchitecture", str)
+ThreadSetting = NewType("ThreadSetting", str)
+ProvenanceDifference = NewType("ProvenanceDifference", str)
+CacheEntryIdle = Annotated[bool, Field(strict=True)]
 ArtifactPayload = NewType("ArtifactPayload", bytes)
 CacheSlot = NewType("CacheSlot", int)
 LocalDetectorSeed = NewType("LocalDetectorSeed", int)
@@ -203,6 +206,34 @@ class CacheFileName(StrEnum):
     SOURCE_ORDER = "order"
     CAPTURE_FEATURES = "features"
     STAGING = ".staging-"
+
+
+class ProvenanceField(StrEnum):
+    CONFIGURATION_DIGEST = "configuration_digest"
+    INPUT_DIGEST = "input_digest"
+    IMPLEMENTATION_DIGEST = "implementation_digest"
+    PREPROCESSING_DIGEST = "preprocessing_digest"
+    SCIENTIFIC_CONFIGURATION = "scientific_configuration"
+    SPLITTING_CONFIGURATION = "splitting_configuration"
+    EXECUTION_DEVICE = "execution_device"
+
+
+class ExecutionPhase(StrEnum):
+    CAMPAIGN = "campaign"
+    MATRIX = "matrix"
+
+
+class LockMode(Enum):
+    SHARED = "SHARED"
+    EXCLUSIVE = "EXCLUSIVE"
+
+
+class LockFileSuffix(StrEnum):
+    LOCK = ".lock"
+
+
+class DevelopmentBenignRows(IntEnum):
+    MINIMUM = 300
 
 
 class ByteBlockSize(IntEnum):
@@ -364,6 +395,18 @@ class BankDesign(Enum):
     FAMILY_BUDGETS = "FAMILY_BUDGETS"
     SECOND_ORDER = "SECOND_ORDER"
     JOINT_CHANNELS = "JOINT_CHANNELS"
+    MEDIAN_ANCHOR = "MEDIAN_ANCHOR"
+    TRIMMED_ANCHOR = "TRIMMED_ANCHOR"
+    COMPLEMENTARY_ANCHOR = "COMPLEMENTARY_ANCHOR"
+    NO_ANCHOR = "NO_ANCHOR"
+
+    @property
+    def is_anchor_alternative(self) -> bool:
+        return self in (
+            BankDesign.MEDIAN_ANCHOR,
+            BankDesign.TRIMMED_ANCHOR,
+            BankDesign.COMPLEMENTARY_ANCHOR,
+        )
 
 
 class ConditionLimitRule(Enum):
@@ -422,6 +465,7 @@ class ExitStatus(IntEnum):
     SUCCESS = 0
     FAILURE = 1
     USAGE_ERROR = 2
+    INCONCLUSIVE = 3
 
 
 class ProgramName(StrEnum):
@@ -641,10 +685,22 @@ class CalibrationVariant(Enum):
     FAMILY_BUDGETS = "FAMILY_BUDGETS"
     SECOND_ORDER = "SECOND_ORDER"
     JOINT_CHANNELS = "JOINT_CHANNELS"
+    MEDIAN_ANCHOR = "MEDIAN_ANCHOR"
+    TRIMMED_ANCHOR = "TRIMMED_ANCHOR"
+    COMPLEMENTARY_ANCHOR = "COMPLEMENTARY_ANCHOR"
+    NO_ANCHOR = "NO_ANCHOR"
 
     @property
     def design(self) -> BankDesign:
         match self:
+            case CalibrationVariant.MEDIAN_ANCHOR:
+                return BankDesign.MEDIAN_ANCHOR
+            case CalibrationVariant.TRIMMED_ANCHOR:
+                return BankDesign.TRIMMED_ANCHOR
+            case CalibrationVariant.COMPLEMENTARY_ANCHOR:
+                return BankDesign.COMPLEMENTARY_ANCHOR
+            case CalibrationVariant.NO_ANCHOR:
+                return BankDesign.NO_ANCHOR
             case CalibrationVariant.NO_GAUSSIAN:
                 return BankDesign.NO_GAUSSIAN
             case CalibrationVariant.FAMILY_BUDGETS:
@@ -713,6 +769,14 @@ class CalibrationVariant(Enum):
                 return OperatingMethod.SECOND_ORDER_PACE
             case CalibrationVariant.JOINT_CHANNELS:
                 return OperatingMethod.JOINT_CHANNELS_PACE
+            case CalibrationVariant.MEDIAN_ANCHOR:
+                return OperatingMethod.MEDIAN_ANCHOR_PACE
+            case CalibrationVariant.TRIMMED_ANCHOR:
+                return OperatingMethod.TRIMMED_ANCHOR_PACE
+            case CalibrationVariant.COMPLEMENTARY_ANCHOR:
+                return OperatingMethod.COMPLEMENTARY_ANCHOR_PACE
+            case CalibrationVariant.NO_ANCHOR:
+                return OperatingMethod.NO_ANCHOR_PACE
 
 
 class MatchClass(Enum):
@@ -749,6 +813,10 @@ class OperatingMethod(Enum):
     FAMILY_BUDGETS_PACE = "FAMILY_BUDGETS_PACE"
     SECOND_ORDER_PACE = "SECOND_ORDER_PACE"
     JOINT_CHANNELS_PACE = "JOINT_CHANNELS_PACE"
+    MEDIAN_ANCHOR_PACE = "MEDIAN_ANCHOR_PACE"
+    TRIMMED_ANCHOR_PACE = "TRIMMED_ANCHOR_PACE"
+    COMPLEMENTARY_ANCHOR_PACE = "COMPLEMENTARY_ANCHOR_PACE"
+    NO_ANCHOR_PACE = "NO_ANCHOR_PACE"
     MEAN_ENSEMBLE = "MEAN_ENSEMBLE"
     MEAN_ENSEMBLE_MATCHED = "MEAN_ENSEMBLE_MATCHED_CALIBRATION"
     KITNET = "KITNET"
@@ -776,6 +844,12 @@ class OperatingMethod(Enum):
                 return HexColor("#AA4499")
             case OperatingMethod.POOLED_COLLAPSE_PACE:
                 return HexColor("#332288")
+            case _:
+                return self.variant_color
+
+    @property
+    def variant_color(self) -> HexColor:
+        match self:
             case OperatingMethod.TEMPORAL_PACE:
                 return HexColor("#DDCC77")
             case OperatingMethod.NO_GAUSSIAN_PACE:
@@ -786,6 +860,14 @@ class OperatingMethod(Enum):
                 return HexColor("#AA4466")
             case OperatingMethod.JOINT_CHANNELS_PACE:
                 return HexColor("#661100")
+            case OperatingMethod.MEDIAN_ANCHOR_PACE:
+                return HexColor("#6699CC")
+            case OperatingMethod.TRIMMED_ANCHOR_PACE:
+                return HexColor("#994455")
+            case OperatingMethod.COMPLEMENTARY_ANCHOR_PACE:
+                return HexColor("#EECC66")
+            case OperatingMethod.NO_ANCHOR_PACE:
+                return HexColor("#997700")
             case OperatingMethod.MEAN_ENSEMBLE:
                 return HexColor("#E69F00")
             case OperatingMethod.MEAN_ENSEMBLE_MATCHED:
@@ -794,7 +876,7 @@ class OperatingMethod(Enum):
                 return HexColor("#D55E00")
             case OperatingMethod.DIOT:
                 return HexColor("#CC79A7")
-            case OperatingMethod.MCDE:
+            case _:
                 return HexColor("#7F7F7F")
 
     @property
@@ -818,6 +900,12 @@ class OperatingMethod(Enum):
                 return DisplayText("PACE with resolution-aware blocks and anchor collapse")
             case OperatingMethod.POOLED_COLLAPSE_PACE:
                 return DisplayText("PACE with pooled calibration and anchor collapse")
+            case _:
+                return self.variant_label
+
+    @property
+    def variant_label(self) -> DisplayText:
+        match self:
             case OperatingMethod.TEMPORAL_PACE:
                 return DisplayText("PACE with forward-chaining cross-fitted calibration")
             case OperatingMethod.NO_GAUSSIAN_PACE:
@@ -828,6 +916,14 @@ class OperatingMethod(Enum):
                 return DisplayText("PACE with second-order bank aggregation")
             case OperatingMethod.JOINT_CHANNELS_PACE:
                 return DisplayText("PACE with joint channel calibration")
+            case OperatingMethod.MEDIAN_ANCHOR_PACE:
+                return DisplayText("PACE with a median anchor")
+            case OperatingMethod.TRIMMED_ANCHOR_PACE:
+                return DisplayText("PACE with a trimmed-mean anchor")
+            case OperatingMethod.COMPLEMENTARY_ANCHOR_PACE:
+                return DisplayText("PACE with an anchor over non-bank detectors")
+            case OperatingMethod.NO_ANCHOR_PACE:
+                return DisplayText("PACE without the anchor tier")
             case OperatingMethod.MEAN_ENSEMBLE:
                 return DisplayText("Mean-ensemble local branch (block-max calibration)")
             case OperatingMethod.MEAN_ENSEMBLE_MATCHED:
@@ -836,7 +932,7 @@ class OperatingMethod(Enum):
                 return ExternalBaseline.KITNET.display_label
             case OperatingMethod.DIOT:
                 return ExternalBaseline.DIOT.display_label
-            case OperatingMethod.MCDE:
+            case _:
                 return ExternalBaseline.MCDE.display_label
 
 

@@ -1,0 +1,62 @@
+\begin{tabular}{llllllllllll}
+\toprule
+alpha & local\_rows & comparator & targets & forward\_matched\_targets & reverse\_matched\_targets & common\_matched\_targets & forward\_gain\_on\_common & reverse\_gain\_on\_common & reverse\_gain\_on\_forward\_unmatched & matched\_comparator\_false\_alert & unmatched\_comparator\_false\_alert \\
+\midrule
+0.01 & 100 & Mean-ensemble local branch (block-max calibration) & 5 & 4 & 5 & 4 & -0.000013 & 0.000000 & 0.000000 & 0.002900 & 0.004314 \\
+0.05 & 100 & Mean-ensemble local branch (block-max calibration) & 5 & 5 & 5 & 5 & 0.000174 & 0.000659 &  & 0.017948 &  \\
+0.01 & 400 & Mean-ensemble local branch (block-max calibration) & 5 & 3 & 5 & 3 & -0.000025 & 0.000000 & 0.000000 & 0.003009 & 0.003509 \\
+0.05 & 400 & Mean-ensemble local branch (block-max calibration) & 5 & 5 & 5 & 5 & 0.000000 & 0.000318 &  & 0.018718 &  \\
+0.01 & 100 & Mean-ensemble local branch (same calibration as PACE) & 5 & 5 & 5 & 5 & 0.000058 & 0.000000 &  & 0.004830 &  \\
+0.05 & 100 & Mean-ensemble local branch (same calibration as PACE) & 5 & 5 & 5 & 5 & 0.000174 & 0.000207 &  & 0.027008 &  \\
+0.01 & 400 & Mean-ensemble local branch (same calibration as PACE) & 5 & 5 & 5 & 5 & -0.000079 & 0.000022 &  & 0.004951 &  \\
+0.05 & 400 & Mean-ensemble local branch (same calibration as PACE) & 5 & 5 & 5 & 5 & -0.002092 & 0.000000 &  & 0.026968 &  \\
+0.01 & 100 & Original PACE (legacy anchor fallback) & 5 & 5 & 5 & 5 & 0.000000 & -0.000116 &  & 0.003300 &  \\
+0.05 & 100 & Original PACE (legacy anchor fallback) & 5 & 5 & 5 & 5 & 0.000000 & 0.000212 &  & 0.016922 &  \\
+0.01 & 400 & Original PACE (legacy anchor fallback) & 5 & 5 & 5 & 5 & -0.000009 & -0.000102 &  & 0.003999 &  \\
+0.05 & 400 & Original PACE (legacy anchor fallback) & 5 & 5 & 5 & 5 & 0.000000 & 0.000000 &  & 0.016196 &  \\
+0.01 & 100 & Previous PACE (budget-conserving, block-maximum) & 5 & 5 & 5 & 5 & -0.000010 & -0.000116 &  & 0.003263 &  \\
+0.05 & 100 & Previous PACE (budget-conserving, block-maximum) & 5 & 5 & 5 & 5 & 0.000000 & 0.000212 &  & 0.016922 &  \\
+0.01 & 400 & Previous PACE (budget-conserving, block-maximum) & 5 & 5 & 5 & 5 & -0.000016 & -0.000102 &  & 0.003359 &  \\
+0.05 & 400 & Previous PACE (budget-conserving, block-maximum) & 5 & 5 & 5 & 5 & 0.000000 & 0.000000 &  & 0.016196 &  \\
+0.01 & 100 & PACE with resolution-aware blocks & 5 & 5 & 5 & 5 & -0.000174 & -0.000174 &  & 0.003873 &  \\
+0.05 & 100 & PACE with resolution-aware blocks & 5 & 5 & 5 & 5 & 0.000000 & 0.000212 &  & 0.016922 &  \\
+0.01 & 400 & PACE with resolution-aware blocks & 5 & 5 & 5 & 5 & -0.000728 & -0.000131 &  & 0.003974 &  \\
+0.05 & 400 & PACE with resolution-aware blocks & 5 & 5 & 5 & 5 & 0.000000 & 0.000000 &  & 0.016196 &  \\
+0.01 & 100 & PACE with pooled conformal-rank calibration & 5 & 5 & 5 & 5 & 0.000000 & 0.000000 &  & 0.003353 &  \\
+0.05 & 100 & PACE with pooled conformal-rank calibration & 5 & 5 & 5 & 5 & -0.000058 & 0.000452 &  & 0.009338 &  \\
+0.01 & 400 & PACE with pooled conformal-rank calibration & 5 & 5 & 5 & 5 & -0.000029 & 0.000000 &  & 0.003633 &  \\
+0.05 & 400 & PACE with pooled conformal-rank calibration & 5 & 5 & 5 & 5 & -0.000160 & 0.000058 &  & 0.008390 &  \\
+0.01 & 100 & PACE with anchor collapse & 5 & 4 & 5 & 4 & 0.000000 & 0.000000 & -0.000697 & 0.002933 & 0.004314 \\
+0.05 & 100 & PACE with anchor collapse & 5 & 5 & 5 & 5 & 0.000000 & 0.000212 &  & 0.016922 &  \\
+0.01 & 400 & PACE with anchor collapse & 5 & 3 & 5 & 3 & -0.000014 & 0.000000 & -0.000553 & 0.003980 & 0.003509 \\
+0.05 & 400 & PACE with anchor collapse & 5 & 5 & 5 & 5 & 0.000000 & 0.000000 &  & 0.016196 &  \\
+0.01 & 100 & PACE with forward-chaining cross-fitted calibration & 5 & 5 & 5 & 5 & 0.000058 & 0.000000 &  & 0.004596 &  \\
+0.05 & 100 & PACE with forward-chaining cross-fitted calibration & 5 & 5 & 5 & 5 & 0.000000 & 0.000000 &  & 0.014756 &  \\
+0.01 & 400 & PACE with forward-chaining cross-fitted calibration & 5 & 5 & 5 & 5 & 0.000000 & 0.000000 &  & 0.004475 &  \\
+0.05 & 400 & PACE with forward-chaining cross-fitted calibration & 5 & 5 & 5 & 5 & -0.000582 & 0.000000 &  & 0.015078 &  \\
+0.01 & 100 & PACE without the Gaussian bank expert & 5 & 5 & 5 & 5 & -0.000010 & -0.000116 &  & 0.003263 &  \\
+0.05 & 100 & PACE without the Gaussian bank expert & 5 & 5 & 5 & 5 & 0.000000 & 0.000212 &  & 0.017187 &  \\
+0.01 & 400 & PACE without the Gaussian bank expert & 5 & 5 & 5 & 5 & -0.000016 & -0.000102 &  & 0.003359 &  \\
+0.05 & 400 & PACE without the Gaussian bank expert & 5 & 5 & 5 & 5 & 0.000000 & 0.000000 &  & 0.016964 &  \\
+0.01 & 100 & PACE with hierarchical family budgets & 5 & 5 & 5 & 5 & -0.000010 & -0.000029 &  & 0.003263 &  \\
+0.05 & 100 & PACE with hierarchical family budgets & 5 & 5 & 5 & 5 & 0.000000 & 0.000212 &  & 0.015177 &  \\
+0.01 & 400 & PACE with hierarchical family budgets & 5 & 5 & 5 & 5 & -0.000016 & -0.000102 &  & 0.003359 &  \\
+0.05 & 400 & PACE with hierarchical family budgets & 5 & 5 & 5 & 5 & 0.000000 & 0.000000 &  & 0.016126 &  \\
+0.01 & 100 & PACE with second-order bank aggregation & 5 & 4 & 5 & 4 & -0.000013 & 0.000000 & -0.000069 & 0.002887 & 0.004314 \\
+0.05 & 100 & PACE with second-order bank aggregation & 5 & 5 & 5 & 5 & 0.000174 & 0.000386 &  & 0.014663 &  \\
+0.01 & 400 & PACE with second-order bank aggregation & 5 & 3 & 5 & 3 & -0.000027 & 0.000000 & -0.000509 & 0.002966 & 0.003429 \\
+0.05 & 400 & PACE with second-order bank aggregation & 5 & 5 & 5 & 5 & 0.000000 & 0.000000 &  & 0.015630 &  \\
+0.01 & 100 & KitNET & 5 & 3 & 5 & 3 & 0.000000 & 0.242400 & 0.965878 & 0.004101 & 0.002044 \\
+0.05 & 100 & KitNET & 5 & 5 & 5 & 5 & 0.291754 & 0.350872 &  & 0.039822 &  \\
+0.01 & 400 & KitNET & 5 & 4 & 5 & 4 & 0.266074 & 0.319836 & 1.000000 & 0.006327 & 0.000000 \\
+0.05 & 400 & KitNET & 5 & 5 & 5 & 5 & 0.287282 & 0.405554 &  & 0.040425 &  \\
+0.01 & 100 & DIoT (flow-symbol adaptation) & 5 & 5 & 4 & 4 & 0.915408 & 0.938280 &  & 0.006975 &  \\
+0.05 & 100 & DIoT (flow-symbol adaptation) & 5 & 4 & 4 & 3 & 0.713640 & 0.778056 & 0.746490 & 0.039705 & 0.008774 \\
+0.01 & 400 & DIoT (flow-symbol adaptation) & 5 & 5 & 4 & 4 & 0.935357 & 0.939744 &  & 0.006971 &  \\
+0.05 & 400 & DIoT (flow-symbol adaptation) & 5 & 4 & 4 & 3 & 0.514243 & 0.653483 & 0.835852 & 0.040197 & 0.008989 \\
+0.01 & 100 & MCDE (primary-source adaptation) & 5 & 3 & 5 & 3 & 0.082767 & 0.261460 & 0.050469 & 0.003559 & 0.002962 \\
+0.05 & 100 & MCDE (primary-source adaptation) & 5 & 5 & 5 & 5 & 0.007411 & 0.032076 &  & 0.029136 &  \\
+0.01 & 400 & MCDE (primary-source adaptation) & 5 & 3 & 5 & 3 & 0.082767 & 0.113087 & 0.055119 & 0.004665 & 0.002621 \\
+0.05 & 400 & MCDE (primary-source adaptation) & 5 & 5 & 4 & 4 & 0.050904 & 0.030157 &  & 0.024081 &  \\
+\bottomrule
+\end{tabular}

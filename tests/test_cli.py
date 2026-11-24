@@ -495,8 +495,12 @@ def _acceptance_report(
     reference_detection: float = 0.87,
     diagnostic: bool = False,
     gain: float = 0.03,
+    harmed_targets: int = 0,
+    gain_interval: tuple[float, float] = (0.01, 0.05),
 ) -> AcceptanceReport:
-    interval = RateConfidenceInterval(lower_bound=0.01, upper_bound=0.05, confidence_level=0.95)
+    interval = RateConfidenceInterval(
+        lower_bound=gain_interval[0], upper_bound=gain_interval[1], confidence_level=0.95
+    )
     levels = tuple(
         LevelGain(
             level=level,
@@ -517,11 +521,13 @@ def _acceptance_report(
         target_count=58,
         levels=levels,
         gain_without_excluded_interval=interval,
-        harmed_target_count=0,
+        harmed_target_count=harmed_targets,
         severe_target_count=0,
         worst_target_difference=0.0,
         false_alert_difference=0.001,
-        false_alert_interval=interval,
+        false_alert_interval=RateConfidenceInterval(
+            lower_bound=-0.002, upper_bound=0.001, confidence_level=0.95
+        ),
         exceedance_increase=0.01,
         seed_gains=(SeedRateDifference(6, 0.03),),
         minimum_stratum_left_out_gain=0.01,
@@ -598,13 +604,14 @@ def test_accept_cli_passes_the_population_scope_to_the_reporting_service(
 
 
 @pytest.mark.parametrize(
-    ("accepted", "reference_detection", "gain", "label"),
+    ("accepted", "reference_detection", "gain", "label", "status"),
     [
-        (True, 0.999, -0.002, "LIMITED EVIDENCE — DETECTION CEILING"),
-        (False, 0.87, 0.0, "SUPERIORITY NOT ESTABLISHED"),
+        (True, 0.87, 0.03, "CONFIRMED", ExitStatus.SUCCESS),
+        (True, 0.999, -0.002, "LIMITED EVIDENCE — DETECTION CEILING", ExitStatus.INCONCLUSIVE),
+        (False, 0.87, 0.0, "SUPERIORITY NOT ESTABLISHED", ExitStatus.FAILURE),
     ],
 )
-def test_confirmation_is_classified_by_headroom_and_never_rejected(
+def test_confirmation_exit_status_separates_confirmed_inconclusive_and_unestablished(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
@@ -612,15 +619,42 @@ def test_confirmation_is_classified_by_headroom_and_never_rejected(
     reference_detection: float,
     gain: float,
     label: str,
+    status: ExitStatus,
 ) -> None:
     _config(tmp_path, monkeypatch)
     report = _acceptance_report(accepted, reference_detection, gain=gain)
     monkeypatch.setattr("pace.cli.report_acceptance", Mock(return_value=report))
-    assert main(["accept", "--population", "confirmation"]) == ExitStatus.SUCCESS
+    assert main(["accept", "--population", "confirmation"]) == status
     rendered = capsys.readouterr().out
     assert f"INDEPENDENT CONFIRMATION: {label}" in rendered
     assert "REJECTED" not in rendered
     assert ("Measured negative evidence" in rendered) is (gain < 0.0)
+
+
+@pytest.mark.parametrize(
+    ("harmed_targets", "gain_interval"),
+    [(5, (-0.01, 0.0)), (0, (-0.03, -0.004))],
+)
+def test_a_detection_ceiling_never_hides_harm_or_statistically_supported_inferiority(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    harmed_targets: int,
+    gain_interval: tuple[float, float],
+) -> None:
+    _config(tmp_path, monkeypatch)
+    report = _acceptance_report(
+        False,
+        0.999,
+        gain=-0.005,
+        harmed_targets=harmed_targets,
+        gain_interval=gain_interval,
+    )
+    monkeypatch.setattr("pace.cli.report_acceptance", Mock(return_value=report))
+    assert main(["accept", "--population", "confirmation"]) == ExitStatus.FAILURE
+    rendered = capsys.readouterr().out
+    assert "INDEPENDENT CONFIRMATION: SUPERIORITY NOT ESTABLISHED" in rendered
+    assert "Measured negative evidence" in rendered
 
 
 @pytest.mark.parametrize("command", ["accept-legacy", "accept-revised"])
