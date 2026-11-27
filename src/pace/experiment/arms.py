@@ -15,7 +15,6 @@ from pace.core.decision import (
     consecutive_blocks,
     evaluate_peer_union,
 )
-from pace.core.joint import apply_joint_local_peer_rule
 from pace.experiment.inputs import LocalEvidence, PeerEvidence, PreparedDevice, TargetFrame
 from pace.experiment.models import (
     LocalBankEvidence,
@@ -77,12 +76,7 @@ def designed_decisions(
     peer_budget: FalseAlarmBudget,
     rule: TieredCalibrationRule,
 ) -> ChannelDecisions:
-    decide = (
-        apply_joint_local_peer_rule
-        if rule.design is BankDesign.JOINT_CHANNELS
-        else apply_tiered_local_peer_rule
-    )
-    return decide(
+    return apply_tiered_local_peer_rule(
         local,
         peer_calibration_evidence,
         peer_query_evidence,
@@ -283,19 +277,6 @@ def _reserve_alerts(context: ArmContext, reserve: ReserveFraction) -> BooleanArr
     ).combined_alerts
 
 
-def _rule_alerts(context: ArmContext, rule: TieredCalibrationRule) -> BooleanArray:
-    local_budget, peer_budget = _alpha_budgets(context)
-    return protected_channel_decisions(
-        context.local,
-        context.peers.calibration_evidence,
-        context.peers.query_evidence,
-        context.configuration.scientific,
-        local_budget,
-        peer_budget,
-        rule,
-    ).combined_alerts
-
-
 def _fused_peer_alerts(
     context: ArmContext, fuse: Callable[[FloatMatrix], FloatMatrix]
 ) -> BooleanArray:
@@ -363,24 +344,6 @@ def _arm_alerts(context: ArmContext, arm: StudyArm) -> BooleanArray:
             return _local_only_alerts(context)
         case StudyArm.RESERVE_QUARTER:
             return _reserve_alerts(context, arm.reserve_variant)
-        case StudyArm.LEGACY_ANCHOR_FALLBACK:
-            return _rule_alerts(
-                context,
-                calibration_rule(
-                    context.configuration.scientific,
-                    AnchorBudgetPolicy.LEGACY_FULL_LOCAL_FALLBACK,
-                    CalibrationMode.IN_SAMPLE,
-                ),
-            )
-        case StudyArm.CROSS_FITTED_CALIBRATION:
-            return _rule_alerts(
-                context,
-                calibration_rule(
-                    context.configuration.scientific,
-                    AnchorBudgetPolicy.SHARE_CONSERVING,
-                    CalibrationMode.CROSS_FITTED,
-                ),
-            )
         case StudyArm.PEER_MEAN_FUSION:
             return _fused_peer_alerts(context, _mean_fusion)
         case StudyArm.PEER_MAX_FUSION:

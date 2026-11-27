@@ -37,9 +37,6 @@ UNION = UnionCalibration(scale_cap=64.0, scale_iterations=20)
 RULE = TieredCalibrationRule(
     anchor_share=0.5, anchor_policy=AnchorBudgetPolicy.SHARE_CONSERVING, union=UNION
 )
-LEGACY_RULE = TieredCalibrationRule(
-    anchor_share=0.5, anchor_policy=AnchorBudgetPolicy.LEGACY_FULL_LOCAL_FALLBACK, union=UNION
-)
 CROSS_FITTED_UNION = UnionCalibration(
     scale_cap=64.0, scale_iterations=20, mode=CalibrationMode.CROSS_FITTED, folds=5
 )
@@ -519,48 +516,6 @@ def test_tiered_local_budget_holds_on_every_calibration_block() -> None:
     assert decisions.local_threshold == anchor.thresholds[0]
 
 
-def test_legacy_policy_gives_an_unresolvable_anchor_tier_the_whole_local_budget() -> None:
-    local, peers_cal, peers_query = _tiered_inputs()
-    decisions = apply_tiered_local_peer_rule(
-        local, peers_cal, peers_query, 250, 0.005, 0.005, LEGACY_RULE
-    )
-    anchor, anchor_alerts = evaluate_peer_union(
-        local.anchor_calibration[np.newaxis, :],
-        local.anchor_evaluation[np.newaxis, :],
-        250,
-        0.005,
-        64.0,
-        20,
-    )
-    legacy = apply_protected_local_peer_rule(
-        local.anchor_calibration,
-        local.anchor_evaluation,
-        peers_cal,
-        peers_query,
-        250,
-        0.005,
-        0.005,
-        64.0,
-        20,
-    )
-    assert decisions.local_threshold == anchor.thresholds[0] == legacy.local_threshold
-    assert np.all(decisions.local_alerts[anchor_alerts])
-    assert np.all(decisions.combined_alerts[legacy.local_alerts])
-    assert decisions.anchor_budget == 0.005
-    assert decisions.bank_budget == 0.0025
-
-
-def test_legacy_policy_overspends_the_local_budget_at_the_strict_alpha() -> None:
-    local, peers_cal, peers_query = _tiered_inputs()
-    decisions = apply_tiered_local_peer_rule(
-        local, peers_cal, peers_query, 250, 0.005, 0.005, LEGACY_RULE
-    )
-    assert decisions.anchor_budget is not None
-    assert decisions.bank_budget is not None
-    assert np.isclose(decisions.anchor_budget + decisions.bank_budget, 0.0075)
-    assert decisions.anchor_budget + decisions.bank_budget > 0.005
-
-
 def test_share_conserving_policy_never_exceeds_the_local_budget() -> None:
     local, peers_cal, peers_query = _tiered_inputs()
     for local_budget in (0.0025, 0.005, 0.01, 0.025, 0.05):
@@ -570,30 +525,6 @@ def test_share_conserving_policy_never_exceeds_the_local_budget() -> None:
         assert decisions.anchor_budget is not None
         assert decisions.bank_budget is not None
         assert np.isclose(decisions.anchor_budget + decisions.bank_budget, local_budget)
-
-
-def test_policies_agree_wherever_the_anchor_tier_is_resolvable() -> None:
-    local, peers_cal, peers_query = _tiered_inputs()
-    conserving = apply_tiered_local_peer_rule(
-        local, peers_cal, peers_query, 250, 0.025, 0.025, RULE
-    )
-    legacy = apply_tiered_local_peer_rule(
-        local, peers_cal, peers_query, 250, 0.025, 0.025, LEGACY_RULE
-    )
-    np.testing.assert_array_equal(conserving.combined_alerts, legacy.combined_alerts)
-    assert conserving.anchor_budget == legacy.anchor_budget
-
-
-def test_conserving_anchor_threshold_is_never_below_the_legacy_one() -> None:
-    local, peers_cal, peers_query = _tiered_inputs()
-    conserving = apply_tiered_local_peer_rule(
-        local, peers_cal, peers_query, 250, 0.005, 0.005, RULE
-    )
-    legacy = apply_tiered_local_peer_rule(
-        local, peers_cal, peers_query, 250, 0.005, 0.005, LEGACY_RULE
-    )
-    assert conserving.local_threshold >= legacy.local_threshold
-    assert np.all(~conserving.local_alerts | legacy.local_alerts)
 
 
 def test_allocation_audit_reports_effective_budget_and_resolution_floor() -> None:
@@ -709,7 +640,7 @@ def test_tiered_rule_without_a_bank_gives_the_anchor_the_whole_local_budget() ->
 def test_peer_alerts_do_not_depend_on_the_local_branch_design() -> None:
     local, peers_cal, peers_query = _tiered_inputs()
     tiered = apply_tiered_local_peer_rule(local, peers_cal, peers_query, 250, 0.03, 0.03, RULE)
-    legacy = apply_protected_local_peer_rule(
+    single_anchor = apply_protected_local_peer_rule(
         local.anchor_calibration,
         local.anchor_evaluation,
         peers_cal,
@@ -720,8 +651,8 @@ def test_peer_alerts_do_not_depend_on_the_local_branch_design() -> None:
         64.0,
         20,
     )
-    np.testing.assert_array_equal(tiered.peer_alerts, legacy.peer_alerts)
-    assert tiered.expert_thresholds == legacy.expert_thresholds
+    np.testing.assert_array_equal(tiered.peer_alerts, single_anchor.peer_alerts)
+    assert tiered.expert_thresholds == single_anchor.expert_thresholds
 
 
 def test_tiered_evidence_rejects_misaligned_rows() -> None:

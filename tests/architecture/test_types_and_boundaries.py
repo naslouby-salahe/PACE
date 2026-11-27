@@ -30,7 +30,7 @@ SEMANTIC_FIELDS = {
         "local_bank": "LocalBankSettings",
         "calibration_mode": "CalibrationMode",
         "resolution_rows": "ResolutionRows",
-        "curve_variants": "tuple[CalibrationVariant, ...]",
+        "ablation_curves": "tuple[PaceAblation, ...]",
         "cross_fit_folds": "CrossFitFoldCount",
         "operating_grid": "tuple[FalseAlarmBudget, ...]",
         "evaluation_role": "EvaluationRole",

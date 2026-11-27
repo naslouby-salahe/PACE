@@ -6,7 +6,7 @@ from typing import Protocol, cast
 
 import numpy as np
 import torch
-from sklearn.covariance import OAS, LedoitWolf
+from sklearn.covariance import OAS
 from sklearn.decomposition import PCA
 from sklearn.ensemble import IsolationForest
 from sklearn.neighbors import LocalOutlierFactor
@@ -21,9 +21,6 @@ from pace.core.evidence import (
     target_relative_evidence,
 )
 from pace.types import (
-    ConditionLimitRule,
-    CovarianceConditionLimit,
-    CovarianceEstimator,
     CovarianceRegularization,
     CudaDeviceIndex,
     DetectorCount,
@@ -42,7 +39,6 @@ from pace.types import (
     LocalExpertFamily,
     LocalExpertKind,
     LocalTrainingRowCount,
-    ObservationCount,
     PcaSolver,
 )
 
@@ -304,47 +300,13 @@ def _histogram_scores(
     return scores
 
 
-def condition_limited_precision(
-    covariance: FloatMatrix, limit: CovarianceConditionLimit | None
-) -> FloatMatrix:
-    if limit is None:
-        return np.asarray(np.linalg.pinv(covariance, hermitian=True), dtype=np.float64)
-    eigenvalues, eigenvectors = np.linalg.eigh(covariance)
-    floored = np.maximum(eigenvalues, eigenvalues.max() / limit)
-    return np.asarray((eigenvectors / floored) @ eigenvectors.T, dtype=np.float64)
-
-
-def _effective_limit(
-    limit: CovarianceConditionLimit | None, rule: ConditionLimitRule, rows: ObservationCount
-) -> CovarianceConditionLimit | None:
-    if limit is None:
-        return None
-    match rule:
-        case ConditionLimitRule.FIXED:
-            return limit
-        case ConditionLimitRule.PER_TRAINING_ROW:
-            return max(1.0, limit * rows)
-
-
 def fit_gaussian(
-    features: FloatMatrix,
-    regularization: CovarianceRegularization,
-    estimator: CovarianceEstimator = CovarianceEstimator.RIDGE,
-    condition_limit: CovarianceConditionLimit | None = None,
-    limit_rule: ConditionLimitRule = ConditionLimitRule.FIXED,
+    features: FloatMatrix, regularization: CovarianceRegularization
 ) -> tuple[FloatMatrix, FloatMatrix]:
     mean = np.mean(features, axis=0, keepdims=True)
-    match estimator:
-        case CovarianceEstimator.RIDGE:
-            covariance = np.atleast_2d(np.cov(features, rowvar=False, ddof=1))
-        case CovarianceEstimator.SHRINKAGE:
-            covariance = np.atleast_2d(OAS().fit(features).covariance_)
-        case CovarianceEstimator.LEDOIT_WOLF:
-            covariance = np.atleast_2d(LedoitWolf().fit(features).covariance_)
+    covariance = np.atleast_2d(OAS().fit(features).covariance_)
     covariance = covariance + np.eye(features.shape[1], dtype=np.float64) * regularization
-    precision = condition_limited_precision(
-        covariance, _effective_limit(condition_limit, limit_rule, features.shape[0])
-    )
+    precision = np.asarray(np.linalg.pinv(covariance, hermitian=True), dtype=np.float64)
     return np.asarray(mean, dtype=np.float64), precision
 
 
@@ -382,11 +344,7 @@ def fit_local_ensemble(
         benign_training, settings.histogram_bins
     )
     gaussian_mean, gaussian_precision = fit_gaussian(
-        benign_training,
-        settings.covariance_regularization,
-        settings.covariance_estimator,
-        settings.covariance_condition_limit,
-        settings.covariance_condition_rule,
+        benign_training, settings.covariance_regularization
     )
     autoencoder = _train_autoencoder(
         benign_training, settings, LocalDetectorSeed(seed), device, execution_device
@@ -518,7 +476,7 @@ def build_local_bank(
 ) -> LocalBankEvidence:
     calibration_evidence = local_detector_evidence(detectors.reference, detectors.calibration)
     query_evidence = local_detector_evidence(detectors.reference, detectors.query)
-    anchor_rows = anchor_detector_rows(settings.anchor_members)
+    anchor_rows = anchor_detector_rows()
     ecod = fit_ecod_sum(features.training)
     pair = fit_pair_cooccurrence(
         features.training,

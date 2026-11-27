@@ -93,7 +93,7 @@ def mean_ensemble_curve(
         ).combined_alerts
 
     return curve_from_alerts(
-        OperatingMethod.MEAN_ENSEMBLE, frame, scientific.operating_grid, alerts_at
+        OperatingMethod.MEAN_ENSEMBLE_BLOCK_MAXIMUM, frame, scientific.operating_grid, alerts_at
     )
 
 
@@ -124,7 +124,7 @@ def matched_mean_ensemble_curve(
         ).combined_alerts
 
     return curve_from_alerts(
-        OperatingMethod.MEAN_ENSEMBLE_MATCHED, frame, scientific.operating_grid, alerts_at
+        OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION, frame, scientific.operating_grid, alerts_at
     )
 
 
@@ -166,9 +166,11 @@ def standard_curves(
             OperatingMethod.PACE, frame, peers, local, scientific, calibration_rule(scientific)
         )
     ]
-    for variant in scientific.curve_variants:
-        rule = calibration_rule(scientific, variant.policy, variant.mode, variant.design)
-        curves.append(tiered_curve(variant.operating_method, frame, peers, local, scientific, rule))
+    for ablation in scientific.ablation_curves:
+        rule = calibration_rule(scientific, ablation.policy, ablation.mode, ablation.design)
+        curves.append(
+            tiered_curve(ablation.operating_method, frame, peers, local, scientific, rule)
+        )
     curves.append(mean_ensemble_curve(frame, peers, local, scientific))
     curves.append(matched_mean_ensemble_curve(frame, peers, local, scientific))
     return tuple(curves)

@@ -9,7 +9,6 @@ from pace.core.pooled import fit_pooled_peer_union
 from pace.core.union import PeerCalibration, expert_union_alerts, validate_peer_calibration_matrix
 from pace.types import (
     AnchorBudgetPolicy,
-    AnchorShare,
     BooleanArray,
     CalibrationBlockSize,
     CalibrationMode,
@@ -414,21 +413,6 @@ class TieredLocalEvidence:
         return self.bank_calibration.shape[0] > 0
 
 
-def _anchor_tier_budget(
-    local_budget: FalseAlarmBudget,
-    anchor_share: AnchorShare,
-    calibration_block_size: CalibrationBlockSize,
-    policy: AnchorBudgetPolicy,
-) -> FalseAlarmBudget:
-    tier = local_budget * anchor_share
-    if (
-        policy is AnchorBudgetPolicy.LEGACY_FULL_LOCAL_FALLBACK
-        and tier < 1.0 / calibration_block_size
-    ):
-        return local_budget
-    return tier
-
-
 def _is_tier_collapsed(
     local_budget: FalseAlarmBudget,
     rule: TieredCalibrationRule,
@@ -493,13 +477,7 @@ def apply_tiered_local_peer_rule(
         rule.union,
     )
     banked = local.has_bank and not _is_tier_collapsed(local_budget, rule, calibration_block_size)
-    anchor_budget = (
-        _anchor_tier_budget(
-            local_budget, rule.anchor_share, calibration_block_size, rule.anchor_policy
-        )
-        if banked
-        else local_budget
-    )
+    anchor_budget = local_budget * rule.anchor_share if banked else local_budget
     anchor_calibration, anchor_alerts = _union_with_rule(
         local.anchor_calibration[np.newaxis, :],
         local.anchor_evaluation[np.newaxis, :],

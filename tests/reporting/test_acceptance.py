@@ -113,7 +113,7 @@ def _crafted(
             curves=(
                 _curve(OperatingMethod.PACE, len(result.attack_types), gain, pace_inflation),
                 _curve(
-                    OperatingMethod.MEAN_ENSEMBLE_MATCHED,
+                    OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION,
                     len(result.attack_types),
                     0.0,
                     reference_inflation,
@@ -175,7 +175,7 @@ def test_both_curves_are_read_at_the_same_fixed_false_alert_rate(
     reading = target_level(
         grouped,
         OperatingMethod.PACE,
-        OperatingMethod.MEAN_ENSEMBLE_MATCHED,
+        OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION,
         FprLevel.ALPHA,
         AlphaLevel.ALPHA_001,
     )
@@ -193,7 +193,7 @@ def test_a_target_whose_comparator_curve_does_not_reach_the_level_stays_unsuppor
     reading = target_level(
         grouped,
         OperatingMethod.PACE,
-        OperatingMethod.MEAN_ENSEMBLE_MATCHED,
+        OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION,
         FprLevel.ALPHA,
         AlphaLevel.ALPHA_001,
     )
@@ -207,7 +207,7 @@ def test_coverage_and_gain_are_reported_for_every_level(
     cell = cell_results(inputs)[0]
     for level in FprLevel:
         readings = level_targets(
-            cell, OperatingMethod.PACE, OperatingMethod.MEAN_ENSEMBLE_MATCHED, level
+            cell, OperatingMethod.PACE, OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION, level
         )
         assert len(readings) == len(cell.targets)
         assert all(np.isclose(item.gain, 0.05) for item in readings)
@@ -247,14 +247,16 @@ def test_acceptance_reads_only_the_same_calibration_comparator_never_the_block_m
             result,
             curves=(
                 *result.curves,
-                _curve(OperatingMethod.MEAN_ENSEMBLE, len(result.attack_types), 0.4, 1.0),
+                _curve(
+                    OperatingMethod.MEAN_ENSEMBLE_BLOCK_MAXIMUM, len(result.attack_types), 0.4, 1.0
+                ),
             ),
         )
         for result in _crafted(outcomes, 0.05, 1.0)
     )
     report = _inputs(configuration, crafted).acceptance
     assert report is not None
-    assert report.comparator is OperatingMethod.MEAN_ENSEMBLE_MATCHED
+    assert report.comparator is OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION
     primary = next(item for item in report.cells[0].levels if item.level is FprLevel.ALPHA)
     assert primary.gain is not None
     assert np.isclose(primary.gain, 0.05)
@@ -409,7 +411,7 @@ def test_unsupported_targets_pull_the_zero_filled_estimate_towards_zero(
     inputs = _inputs(configuration, _crafted(outcomes, 0.05, 1.0))
     cell = cell_results(inputs)[0]
     readings = cell_inference(
-        cell, OperatingMethod.MEAN_ENSEMBLE_MATCHED, inputs.configuration.reporting
+        cell, OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION, inputs.configuration.reporting
     )
     zero_filled = next(
         item for item in readings if item.method is InferenceMethod.UNSUPPORTED_AS_ZERO

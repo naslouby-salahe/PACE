@@ -108,7 +108,7 @@ def _local_inputs(
     return target, frame, peers
 
 
-def test_legacy_arm_reproduces_the_frozen_protected_local_rule() -> None:
+def test_mean_ensemble_arm_reproduces_the_block_maximum_protected_local_rule() -> None:
     configuration = _configuration((StudyArm.MEAN_ENSEMBLE_LOCAL_BRANCH,))
     target, frame, peers = _local_inputs(configuration)
     local = compute_local_evidence(target, frame, configuration, SEED, peers)

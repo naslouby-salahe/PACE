@@ -42,7 +42,7 @@ def _by_panel(
 def _series_styles(methods: set[OperatingMethod]) -> dict[OperatingMethod, SeriesStyle]:
     styles = {
         OperatingMethod.PACE: SeriesStyle.BOLD,
-        OperatingMethod.MEAN_ENSEMBLE_MATCHED: SeriesStyle.DASHED,
+        OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION: SeriesStyle.DASHED,
     }
     background = cycle((SeriesStyle.DASH_DOT, SeriesStyle.DOTTED, SeriesStyle.THIN))
     others = sorted(methods - styles.keys(), key=lambda method: method.name)
@@ -90,7 +90,7 @@ def comparable_operating_curves(inputs: ReportInputs) -> Figure:
     baselines = {
         baseline.operating_method for baseline in inputs.configuration.scientific.baselines.methods
     }
-    references = {OperatingMethod.PACE, OperatingMethod.MEAN_ENSEMBLE_MATCHED}
+    references = {OperatingMethod.PACE, OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION}
     variants = set(comparison_references(inputs)) - baselines - references
     styles = _series_styles(baselines | variants | references)
     panels = (

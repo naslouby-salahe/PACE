@@ -28,9 +28,6 @@ scientific.local\_detectors.lof\_neighbors & 20 \\
 scientific.local\_detectors.nearest\_neighbors & 10 \\
 scientific.local\_detectors.histogram\_bins & 20 \\
 scientific.local\_detectors.covariance\_regularization & 0.001 \\
-scientific.local\_detectors.covariance\_estimator & Shrinkage \\
-scientific.local\_detectors.covariance\_condition\_limit & none \\
-scientific.local\_detectors.covariance\_condition\_rule & Fixed \\
 scientific.local\_bank.response\_forest\_trees & 100 \\
 scientific.local\_bank.pair\_count & 150 \\
 scientific.local\_bank.pair\_bins & 8 \\
@@ -38,11 +35,10 @@ scientific.local\_bank.pair\_smoothing & 0.5 \\
 scientific.local\_bank.anchor\_share & 0.5 \\
 scientific.local\_bank.anchor\_budget\_policy & Share-conserving \\
 scientific.local\_bank.design & Per-expert \\
-scientific.local\_bank.anchor\_members & Without autoencoder \\
 scientific.calibration\_mode & Cross-fitted \\
 scientific.cross\_fit\_folds & 5 \\
 scientific.resolution\_rows & 2 \\
-scientific.curve\_variants & Original PACE (legacy anchor fallback); Previous PACE (budget-conserving, block-maximum); PACE with resolution-aware blocks; PACE with pooled conformal-rank calibration; PACE with anchor collapse; PACE with forward-chaining cross-fitted calibration; Without Gaussian expert; Family budgets; Second-order aggregation \\
+scientific.ablation\_curves & PACE with in-sample block-maximum calibration; PACE with resolution-aware blocks; PACE with pooled conformal-rank calibration; PACE with anchor collapse; PACE with forward-chaining cross-fitted calibration; PACE without the Gaussian bank expert; Family budgets; PACE with second-order bank aggregation \\
 scientific.operating\_grid & 0.0005; 0.001; 0.0025; 0.005; 0.01; 0.02; 0.035; 0.05; 0.075; 0.1; 0.15; 0.25 \\
 scientific.evaluation\_role & Held-out \\
 scientific.baselines.methods & KitNET; DIoT (flow-symbol adaptation); MCDE (primary-source adaptation) \\
@@ -73,7 +69,7 @@ scientific.baselines.DIoT (flow-symbol adaptation).fine\_tune\_epochs & 5 \\
 scientific.baselines.DIoT (flow-symbol adaptation).batch\_size & 256 \\
 scientific.baselines.DIoT (flow-symbol adaptation).learning\_rate & 0.001 \\
 scientific.baselines.DIoT (flow-symbol adaptation).peer\_row\_limit & 1000 \\
-scientific.study\_arms & Mean-ensemble local branch (block-max calibration arm); Bank without feature experts; Bank without response experts; Bank without rarity experts; Bank without anchor; Bank single union; Response on margins; Legacy anchor fallback; Cross-fitted calibration; Reserve quarter; Peer mean fusion; Peer max fusion; No local channel; Local only \\
+scientific.study\_arms & Mean-ensemble local branch (block-maximum calibration); Bank without feature experts; Bank without response experts; Bank without rarity experts; Bank without anchor; Bank single union; Response on margins; Reserve quarter; Peer mean fusion; Peer max fusion; No local channel; Local only \\
 scientific.target\_clients &  \\
 scientific.numerical\_threads & 1 \\
 splitting.training\_fraction & 0.4 \\
@@ -105,6 +101,6 @@ protocol\_matrix.power.significance\_level & 0.05 \\
 protocol\_matrix.power.power & 0.8 \\
 runtime.source\_verification & STRICT \\
 reporting.acceptance\_comparator & Mean-ensemble local branch (same calibration as PACE) \\
-reporting.nominal\_gain\_comparator & Mean-ensemble local branch (block-max calibration arm) \\
+reporting.nominal\_gain\_comparator & Mean-ensemble local branch (block-maximum calibration) \\
 \bottomrule
 \end{tabular}

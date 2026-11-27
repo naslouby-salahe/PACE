@@ -139,7 +139,7 @@ def _point(
     members = [cell.targets[reading.target] for reading in readings]
     pace = [_nominal_rate(results, OperatingMethod.PACE, cell.alpha) for results in members]
     reference = [
-        _nominal_rate(results, OperatingMethod.MEAN_ENSEMBLE_MATCHED, cell.alpha)
+        _nominal_rate(results, OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION, cell.alpha)
         for results in members
     ]
     return ScalingPoint(
@@ -159,7 +159,10 @@ def _supported(cell: CellResults) -> dict[DatasetClientId, TargetLevel]:
     return {
         reading.target: reading
         for reading in level_targets(
-            cell, OperatingMethod.PACE, OperatingMethod.MEAN_ENSEMBLE_MATCHED, FprLevel.ALPHA
+            cell,
+            OperatingMethod.PACE,
+            OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION,
+            FprLevel.ALPHA,
         )
     }
 

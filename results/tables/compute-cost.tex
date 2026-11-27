@@ -2,187 +2,187 @@
 \toprule
 stratum & target & method & phase & processed\_rows & seconds & seconds\_sd & rows\_per\_second & peak\_python\_memory\_mb & model\_bytes \\
 \midrule
-IoT-23 & 1-1 & PACE & Offline training (once, shared) & 50000 & 0.082101 & 0.000000 & 609004.8 & 8.846397 & 27946 \\
-IoT-23 & 1-1 & PACE & Per-target onboarding fit & 50000 & 0.077096 & 0.000234 & 648541.9 & 0.694504 & 1110044 \\
-IoT-23 & 1-1 & PACE & Per-target calibration & 50000 & 0.217241 & 0.005876 & 230158.9 & 16.319921 & 150505 \\
-IoT-23 & 1-1 & PACE & Inference & 50000 & 0.617223 & 0.007983 & 81008.1 & 58.430420 & 25078739 \\
-IoT-23 & 1-1 & KitNET & Per-target onboarding fit & 50000 & 0.472268 & 0.016590 & 105872.0 & 0.043781 & 5443 \\
-IoT-23 & 1-1 & KitNET & Per-target calibration & 50000 & 0.001542 & 0.000028 & 32418217.5 & 0.005969 & 21 \\
-IoT-23 & 1-1 & KitNET & Inference & 50000 & 0.035048 & 0.000496 & 1426596.5 & 17.612152 & 400161 \\
-IoT-23 & 1-1 & MCDE (primary-source adaptation) & Offline training (once, shared) & 50000 & 0.974977 & 0.000000 & 51283.2 & 31.064524 & 366478 \\
-IoT-23 & 1-1 & MCDE (primary-source adaptation) & Per-target onboarding fit & 50000 & 0.004281 & 0.000143 & 11680550.9 & 0.285868 & 8885 \\
-IoT-23 & 1-1 & MCDE (primary-source adaptation) & Inference & 50000 & 0.318895 & 0.007746 & 156791.5 & 418.626585 & 400161 \\
-IoT-23 & 1-1 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 50000 & 2.788958 & 0.000000 & 17927.8 & 17.658232 & 226839 \\
-IoT-23 & 1-1 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 50000 & 0.159906 & 0.002367 & 312684.3 & 7.058953 & 2398504 \\
-IoT-23 & 1-1 & DIoT (flow-symbol adaptation) & Inference & 50000 & 2.835014 & 0.027660 & 17636.6 & 880.482751 & 400161 \\
-IoT-23 & 3-1 & PACE & Offline training (once, shared) & 13889 & 0.562682 & 0.000000 & 24683.6 & 30.404617 & 27946 \\
-IoT-23 & 3-1 & PACE & Per-target onboarding fit & 13889 & 0.082616 & 0.004108 & 168115.8 & 0.711247 & 1194397 \\
-IoT-23 & 3-1 & PACE & Per-target calibration & 13889 & 0.007134 & 0.000012 & 1946777.7 & 0.389460 & 42163 \\
-IoT-23 & 3-1 & PACE & Inference & 13889 & 0.044482 & 0.001456 & 312241.4 & 14.721107 & 3902337 \\
-IoT-23 & 3-1 & KitNET & Per-target onboarding fit & 13889 & 0.632532 & 0.012089 & 21957.8 & 0.043781 & 6463 \\
-IoT-23 & 3-1 & KitNET & Per-target calibration & 13889 & 0.000033 & 0.000003 & 423083949.4 & 0.006439 & 21 \\
-IoT-23 & 3-1 & KitNET & Inference & 13889 & 0.010473 & 0.000149 & 1326183.2 & 6.211304 & 111273 \\
-IoT-23 & 3-1 & MCDE (primary-source adaptation) & Offline training (once, shared) & 13889 & 1.014857 & 0.000000 & 13685.7 & 31.445786 & 366281 \\
-IoT-23 & 3-1 & MCDE (primary-source adaptation) & Per-target onboarding fit & 13889 & 0.003068 & 0.000038 & 4526753.0 & 0.285730 & 8885 \\
-IoT-23 & 3-1 & MCDE (primary-source adaptation) & Inference & 13889 & 0.068799 & 0.001169 & 201879.3 & 116.053770 & 111273 \\
-IoT-23 & 3-1 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 13889 & 2.569096 & 0.000000 & 5406.2 & 17.657966 & 226839 \\
-IoT-23 & 3-1 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 13889 & 0.161996 & 0.000819 & 85736.9 & 7.058923 & 2398504 \\
-IoT-23 & 3-1 & DIoT (flow-symbol adaptation) & Inference & 13889 & 0.623828 & 0.028330 & 22264.1 & 244.581506 & 111273 \\
-TON\_IoT & 192.168.1.1 & PACE & Offline training (once, shared) & 49722 & 0.227788 & 0.000000 & 218282.3 & 18.113091 & 24362 \\
-TON\_IoT & 192.168.1.1 & PACE & Per-target onboarding fit & 49722 & 0.078206 & 0.000169 & 635782.5 & 0.673199 & 962811 \\
-TON\_IoT & 192.168.1.1 & PACE & Per-target calibration & 49722 & 0.018322 & 0.000038 & 2713770.2 & 2.139601 & 149653 \\
-TON\_IoT & 192.168.1.1 & PACE & Inference & 49722 & 0.149759 & 0.001795 & 332013.4 & 52.051620 & 11365200 \\
-TON\_IoT & 192.168.1.1 & KitNET & Per-target onboarding fit & 49722 & 0.453013 & 0.007503 & 109758.3 & 0.029629 & 4883 \\
-TON\_IoT & 192.168.1.1 & KitNET & Per-target calibration & 49722 & 0.000234 & 0.000010 & 212894772.6 & 0.006089 & 21 \\
-TON\_IoT & 192.168.1.1 & KitNET & Inference & 49722 & 0.028666 & 0.000212 & 1734530.1 & 17.135681 & 397937 \\
-TON\_IoT & 192.168.1.1 & MCDE (primary-source adaptation) & Offline training (once, shared) & 49722 & 0.746320 & 0.000000 & 66622.9 & 25.556549 & 367683 \\
-TON\_IoT & 192.168.1.1 & MCDE (primary-source adaptation) & Per-target onboarding fit & 49722 & 0.003090 & 0.000069 & 16089477.9 & 0.242998 & 7205 \\
-TON\_IoT & 192.168.1.1 & MCDE (primary-source adaptation) & Inference & 49722 & 0.181229 & 0.000409 & 274360.8 & 335.870558 & 397937 \\
-TON\_IoT & 192.168.1.1 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 49722 & 2.284818 & 0.000000 & 21761.9 & 16.834179 & 225047 \\
-TON\_IoT & 192.168.1.1 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 49722 & 0.131467 & 0.000475 & 378210.3 & 5.691735 & 2396712 \\
-TON\_IoT & 192.168.1.1 & DIoT (flow-symbol adaptation) & Inference & 49722 & 2.617593 & 0.051566 & 18995.3 & 705.639090 & 397937 \\
-TON\_IoT & 192.168.1.152 & PACE & Offline training (once, shared) & 36885 & 0.317452 & 0.000000 & 116190.9 & 24.134666 & 24362 \\
-TON\_IoT & 192.168.1.152 & PACE & Per-target onboarding fit & 36885 & 0.075296 & 0.001336 & 489864.2 & 0.573203 & 387064 \\
-TON\_IoT & 192.168.1.152 & PACE & Per-target calibration & 36885 & 0.018883 & 0.000324 & 1953315.1 & 1.469892 & 111142 \\
-TON\_IoT & 192.168.1.152 & PACE & Inference & 36885 & 0.115852 & 0.001528 & 318380.7 & 38.578758 & 8373840 \\
-TON\_IoT & 192.168.1.152 & KitNET & Per-target onboarding fit & 36885 & 0.517467 & 0.004237 & 71279.9 & 0.029629 & 5368 \\
-TON\_IoT & 192.168.1.152 & KitNET & Per-target calibration & 36885 & 0.000159 & 0.000005 & 232639544.9 & 0.006119 & 21 \\
-TON\_IoT & 192.168.1.152 & KitNET & Inference & 36885 & 0.022457 & 0.000081 & 1642508.4 & 14.135483 & 295241 \\
-TON\_IoT & 192.168.1.152 & MCDE (primary-source adaptation) & Offline training (once, shared) & 36885 & 0.795103 & 0.000000 & 46390.2 & 25.407375 & 367699 \\
-TON\_IoT & 192.168.1.152 & MCDE (primary-source adaptation) & Per-target onboarding fit & 36885 & 0.002891 & 0.000032 & 12757124.0 & 0.242954 & 4885 \\
-TON\_IoT & 192.168.1.152 & MCDE (primary-source adaptation) & Inference & 36885 & 0.126584 & 0.003242 & 291388.6 & 166.131834 & 295241 \\
-TON\_IoT & 192.168.1.152 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 36885 & 2.228897 & 0.000000 & 16548.5 & 16.835371 & 225047 \\
-TON\_IoT & 192.168.1.152 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 36885 & 0.185385 & 0.008819 & 198964.1 & 5.691735 & 2396712 \\
-TON\_IoT & 192.168.1.152 & DIoT (flow-symbol adaptation) & Inference & 36885 & 1.829538 & 0.034421 & 20160.8 & 523.460896 & 295241 \\
-Gotham 2025 & iotsim-air-quality-1 & PACE & Offline training (once, shared) & 21447 & 0.486402 & 0.000000 & 44093.1 & 45.357216 & 28458 \\
-Gotham 2025 & iotsim-air-quality-1 & PACE & Per-target onboarding fit & 21447 & 0.081021 & 0.000493 & 264707.9 & 0.724416 & 1257338 \\
-Gotham 2025 & iotsim-air-quality-1 & PACE & Per-target calibration & 21447 & 0.008784 & 0.000023 & 2441621.4 & 0.445443 & 64810 \\
-Gotham 2025 & iotsim-air-quality-1 & PACE & Inference & 21447 & 0.050488 & 0.000479 & 424797.0 & 22.145561 & 4126196 \\
-Gotham 2025 & iotsim-air-quality-1 & KitNET & Per-target onboarding fit & 21447 & 0.963102 & 0.001553 & 22268.7 & 0.046047 & 9269 \\
-Gotham 2025 & iotsim-air-quality-1 & KitNET & Per-target calibration & 21447 & 0.000051 & 0.000005 & 417413816.5 & 0.006471 & 21 \\
-Gotham 2025 & iotsim-air-quality-1 & KitNET & Inference & 21447 & 0.018072 & 0.000166 & 1186769.1 & 14.136322 & 171737 \\
-Gotham 2025 & iotsim-air-quality-1 & MCDE (primary-source adaptation) & Offline training (once, shared) & 21447 & 0.857327 & 0.000000 & 25016.1 & 29.577760 & 366635 \\
-Gotham 2025 & iotsim-air-quality-1 & MCDE (primary-source adaptation) & Per-target onboarding fit & 21447 & 0.003300 & 0.000058 & 6498424.7 & 0.291836 & 9125 \\
-Gotham 2025 & iotsim-air-quality-1 & MCDE (primary-source adaptation) & Inference & 21447 & 0.089132 & 0.000224 & 240620.4 & 184.115881 & 171737 \\
-Gotham 2025 & iotsim-air-quality-1 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 21447 & 1.683020 & 0.000000 & 12743.2 & 18.122297 & 227095 \\
-Gotham 2025 & iotsim-air-quality-1 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 21447 & 0.169368 & 0.000981 & 126629.4 & 7.254235 & 2398760 \\
-Gotham 2025 & iotsim-air-quality-1 & DIoT (flow-symbol adaptation) & Inference & 21447 & 1.171867 & 0.049570 & 18301.6 & 388.147260 & 171737 \\
-Gotham 2025 & iotsim-building-monitor-1 & PACE & Offline training (once, shared) & 75659 & 0.131912 & 0.000000 & 573554.4 & 13.514908 & 28458 \\
-Gotham 2025 & iotsim-building-monitor-1 & PACE & Per-target onboarding fit & 75659 & 0.081932 & 0.001150 & 923435.8 & 0.780514 & 1586142 \\
-Gotham 2025 & iotsim-building-monitor-1 & PACE & Per-target calibration & 75659 & 0.006398 & 0.000093 & 11825746.3 & 0.663016 & 227479 \\
-Gotham 2025 & iotsim-building-monitor-1 & PACE & Inference & 75659 & 0.228805 & 0.001706 & 330670.0 & 77.550919 & 13196685 \\
-Gotham 2025 & iotsim-building-monitor-1 & KitNET & Per-target onboarding fit & 75659 & 0.961735 & 0.002772 & 78669.3 & 0.046047 & 9485 \\
-Gotham 2025 & iotsim-building-monitor-1 & KitNET & Per-target calibration & 75659 & 0.000064 & 0.000021 & 1180315320.8 & 0.006015 & 21 \\
-Gotham 2025 & iotsim-building-monitor-1 & KitNET & Inference & 75659 & 0.071327 & 0.000674 & 1060730.4 & 49.706329 & 605435 \\
-Gotham 2025 & iotsim-building-monitor-1 & MCDE (primary-source adaptation) & Offline training (once, shared) & 75659 & 0.898075 & 0.000000 & 84245.7 & 29.680277 & 366530 \\
-Gotham 2025 & iotsim-building-monitor-1 & MCDE (primary-source adaptation) & Per-target onboarding fit & 75659 & 0.003558 & 0.000089 & 21262233.5 & 0.291880 & 9125 \\
-Gotham 2025 & iotsim-building-monitor-1 & MCDE (primary-source adaptation) & Inference & 75659 & 0.283858 & 0.013873 & 266538.3 & 649.417433 & 605435 \\
-Gotham 2025 & iotsim-building-monitor-1 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 75659 & 1.751188 & 0.000000 & 43204.4 & 18.121285 & 227095 \\
-Gotham 2025 & iotsim-building-monitor-1 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 75659 & 0.169253 & 0.004825 & 447017.0 & 7.254235 & 2398760 \\
-Gotham 2025 & iotsim-building-monitor-1 & DIoT (flow-symbol adaptation) & Inference & 75659 & 4.120425 & 0.046397 & 18361.9 & 1369.271100 & 605435 \\
-CTU-13 & CTU13-scenario-01 & PACE & Offline training (once, shared) & 16078 & 0.078743 & 0.000000 & 204183.5 & 8.055008 & 28970 \\
-CTU-13 & CTU13-scenario-01 & PACE & Per-target onboarding fit & 16078 & 0.081533 & 0.001454 & 197195.3 & 0.694175 & 1097798 \\
-CTU-13 & CTU13-scenario-01 & PACE & Per-target calibration & 16078 & 0.029168 & 0.000303 & 551221.5 & 2.792269 & 48739 \\
-CTU-13 & CTU13-scenario-01 & PACE & Inference & 16078 & 0.097502 & 0.000227 & 164898.8 & 18.013573 & 6701761 \\
-CTU-13 & CTU13-scenario-01 & KitNET & Per-target onboarding fit & 16078 & 0.710762 & 0.003097 & 22620.8 & 0.048374 & 7463 \\
-CTU-13 & CTU13-scenario-01 & KitNET & Per-target calibration & 16078 & 0.000253 & 0.000052 & 63563476.5 & 0.006086 & 21 \\
-CTU-13 & CTU13-scenario-01 & KitNET & Inference & 16078 & 0.012233 & 0.000039 & 1314349.6 & 7.669601 & 128785 \\
-CTU-13 & CTU13-scenario-01 & MCDE (primary-source adaptation) & Offline training (once, shared) & 16078 & 0.819933 & 0.000000 & 19608.9 & 30.261983 & 363562 \\
-CTU-13 & CTU13-scenario-01 & MCDE (primary-source adaptation) & Per-target onboarding fit & 16078 & 0.003256 & 0.000056 & 4937448.6 & 0.297937 & 9365 \\
-CTU-13 & CTU13-scenario-01 & MCDE (primary-source adaptation) & Inference & 16078 & 0.076827 & 0.000603 & 209274.1 & 141.819365 & 128785 \\
-CTU-13 & CTU13-scenario-01 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 16078 & 3.053366 & 0.000000 & 5265.7 & 24.907848 & 227351 \\
-CTU-13 & CTU13-scenario-01 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 16078 & 0.173554 & 0.000170 & 92639.9 & 7.449548 & 2399016 \\
-CTU-13 & CTU13-scenario-01 & DIoT (flow-symbol adaptation) & Inference & 16078 & 0.582500 & 0.026932 & 27601.7 & 298.830097 & 128785 \\
-CTU-13 & CTU13-scenario-02 & PACE & Offline training (once, shared) & 11824 & 0.134794 & 0.000000 & 87719.1 & 10.715729 & 28970 \\
-CTU-13 & CTU13-scenario-02 & PACE & Per-target onboarding fit & 11824 & 0.090068 & 0.005231 & 131279.1 & 0.708298 & 1179757 \\
-CTU-13 & CTU13-scenario-02 & PACE & Per-target calibration & 11824 & 0.011002 & 0.000180 & 1074753.5 & 0.863005 & 35977 \\
-CTU-13 & CTU13-scenario-02 & PACE & Inference & 11824 & 0.049177 & 0.000153 & 240439.8 & 12.820786 & 4081559 \\
-CTU-13 & CTU13-scenario-02 & KitNET & Per-target onboarding fit & 11824 & 0.763282 & 0.006015 & 15491.0 & 0.048374 & 7897 \\
-CTU-13 & CTU13-scenario-02 & KitNET & Per-target calibration & 11824 & 0.000084 & 0.000022 & 141310323.3 & 0.006169 & 21 \\
-CTU-13 & CTU13-scenario-02 & KitNET & Inference & 11824 & 0.009656 & 0.000188 & 1224523.7 & 6.108414 & 94753 \\
-CTU-13 & CTU13-scenario-02 & MCDE (primary-source adaptation) & Offline training (once, shared) & 11824 & 0.869287 & 0.000000 & 13602.0 & 30.991835 & 364576 \\
-CTU-13 & CTU13-scenario-02 & MCDE (primary-source adaptation) & Per-target onboarding fit & 11824 & 0.003280 & 0.000010 & 3605078.5 & 0.297937 & 9365 \\
-CTU-13 & CTU13-scenario-02 & MCDE (primary-source adaptation) & Inference & 11824 & 0.050839 & 0.000751 & 232578.1 & 104.235960 & 94753 \\
-CTU-13 & CTU13-scenario-02 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 11824 & 3.065067 & 0.000000 & 3857.7 & 25.696041 & 227351 \\
-CTU-13 & CTU13-scenario-02 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 11824 & 0.172430 & 0.000957 & 68572.7 & 7.449548 & 2399016 \\
-CTU-13 & CTU13-scenario-02 & DIoT (flow-symbol adaptation) & Inference & 11824 & 0.422018 & 0.004825 & 28017.7 & 219.764471 & 94753 \\
-N-BaIoT & Danmini\_Doorbell & PACE & Offline training (once, shared) & 108079 & 1.066295 & 0.000000 & 101359.4 & 183.673355 & 68403 \\
-N-BaIoT & Danmini\_Doorbell & PACE & Per-target onboarding fit & 108079 & 0.088858 & 0.001448 & 1216309.9 & 1.261263 & 1506619 \\
-N-BaIoT & Danmini\_Doorbell & PACE & Per-target calibration & 108079 & 0.035576 & 0.000236 & 3037965.1 & 2.716654 & 324748 \\
-N-BaIoT & Danmini\_Doorbell & PACE & Inference & 108079 & 0.602547 & 0.003468 & 179370.2 & 112.369270 & 23366344 \\
-N-BaIoT & Danmini\_Doorbell & KitNET & Per-target onboarding fit & 108079 & 1.374971 & 0.017858 & 78604.5 & 0.407948 & 19308 \\
-N-BaIoT & Danmini\_Doorbell & KitNET & Per-target calibration & 108079 & 0.000281 & 0.000007 & 384888956.0 & 0.006078 & 21 \\
-N-BaIoT & Danmini\_Doorbell & KitNET & Inference & 108079 & 0.295264 & 0.007359 & 366041.9 & 98.188934 & 864795 \\
-N-BaIoT & Danmini\_Doorbell & MCDE (primary-source adaptation) & Offline training (once, shared) & 108079 & 1.961879 & 0.000000 & 55089.5 & 83.389735 & 487015 \\
-N-BaIoT & Danmini\_Doorbell & MCDE (primary-source adaptation) & Per-target onboarding fit & 108079 & 0.005358 & 0.000038 & 20169939.4 & 0.768442 & 27845 \\
-N-BaIoT & Danmini\_Doorbell & MCDE (primary-source adaptation) & Inference & 108079 & 1.740224 & 0.091055 & 62106.4 & 2857.347075 & 864795 \\
-N-BaIoT & Danmini\_Doorbell & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 108079 & 3.231428 & 0.000000 & 33446.2 & 70.374522 & 247063 \\
-N-BaIoT & Danmini\_Doorbell & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 108079 & 0.172508 & 0.000707 & 626514.1 & 22.488610 & 2418728 \\
-N-BaIoT & Danmini\_Doorbell & DIoT (flow-symbol adaptation) & Inference & 108079 & 6.404163 & 0.068610 & 16876.4 & 6072.295181 & 864795 \\
-N-BaIoT & Ecobee\_Thermostat & PACE & Offline training (once, shared) & 102623 & 1.194795 & 0.000000 & 85891.8 & 193.498886 & 68403 \\
-N-BaIoT & Ecobee\_Thermostat & PACE & Per-target onboarding fit & 102623 & 0.093849 & 0.001262 & 1093486.0 & 1.261263 & 1877320 \\
-N-BaIoT & Ecobee\_Thermostat & PACE & Per-target calibration & 102623 & 0.015141 & 0.000294 & 6777630.8 & 0.904202 & 308380 \\
-N-BaIoT & Ecobee\_Thermostat & PACE & Inference & 102623 & 0.546894 & 0.003480 & 187647.0 & 106.083626 & 20921801 \\
-N-BaIoT & Ecobee\_Thermostat & KitNET & Per-target onboarding fit & 102623 & 1.175226 & 0.004120 & 87321.9 & 0.407948 & 18312 \\
-N-BaIoT & Ecobee\_Thermostat & KitNET & Per-target calibration & 102623 & 0.000093 & 0.000004 & 1098959101.6 & 0.006178 & 21 \\
-N-BaIoT & Ecobee\_Thermostat & KitNET & Inference & 102623 & 0.282083 & 0.008822 & 363804.3 & 82.274193 & 821147 \\
-N-BaIoT & Ecobee\_Thermostat & MCDE (primary-source adaptation) & Offline training (once, shared) & 102623 & 1.930401 & 0.000000 & 53161.5 & 82.986664 & 483967 \\
-N-BaIoT & Ecobee\_Thermostat & MCDE (primary-source adaptation) & Per-target onboarding fit & 102623 & 0.005175 & 0.000042 & 19829873.6 & 0.768398 & 27845 \\
-N-BaIoT & Ecobee\_Thermostat & MCDE (primary-source adaptation) & Inference & 102623 & 1.611914 & 0.139853 & 63665.3 & 2712.988165 & 821147 \\
-N-BaIoT & Ecobee\_Thermostat & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 102623 & 3.213232 & 0.000000 & 31937.6 & 70.373683 & 247063 \\
-N-BaIoT & Ecobee\_Thermostat & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 102623 & 0.159799 & 0.000492 & 642201.4 & 22.488559 & 2418728 \\
-N-BaIoT & Ecobee\_Thermostat & DIoT (flow-symbol adaptation) & Inference & 102623 & 5.937675 & 0.051840 & 17283.4 & 5765.755985 & 821147 \\
-UNSW IoT-attack flows G1 & 00166cab6b88 & PACE & Offline training (once, shared) & 14196 & 0.144423 & 0.000000 & 98294.9 & 4.681274 & 17194 \\
-UNSW IoT-attack flows G1 & 00166cab6b88 & PACE & Per-target onboarding fit & 14196 & 0.081080 & 0.003264 & 175086.4 & 0.676030 & 418111 \\
-UNSW IoT-attack flows G1 & 00166cab6b88 & PACE & Per-target calibration & 14196 & 0.045544 & 0.000190 & 311700.2 & 3.556702 & 43030 \\
-UNSW IoT-attack flows G1 & 00166cab6b88 & PACE & Inference & 14196 & 0.035126 & 0.000233 & 404141.7 & 15.106613 & 3222550 \\
-UNSW IoT-attack flows G1 & 00166cab6b88 & KitNET & Per-target onboarding fit & 14196 & 0.217790 & 0.016128 & 65182.0 & 0.012302 & 2562 \\
-UNSW IoT-attack flows G1 & 00166cab6b88 & KitNET & Per-target calibration & 14196 & 0.000530 & 0.000047 & 26804613.0 & 0.006008 & 21 \\
-UNSW IoT-attack flows G1 & 00166cab6b88 & KitNET & Inference & 14196 & 0.004029 & 0.000055 & 3523749.4 & 5.479797 & 113729 \\
-UNSW IoT-attack flows G1 & 00166cab6b88 & MCDE (primary-source adaptation) & Offline training (once, shared) & 14196 & 0.448034 & 0.000000 & 31685.1 & 14.195724 & 362416 \\
-UNSW IoT-attack flows G1 & 00166cab6b88 & MCDE (primary-source adaptation) & Per-target onboarding fit & 14196 & 0.003240 & 0.000103 & 4381905.7 & 0.140810 & 3845 \\
-UNSW IoT-attack flows G1 & 00166cab6b88 & MCDE (primary-source adaptation) & Inference & 14196 & 0.079531 & 0.000419 & 178496.4 & 50.684637 & 113729 \\
-UNSW IoT-attack flows G1 & 00166cab6b88 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 14196 & 1.162061 & 0.000000 & 12216.2 & 7.355087 & 221463 \\
-UNSW IoT-attack flows G1 & 00166cab6b88 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 14196 & 0.182937 & 0.008203 & 77600.6 & 2.957360 & 2393128 \\
-UNSW IoT-attack flows G1 & 00166cab6b88 & DIoT (flow-symbol adaptation) & Inference & 14196 & 0.468453 & 0.008211 & 30304.0 & 104.423150 & 113729 \\
-UNSW IoT-attack flows G1 & 50c7bf005639 & PACE & Offline training (once, shared) & 14156 & 0.153411 & 0.000000 & 92275.1 & 4.690681 & 17194 \\
-UNSW IoT-attack flows G1 & 50c7bf005639 & PACE & Per-target onboarding fit & 14156 & 0.079427 & 0.001143 & 178225.6 & 0.659666 & 330623 \\
-UNSW IoT-attack flows G1 & 50c7bf005639 & PACE & Per-target calibration & 14156 & 0.047768 & 0.000771 & 296351.0 & 3.563722 & 42910 \\
-UNSW IoT-attack flows G1 & 50c7bf005639 & PACE & Inference & 14156 & 0.039458 & 0.000365 & 358765.6 & 15.068436 & 3222456 \\
-UNSW IoT-attack flows G1 & 50c7bf005639 & KitNET & Per-target onboarding fit & 14156 & 0.217645 & 0.013211 & 65041.6 & 0.012249 & 2450 \\
-UNSW IoT-attack flows G1 & 50c7bf005639 & KitNET & Per-target calibration & 14156 & 0.000562 & 0.000061 & 25190255.6 & 0.006191 & 21 \\
-UNSW IoT-attack flows G1 & 50c7bf005639 & KitNET & Inference & 14156 & 0.003970 & 0.000124 & 3565994.0 & 4.384537 & 113409 \\
-UNSW IoT-attack flows G1 & 50c7bf005639 & MCDE (primary-source adaptation) & Offline training (once, shared) & 14156 & 0.433013 & 0.000000 & 32691.8 & 14.131728 & 362644 \\
-UNSW IoT-attack flows G1 & 50c7bf005639 & MCDE (primary-source adaptation) & Per-target onboarding fit & 14156 & 0.003525 & 0.000203 & 4015861.8 & 0.140766 & 2645 \\
-UNSW IoT-attack flows G1 & 50c7bf005639 & MCDE (primary-source adaptation) & Inference & 14156 & 0.065412 & 0.000204 & 216412.2 & 33.803152 & 113409 \\
-UNSW IoT-attack flows G1 & 50c7bf005639 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 14156 & 1.155150 & 0.000000 & 12254.7 & 7.355624 & 221463 \\
-UNSW IoT-attack flows G1 & 50c7bf005639 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 14156 & 0.017767 & 0.000218 & 796762.3 & 2.957360 & 2393128 \\
-UNSW IoT-attack flows G1 & 50c7bf005639 & DIoT (flow-symbol adaptation) & Inference & 14156 & 0.468283 & 0.011415 & 30229.6 & 104.129020 & 113409 \\
-UNSW IoT-attack flows G2 & 0017882b9a25 & PACE & Offline training (once, shared) & 8836 & 0.089628 & 0.000000 & 98585.0 & 2.929710 & 16170 \\
-UNSW IoT-attack flows G2 & 0017882b9a25 & PACE & Per-target onboarding fit & 8836 & 0.078180 & 0.001031 & 113021.7 & 0.765823 & 940013 \\
-UNSW IoT-attack flows G2 & 0017882b9a25 & PACE & Per-target calibration & 8836 & 0.032473 & 0.000357 & 272106.7 & 2.236975 & 26950 \\
-UNSW IoT-attack flows G2 & 0017882b9a25 & PACE & Inference & 8836 & 0.026778 & 0.000557 & 329967.6 & 9.425735 & 2024815 \\
-UNSW IoT-attack flows G2 & 0017882b9a25 & KitNET & Per-target onboarding fit & 8836 & 0.207120 & 0.001305 & 42661.3 & 0.011501 & 2226 \\
-UNSW IoT-attack flows G2 & 0017882b9a25 & KitNET & Per-target calibration & 8836 & 0.000318 & 0.000004 & 27751982.6 & 0.006190 & 21 \\
-UNSW IoT-attack flows G2 & 0017882b9a25 & KitNET & Inference & 8836 & 0.002304 & 0.000076 & 3834464.2 & 2.761002 & 70849 \\
-UNSW IoT-attack flows G2 & 0017882b9a25 & MCDE (primary-source adaptation) & Offline training (once, shared) & 8836 & 0.432349 & 0.000000 & 20437.2 & 12.710865 & 361991 \\
-UNSW IoT-attack flows G2 & 0017882b9a25 & MCDE (primary-source adaptation) & Per-target onboarding fit & 8836 & 0.003479 & 0.000233 & 2540071.9 & 0.122499 & 3365 \\
-UNSW IoT-attack flows G2 & 0017882b9a25 & MCDE (primary-source adaptation) & Inference & 8836 & 0.037220 & 0.000632 & 237399.0 & 27.502846 & 70849 \\
-UNSW IoT-attack flows G2 & 0017882b9a25 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 8836 & 1.094773 & 0.000000 & 8071.1 & 6.378566 & 220951 \\
-UNSW IoT-attack flows G2 & 0017882b9a25 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 8836 & 0.042537 & 0.000611 & 207725.7 & 2.566735 & 2392616 \\
-UNSW IoT-attack flows G2 & 0017882b9a25 & DIoT (flow-symbol adaptation) & Inference & 8836 & 0.282942 & 0.001297 & 31229.0 & 56.367749 & 70849 \\
-UNSW IoT-attack flows G2 & 44650d56ccd3 & PACE & Offline training (once, shared) & 8773 & 0.085617 & 0.000000 & 102467.5 & 2.942688 & 16170 \\
-UNSW IoT-attack flows G2 & 44650d56ccd3 & PACE & Per-target onboarding fit & 8773 & 0.078828 & 0.000135 & 111292.3 & 0.830035 & 1315123 \\
-UNSW IoT-attack flows G2 & 44650d56ccd3 & PACE & Per-target calibration & 8773 & 0.032315 & 0.000320 & 271480.6 & 2.239501 & 26761 \\
-UNSW IoT-attack flows G2 & 44650d56ccd3 & PACE & Inference & 8773 & 0.024737 & 0.000411 & 354652.3 & 9.365334 & 2024141 \\
-UNSW IoT-attack flows G2 & 44650d56ccd3 & KitNET & Per-target onboarding fit & 8773 & 0.151928 & 0.001191 & 57744.5 & 0.011501 & 2005 \\
-UNSW IoT-attack flows G2 & 44650d56ccd3 & KitNET & Per-target calibration & 8773 & 0.000350 & 0.000061 & 25059914.8 & 0.006096 & 21 \\
-UNSW IoT-attack flows G2 & 44650d56ccd3 & KitNET & Inference & 8773 & 0.001973 & 0.000023 & 4445990.3 & 2.607697 & 70345 \\
-UNSW IoT-attack flows G2 & 44650d56ccd3 & MCDE (primary-source adaptation) & Offline training (once, shared) & 8773 & 0.409138 & 0.000000 & 21442.6 & 12.850908 & 361767 \\
-UNSW IoT-attack flows G2 & 44650d56ccd3 & MCDE (primary-source adaptation) & Per-target onboarding fit & 8773 & 0.003126 & 0.000047 & 2806453.6 & 0.122499 & 3365 \\
-UNSW IoT-attack flows G2 & 44650d56ccd3 & MCDE (primary-source adaptation) & Inference & 8773 & 0.060606 & 0.000185 & 144754.5 & 27.309187 & 70345 \\
-UNSW IoT-attack flows G2 & 44650d56ccd3 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 8773 & 1.164891 & 0.000000 & 7531.2 & 6.377891 & 220951 \\
-UNSW IoT-attack flows G2 & 44650d56ccd3 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 8773 & 0.188387 & 0.009168 & 46569.1 & 2.566735 & 2392638 \\
-UNSW IoT-attack flows G2 & 44650d56ccd3 & DIoT (flow-symbol adaptation) & Inference & 8773 & 0.280537 & 0.001148 & 31272.2 & 55.965913 & 70345 \\
+IoT-23 & 1-1 & PACE & Offline training (once, shared) & 50000 & 0.089578 & 0.000000 & 558172.7 & 8.846397 & 27946 \\
+IoT-23 & 1-1 & PACE & Per-target onboarding fit & 50000 & 0.088334 & 0.000375 & 566036.4 & 0.698107 & 1110058 \\
+IoT-23 & 1-1 & PACE & Per-target calibration & 50000 & 0.204431 & 0.001226 & 244580.9 & 16.319271 & 150505 \\
+IoT-23 & 1-1 & PACE & Inference & 50000 & 0.606852 & 0.012126 & 82392.4 & 58.430420 & 25078739 \\
+IoT-23 & 1-1 & KitNET & Per-target onboarding fit & 50000 & 0.477228 & 0.004860 & 104771.8 & 0.043781 & 5443 \\
+IoT-23 & 1-1 & KitNET & Per-target calibration & 50000 & 0.001560 & 0.000015 & 32060550.8 & 0.006013 & 21 \\
+IoT-23 & 1-1 & KitNET & Inference & 50000 & 0.035967 & 0.000503 & 1390161.0 & 17.612152 & 400161 \\
+IoT-23 & 1-1 & MCDE (primary-source adaptation) & Offline training (once, shared) & 50000 & 1.017447 & 0.000000 & 49142.6 & 31.063971 & 366478 \\
+IoT-23 & 1-1 & MCDE (primary-source adaptation) & Per-target onboarding fit & 50000 & 0.004317 & 0.000057 & 11583398.9 & 0.285780 & 8885 \\
+IoT-23 & 1-1 & MCDE (primary-source adaptation) & Inference & 50000 & 0.336917 & 0.005532 & 148404.7 & 418.626585 & 400161 \\
+IoT-23 & 1-1 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 50000 & 2.743462 & 0.000000 & 18225.1 & 17.658895 & 226841 \\
+IoT-23 & 1-1 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 50000 & 0.166712 & 0.001258 & 299917.8 & 7.058953 & 2398526 \\
+IoT-23 & 1-1 & DIoT (flow-symbol adaptation) & Inference & 50000 & 2.896220 & 0.094325 & 17263.9 & 880.482702 & 400161 \\
+IoT-23 & 3-1 & PACE & Offline training (once, shared) & 13889 & 0.613419 & 0.000000 & 22641.9 & 30.404617 & 27946 \\
+IoT-23 & 3-1 & PACE & Per-target onboarding fit & 13889 & 0.089571 & 0.000840 & 155061.0 & 0.711333 & 1194413 \\
+IoT-23 & 3-1 & PACE & Per-target calibration & 13889 & 0.007676 & 0.000022 & 1809319.7 & 0.388859 & 42163 \\
+IoT-23 & 3-1 & PACE & Inference & 13889 & 0.046178 & 0.001063 & 300770.7 & 14.721107 & 3902337 \\
+IoT-23 & 3-1 & KitNET & Per-target onboarding fit & 13889 & 0.660934 & 0.014855 & 21014.2 & 0.043781 & 6463 \\
+IoT-23 & 3-1 & KitNET & Per-target calibration & 13889 & 0.000034 & 0.000002 & 414584673.5 & 0.006440 & 21 \\
+IoT-23 & 3-1 & KitNET & Inference & 13889 & 0.010925 & 0.000036 & 1271353.0 & 6.211304 & 111273 \\
+IoT-23 & 3-1 & MCDE (primary-source adaptation) & Offline training (once, shared) & 13889 & 1.038095 & 0.000000 & 13379.3 & 31.445959 & 366281 \\
+IoT-23 & 3-1 & MCDE (primary-source adaptation) & Per-target onboarding fit & 13889 & 0.003034 & 0.000070 & 4577469.3 & 0.285730 & 8885 \\
+IoT-23 & 3-1 & MCDE (primary-source adaptation) & Inference & 13889 & 0.066041 & 0.000182 & 210310.0 & 116.053770 & 111273 \\
+IoT-23 & 3-1 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 13889 & 2.745152 & 0.000000 & 5059.5 & 17.657640 & 226841 \\
+IoT-23 & 3-1 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 13889 & 0.180137 & 0.000760 & 77102.2 & 7.058923 & 2398526 \\
+IoT-23 & 3-1 & DIoT (flow-symbol adaptation) & Inference & 13889 & 0.681000 & 0.044744 & 20395.0 & 244.581603 & 111273 \\
+TON\_IoT & 192.168.1.1 & PACE & Offline training (once, shared) & 49722 & 0.243257 & 0.000000 & 204400.7 & 18.113091 & 24362 \\
+TON\_IoT & 192.168.1.1 & PACE & Per-target onboarding fit & 49722 & 0.083220 & 0.001287 & 597474.4 & 0.671746 & 962825 \\
+TON\_IoT & 192.168.1.1 & PACE & Per-target calibration & 49722 & 0.019982 & 0.000416 & 2488308.3 & 2.139515 & 149653 \\
+TON\_IoT & 192.168.1.1 & PACE & Inference & 49722 & 0.177653 & 0.004443 & 279882.0 & 52.051620 & 11365200 \\
+TON\_IoT & 192.168.1.1 & KitNET & Per-target onboarding fit & 49722 & 0.489920 & 0.015529 & 101490.1 & 0.029629 & 4883 \\
+TON\_IoT & 192.168.1.1 & KitNET & Per-target calibration & 49722 & 0.000293 & 0.000044 & 169849604.8 & 0.006220 & 21 \\
+TON\_IoT & 192.168.1.1 & KitNET & Inference & 49722 & 0.029381 & 0.000307 & 1692321.3 & 17.135681 & 397937 \\
+TON\_IoT & 192.168.1.1 & MCDE (primary-source adaptation) & Offline training (once, shared) & 49722 & 0.778422 & 0.000000 & 63875.4 & 25.556457 & 367683 \\
+TON\_IoT & 192.168.1.1 & MCDE (primary-source adaptation) & Per-target onboarding fit & 49722 & 0.003027 & 0.000040 & 16423650.6 & 0.242954 & 7205 \\
+TON\_IoT & 192.168.1.1 & MCDE (primary-source adaptation) & Inference & 49722 & 0.189699 & 0.001166 & 262110.6 & 335.870558 & 397937 \\
+TON\_IoT & 192.168.1.1 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 49722 & 2.281392 & 0.000000 & 21794.6 & 16.834440 & 225049 \\
+TON\_IoT & 192.168.1.1 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 49722 & 0.139463 & 0.001212 & 356525.3 & 5.691735 & 2396734 \\
+TON\_IoT & 192.168.1.1 & DIoT (flow-symbol adaptation) & Inference & 49722 & 2.947041 & 0.065873 & 16871.8 & 705.638930 & 397937 \\
+TON\_IoT & 192.168.1.152 & PACE & Offline training (once, shared) & 36885 & 0.330875 & 0.000000 & 111477.1 & 24.134666 & 24362 \\
+TON\_IoT & 192.168.1.152 & PACE & Per-target onboarding fit & 36885 & 0.083723 & 0.002419 & 440560.7 & 0.572398 & 387078 \\
+TON\_IoT & 192.168.1.152 & PACE & Per-target calibration & 36885 & 0.019414 & 0.000189 & 1899870.1 & 1.469763 & 111142 \\
+TON\_IoT & 192.168.1.152 & PACE & Inference & 36885 & 0.121899 & 0.007103 & 302587.8 & 38.578758 & 8373840 \\
+TON\_IoT & 192.168.1.152 & KitNET & Per-target onboarding fit & 36885 & 0.534561 & 0.003582 & 69000.6 & 0.029629 & 5368 \\
+TON\_IoT & 192.168.1.152 & KitNET & Per-target calibration & 36885 & 0.000166 & 0.000009 & 222809954.1 & 0.006081 & 21 \\
+TON\_IoT & 192.168.1.152 & KitNET & Inference & 36885 & 0.024134 & 0.000433 & 1528336.0 & 14.135483 & 295241 \\
+TON\_IoT & 192.168.1.152 & MCDE (primary-source adaptation) & Offline training (once, shared) & 36885 & 0.826779 & 0.000000 & 44612.9 & 25.406405 & 367699 \\
+TON\_IoT & 192.168.1.152 & MCDE (primary-source adaptation) & Per-target onboarding fit & 36885 & 0.002993 & 0.000101 & 12322068.9 & 0.242954 & 4885 \\
+TON\_IoT & 192.168.1.152 & MCDE (primary-source adaptation) & Inference & 36885 & 0.144499 & 0.024000 & 255261.4 & 166.131834 & 295241 \\
+TON\_IoT & 192.168.1.152 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 36885 & 2.288166 & 0.000000 & 16119.9 & 16.834400 & 225049 \\
+TON\_IoT & 192.168.1.152 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 36885 & 0.184556 & 0.001873 & 199858.3 & 5.691735 & 2396734 \\
+TON\_IoT & 192.168.1.152 & DIoT (flow-symbol adaptation) & Inference & 36885 & 2.074383 & 0.013207 & 17781.2 & 523.460626 & 295241 \\
+Gotham 2025 & iotsim-air-quality-1 & PACE & Offline training (once, shared) & 21447 & 0.501741 & 0.000000 & 42745.2 & 45.357216 & 28458 \\
+Gotham 2025 & iotsim-air-quality-1 & PACE & Per-target onboarding fit & 21447 & 0.086210 & 0.001363 & 248777.2 & 0.720423 & 1257354 \\
+Gotham 2025 & iotsim-air-quality-1 & PACE & Per-target calibration & 21447 & 0.009187 & 0.000139 & 2334600.7 & 0.445314 & 64810 \\
+Gotham 2025 & iotsim-air-quality-1 & PACE & Inference & 21447 & 0.061305 & 0.001770 & 349839.6 & 22.145561 & 4126196 \\
+Gotham 2025 & iotsim-air-quality-1 & KitNET & Per-target onboarding fit & 21447 & 1.040083 & 0.002618 & 20620.5 & 0.046047 & 9269 \\
+Gotham 2025 & iotsim-air-quality-1 & KitNET & Per-target calibration & 21447 & 0.000050 & 0.000003 & 429300523.2 & 0.006263 & 21 \\
+Gotham 2025 & iotsim-air-quality-1 & KitNET & Inference & 21447 & 0.020214 & 0.000087 & 1061008.9 & 14.136322 & 171737 \\
+Gotham 2025 & iotsim-air-quality-1 & MCDE (primary-source adaptation) & Offline training (once, shared) & 21447 & 0.919431 & 0.000000 & 23326.4 & 29.579126 & 366635 \\
+Gotham 2025 & iotsim-air-quality-1 & MCDE (primary-source adaptation) & Per-target onboarding fit & 21447 & 0.003397 & 0.000066 & 6313839.0 & 0.291880 & 9125 \\
+Gotham 2025 & iotsim-air-quality-1 & MCDE (primary-source adaptation) & Inference & 21447 & 0.096012 & 0.000695 & 223377.5 & 184.115881 & 171737 \\
+Gotham 2025 & iotsim-air-quality-1 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 21447 & 1.841300 & 0.000000 & 11647.8 & 18.120141 & 227097 \\
+Gotham 2025 & iotsim-air-quality-1 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 21447 & 0.202478 & 0.001410 & 105922.5 & 7.254192 & 2398782 \\
+Gotham 2025 & iotsim-air-quality-1 & DIoT (flow-symbol adaptation) & Inference & 21447 & 1.231074 & 0.039310 & 17421.4 & 388.147295 & 171737 \\
+Gotham 2025 & iotsim-building-monitor-1 & PACE & Offline training (once, shared) & 75659 & 0.144808 & 0.000000 & 522478.0 & 13.514908 & 28458 \\
+Gotham 2025 & iotsim-building-monitor-1 & PACE & Per-target onboarding fit & 75659 & 0.088260 & 0.000880 & 857228.2 & 0.778845 & 1586156 \\
+Gotham 2025 & iotsim-building-monitor-1 & PACE & Per-target calibration & 75659 & 0.006907 & 0.000052 & 10953255.6 & 0.663065 & 227479 \\
+Gotham 2025 & iotsim-building-monitor-1 & PACE & Inference & 75659 & 0.257049 & 0.003223 & 294337.1 & 77.550919 & 13196685 \\
+Gotham 2025 & iotsim-building-monitor-1 & KitNET & Per-target onboarding fit & 75659 & 1.010586 & 0.001777 & 74866.5 & 0.046047 & 9485 \\
+Gotham 2025 & iotsim-building-monitor-1 & KitNET & Per-target calibration & 75659 & 0.000070 & 0.000021 & 1081223850.3 & 0.006103 & 21 \\
+Gotham 2025 & iotsim-building-monitor-1 & KitNET & Inference & 75659 & 0.074931 & 0.000881 & 1009709.6 & 49.706329 & 605435 \\
+Gotham 2025 & iotsim-building-monitor-1 & MCDE (primary-source adaptation) & Offline training (once, shared) & 75659 & 0.952315 & 0.000000 & 79447.4 & 29.681583 & 366530 \\
+Gotham 2025 & iotsim-building-monitor-1 & MCDE (primary-source adaptation) & Per-target onboarding fit & 75659 & 0.003510 & 0.000165 & 21554724.1 & 0.291836 & 9125 \\
+Gotham 2025 & iotsim-building-monitor-1 & MCDE (primary-source adaptation) & Inference & 75659 & 0.317223 & 0.031417 & 238503.8 & 649.417433 & 605435 \\
+Gotham 2025 & iotsim-building-monitor-1 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 75659 & 1.796146 & 0.000000 & 42123.0 & 18.119432 & 227097 \\
+Gotham 2025 & iotsim-building-monitor-1 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 75659 & 0.180287 & 0.001968 & 419659.3 & 7.254235 & 2398782 \\
+Gotham 2025 & iotsim-building-monitor-1 & DIoT (flow-symbol adaptation) & Inference & 75659 & 4.503739 & 0.038438 & 16799.2 & 1369.270905 & 605435 \\
+CTU-13 & CTU13-scenario-01 & PACE & Offline training (once, shared) & 16078 & 0.085273 & 0.000000 & 188546.6 & 8.055008 & 28970 \\
+CTU-13 & CTU13-scenario-01 & PACE & Per-target onboarding fit & 16078 & 0.084175 & 0.000776 & 191006.7 & 0.695125 & 1097810 \\
+CTU-13 & CTU13-scenario-01 & PACE & Per-target calibration & 16078 & 0.030973 & 0.000528 & 519100.2 & 2.792140 & 48739 \\
+CTU-13 & CTU13-scenario-01 & PACE & Inference & 16078 & 0.100915 & 0.001049 & 159322.1 & 18.013573 & 6701761 \\
+CTU-13 & CTU13-scenario-01 & KitNET & Per-target onboarding fit & 16078 & 0.741370 & 0.003895 & 21686.9 & 0.048374 & 7463 \\
+CTU-13 & CTU13-scenario-01 & KitNET & Per-target calibration & 16078 & 0.000273 & 0.000021 & 58853315.2 & 0.006002 & 21 \\
+CTU-13 & CTU13-scenario-01 & KitNET & Inference & 16078 & 0.017630 & 0.002014 & 911957.1 & 7.669601 & 128785 \\
+CTU-13 & CTU13-scenario-01 & MCDE (primary-source adaptation) & Offline training (once, shared) & 16078 & 0.854301 & 0.000000 & 18820.1 & 30.258336 & 363562 \\
+CTU-13 & CTU13-scenario-01 & MCDE (primary-source adaptation) & Per-target onboarding fit & 16078 & 0.003401 & 0.000090 & 4726964.3 & 0.297937 & 9365 \\
+CTU-13 & CTU13-scenario-01 & MCDE (primary-source adaptation) & Inference & 16078 & 0.082338 & 0.000388 & 195269.4 & 141.819365 & 128785 \\
+CTU-13 & CTU13-scenario-01 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 16078 & 3.207801 & 0.000000 & 5012.2 & 24.908078 & 227353 \\
+CTU-13 & CTU13-scenario-01 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 16078 & 0.184206 & 0.000176 & 87282.9 & 7.449548 & 2399038 \\
+CTU-13 & CTU13-scenario-01 & DIoT (flow-symbol adaptation) & Inference & 16078 & 0.631024 & 0.030943 & 25479.2 & 298.830097 & 128785 \\
+CTU-13 & CTU13-scenario-02 & PACE & Offline training (once, shared) & 11824 & 0.138082 & 0.000000 & 85630.1 & 10.715729 & 28970 \\
+CTU-13 & CTU13-scenario-02 & PACE & Per-target onboarding fit & 11824 & 0.087125 & 0.000681 & 135712.9 & 0.708767 & 1179771 \\
+CTU-13 & CTU13-scenario-02 & PACE & Per-target calibration & 11824 & 0.011480 & 0.000215 & 1029936.8 & 0.863010 & 35977 \\
+CTU-13 & CTU13-scenario-02 & PACE & Inference & 11824 & 0.050798 & 0.001493 & 232765.4 & 12.820786 & 4081559 \\
+CTU-13 & CTU13-scenario-02 & KitNET & Per-target onboarding fit & 11824 & 0.800035 & 0.004439 & 14779.4 & 0.048374 & 7897 \\
+CTU-13 & CTU13-scenario-02 & KitNET & Per-target calibration & 11824 & 0.000071 & 0.000005 & 167426577.0 & 0.006086 & 21 \\
+CTU-13 & CTU13-scenario-02 & KitNET & Inference & 11824 & 0.010913 & 0.000252 & 1083498.5 & 6.108414 & 94753 \\
+CTU-13 & CTU13-scenario-02 & MCDE (primary-source adaptation) & Offline training (once, shared) & 11824 & 0.874075 & 0.000000 & 13527.4 & 30.990311 & 364576 \\
+CTU-13 & CTU13-scenario-02 & MCDE (primary-source adaptation) & Per-target onboarding fit & 11824 & 0.003527 & 0.000082 & 3352034.2 & 0.297937 & 9365 \\
+CTU-13 & CTU13-scenario-02 & MCDE (primary-source adaptation) & Inference & 11824 & 0.054585 & 0.000717 & 216615.8 & 104.235960 & 94753 \\
+CTU-13 & CTU13-scenario-02 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 11824 & 3.211515 & 0.000000 & 3681.8 & 25.696903 & 227353 \\
+CTU-13 & CTU13-scenario-02 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 11824 & 0.183725 & 0.002576 & 64357.2 & 7.449548 & 2399038 \\
+CTU-13 & CTU13-scenario-02 & DIoT (flow-symbol adaptation) & Inference & 11824 & 0.435872 & 0.000798 & 27127.2 & 219.764471 & 94753 \\
+N-BaIoT & Danmini\_Doorbell & PACE & Offline training (once, shared) & 108079 & 1.145715 & 0.000000 & 94333.3 & 183.673355 & 68403 \\
+N-BaIoT & Danmini\_Doorbell & PACE & Per-target onboarding fit & 108079 & 0.092780 & 0.001598 & 1164898.0 & 1.261263 & 1506633 \\
+N-BaIoT & Danmini\_Doorbell & PACE & Per-target calibration & 108079 & 0.039188 & 0.000731 & 2757961.4 & 2.716568 & 324748 \\
+N-BaIoT & Danmini\_Doorbell & PACE & Inference & 108079 & 0.649490 & 0.006393 & 166406.1 & 112.369270 & 23366344 \\
+N-BaIoT & Danmini\_Doorbell & KitNET & Per-target onboarding fit & 108079 & 1.441604 & 0.015453 & 74971.4 & 0.407948 & 19308 \\
+N-BaIoT & Danmini\_Doorbell & KitNET & Per-target calibration & 108079 & 0.000312 & 0.000019 & 346379297.5 & 0.006036 & 21 \\
+N-BaIoT & Danmini\_Doorbell & KitNET & Inference & 108079 & 0.307400 & 0.001980 & 351590.5 & 98.188934 & 864795 \\
+N-BaIoT & Danmini\_Doorbell & MCDE (primary-source adaptation) & Offline training (once, shared) & 108079 & 2.062692 & 0.000000 & 52397.1 & 83.390172 & 487015 \\
+N-BaIoT & Danmini\_Doorbell & MCDE (primary-source adaptation) & Per-target onboarding fit & 108079 & 0.005134 & 0.000039 & 21050538.3 & 0.768442 & 27845 \\
+N-BaIoT & Danmini\_Doorbell & MCDE (primary-source adaptation) & Inference & 108079 & 1.811498 & 0.053515 & 59662.8 & 2857.347075 & 864795 \\
+N-BaIoT & Danmini\_Doorbell & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 108079 & 3.397243 & 0.000000 & 31813.7 & 70.374149 & 247065 \\
+N-BaIoT & Danmini\_Doorbell & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 108079 & 0.183236 & 0.002021 & 589833.8 & 22.488559 & 2418750 \\
+N-BaIoT & Danmini\_Doorbell & DIoT (flow-symbol adaptation) & Inference & 108079 & 7.266190 & 0.233900 & 14874.2 & 6072.295049 & 864795 \\
+N-BaIoT & Ecobee\_Thermostat & PACE & Offline training (once, shared) & 102623 & 1.255006 & 0.000000 & 81770.9 & 193.498886 & 68403 \\
+N-BaIoT & Ecobee\_Thermostat & PACE & Per-target onboarding fit & 102623 & 0.096963 & 0.006761 & 1058376.8 & 1.261263 & 1877334 \\
+N-BaIoT & Ecobee\_Thermostat & PACE & Per-target calibration & 102623 & 0.014604 & 0.000566 & 7026824.9 & 0.904245 & 308380 \\
+N-BaIoT & Ecobee\_Thermostat & PACE & Inference & 102623 & 0.591454 & 0.010664 & 173509.7 & 106.083626 & 20921801 \\
+N-BaIoT & Ecobee\_Thermostat & KitNET & Per-target onboarding fit & 102623 & 1.238436 & 0.001430 & 82865.0 & 0.407948 & 18312 \\
+N-BaIoT & Ecobee\_Thermostat & KitNET & Per-target calibration & 102623 & 0.000100 & 0.000004 & 1021876780.7 & 0.006178 & 21 \\
+N-BaIoT & Ecobee\_Thermostat & KitNET & Inference & 102623 & 0.284166 & 0.003596 & 361137.7 & 82.274193 & 821147 \\
+N-BaIoT & Ecobee\_Thermostat & MCDE (primary-source adaptation) & Offline training (once, shared) & 102623 & 2.014569 & 0.000000 & 50940.4 & 82.984875 & 483967 \\
+N-BaIoT & Ecobee\_Thermostat & MCDE (primary-source adaptation) & Per-target onboarding fit & 102623 & 0.005628 & 0.000059 & 18234396.3 & 0.768398 & 27845 \\
+N-BaIoT & Ecobee\_Thermostat & MCDE (primary-source adaptation) & Inference & 102623 & 1.737153 & 0.015984 & 59075.4 & 2712.988165 & 821147 \\
+N-BaIoT & Ecobee\_Thermostat & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 102623 & 3.464553 & 0.000000 & 29620.9 & 70.374993 & 247065 \\
+N-BaIoT & Ecobee\_Thermostat & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 102623 & 0.171256 & 0.000435 & 599238.7 & 22.488610 & 2418750 \\
+N-BaIoT & Ecobee\_Thermostat & DIoT (flow-symbol adaptation) & Inference & 102623 & 6.406773 & 0.034057 & 16017.9 & 5765.756096 & 821147 \\
+UNSW IoT-attack flows G1 & 00166cab6b88 & PACE & Offline training (once, shared) & 14196 & 0.146619 & 0.000000 & 96822.5 & 4.681274 & 17194 \\
+UNSW IoT-attack flows G1 & 00166cab6b88 & PACE & Per-target onboarding fit & 14196 & 0.082295 & 0.001897 & 172502.1 & 0.675201 & 418125 \\
+UNSW IoT-attack flows G1 & 00166cab6b88 & PACE & Per-target calibration & 14196 & 0.047008 & 0.000175 & 301993.9 & 3.556573 & 43030 \\
+UNSW IoT-attack flows G1 & 00166cab6b88 & PACE & Inference & 14196 & 0.043288 & 0.001555 & 327942.1 & 15.106613 & 3222550 \\
+UNSW IoT-attack flows G1 & 00166cab6b88 & KitNET & Per-target onboarding fit & 14196 & 0.228263 & 0.006921 & 62191.4 & 0.012302 & 2562 \\
+UNSW IoT-attack flows G1 & 00166cab6b88 & KitNET & Per-target calibration & 14196 & 0.000510 & 0.000007 & 27834566.2 & 0.006096 & 21 \\
+UNSW IoT-attack flows G1 & 00166cab6b88 & KitNET & Inference & 14196 & 0.004189 & 0.000062 & 3388515.1 & 5.479797 & 113729 \\
+UNSW IoT-attack flows G1 & 00166cab6b88 & MCDE (primary-source adaptation) & Offline training (once, shared) & 14196 & 0.487711 & 0.000000 & 29107.4 & 14.196201 & 362416 \\
+UNSW IoT-attack flows G1 & 00166cab6b88 & MCDE (primary-source adaptation) & Per-target onboarding fit & 14196 & 0.003062 & 0.000058 & 4635641.0 & 0.140766 & 3845 \\
+UNSW IoT-attack flows G1 & 00166cab6b88 & MCDE (primary-source adaptation) & Inference & 14196 & 0.082980 & 0.002516 & 171078.0 & 50.684637 & 113729 \\
+UNSW IoT-attack flows G1 & 00166cab6b88 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 14196 & 1.215356 & 0.000000 & 11680.5 & 7.355089 & 221465 \\
+UNSW IoT-attack flows G1 & 00166cab6b88 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 14196 & 0.202648 & 0.002290 & 70052.6 & 2.957360 & 2393150 \\
+UNSW IoT-attack flows G1 & 00166cab6b88 & DIoT (flow-symbol adaptation) & Inference & 14196 & 0.515098 & 0.013404 & 27559.8 & 104.423212 & 113729 \\
+UNSW IoT-attack flows G1 & 50c7bf005639 & PACE & Offline training (once, shared) & 14156 & 0.152416 & 0.000000 & 92877.3 & 4.690681 & 17194 \\
+UNSW IoT-attack flows G1 & 50c7bf005639 & PACE & Per-target onboarding fit & 14156 & 0.082750 & 0.002857 & 171069.0 & 0.658251 & 330635 \\
+UNSW IoT-attack flows G1 & 50c7bf005639 & PACE & Per-target calibration & 14156 & 0.046904 & 0.000244 & 301805.6 & 3.563464 & 42910 \\
+UNSW IoT-attack flows G1 & 50c7bf005639 & PACE & Inference & 14156 & 0.039018 & 0.000339 & 362808.7 & 15.068436 & 3222456 \\
+UNSW IoT-attack flows G1 & 50c7bf005639 & KitNET & Per-target onboarding fit & 14156 & 0.220726 & 0.005184 & 64134.0 & 0.012249 & 2450 \\
+UNSW IoT-attack flows G1 & 50c7bf005639 & KitNET & Per-target calibration & 14156 & 0.000531 & 0.000022 & 26642743.2 & 0.005978 & 21 \\
+UNSW IoT-attack flows G1 & 50c7bf005639 & KitNET & Inference & 14156 & 0.003858 & 0.000017 & 3668788.9 & 4.384537 & 113409 \\
+UNSW IoT-attack flows G1 & 50c7bf005639 & MCDE (primary-source adaptation) & Offline training (once, shared) & 14156 & 0.467985 & 0.000000 & 30248.8 & 14.132727 & 362644 \\
+UNSW IoT-attack flows G1 & 50c7bf005639 & MCDE (primary-source adaptation) & Per-target onboarding fit & 14156 & 0.002579 & 0.000044 & 5487917.9 & 0.140810 & 2645 \\
+UNSW IoT-attack flows G1 & 50c7bf005639 & MCDE (primary-source adaptation) & Inference & 14156 & 0.066172 & 0.000519 & 213926.6 & 33.803152 & 113409 \\
+UNSW IoT-attack flows G1 & 50c7bf005639 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 14156 & 1.140428 & 0.000000 & 12412.9 & 7.355267 & 221465 \\
+UNSW IoT-attack flows G1 & 50c7bf005639 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 14156 & 0.018989 & 0.000353 & 745500.6 & 2.957360 & 2393150 \\
+UNSW IoT-attack flows G1 & 50c7bf005639 & DIoT (flow-symbol adaptation) & Inference & 14156 & 0.493273 & 0.005260 & 28698.1 & 104.129082 & 113409 \\
+UNSW IoT-attack flows G2 & 0017882b9a25 & PACE & Offline training (once, shared) & 8836 & 0.092524 & 0.000000 & 95499.3 & 2.929710 & 16170 \\
+UNSW IoT-attack flows G2 & 0017882b9a25 & PACE & Per-target onboarding fit & 8836 & 0.081741 & 0.001222 & 108097.9 & 0.764372 & 940027 \\
+UNSW IoT-attack flows G2 & 0017882b9a25 & PACE & Per-target calibration & 8836 & 0.032901 & 0.000326 & 268564.6 & 2.236975 & 26950 \\
+UNSW IoT-attack flows G2 & 0017882b9a25 & PACE & Inference & 8836 & 0.026422 & 0.000104 & 334416.3 & 9.425735 & 2024815 \\
+UNSW IoT-attack flows G2 & 0017882b9a25 & KitNET & Per-target onboarding fit & 8836 & 0.212838 & 0.000193 & 41515.1 & 0.011501 & 2226 \\
+UNSW IoT-attack flows G2 & 0017882b9a25 & KitNET & Per-target calibration & 8836 & 0.000331 & 0.000019 & 26708446.9 & 0.005973 & 21 \\
+UNSW IoT-attack flows G2 & 0017882b9a25 & KitNET & Inference & 8836 & 0.002318 & 0.000083 & 3812094.3 & 2.761002 & 70849 \\
+UNSW IoT-attack flows G2 & 0017882b9a25 & MCDE (primary-source adaptation) & Offline training (once, shared) & 8836 & 0.440336 & 0.000000 & 20066.5 & 12.712272 & 361991 \\
+UNSW IoT-attack flows G2 & 0017882b9a25 & MCDE (primary-source adaptation) & Per-target onboarding fit & 8836 & 0.003469 & 0.000016 & 2546926.6 & 0.122499 & 3365 \\
+UNSW IoT-attack flows G2 & 0017882b9a25 & MCDE (primary-source adaptation) & Inference & 8836 & 0.041814 & 0.000575 & 211319.2 & 27.502890 & 70849 \\
+UNSW IoT-attack flows G2 & 0017882b9a25 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 8836 & 1.260866 & 0.000000 & 7007.9 & 6.377987 & 220953 \\
+UNSW IoT-attack flows G2 & 0017882b9a25 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 8836 & 0.048304 & 0.000319 & 182923.0 & 2.566735 & 2392638 \\
+UNSW IoT-attack flows G2 & 0017882b9a25 & DIoT (flow-symbol adaptation) & Inference & 8836 & 0.306746 & 0.004782 & 28805.6 & 56.367736 & 70849 \\
+UNSW IoT-attack flows G2 & 44650d56ccd3 & PACE & Offline training (once, shared) & 8773 & 0.088637 & 0.000000 & 98977.2 & 2.942688 & 16170 \\
+UNSW IoT-attack flows G2 & 44650d56ccd3 & PACE & Per-target onboarding fit & 8773 & 0.082772 & 0.000742 & 105990.0 & 0.829364 & 1315137 \\
+UNSW IoT-attack flows G2 & 44650d56ccd3 & PACE & Per-target calibration & 8773 & 0.033957 & 0.000375 & 258358.1 & 2.239244 & 26761 \\
+UNSW IoT-attack flows G2 & 44650d56ccd3 & PACE & Inference & 8773 & 0.026017 & 0.000088 & 337205.3 & 9.365334 & 2024141 \\
+UNSW IoT-attack flows G2 & 44650d56ccd3 & KitNET & Per-target onboarding fit & 8773 & 0.157540 & 0.000290 & 55687.4 & 0.011501 & 2005 \\
+UNSW IoT-attack flows G2 & 44650d56ccd3 & KitNET & Per-target calibration & 8773 & 0.000342 & 0.000021 & 25670611.4 & 0.006097 & 21 \\
+UNSW IoT-attack flows G2 & 44650d56ccd3 & KitNET & Inference & 8773 & 0.002102 & 0.000055 & 4173758.0 & 2.607697 & 70345 \\
+UNSW IoT-attack flows G2 & 44650d56ccd3 & MCDE (primary-source adaptation) & Offline training (once, shared) & 8773 & 0.430342 & 0.000000 & 20386.1 & 12.852345 & 361767 \\
+UNSW IoT-attack flows G2 & 44650d56ccd3 & MCDE (primary-source adaptation) & Per-target onboarding fit & 8773 & 0.003267 & 0.000211 & 2685154.4 & 0.122412 & 3365 \\
+UNSW IoT-attack flows G2 & 44650d56ccd3 & MCDE (primary-source adaptation) & Inference & 8773 & 0.063787 & 0.000096 & 137536.9 & 27.309187 & 70345 \\
+UNSW IoT-attack flows G2 & 44650d56ccd3 & DIoT (flow-symbol adaptation) & Offline training (once, shared) & 8773 & 1.176488 & 0.000000 & 7456.9 & 6.378077 & 220953 \\
+UNSW IoT-attack flows G2 & 44650d56ccd3 & DIoT (flow-symbol adaptation) & Per-target onboarding fit & 8773 & 0.182298 & 0.000908 & 48124.6 & 2.566735 & 2392638 \\
+UNSW IoT-attack flows G2 & 44650d56ccd3 & DIoT (flow-symbol adaptation) & Inference & 8773 & 0.299745 & 0.001541 & 29268.2 & 55.965864 & 70345 \\
 \bottomrule
 \end{tabular}

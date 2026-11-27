@@ -559,13 +559,13 @@ def _acceptance_report(
             for criterion in AcceptanceCriterion
         ),
     )
-    return AcceptanceReport(OperatingMethod.MEAN_ENSEMBLE_MATCHED, (cell,))
+    return AcceptanceReport(OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION, (cell,))
 
 
 def _mixed_report() -> AcceptanceReport:
     gating = _acceptance_report(True).cells[0]
     diagnostic = _acceptance_report(False, diagnostic=True).cells[0]
-    return AcceptanceReport(OperatingMethod.MEAN_ENSEMBLE_MATCHED, (gating, diagnostic))
+    return AcceptanceReport(OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION, (gating, diagnostic))
 
 
 @pytest.mark.parametrize(
@@ -744,16 +744,6 @@ def test_a_detection_ceiling_never_hides_harm_or_statistically_supported_inferio
     rendered = capsys.readouterr().out
     assert "INDEPENDENT CONFIRMATION: SUPERIORITY NOT ESTABLISHED" in rendered
     assert "Measured negative evidence" in rendered
-
-
-@pytest.mark.parametrize("command", ["accept-legacy", "accept-revised"])
-def test_obsolete_acceptance_commands_are_unavailable(
-    command: str, capsys: pytest.CaptureFixture[str]
-) -> None:
-    with pytest.raises(SystemExit) as error:
-        main([command])
-    assert error.value.code != 0
-    capsys.readouterr()
 
 
 def test_every_command_and_parameter_has_help_text() -> None:

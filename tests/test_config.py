@@ -321,9 +321,10 @@ def test_unknown_configuration_keys_are_rejected(tmp_path: Path) -> None:
         ("methods: [KITNET, DIOT, MCDE]", "methods: [KITNET, KITNET]"),
         ("cross_fit_folds: 5", "cross_fit_folds: 1"),
         (
-            "curve_variants: [LEGACY, PREVIOUS, RESOLUTION, POOLED, COLLAPSE, TEMPORAL, "
-            "NO_GAUSSIAN, FAMILY_BUDGETS, SECOND_ORDER]",
-            "curve_variants: [LEGACY, LEGACY]",
+            "ablation_curves: [IN_SAMPLE_CALIBRATION, RESOLUTION_AWARE_BLOCKS, "
+            "POOLED_CONFORMAL_RANK, ANCHOR_COLLAPSE, FORWARD_CHAINING_CALIBRATION, "
+            "WITHOUT_GAUSSIAN_EXPERT, FAMILY_BUDGETS, SECOND_ORDER_AGGREGATION]",
+            "ablation_curves: [IN_SAMPLE_CALIBRATION, IN_SAMPLE_CALIBRATION]",
         ),
         ("resolution_rows: 2", "resolution_rows: 0"),
         ("replicates: 10", "replicates: 0"),
@@ -363,7 +364,7 @@ def test_configuration_accepts_already_validated_domain_values() -> None:
         calibration_mode=configuration.scientific.calibration_mode,
         cross_fit_folds=configuration.scientific.cross_fit_folds,
         resolution_rows=configuration.scientific.resolution_rows,
-        curve_variants=configuration.scientific.curve_variants,
+        ablation_curves=configuration.scientific.ablation_curves,
         operating_grid=configuration.scientific.operating_grid,
         evaluation_role=configuration.scientific.evaluation_role,
         baselines=configuration.scientific.baselines,
@@ -571,9 +572,7 @@ def _write_variant(tmp_path: Path, old: str, new: str) -> Path:
 @pytest.mark.parametrize(
     ("old", "cause"),
     [
-        ("    covariance_estimator: SHRINKAGE\n", "covariance_estimator"),
         ("    design: PER_EXPERT\n", "design"),
-        ("    anchor_members: WITHOUT_AUTOENCODER\n", "anchor_members"),
     ],
 )
 def test_scientific_choices_have_no_silent_defaults(tmp_path: Path, old: str, cause: str) -> None:

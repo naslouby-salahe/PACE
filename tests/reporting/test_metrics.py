@@ -337,7 +337,7 @@ def test_matched_fpr_interpolation_edge_cases() -> None:
     assert abs(matched - 0.6) < 1e-9
 
 
-def _with_legacy_arm(
+def _with_mean_ensemble_arm(
     result: TargetPerformance, detection_rate: float, false_alert_rate: float
 ) -> TargetPerformance:
     arm = ArmPerformance(
@@ -356,7 +356,7 @@ def test_arm_matched_difference_clamps_outside_the_sweep_and_interpolates_inside
     arm_false_alert_rate: float, expected_matched_rate: float
 ) -> None:
     results = tuple(
-        _with_legacy_arm(
+        _with_mean_ensemble_arm(
             _target_result("a", seed, (0.8, 0.6), (0.7, 0.5), 0.05), 0.4, arm_false_alert_rate
         )
         for seed in (1, 2)

@@ -8,7 +8,6 @@ from pydantic import ValidationError, field_validator, model_validator
 from pace.types import (
     AlphaLevel,
     AnchorBudgetPolicy,
-    AnchorMembers,
     AnchorShare,
     AttackRowsPerHalfCap,
     BankDesign,
@@ -20,14 +19,10 @@ from pace.types import (
     BudgetMultiplier,
     CalibrationBlockSize,
     CalibrationMode,
-    CalibrationVariant,
     ClientName,
-    ConditionLimitRule,
     ConfidenceLevel,
     ConfigurationError,
     CountSmoothing,
-    CovarianceConditionLimit,
-    CovarianceEstimator,
     CovarianceRegularization,
     CrossFitFoldCount,
     DetectorCount,
@@ -57,6 +52,7 @@ from pace.types import (
     NegligibleSpread,
     NumericalThreadCount,
     ObservationCount,
+    PaceAblation,
     PairCount,
     PairedDifferenceSd,
     PCAExplainedVariance,
@@ -112,9 +108,6 @@ class LocalDetectorSettings(FrozenStrictModel, frozen=True):
     nearest_neighbors: DetectorCount
     histogram_bins: DetectorCount
     covariance_regularization: CovarianceRegularization
-    covariance_estimator: CovarianceEstimator
-    covariance_condition_limit: CovarianceConditionLimit | None = None
-    covariance_condition_rule: ConditionLimitRule = ConditionLimitRule.FIXED
 
     def with_training_rows(self, rows: LocalTrainingRowCount) -> "LocalDetectorSettings":
         return self.model_copy(update=dict(local_training_rows=rows))
@@ -137,7 +130,6 @@ class LocalBankSettings(FrozenStrictModel, frozen=True):
     anchor_share: AnchorShare
     anchor_budget_policy: AnchorBudgetPolicy
     design: BankDesign
-    anchor_members: AnchorMembers
 
 
 class BudgetSweepSettings(FrozenStrictModel, frozen=True):
@@ -236,7 +228,7 @@ class ScientificSettings(FrozenStrictModel, frozen=True):
     calibration_mode: CalibrationMode
     cross_fit_folds: CrossFitFoldCount
     resolution_rows: ResolutionRows
-    curve_variants: tuple[CalibrationVariant, ...]
+    ablation_curves: tuple[PaceAblation, ...]
     operating_grid: tuple[FalseAlarmBudget, ...]
     evaluation_role: EvaluationRole
     baselines: BaselineSettings
@@ -261,13 +253,13 @@ class ScientificSettings(FrozenStrictModel, frozen=True):
             raise ValueError("Learning seeds must be a unique, non-empty sequence")
         return value
 
-    @field_validator("curve_variants", mode="after")
+    @field_validator("ablation_curves", mode="after")
     @classmethod
-    def variants_are_unique(
-        cls, value: tuple[CalibrationVariant, ...]
-    ) -> tuple[CalibrationVariant, ...]:
+    def ablation_curves_are_unique(
+        cls, value: tuple[PaceAblation, ...]
+    ) -> tuple[PaceAblation, ...]:
         if len(set(value)) != len(value):
-            raise ValueError("Calibration curve variants must be unique")
+            raise ValueError("Ablation curves must be unique")
         return value
 
     @field_validator("operating_grid", mode="after")

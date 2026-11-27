@@ -1,60 +1,60 @@
 alpha,local_rows,comparator,direction,stratum,exact_cells,interpolated_cells,unavailable_cells,matched_targets,unmatched_targets,coverage,comparator_nominal_false_alert_matched_targets,comparator_nominal_false_alert_unmatched_targets
-0.01,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,IoT-23,11,11,11,6,5,0.545455,0.118303,0.051813
-0.01,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,TON_IoT,1,12,14,3,6,0.333333,0.029730,0.026045
-0.01,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,Gotham 2025,9,6,6,3,4,0.428571,0.008378,0.004622
-0.01,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,CTU-13,11,12,13,4,8,0.333333,0.006201,0.038588
-0.01,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,N-BaIoT,7,6,14,2,7,0.222222,0.002824,0.005099
-0.01,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.001019,
-0.01,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.010539,
-0.01,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,IoT-23,10,23,0,11,0,1.000000,0.088080,
-0.01,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,TON_IoT,4,23,0,9,0,1.000000,0.027273,
-0.01,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,Gotham 2025,5,15,1,6,1,0.857143,0.007270,0.000000
-0.01,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,CTU-13,3,33,0,12,0,1.000000,0.027792,
-0.01,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.004594,
-0.01,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.001019,
-0.01,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G2,3,12,0,5,0,1.000000,0.010539,
-0.05,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,IoT-23,7,26,0,11,0,1.000000,0.130710,
-0.05,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,TON_IoT,0,24,3,8,1,0.888889,0.060782,0.052423
-0.05,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,Gotham 2025,2,16,3,6,1,0.857143,0.035396,0.000000
-0.05,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,CTU-13,5,31,0,12,0,1.000000,0.052201,
-0.05,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,N-BaIoT,7,12,8,5,4,0.555556,0.012024,0.006753
-0.05,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.010354,
-0.05,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.072341,
-0.05,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,IoT-23,7,26,0,11,0,1.000000,0.130710,
-0.05,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,TON_IoT,3,24,0,9,0,1.000000,0.059854,
-0.05,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,Gotham 2025,2,17,2,6,1,0.857143,0.035396,0.000000
-0.05,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,CTU-13,4,32,0,12,0,1.000000,0.052201,
-0.05,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,N-BaIoT,1,20,6,6,3,0.666667,0.013663,0.001718
-0.05,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G1,6,9,0,5,0,1.000000,0.010354,
-0.05,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.072341,
-0.01,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,IoT-23,21,6,6,7,4,0.636364,0.104160,0.059683
-0.01,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,TON_IoT,2,11,14,3,6,0.333333,0.055058,0.016705
-0.01,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,Gotham 2025,10,6,5,5,2,0.714286,0.006181,0.007495
-0.01,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,CTU-13,12,14,10,6,6,0.500000,0.036708,0.021628
-0.01,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,N-BaIoT,8,1,18,2,7,0.222222,0.000000,0.002132
-0.01,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G1,3,12,0,5,0,1.000000,0.000980,
-0.01,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G2,4,10,1,4,1,0.800000,0.011449,0.003531
-0.01,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,IoT-23,13,20,0,11,0,1.000000,0.087986,
-0.01,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,TON_IoT,2,25,0,9,0,1.000000,0.029489,
-0.01,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,Gotham 2025,6,15,0,7,0,1.000000,0.006556,
-0.01,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,CTU-13,9,27,0,12,0,1.000000,0.029168,
-0.01,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.001658,
-0.01,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G1,3,12,0,5,0,1.000000,0.000980,
-0.01,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.009865,
-0.05,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,IoT-23,6,27,0,11,0,1.000000,0.132410,
-0.05,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,TON_IoT,0,26,1,8,1,0.888889,0.079333,0.061820
-0.05,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,Gotham 2025,6,12,3,6,1,0.857143,0.032507,0.003640
-0.05,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,CTU-13,6,30,0,12,0,1.000000,0.052718,
-0.05,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,N-BaIoT,6,20,1,8,1,0.888889,0.008287,0.000555
-0.05,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G1,4,11,0,5,0,1.000000,0.010577,
-0.05,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.117305,
-0.05,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,IoT-23,5,28,0,11,0,1.000000,0.132410,
-0.05,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,TON_IoT,1,26,0,9,0,1.000000,0.077388,
-0.05,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,Gotham 2025,3,18,0,7,0,1.000000,0.028383,
-0.05,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,CTU-13,2,34,0,12,0,1.000000,0.052718,
-0.05,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,N-BaIoT,0,20,7,6,3,0.666667,0.010402,0.001482
-0.05,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G1,4,11,0,5,0,1.000000,0.010577,
-0.05,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,12,3,4,1,0.800000,0.082937,0.254776
+0.01,100,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,IoT-23,11,11,11,6,5,0.545455,0.118303,0.051813
+0.01,100,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,TON_IoT,1,12,14,3,6,0.333333,0.029730,0.026045
+0.01,100,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,Gotham 2025,9,6,6,3,4,0.428571,0.008378,0.004622
+0.01,100,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,CTU-13,11,12,13,4,8,0.333333,0.006201,0.038588
+0.01,100,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,N-BaIoT,7,6,14,2,7,0.222222,0.002824,0.005099
+0.01,100,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.001019,
+0.01,100,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.010539,
+0.01,100,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,IoT-23,10,23,0,11,0,1.000000,0.088080,
+0.01,100,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,TON_IoT,4,23,0,9,0,1.000000,0.027273,
+0.01,100,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,Gotham 2025,5,15,1,6,1,0.857143,0.007270,0.000000
+0.01,100,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,CTU-13,3,33,0,12,0,1.000000,0.027792,
+0.01,100,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.004594,
+0.01,100,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.001019,
+0.01,100,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G2,3,12,0,5,0,1.000000,0.010539,
+0.05,100,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,IoT-23,7,26,0,11,0,1.000000,0.130710,
+0.05,100,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,TON_IoT,0,24,3,8,1,0.888889,0.060782,0.052423
+0.05,100,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,Gotham 2025,2,16,3,6,1,0.857143,0.035396,0.000000
+0.05,100,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,CTU-13,5,31,0,12,0,1.000000,0.052201,
+0.05,100,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,N-BaIoT,7,12,8,5,4,0.555556,0.012024,0.006753
+0.05,100,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.010354,
+0.05,100,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.072341,
+0.05,100,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,IoT-23,7,26,0,11,0,1.000000,0.130710,
+0.05,100,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,TON_IoT,3,24,0,9,0,1.000000,0.059854,
+0.05,100,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,Gotham 2025,2,17,2,6,1,0.857143,0.035396,0.000000
+0.05,100,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,CTU-13,4,32,0,12,0,1.000000,0.052201,
+0.05,100,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,N-BaIoT,1,20,6,6,3,0.666667,0.013663,0.001718
+0.05,100,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G1,6,9,0,5,0,1.000000,0.010354,
+0.05,100,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.072341,
+0.01,400,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,IoT-23,21,6,6,7,4,0.636364,0.104160,0.059683
+0.01,400,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,TON_IoT,2,11,14,3,6,0.333333,0.055058,0.016705
+0.01,400,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,Gotham 2025,10,6,5,5,2,0.714286,0.006181,0.007495
+0.01,400,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,CTU-13,12,14,10,6,6,0.500000,0.036708,0.021628
+0.01,400,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,N-BaIoT,8,1,18,2,7,0.222222,0.000000,0.002132
+0.01,400,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G1,3,12,0,5,0,1.000000,0.000980,
+0.01,400,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G2,4,10,1,4,1,0.800000,0.011449,0.003531
+0.01,400,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,IoT-23,13,20,0,11,0,1.000000,0.087986,
+0.01,400,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,TON_IoT,2,25,0,9,0,1.000000,0.029489,
+0.01,400,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,Gotham 2025,6,15,0,7,0,1.000000,0.006556,
+0.01,400,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,CTU-13,9,27,0,12,0,1.000000,0.029168,
+0.01,400,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.001658,
+0.01,400,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G1,3,12,0,5,0,1.000000,0.000980,
+0.01,400,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.009865,
+0.05,400,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,IoT-23,6,27,0,11,0,1.000000,0.132410,
+0.05,400,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,TON_IoT,0,26,1,8,1,0.888889,0.079333,0.061820
+0.05,400,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,Gotham 2025,6,12,3,6,1,0.857143,0.032507,0.003640
+0.05,400,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,CTU-13,6,30,0,12,0,1.000000,0.052718,
+0.05,400,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,N-BaIoT,6,20,1,8,1,0.888889,0.008287,0.000555
+0.05,400,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G1,4,11,0,5,0,1.000000,0.010577,
+0.05,400,Mean-ensemble local branch (block-maximum calibration),PACE read at the comparator FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.117305,
+0.05,400,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,IoT-23,5,28,0,11,0,1.000000,0.132410,
+0.05,400,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,TON_IoT,1,26,0,9,0,1.000000,0.077388,
+0.05,400,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,Gotham 2025,3,18,0,7,0,1.000000,0.028383,
+0.05,400,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,CTU-13,2,34,0,12,0,1.000000,0.052718,
+0.05,400,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,N-BaIoT,0,20,7,6,3,0.666667,0.010402,0.001482
+0.05,400,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G1,4,11,0,5,0,1.000000,0.010577,
+0.05,400,Mean-ensemble local branch (block-maximum calibration),Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,12,3,4,1,0.800000,0.082937,0.254776
 0.01,100,Mean-ensemble local branch (same calibration as PACE),PACE read at the comparator FPR,IoT-23,10,9,14,6,5,0.545455,0.120511,0.048135
 0.01,100,Mean-ensemble local branch (same calibration as PACE),PACE read at the comparator FPR,TON_IoT,6,12,9,5,4,0.555556,0.067885,0.036722
 0.01,100,Mean-ensemble local branch (same calibration as PACE),PACE read at the comparator FPR,Gotham 2025,10,8,3,6,1,0.857143,0.022554,0.000000
@@ -111,118 +111,62 @@ alpha,local_rows,comparator,direction,stratum,exact_cells,interpolated_cells,una
 0.05,400,Mean-ensemble local branch (same calibration as PACE),Comparator read at the PACE FPR,N-BaIoT,0,27,0,9,0,1.000000,0.036419,
 0.05,400,Mean-ensemble local branch (same calibration as PACE),Comparator read at the PACE FPR,UNSW IoT-attack flows G1,4,11,0,5,0,1.000000,0.031614,
 0.05,400,Mean-ensemble local branch (same calibration as PACE),Comparator read at the PACE FPR,UNSW IoT-attack flows G2,3,12,0,5,0,1.000000,0.137897,
-0.01,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,IoT-23,20,13,0,11,0,1.000000,0.096219,
-0.01,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,TON_IoT,15,12,0,9,0,1.000000,0.028859,
-0.01,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,Gotham 2025,11,9,1,6,1,0.857143,0.006323,0.011392
-0.01,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,CTU-13,18,18,0,12,0,1.000000,0.028905,
-0.01,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,N-BaIoT,20,6,1,8,1,0.888889,0.006079,0.000565
-0.01,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.000957,
-0.01,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.010515,
-0.01,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,IoT-23,21,12,0,11,0,1.000000,0.096219,
-0.01,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,TON_IoT,11,16,0,9,0,1.000000,0.028859,
-0.01,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,Gotham 2025,9,12,0,7,0,1.000000,0.007047,
-0.01,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,CTU-13,7,29,0,12,0,1.000000,0.028905,
-0.01,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,N-BaIoT,8,19,0,9,0,1.000000,0.005466,
-0.01,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.000957,
-0.01,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.010515,
-0.05,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,IoT-23,7,26,0,11,0,1.000000,0.122171,
-0.05,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,TON_IoT,4,23,0,9,0,1.000000,0.064098,
-0.05,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,Gotham 2025,6,15,0,7,0,1.000000,0.029135,
-0.05,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,CTU-13,3,33,0,12,0,1.000000,0.052987,
-0.05,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,N-BaIoT,3,24,0,9,0,1.000000,0.010619,
-0.05,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009112,
-0.05,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,UNSW IoT-attack flows G2,2,13,0,5,0,1.000000,0.023510,
-0.05,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,IoT-23,11,22,0,11,0,1.000000,0.122171,
-0.05,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,TON_IoT,8,19,0,9,0,1.000000,0.064098,
-0.05,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,Gotham 2025,5,16,0,7,0,1.000000,0.029135,
-0.05,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,CTU-13,5,31,0,12,0,1.000000,0.052987,
-0.05,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,N-BaIoT,0,24,3,8,1,0.888889,0.011769,0.001423
-0.05,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,UNSW IoT-attack flows G1,6,9,0,5,0,1.000000,0.009112,
-0.05,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.023510,
-0.01,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,IoT-23,25,8,0,11,0,1.000000,0.089344,
-0.01,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,TON_IoT,16,11,0,9,0,1.000000,0.037922,
-0.01,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,Gotham 2025,13,7,1,6,1,0.857143,0.006268,0.011433
-0.01,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,CTU-13,20,16,0,12,0,1.000000,0.030618,
-0.01,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,N-BaIoT,18,8,1,8,1,0.888889,0.002533,0.000444
-0.01,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.001004,
-0.01,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,UNSW IoT-attack flows G2,5,10,0,5,0,1.000000,0.010073,
-0.01,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,IoT-23,22,11,0,11,0,1.000000,0.089344,
-0.01,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,TON_IoT,9,18,0,9,0,1.000000,0.037922,
-0.01,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,Gotham 2025,10,11,0,7,0,1.000000,0.007006,
-0.01,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,CTU-13,10,26,0,12,0,1.000000,0.030618,
-0.01,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.002301,
-0.01,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.001004,
-0.01,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,UNSW IoT-attack flows G2,3,12,0,5,0,1.000000,0.010073,
-0.05,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,IoT-23,6,27,0,11,0,1.000000,0.126935,
-0.05,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,TON_IoT,3,24,0,9,0,1.000000,0.076798,
-0.05,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,Gotham 2025,7,14,0,7,0,1.000000,0.027341,
-0.05,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,CTU-13,4,32,0,12,0,1.000000,0.050765,
-0.05,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,N-BaIoT,5,22,0,9,0,1.000000,0.007136,
-0.05,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009526,
-0.05,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.024230,
-0.05,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,IoT-23,8,25,0,11,0,1.000000,0.126935,
-0.05,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,TON_IoT,5,22,0,9,0,1.000000,0.076798,
-0.05,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,Gotham 2025,6,15,0,7,0,1.000000,0.027341,
-0.05,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,CTU-13,2,34,0,12,0,1.000000,0.050765,
-0.05,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,N-BaIoT,0,24,3,8,1,0.888889,0.007854,0.001393
-0.05,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009526,
-0.05,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,11,4,3,2,0.600000,0.015366,0.037525
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,IoT-23,22,8,3,10,1,0.909091,0.101192,0.000117
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,TON_IoT,21,4,2,8,1,0.888889,0.029684,0.001267
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,Gotham 2025,14,1,6,5,2,0.714286,0.005556,0.008179
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,CTU-13,27,6,3,11,1,0.916667,0.030675,0.001953
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,N-BaIoT,17,2,8,5,4,0.555556,0.003687,0.007114
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,UNSW IoT-attack flows G1,6,5,4,3,2,0.600000,0.000460,0.000369
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,UNSW IoT-attack flows G2,5,5,5,2,3,0.400000,0.010807,0.008587
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,IoT-23,18,15,0,11,0,1.000000,0.092003,
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,TON_IoT,11,16,0,9,0,1.000000,0.026527,
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,Gotham 2025,9,12,0,7,0,1.000000,0.006306,
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,CTU-13,7,29,0,12,0,1.000000,0.028282,
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.005210,
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.000424,
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.009475,
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,IoT-23,7,26,0,11,0,1.000000,0.122171,
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,TON_IoT,4,23,0,9,0,1.000000,0.064098,
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,Gotham 2025,6,15,0,7,0,1.000000,0.029135,
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,CTU-13,3,33,0,12,0,1.000000,0.052987,
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,N-BaIoT,3,24,0,9,0,1.000000,0.010619,
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009112,
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,UNSW IoT-attack flows G2,2,13,0,5,0,1.000000,0.023510,
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,IoT-23,11,22,0,11,0,1.000000,0.122171,
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,TON_IoT,8,19,0,9,0,1.000000,0.064098,
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,Gotham 2025,5,16,0,7,0,1.000000,0.029135,
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,CTU-13,5,31,0,12,0,1.000000,0.052987,
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,N-BaIoT,0,24,3,8,1,0.888889,0.011769,0.001423
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,UNSW IoT-attack flows G1,6,9,0,5,0,1.000000,0.009112,
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.023510,
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,IoT-23,23,7,3,10,1,0.909091,0.096332,0.000117
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,TON_IoT,22,5,0,9,0,1.000000,0.033131,
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,Gotham 2025,13,2,6,5,2,0.714286,0.004709,0.008238
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,CTU-13,25,8,3,11,1,0.916667,0.031838,0.002353
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,N-BaIoT,17,4,6,6,3,0.666667,0.002952,0.000622
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,UNSW IoT-attack flows G1,9,2,4,3,2,0.600000,0.000484,0.000321
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,UNSW IoT-attack flows G2,5,6,4,3,2,0.600000,0.014219,0.002878
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,IoT-23,21,12,0,11,0,1.000000,0.087585,
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,TON_IoT,9,18,0,9,0,1.000000,0.033131,
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,Gotham 2025,11,10,0,7,0,1.000000,0.005717,
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,CTU-13,7,29,0,12,0,1.000000,0.029381,
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.002175,
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.000419,
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,UNSW IoT-attack flows G2,3,12,0,5,0,1.000000,0.009682,
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,IoT-23,6,27,0,11,0,1.000000,0.126935,
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,TON_IoT,3,24,0,9,0,1.000000,0.076798,
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,Gotham 2025,7,14,0,7,0,1.000000,0.027341,
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,CTU-13,4,32,0,12,0,1.000000,0.050765,
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,N-BaIoT,5,22,0,9,0,1.000000,0.007136,
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009526,
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.024230,
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,IoT-23,8,25,0,11,0,1.000000,0.126935,
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,TON_IoT,5,22,0,9,0,1.000000,0.076798,
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,Gotham 2025,6,15,0,7,0,1.000000,0.027341,
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,CTU-13,2,34,0,12,0,1.000000,0.050765,
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,N-BaIoT,0,24,3,8,1,0.888889,0.007854,0.001393
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009526,
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,11,4,3,2,0.600000,0.015366,0.037525
+0.01,100,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,IoT-23,22,8,3,10,1,0.909091,0.101192,0.000117
+0.01,100,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,TON_IoT,21,4,2,8,1,0.888889,0.029684,0.001267
+0.01,100,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,Gotham 2025,14,1,6,5,2,0.714286,0.005556,0.008179
+0.01,100,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,CTU-13,27,6,3,11,1,0.916667,0.030675,0.001953
+0.01,100,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,N-BaIoT,17,2,8,5,4,0.555556,0.003687,0.007114
+0.01,100,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,UNSW IoT-attack flows G1,6,5,4,3,2,0.600000,0.000460,0.000369
+0.01,100,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,UNSW IoT-attack flows G2,5,5,5,2,3,0.400000,0.010807,0.008587
+0.01,100,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,IoT-23,18,15,0,11,0,1.000000,0.092003,
+0.01,100,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,TON_IoT,11,16,0,9,0,1.000000,0.026527,
+0.01,100,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,Gotham 2025,9,12,0,7,0,1.000000,0.006306,
+0.01,100,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,CTU-13,7,29,0,12,0,1.000000,0.028282,
+0.01,100,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.005210,
+0.01,100,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.000424,
+0.01,100,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.009475,
+0.05,100,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,IoT-23,7,26,0,11,0,1.000000,0.122171,
+0.05,100,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,TON_IoT,4,23,0,9,0,1.000000,0.064098,
+0.05,100,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,Gotham 2025,6,15,0,7,0,1.000000,0.029135,
+0.05,100,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,CTU-13,3,33,0,12,0,1.000000,0.052987,
+0.05,100,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,N-BaIoT,3,24,0,9,0,1.000000,0.010619,
+0.05,100,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009112,
+0.05,100,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,UNSW IoT-attack flows G2,2,13,0,5,0,1.000000,0.023510,
+0.05,100,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,IoT-23,11,22,0,11,0,1.000000,0.122171,
+0.05,100,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,TON_IoT,8,19,0,9,0,1.000000,0.064098,
+0.05,100,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,Gotham 2025,5,16,0,7,0,1.000000,0.029135,
+0.05,100,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,CTU-13,5,31,0,12,0,1.000000,0.052987,
+0.05,100,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,N-BaIoT,0,24,3,8,1,0.888889,0.011769,0.001423
+0.05,100,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,6,9,0,5,0,1.000000,0.009112,
+0.05,100,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.023510,
+0.01,400,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,IoT-23,23,7,3,10,1,0.909091,0.096332,0.000117
+0.01,400,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,TON_IoT,22,5,0,9,0,1.000000,0.033131,
+0.01,400,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,Gotham 2025,13,2,6,5,2,0.714286,0.004709,0.008238
+0.01,400,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,CTU-13,25,8,3,11,1,0.916667,0.031838,0.002353
+0.01,400,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,N-BaIoT,17,4,6,6,3,0.666667,0.002952,0.000622
+0.01,400,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,UNSW IoT-attack flows G1,9,2,4,3,2,0.600000,0.000484,0.000321
+0.01,400,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,UNSW IoT-attack flows G2,5,6,4,3,2,0.600000,0.014219,0.002878
+0.01,400,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,IoT-23,21,12,0,11,0,1.000000,0.087585,
+0.01,400,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,TON_IoT,9,18,0,9,0,1.000000,0.033131,
+0.01,400,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,Gotham 2025,11,10,0,7,0,1.000000,0.005717,
+0.01,400,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,CTU-13,7,29,0,12,0,1.000000,0.029381,
+0.01,400,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.002175,
+0.01,400,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.000419,
+0.01,400,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,3,12,0,5,0,1.000000,0.009682,
+0.05,400,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,IoT-23,6,27,0,11,0,1.000000,0.126935,
+0.05,400,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,TON_IoT,3,24,0,9,0,1.000000,0.076798,
+0.05,400,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,Gotham 2025,7,14,0,7,0,1.000000,0.027341,
+0.05,400,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,CTU-13,4,32,0,12,0,1.000000,0.050765,
+0.05,400,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,N-BaIoT,5,22,0,9,0,1.000000,0.007136,
+0.05,400,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009526,
+0.05,400,PACE with in-sample block-maximum calibration,PACE read at the comparator FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.024230,
+0.05,400,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,IoT-23,8,25,0,11,0,1.000000,0.126935,
+0.05,400,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,TON_IoT,5,22,0,9,0,1.000000,0.076798,
+0.05,400,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,Gotham 2025,6,15,0,7,0,1.000000,0.027341,
+0.05,400,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,CTU-13,2,34,0,12,0,1.000000,0.050765,
+0.05,400,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,N-BaIoT,0,24,3,8,1,0.888889,0.007854,0.001393
+0.05,400,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009526,
+0.05,400,PACE with in-sample block-maximum calibration,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,11,4,3,2,0.600000,0.015366,0.037525
 0.01,100,PACE with resolution-aware blocks,PACE read at the comparator FPR,IoT-23,23,10,0,11,0,1.000000,0.093925,
 0.01,100,PACE with resolution-aware blocks,PACE read at the comparator FPR,TON_IoT,6,21,0,9,0,1.000000,0.035423,
 0.01,100,PACE with resolution-aware blocks,PACE read at the comparator FPR,Gotham 2025,11,10,0,7,0,1.000000,0.019024,
@@ -335,62 +279,62 @@ alpha,local_rows,comparator,direction,stratum,exact_cells,interpolated_cells,una
 0.05,400,PACE with pooled conformal-rank calibration,Comparator read at the PACE FPR,N-BaIoT,0,27,0,9,0,1.000000,0.032794,
 0.05,400,PACE with pooled conformal-rank calibration,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,3,12,0,5,0,1.000000,0.014113,
 0.05,400,PACE with pooled conformal-rank calibration,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,1,12,2,4,1,0.800000,0.092481,0.012127
-0.01,100,PACE with anchor collapse,PACE read at the comparator FPR,IoT-23,15,13,5,8,3,0.727273,0.095332,0.079399
-0.01,100,PACE with anchor collapse,PACE read at the comparator FPR,TON_IoT,5,8,14,3,6,0.333333,0.028277,0.026055
-0.01,100,PACE with anchor collapse,PACE read at the comparator FPR,Gotham 2025,7,9,5,4,3,0.571429,0.007052,0.005097
-0.01,100,PACE with anchor collapse,PACE read at the comparator FPR,CTU-13,9,13,14,4,8,0.333333,0.006561,0.038781
-0.01,100,PACE with anchor collapse,PACE read at the comparator FPR,N-BaIoT,6,3,18,1,8,0.111111,0.000000,0.004944
-0.01,100,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.000947,
-0.01,100,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G2,3,12,0,5,0,1.000000,0.010378,
-0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,IoT-23,13,20,0,11,0,1.000000,0.090987,
-0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,TON_IoT,5,22,0,9,0,1.000000,0.026795,
-0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,Gotham 2025,8,13,0,7,0,1.000000,0.006214,
-0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,CTU-13,6,30,0,12,0,1.000000,0.028041,
-0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.004394,
-0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.000947,
-0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.010378,
-0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,IoT-23,7,26,0,11,0,1.000000,0.122171,
-0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,TON_IoT,4,23,0,9,0,1.000000,0.064098,
-0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,Gotham 2025,6,15,0,7,0,1.000000,0.029135,
-0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,CTU-13,3,33,0,12,0,1.000000,0.052987,
-0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,N-BaIoT,3,24,0,9,0,1.000000,0.010619,
-0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009112,
-0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G2,2,13,0,5,0,1.000000,0.023510,
-0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,IoT-23,11,22,0,11,0,1.000000,0.122171,
-0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,TON_IoT,8,19,0,9,0,1.000000,0.064098,
-0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,Gotham 2025,5,16,0,7,0,1.000000,0.029135,
-0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,CTU-13,5,31,0,12,0,1.000000,0.052987,
-0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,N-BaIoT,0,24,3,8,1,0.888889,0.011769,0.001423
-0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,6,9,0,5,0,1.000000,0.009112,
-0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.023510,
-0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,IoT-23,17,7,9,6,5,0.545455,0.118358,0.051141
-0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,TON_IoT,3,10,14,3,6,0.333333,0.053428,0.016591
-0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,Gotham 2025,10,6,5,5,2,0.714286,0.005922,0.007499
-0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,CTU-13,11,17,8,8,4,0.666667,0.029006,0.030410
-0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,N-BaIoT,6,4,17,3,6,0.333333,0.000189,0.001862
-0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G1,4,11,0,5,0,1.000000,0.000999,
-0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G2,4,10,1,4,1,0.800000,0.011373,0.003339
-0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,IoT-23,13,20,0,11,0,1.000000,0.087805,
-0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,TON_IoT,4,23,0,9,0,1.000000,0.028870,
-0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,Gotham 2025,11,10,0,7,0,1.000000,0.006373,
-0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,CTU-13,7,29,0,12,0,1.000000,0.029474,
-0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.001304,
-0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.000999,
-0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,3,12,0,5,0,1.000000,0.009766,
-0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,IoT-23,6,27,0,11,0,1.000000,0.126935,
-0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,TON_IoT,3,24,0,9,0,1.000000,0.076798,
-0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,Gotham 2025,7,14,0,7,0,1.000000,0.027341,
-0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,CTU-13,4,32,0,12,0,1.000000,0.050765,
-0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,N-BaIoT,5,22,0,9,0,1.000000,0.007136,
-0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009526,
-0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.024230,
-0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,IoT-23,8,25,0,11,0,1.000000,0.126935,
-0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,TON_IoT,2,25,0,9,0,1.000000,0.076798,
-0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,Gotham 2025,6,15,0,7,0,1.000000,0.027341,
-0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,CTU-13,2,34,0,12,0,1.000000,0.050765,
-0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,N-BaIoT,0,24,3,8,1,0.888889,0.007854,0.001393
-0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009526,
-0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,11,4,3,2,0.600000,0.015366,0.037525
+0.01,100,PACE with anchor collapse,PACE read at the comparator FPR,IoT-23,12,11,10,7,4,0.636364,0.108208,0.056278
+0.01,100,PACE with anchor collapse,PACE read at the comparator FPR,TON_IoT,8,10,9,5,4,0.555556,0.067793,0.036722
+0.01,100,PACE with anchor collapse,PACE read at the comparator FPR,Gotham 2025,11,7,3,6,1,0.857143,0.022511,0.000000
+0.01,100,PACE with anchor collapse,PACE read at the comparator FPR,CTU-13,9,24,3,10,2,0.833333,0.025618,0.087743
+0.01,100,PACE with anchor collapse,PACE read at the comparator FPR,N-BaIoT,6,21,0,9,0,1.000000,0.009132,
+0.01,100,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G1,6,9,0,5,0,1.000000,0.006992,
+0.01,100,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G2,5,10,0,5,0,1.000000,0.016579,
+0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,IoT-23,21,12,0,11,0,1.000000,0.089324,
+0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,TON_IoT,8,19,0,9,0,1.000000,0.053983,
+0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,Gotham 2025,14,7,0,7,0,1.000000,0.019295,
+0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,CTU-13,9,27,0,12,0,1.000000,0.035973,
+0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,N-BaIoT,10,17,0,9,0,1.000000,0.009132,
+0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.006992,
+0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,5,10,0,5,0,1.000000,0.016579,
+0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,IoT-23,33,0,0,11,0,1.000000,0.126098,
+0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,TON_IoT,27,0,0,9,0,1.000000,0.084918,
+0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,Gotham 2025,21,0,0,7,0,1.000000,0.031093,
+0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,CTU-13,36,0,0,12,0,1.000000,0.079728,
+0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,N-BaIoT,27,0,0,9,0,1.000000,0.030342,
+0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G1,15,0,0,5,0,1.000000,0.025158,
+0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G2,15,0,0,5,0,1.000000,0.088032,
+0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,IoT-23,33,0,0,11,0,1.000000,0.126098,
+0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,TON_IoT,27,0,0,9,0,1.000000,0.084918,
+0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,Gotham 2025,21,0,0,7,0,1.000000,0.031093,
+0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,CTU-13,36,0,0,12,0,1.000000,0.079728,
+0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,N-BaIoT,27,0,0,9,0,1.000000,0.030342,
+0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,15,0,0,5,0,1.000000,0.025158,
+0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,15,0,0,5,0,1.000000,0.088032,
+0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,IoT-23,10,11,12,7,4,0.636364,0.107014,0.054986
+0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,TON_IoT,2,15,10,4,5,0.444444,0.087813,0.040272
+0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,Gotham 2025,9,9,3,6,1,0.857143,0.021878,0.003640
+0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,CTU-13,14,22,0,12,0,1.000000,0.037035,
+0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,N-BaIoT,7,19,1,8,1,0.888889,0.005674,0.006401
+0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G1,4,11,0,5,0,1.000000,0.007034,
+0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.016923,
+0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,IoT-23,16,17,0,11,0,1.000000,0.088095,
+0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,TON_IoT,8,19,0,9,0,1.000000,0.061401,
+0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,Gotham 2025,13,8,0,7,0,1.000000,0.019273,
+0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,CTU-13,11,25,0,12,0,1.000000,0.037035,
+0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,N-BaIoT,10,17,0,9,0,1.000000,0.005755,
+0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,3,12,0,5,0,1.000000,0.007034,
+0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.016923,
+0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,IoT-23,33,0,0,11,0,1.000000,0.131403,
+0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,TON_IoT,27,0,0,9,0,1.000000,0.086274,
+0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,Gotham 2025,21,0,0,7,0,1.000000,0.028781,
+0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,CTU-13,36,0,0,12,0,1.000000,0.079177,
+0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,N-BaIoT,27,0,0,9,0,1.000000,0.031364,
+0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G1,15,0,0,5,0,1.000000,0.026390,
+0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,UNSW IoT-attack flows G2,15,0,0,5,0,1.000000,0.147611,
+0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,IoT-23,33,0,0,11,0,1.000000,0.131403,
+0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,TON_IoT,27,0,0,9,0,1.000000,0.086274,
+0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,Gotham 2025,21,0,0,7,0,1.000000,0.028781,
+0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,CTU-13,36,0,0,12,0,1.000000,0.079177,
+0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,N-BaIoT,27,0,0,9,0,1.000000,0.031364,
+0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,15,0,0,5,0,1.000000,0.026390,
+0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,15,0,0,5,0,1.000000,0.147611,
 0.01,100,PACE with forward-chaining cross-fitted calibration,PACE read at the comparator FPR,IoT-23,15,18,0,11,0,1.000000,0.096923,
 0.01,100,PACE with forward-chaining cross-fitted calibration,PACE read at the comparator FPR,TON_IoT,18,6,3,8,1,0.888889,0.037135,0.000901
 0.01,100,PACE with forward-chaining cross-fitted calibration,PACE read at the comparator FPR,Gotham 2025,16,5,0,7,0,1.000000,0.011857,
@@ -447,174 +391,174 @@ alpha,local_rows,comparator,direction,stratum,exact_cells,interpolated_cells,una
 0.05,400,PACE with forward-chaining cross-fitted calibration,Comparator read at the PACE FPR,N-BaIoT,1,26,0,9,0,1.000000,0.023821,
 0.05,400,PACE with forward-chaining cross-fitted calibration,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,8,7,0,5,0,1.000000,0.028533,
 0.05,400,PACE with forward-chaining cross-fitted calibration,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.129052,
-0.01,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,IoT-23,19,8,6,9,2,0.818182,0.095023,0.075816
-0.01,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,TON_IoT,21,3,3,7,2,0.777778,0.032814,0.004399
-0.01,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,Gotham 2025,14,1,6,5,2,0.714286,0.005556,0.008179
-0.01,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,CTU-13,24,6,6,10,2,0.833333,0.032320,0.007314
-0.01,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,N-BaIoT,15,2,10,4,5,0.444444,0.003279,0.006573
-0.01,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,4,6,3,2,0.600000,0.000452,0.000333
-0.01,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G2,5,5,5,2,3,0.400000,0.010807,0.008587
-0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,IoT-23,14,19,0,11,0,1.000000,0.091531,
-0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,TON_IoT,11,16,0,9,0,1.000000,0.026500,
-0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,Gotham 2025,9,12,0,7,0,1.000000,0.006306,
-0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,CTU-13,6,30,0,12,0,1.000000,0.028152,
-0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.005109,
-0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,3,12,0,5,0,1.000000,0.000405,
-0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,5,10,0,5,0,1.000000,0.009475,
-0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,IoT-23,5,28,0,11,0,1.000000,0.122836,
-0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,TON_IoT,5,22,0,9,0,1.000000,0.064154,
-0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,Gotham 2025,6,15,0,7,0,1.000000,0.029135,
-0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,CTU-13,3,33,0,12,0,1.000000,0.050419,
-0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,N-BaIoT,2,25,0,9,0,1.000000,0.010916,
-0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G1,4,11,0,5,0,1.000000,0.009726,
-0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G2,2,13,0,5,0,1.000000,0.023502,
-0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,IoT-23,9,24,0,11,0,1.000000,0.122836,
-0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,TON_IoT,8,19,0,9,0,1.000000,0.064154,
-0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,Gotham 2025,4,17,0,7,0,1.000000,0.029135,
-0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,CTU-13,4,31,1,11,1,0.916667,0.034950,0.220588
-0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,N-BaIoT,0,25,2,8,1,0.888889,0.011953,0.002624
-0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,6,9,0,5,0,1.000000,0.009726,
-0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.023502,
-0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,IoT-23,20,7,6,9,2,0.818182,0.094049,0.055902
-0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,TON_IoT,18,5,4,6,3,0.666667,0.036980,0.025318
-0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,Gotham 2025,10,2,9,4,3,0.571429,0.004265,0.006705
-0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,CTU-13,21,6,9,8,4,0.666667,0.039751,0.005276
-0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,N-BaIoT,14,4,9,5,4,0.555556,0.003443,0.000528
-0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G1,8,2,5,2,3,0.400000,0.000572,0.000301
-0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G2,5,6,4,3,2,0.600000,0.014219,0.002858
-0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,IoT-23,21,12,0,11,0,1.000000,0.087113,
-0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,TON_IoT,8,19,0,9,0,1.000000,0.033093,
-0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,Gotham 2025,8,13,0,7,0,1.000000,0.005311,
-0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,CTU-13,7,29,0,12,0,1.000000,0.028259,
-0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.002147,
-0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.000409,
-0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,3,12,0,5,0,1.000000,0.009675,
-0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,IoT-23,7,26,0,11,0,1.000000,0.127606,
-0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,TON_IoT,0,27,0,9,0,1.000000,0.079384,
-0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,Gotham 2025,5,13,3,6,1,0.857143,0.031315,0.004160
-0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,CTU-13,3,33,0,12,0,1.000000,0.051147,
-0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,N-BaIoT,7,19,1,8,1,0.888889,0.007988,0.000454
-0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009931,
-0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.024291,
-0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,IoT-23,10,23,0,11,0,1.000000,0.127606,
-0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,TON_IoT,2,25,0,9,0,1.000000,0.079384,
-0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,Gotham 2025,4,17,0,7,0,1.000000,0.027436,
-0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,CTU-13,2,34,0,12,0,1.000000,0.051147,
-0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,N-BaIoT,0,25,2,8,1,0.888889,0.007870,0.001393
-0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009931,
-0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,11,4,3,2,0.600000,0.015468,0.037525
-0.01,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,IoT-23,22,8,3,10,1,0.909091,0.101192,0.000117
-0.01,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,TON_IoT,21,4,2,8,1,0.888889,0.029684,0.001267
-0.01,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,Gotham 2025,14,1,6,5,2,0.714286,0.005556,0.008179
-0.01,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,CTU-13,27,6,3,11,1,0.916667,0.030675,0.001953
-0.01,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,N-BaIoT,17,2,8,5,4,0.555556,0.003687,0.007114
-0.01,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G1,6,5,4,3,2,0.600000,0.000460,0.000369
-0.01,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G2,5,5,5,2,3,0.400000,0.010807,0.008587
-0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,IoT-23,18,15,0,11,0,1.000000,0.092003,
-0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,TON_IoT,13,14,0,9,0,1.000000,0.026527,
-0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,Gotham 2025,9,12,0,7,0,1.000000,0.006306,
-0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,CTU-13,8,28,0,12,0,1.000000,0.028282,
-0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,N-BaIoT,6,21,0,9,0,1.000000,0.005210,
-0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,3,12,0,5,0,1.000000,0.000424,
-0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,5,10,0,5,0,1.000000,0.009475,
-0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,IoT-23,8,25,0,11,0,1.000000,0.122013,
-0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,TON_IoT,5,22,0,9,0,1.000000,0.064307,
-0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,Gotham 2025,6,15,0,7,0,1.000000,0.030285,
-0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,CTU-13,3,33,0,12,0,1.000000,0.053171,
-0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,N-BaIoT,3,24,0,9,0,1.000000,0.010332,
-0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G1,4,11,0,5,0,1.000000,0.009821,
-0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G2,2,13,0,5,0,1.000000,0.023510,
-0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,IoT-23,8,25,0,11,0,1.000000,0.122013,
-0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,TON_IoT,7,20,0,9,0,1.000000,0.064307,
-0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,Gotham 2025,5,16,0,7,0,1.000000,0.030285,
-0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,CTU-13,4,32,0,12,0,1.000000,0.053171,
-0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,N-BaIoT,0,24,3,8,1,0.888889,0.011449,0.001393
-0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,6,9,0,5,0,1.000000,0.009821,
-0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.023510,
-0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,IoT-23,21,9,3,10,1,0.909091,0.096485,0.000117
-0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,TON_IoT,22,5,0,9,0,1.000000,0.033131,
-0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,Gotham 2025,12,3,6,5,2,0.714286,0.005140,0.008238
-0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,CTU-13,25,8,3,11,1,0.916667,0.031838,0.002353
-0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,N-BaIoT,17,4,6,6,3,0.666667,0.002952,0.000622
-0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G1,9,2,4,3,2,0.600000,0.000484,0.000321
-0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G2,5,6,4,3,2,0.600000,0.014219,0.002878
-0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,IoT-23,20,13,0,11,0,1.000000,0.087724,
-0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,TON_IoT,10,17,0,9,0,1.000000,0.033131,
-0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,Gotham 2025,9,12,0,7,0,1.000000,0.006025,
-0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,CTU-13,9,27,0,12,0,1.000000,0.029381,
-0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.002175,
-0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.000419,
-0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,3,12,0,5,0,1.000000,0.009682,
-0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,IoT-23,6,27,0,11,0,1.000000,0.125994,
-0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,TON_IoT,2,25,0,9,0,1.000000,0.077911,
-0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,Gotham 2025,7,14,0,7,0,1.000000,0.028166,
-0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,CTU-13,4,32,0,12,0,1.000000,0.050818,
-0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,N-BaIoT,6,21,0,9,0,1.000000,0.006873,
-0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009564,
-0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.024115,
-0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,IoT-23,7,26,0,11,0,1.000000,0.125994,
-0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,TON_IoT,3,24,0,9,0,1.000000,0.077911,
-0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,Gotham 2025,7,14,0,7,0,1.000000,0.028166,
-0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,CTU-13,1,35,0,12,0,1.000000,0.050818,
-0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,N-BaIoT,0,24,3,8,1,0.888889,0.007416,0.002533
-0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009564,
-0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,11,4,3,2,0.600000,0.015251,0.037410
-0.01,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,IoT-23,14,6,13,5,6,0.454545,0.141351,0.047922
-0.01,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,TON_IoT,6,4,17,2,7,0.222222,0.032279,0.023245
-0.01,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,Gotham 2025,10,1,10,3,4,0.428571,0.006181,0.005004
-0.01,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,CTU-13,10,5,21,3,9,0.250000,0.005180,0.034630
-0.01,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,N-BaIoT,6,2,19,1,8,0.111111,0.000000,0.004555
-0.01,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G1,4,4,7,2,3,0.400000,0.000536,0.000285
-0.01,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G2,5,5,5,2,3,0.400000,0.010502,0.008523
-0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,IoT-23,10,23,0,11,0,1.000000,0.090390,
-0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,TON_IoT,4,23,0,9,0,1.000000,0.025252,
-0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,Gotham 2025,5,15,1,6,1,0.857143,0.006426,0.000000
-0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,CTU-13,5,31,0,12,0,1.000000,0.027268,
-0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,N-BaIoT,8,19,0,9,0,1.000000,0.004049,
-0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,3,12,0,5,0,1.000000,0.000386,
-0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,3,12,0,5,0,1.000000,0.009314,
-0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,IoT-23,9,24,0,11,0,1.000000,0.120547,
-0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,TON_IoT,1,24,2,8,1,0.888889,0.071371,0.053412
-0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,Gotham 2025,4,14,3,6,1,0.857143,0.031854,0.000000
-0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,CTU-13,3,33,0,12,0,1.000000,0.049608,
-0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,N-BaIoT,7,18,2,7,2,0.777778,0.011693,0.000890
-0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G1,4,11,0,5,0,1.000000,0.009684,
-0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G2,2,13,0,5,0,1.000000,0.023456,
-0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,IoT-23,7,26,0,11,0,1.000000,0.120547,
-0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,TON_IoT,4,22,1,8,1,0.888889,0.076817,0.009843
-0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,Gotham 2025,2,17,2,6,1,0.857143,0.031854,0.000000
-0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,CTU-13,2,33,1,11,1,0.916667,0.034064,0.220588
-0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,N-BaIoT,0,21,6,6,3,0.666667,0.013216,0.001446
-0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,4,9,2,4,1,0.800000,0.009133,0.011888
-0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.023456,
-0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,IoT-23,11,9,13,4,7,0.363636,0.011150,0.128498
-0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,TON_IoT,2,3,22,0,9,0.000000,,0.025098
-0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,Gotham 2025,9,3,9,4,3,0.571429,0.004964,0.006674
-0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,CTU-13,9,6,21,2,10,0.166667,0.088800,0.015282
-0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,N-BaIoT,7,0,20,2,7,0.222222,0.000000,0.001650
-0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G1,9,2,4,2,3,0.400000,0.000572,0.000309
-0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G2,4,6,5,2,3,0.400000,0.010520,0.008510
-0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,IoT-23,13,20,0,11,0,1.000000,0.085826,
-0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,TON_IoT,2,25,0,9,0,1.000000,0.025098,
-0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,Gotham 2025,7,14,0,7,0,1.000000,0.005697,
-0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,CTU-13,8,28,0,12,0,1.000000,0.027535,
-0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,N-BaIoT,7,20,0,9,0,1.000000,0.001283,
-0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.000414,
-0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.009314,
-0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,IoT-23,6,27,0,11,0,1.000000,0.125143,
-0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,TON_IoT,1,24,2,8,1,0.888889,0.071100,0.048961
-0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,Gotham 2025,4,14,3,6,1,0.857143,0.030418,0.004420
-0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,CTU-13,6,30,0,12,0,1.000000,0.050069,
-0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,N-BaIoT,6,19,2,7,2,0.777778,0.009529,0.000515
-0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.009659,
-0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G2,0,15,0,5,0,1.000000,0.024276,
-0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,IoT-23,5,28,0,11,0,1.000000,0.125143,
-0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,TON_IoT,1,26,0,9,0,1.000000,0.068640,
-0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,Gotham 2025,3,18,0,7,0,1.000000,0.026704,
-0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,CTU-13,1,35,0,12,0,1.000000,0.050069,
-0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,N-BaIoT,0,21,6,5,4,0.555556,0.010278,0.004085
-0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,4,9,2,4,1,0.800000,0.009489,0.010339
-0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,0,11,4,3,2,0.600000,0.015520,0.037410
+0.01,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,IoT-23,21,9,3,10,1,0.909091,0.087565,0.151515
+0.01,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,TON_IoT,20,7,0,9,0,1.000000,0.057420,
+0.01,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,Gotham 2025,18,3,0,7,0,1.000000,0.019877,
+0.01,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,CTU-13,24,11,1,11,1,0.916667,0.036750,0.013787
+0.01,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,N-BaIoT,13,14,0,9,0,1.000000,0.008842,
+0.01,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G1,9,6,0,5,0,1.000000,0.006154,
+0.01,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G2,14,1,0,5,0,1.000000,0.016035,
+0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,IoT-23,22,11,0,11,0,1.000000,0.093378,
+0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,TON_IoT,20,7,0,9,0,1.000000,0.057420,
+0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,Gotham 2025,17,4,0,7,0,1.000000,0.019877,
+0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,CTU-13,23,13,0,12,0,1.000000,0.034836,
+0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,N-BaIoT,13,14,0,9,0,1.000000,0.008842,
+0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,9,6,0,5,0,1.000000,0.006154,
+0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,14,1,0,5,0,1.000000,0.016035,
+0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,IoT-23,23,10,0,11,0,1.000000,0.127000,
+0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,TON_IoT,20,7,0,9,0,1.000000,0.085050,
+0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,Gotham 2025,16,5,0,7,0,1.000000,0.032081,
+0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,CTU-13,30,6,0,12,0,1.000000,0.076741,
+0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,N-BaIoT,1,26,0,9,0,1.000000,0.031359,
+0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G1,8,7,0,5,0,1.000000,0.026186,
+0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G2,5,10,0,5,0,1.000000,0.042399,
+0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,IoT-23,24,9,0,11,0,1.000000,0.127000,
+0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,TON_IoT,20,7,0,9,0,1.000000,0.085050,
+0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,Gotham 2025,16,5,0,7,0,1.000000,0.032081,
+0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,CTU-13,29,7,0,12,0,1.000000,0.076741,
+0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,N-BaIoT,1,26,0,9,0,1.000000,0.031359,
+0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,9,6,0,5,0,1.000000,0.026186,
+0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,5,10,0,5,0,1.000000,0.042399,
+0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,IoT-23,23,7,3,10,1,0.909091,0.086343,0.111688
+0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,TON_IoT,18,8,1,8,1,0.888889,0.061815,0.063561
+0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,Gotham 2025,16,2,3,6,1,0.857143,0.020995,0.003640
+0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,CTU-13,24,12,0,12,0,1.000000,0.036460,
+0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,N-BaIoT,16,11,0,9,0,1.000000,0.005876,
+0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G1,9,6,0,5,0,1.000000,0.006235,
+0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G2,10,5,0,5,0,1.000000,0.016250,
+0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,IoT-23,23,10,0,11,0,1.000000,0.088647,
+0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,TON_IoT,19,8,0,9,0,1.000000,0.062009,
+0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,Gotham 2025,17,4,0,7,0,1.000000,0.018515,
+0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,CTU-13,24,12,0,12,0,1.000000,0.036460,
+0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,N-BaIoT,16,11,0,9,0,1.000000,0.005876,
+0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,9,6,0,5,0,1.000000,0.006235,
+0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,10,5,0,5,0,1.000000,0.016250,
+0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,IoT-23,27,6,0,11,0,1.000000,0.131821,
+0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,TON_IoT,19,7,1,8,1,0.888889,0.089222,0.063561
+0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,Gotham 2025,14,5,2,6,1,0.857143,0.033158,0.004940
+0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,CTU-13,27,9,0,12,0,1.000000,0.079056,
+0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,N-BaIoT,3,24,0,9,0,1.000000,0.032266,
+0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G1,9,6,0,5,0,1.000000,0.026600,
+0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,UNSW IoT-attack flows G2,6,9,0,5,0,1.000000,0.132042,
+0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,IoT-23,28,5,0,11,0,1.000000,0.131821,
+0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,TON_IoT,19,8,0,9,0,1.000000,0.086371,
+0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,Gotham 2025,14,7,0,7,0,1.000000,0.029127,
+0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,CTU-13,27,9,0,12,0,1.000000,0.079056,
+0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,N-BaIoT,3,24,0,9,0,1.000000,0.032266,
+0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,9,6,0,5,0,1.000000,0.026600,
+0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,6,9,0,5,0,1.000000,0.132042,
+0.01,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,IoT-23,25,8,0,11,0,1.000000,0.093649,
+0.01,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,TON_IoT,21,6,0,9,0,1.000000,0.055614,
+0.01,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,Gotham 2025,15,6,0,7,0,1.000000,0.019444,
+0.01,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,CTU-13,26,10,0,12,0,1.000000,0.034669,
+0.01,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,N-BaIoT,18,9,0,9,0,1.000000,0.008654,
+0.01,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G1,7,8,0,5,0,1.000000,0.006087,
+0.01,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G2,10,5,0,5,0,1.000000,0.016089,
+0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,IoT-23,24,9,0,11,0,1.000000,0.093649,
+0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,TON_IoT,20,7,0,9,0,1.000000,0.055614,
+0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,Gotham 2025,15,6,0,7,0,1.000000,0.019444,
+0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,CTU-13,25,11,0,12,0,1.000000,0.034669,
+0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,N-BaIoT,18,9,0,9,0,1.000000,0.008654,
+0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,7,8,0,5,0,1.000000,0.006087,
+0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,10,5,0,5,0,1.000000,0.016089,
+0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,IoT-23,20,13,0,11,0,1.000000,0.125748,
+0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,TON_IoT,14,13,0,9,0,1.000000,0.084792,
+0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,Gotham 2025,11,10,0,7,0,1.000000,0.031998,
+0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,CTU-13,17,19,0,12,0,1.000000,0.079316,
+0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,N-BaIoT,1,26,0,9,0,1.000000,0.030829,
+0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G1,8,7,0,5,0,1.000000,0.024954,
+0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G2,6,9,0,5,0,1.000000,0.042390,
+0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,IoT-23,19,14,0,11,0,1.000000,0.125748,
+0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,TON_IoT,14,13,0,9,0,1.000000,0.084792,
+0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,Gotham 2025,11,10,0,7,0,1.000000,0.031998,
+0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,CTU-13,17,19,0,12,0,1.000000,0.079316,
+0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,N-BaIoT,1,26,0,9,0,1.000000,0.030829,
+0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,8,7,0,5,0,1.000000,0.024954,
+0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,5,10,0,5,0,1.000000,0.042390,
+0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,IoT-23,25,8,0,11,0,1.000000,0.089040,
+0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,TON_IoT,18,9,0,9,0,1.000000,0.060002,
+0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,Gotham 2025,16,5,0,7,0,1.000000,0.019000,
+0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,CTU-13,26,10,0,12,0,1.000000,0.036317,
+0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,N-BaIoT,17,10,0,9,0,1.000000,0.005505,
+0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G1,10,5,0,5,0,1.000000,0.006154,
+0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G2,13,2,0,5,0,1.000000,0.016150,
+0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,IoT-23,25,8,0,11,0,1.000000,0.089040,
+0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,TON_IoT,17,10,0,9,0,1.000000,0.060002,
+0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,Gotham 2025,16,5,0,7,0,1.000000,0.019000,
+0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,CTU-13,26,10,0,12,0,1.000000,0.036317,
+0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,N-BaIoT,17,10,0,9,0,1.000000,0.005505,
+0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,10,5,0,5,0,1.000000,0.006154,
+0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,13,2,0,5,0,1.000000,0.016150,
+0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,IoT-23,16,17,0,11,0,1.000000,0.130321,
+0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,TON_IoT,11,16,0,9,0,1.000000,0.085696,
+0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,Gotham 2025,12,9,0,7,0,1.000000,0.028999,
+0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,CTU-13,22,14,0,12,0,1.000000,0.078468,
+0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,N-BaIoT,3,24,0,9,0,1.000000,0.032127,
+0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G1,7,8,0,5,0,1.000000,0.026490,
+0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,UNSW IoT-attack flows G2,6,9,0,5,0,1.000000,0.132409,
+0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,IoT-23,16,17,0,11,0,1.000000,0.130321,
+0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,TON_IoT,11,16,0,9,0,1.000000,0.085696,
+0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,Gotham 2025,12,9,0,7,0,1.000000,0.028999,
+0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,CTU-13,21,15,0,12,0,1.000000,0.078468,
+0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,N-BaIoT,3,24,0,9,0,1.000000,0.032127,
+0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,7,8,0,5,0,1.000000,0.026490,
+0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,6,9,0,5,0,1.000000,0.132409,
+0.01,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,IoT-23,18,9,6,8,3,0.727273,0.095033,0.084077
+0.01,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,TON_IoT,7,12,8,5,4,0.555556,0.076305,0.037608
+0.01,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,Gotham 2025,9,8,4,5,2,0.714286,0.025247,0.001820
+0.01,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,CTU-13,14,19,3,9,3,0.750000,0.025152,0.063210
+0.01,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,N-BaIoT,9,18,0,9,0,1.000000,0.008849,
+0.01,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G1,6,9,0,5,0,1.000000,0.006111,
+0.01,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G2,9,6,0,5,0,1.000000,0.015897,
+0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,IoT-23,19,14,0,11,0,1.000000,0.092045,
+0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,TON_IoT,4,23,0,9,0,1.000000,0.059106,
+0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,Gotham 2025,10,8,3,6,1,0.857143,0.021646,0.000000
+0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,CTU-13,13,23,0,12,0,1.000000,0.034666,
+0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,N-BaIoT,8,19,0,9,0,1.000000,0.008849,
+0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,6,9,0,5,0,1.000000,0.006111,
+0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,8,7,0,5,0,1.000000,0.015897,
+0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,IoT-23,13,20,0,11,0,1.000000,0.125760,
+0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,TON_IoT,7,18,2,8,1,0.888889,0.089040,0.053412
+0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,Gotham 2025,10,8,3,6,1,0.857143,0.035825,0.000000
+0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,CTU-13,15,21,0,12,0,1.000000,0.076131,
+0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,N-BaIoT,2,25,0,9,0,1.000000,0.030568,
+0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G1,6,9,0,5,0,1.000000,0.026115,
+0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G2,2,13,0,5,0,1.000000,0.041957,
+0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,IoT-23,11,22,0,11,0,1.000000,0.125760,
+0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,TON_IoT,5,22,0,9,0,1.000000,0.085081,
+0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,Gotham 2025,9,9,3,6,1,0.857143,0.035825,0.000000
+0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,CTU-13,14,22,0,12,0,1.000000,0.076131,
+0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,N-BaIoT,2,25,0,9,0,1.000000,0.030568,
+0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,6,9,0,5,0,1.000000,0.026115,
+0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.041957,
+0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,IoT-23,15,9,9,7,4,0.636364,0.105469,0.056338
+0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,TON_IoT,3,13,11,4,5,0.444444,0.075876,0.041418
+0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,Gotham 2025,7,11,3,6,1,0.857143,0.021880,0.003900
+0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,CTU-13,15,21,0,12,0,1.000000,0.036090,
+0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,N-BaIoT,6,21,0,9,0,1.000000,0.006890,
+0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G1,7,8,0,5,0,1.000000,0.006192,
+0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G2,8,7,0,5,0,1.000000,0.015905,
+0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,IoT-23,15,18,0,11,0,1.000000,0.087603,
+0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,TON_IoT,3,24,0,9,0,1.000000,0.056733,
+0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,Gotham 2025,9,12,0,7,0,1.000000,0.019312,
+0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,CTU-13,14,22,0,12,0,1.000000,0.036090,
+0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,N-BaIoT,6,21,0,9,0,1.000000,0.006890,
+0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,7,8,0,5,0,1.000000,0.006192,
+0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,8,7,0,5,0,1.000000,0.015905,
+0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,IoT-23,13,20,0,11,0,1.000000,0.129818,
+0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,TON_IoT,2,21,4,7,2,0.777778,0.092243,0.061909
+0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,Gotham 2025,4,15,2,6,1,0.857143,0.033526,0.005460
+0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,CTU-13,17,19,0,12,0,1.000000,0.077835,
+0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,N-BaIoT,2,25,0,9,0,1.000000,0.030782,
+0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G1,7,8,0,5,0,1.000000,0.027841,
+0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.132885,
+0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,IoT-23,13,20,0,11,0,1.000000,0.129818,
+0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,TON_IoT,2,25,0,9,0,1.000000,0.085502,
+0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,Gotham 2025,4,16,1,6,1,0.857143,0.034436,0.000000
+0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,CTU-13,14,22,0,12,0,1.000000,0.077835,
+0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,N-BaIoT,2,25,0,9,0,1.000000,0.030782,
+0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G1,5,10,0,5,0,1.000000,0.027841,
+0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,UNSW IoT-attack flows G2,4,11,0,5,0,1.000000,0.132885,
 0.01,100,KitNET,PACE read at the comparator FPR,IoT-23,2,13,18,4,7,0.363636,0.017961,0.038711
 0.01,100,KitNET,PACE read at the comparator FPR,TON_IoT,1,14,12,5,4,0.555556,0.079361,0.006346
 0.01,100,KitNET,PACE read at the comparator FPR,Gotham 2025,0,9,12,3,4,0.428571,0.008918,0.000669

@@ -54,7 +54,6 @@ BudgetMultiplier = PositiveFloat
 Threshold = FiniteFloat
 LearningRate = PositiveFloat
 CovarianceRegularization = PositiveFloat
-CovarianceConditionLimit = AtLeastOneFloat
 
 ObservationCount = NonNegativeInt
 SourceFileCount = NonNegativeInt
@@ -446,25 +445,13 @@ class LocalDetectorKind(Enum):
     def row(self) -> DetectorRow:
         return tuple(LocalDetectorKind).index(self)
 
-    def is_anchor_member(self, members: "AnchorMembers") -> bool:
-        return members is AnchorMembers.ALL_DETECTORS or self is not LocalDetectorKind.AUTOENCODER
+    @property
+    def is_anchor_member(self) -> bool:
+        return self is not LocalDetectorKind.AUTOENCODER
 
 
 class PcaSolver(StrEnum):
     FULL = "full"
-
-
-class AnchorMembers(Enum):
-    WITHOUT_AUTOENCODER = "WITHOUT_AUTOENCODER"
-    ALL_DETECTORS = "ALL_DETECTORS"
-
-    @property
-    def display_label(self) -> "DisplayText":
-        match self:
-            case AnchorMembers.WITHOUT_AUTOENCODER:
-                return DisplayText("Without autoencoder")
-            case AnchorMembers.ALL_DETECTORS:
-                return DisplayText("All detectors")
 
 
 class BankDesign(Enum):
@@ -472,7 +459,6 @@ class BankDesign(Enum):
     NO_GAUSSIAN = "NO_GAUSSIAN"
     FAMILY_BUDGETS = "FAMILY_BUDGETS"
     SECOND_ORDER = "SECOND_ORDER"
-    JOINT_CHANNELS = "JOINT_CHANNELS"
 
     @property
     def display_label(self) -> "DisplayText":
@@ -485,37 +471,6 @@ class BankDesign(Enum):
                 return DisplayText("Family budgets")
             case BankDesign.SECOND_ORDER:
                 return DisplayText("Second-order aggregation")
-            case BankDesign.JOINT_CHANNELS:
-                return DisplayText("Joint channels")
-
-
-class ConditionLimitRule(Enum):
-    FIXED = "FIXED"
-    PER_TRAINING_ROW = "PER_TRAINING_ROW"
-
-    @property
-    def display_label(self) -> "DisplayText":
-        match self:
-            case ConditionLimitRule.FIXED:
-                return DisplayText("Fixed")
-            case ConditionLimitRule.PER_TRAINING_ROW:
-                return DisplayText("Per training row")
-
-
-class CovarianceEstimator(Enum):
-    RIDGE = "RIDGE"
-    SHRINKAGE = "SHRINKAGE"
-    LEDOIT_WOLF = "LEDOIT_WOLF"
-
-    @property
-    def display_label(self) -> "DisplayText":
-        match self:
-            case CovarianceEstimator.RIDGE:
-                return DisplayText("Ridge")
-            case CovarianceEstimator.SHRINKAGE:
-                return DisplayText("Shrinkage")
-            case CovarianceEstimator.LEDOIT_WOLF:
-                return DisplayText("Ledoit-Wolf")
 
 
 class LocalExpertFamily(Enum):
@@ -630,8 +585,6 @@ class StudyArm(Enum):
     BANK_WITHOUT_ANCHOR = "BANK_WITHOUT_ANCHOR"
     BANK_SINGLE_UNION = "BANK_SINGLE_UNION"
     RESPONSE_ON_MARGINS = "RESPONSE_ON_MARGINS"
-    LEGACY_ANCHOR_FALLBACK = "LEGACY_ANCHOR_FALLBACK"
-    CROSS_FITTED_CALIBRATION = "CROSS_FITTED_CALIBRATION"
 
     @property
     def removed_expert_family(self) -> LocalExpertFamily:
@@ -659,7 +612,7 @@ class StudyArm(Enum):
             case StudyArm.PEER_MAX_FUSION:
                 return DisplayText("Peer max fusion")
             case StudyArm.MEAN_ENSEMBLE_LOCAL_BRANCH:
-                return DisplayText("Mean-ensemble local branch (block-max calibration arm)")
+                return OperatingMethod.MEAN_ENSEMBLE_BLOCK_MAXIMUM.display_label
             case StudyArm.BANK_WITHOUT_FEATURE_EXPERTS:
                 return DisplayText("Bank without feature experts")
             case StudyArm.BANK_WITHOUT_RESPONSE_EXPERTS:
@@ -672,10 +625,6 @@ class StudyArm(Enum):
                 return DisplayText("Bank single union")
             case StudyArm.RESPONSE_ON_MARGINS:
                 return DisplayText("Response on margins")
-            case StudyArm.LEGACY_ANCHOR_FALLBACK:
-                return DisplayText("Legacy anchor fallback")
-            case StudyArm.CROSS_FITTED_CALIBRATION:
-                return DisplayText("Cross-fitted calibration")
 
     @property
     def reserve_variant(self) -> ReserveFraction:
@@ -685,15 +634,12 @@ class StudyArm(Enum):
 
 
 class AnchorBudgetPolicy(Enum):
-    LEGACY_FULL_LOCAL_FALLBACK = "LEGACY_FULL_LOCAL_FALLBACK"
     SHARE_CONSERVING = "SHARE_CONSERVING"
     COLLAPSE_TO_ANCHOR = "COLLAPSE_TO_ANCHOR"
 
     @property
     def display_label(self) -> "DisplayText":
         match self:
-            case AnchorBudgetPolicy.LEGACY_FULL_LOCAL_FALLBACK:
-                return DisplayText("Legacy full-local fallback")
             case AnchorBudgetPolicy.SHARE_CONSERVING:
                 return DisplayText("Share-conserving")
             case AnchorBudgetPolicy.COLLAPSE_TO_ANCHOR:
@@ -817,92 +763,69 @@ class ExternalBaseline(Enum):
                 return OperatingMethod.MCDE
 
 
-class CalibrationVariant(Enum):
-    LEGACY = "LEGACY"
-    PREVIOUS = "PREVIOUS"
-    CROSS_FITTED = "CROSS_FITTED"
-    RESOLUTION = "RESOLUTION"
-    POOLED = "POOLED"
-    COLLAPSE = "COLLAPSE"
-    RESOLUTION_COLLAPSE = "RESOLUTION_COLLAPSE"
-    POOLED_COLLAPSE = "POOLED_COLLAPSE"
-    TEMPORAL = "TEMPORAL"
-    NO_GAUSSIAN = "NO_GAUSSIAN"
+class PaceAblation(Enum):
+    IN_SAMPLE_CALIBRATION = "IN_SAMPLE_CALIBRATION"
+    RESOLUTION_AWARE_BLOCKS = "RESOLUTION_AWARE_BLOCKS"
+    POOLED_CONFORMAL_RANK = "POOLED_CONFORMAL_RANK"
+    FORWARD_CHAINING_CALIBRATION = "FORWARD_CHAINING_CALIBRATION"
+    ANCHOR_COLLAPSE = "ANCHOR_COLLAPSE"
+    WITHOUT_GAUSSIAN_EXPERT = "WITHOUT_GAUSSIAN_EXPERT"
     FAMILY_BUDGETS = "FAMILY_BUDGETS"
-    SECOND_ORDER = "SECOND_ORDER"
-    JOINT_CHANNELS = "JOINT_CHANNELS"
+    SECOND_ORDER_AGGREGATION = "SECOND_ORDER_AGGREGATION"
 
     @property
-    def design(self) -> BankDesign:
+    def design(self) -> BankDesign | None:
         match self:
-            case CalibrationVariant.NO_GAUSSIAN:
+            case PaceAblation.WITHOUT_GAUSSIAN_EXPERT:
                 return BankDesign.NO_GAUSSIAN
-            case CalibrationVariant.FAMILY_BUDGETS:
+            case PaceAblation.FAMILY_BUDGETS:
                 return BankDesign.FAMILY_BUDGETS
-            case CalibrationVariant.SECOND_ORDER:
+            case PaceAblation.SECOND_ORDER_AGGREGATION:
                 return BankDesign.SECOND_ORDER
-            case CalibrationVariant.JOINT_CHANNELS:
-                return BankDesign.JOINT_CHANNELS
             case _:
-                return BankDesign.PER_EXPERT
+                return None
 
     @property
-    def policy(self) -> AnchorBudgetPolicy:
+    def policy(self) -> AnchorBudgetPolicy | None:
         match self:
-            case CalibrationVariant.LEGACY:
-                return AnchorBudgetPolicy.LEGACY_FULL_LOCAL_FALLBACK
-            case (
-                CalibrationVariant.COLLAPSE
-                | CalibrationVariant.RESOLUTION_COLLAPSE
-                | CalibrationVariant.POOLED_COLLAPSE
-            ):
+            case PaceAblation.ANCHOR_COLLAPSE:
                 return AnchorBudgetPolicy.COLLAPSE_TO_ANCHOR
             case _:
-                return AnchorBudgetPolicy.SHARE_CONSERVING
+                return None
 
     @property
-    def mode(self) -> CalibrationMode:
+    def mode(self) -> CalibrationMode | None:
         match self:
-            case CalibrationVariant.CROSS_FITTED:
-                return CalibrationMode.CROSS_FITTED
-            case CalibrationVariant.TEMPORAL:
-                return CalibrationMode.TEMPORAL_CROSS_FITTED
-            case CalibrationVariant.RESOLUTION | CalibrationVariant.RESOLUTION_COLLAPSE:
-                return CalibrationMode.RESOLUTION_BLOCKS
-            case CalibrationVariant.POOLED | CalibrationVariant.POOLED_COLLAPSE:
-                return CalibrationMode.POOLED_CONFORMAL
-            case _:
+            case PaceAblation.IN_SAMPLE_CALIBRATION:
                 return CalibrationMode.IN_SAMPLE
+            case PaceAblation.RESOLUTION_AWARE_BLOCKS:
+                return CalibrationMode.RESOLUTION_BLOCKS
+            case PaceAblation.POOLED_CONFORMAL_RANK:
+                return CalibrationMode.POOLED_CONFORMAL
+            case PaceAblation.FORWARD_CHAINING_CALIBRATION:
+                return CalibrationMode.TEMPORAL_CROSS_FITTED
+            case _:
+                return None
 
     @property
     def operating_method(self) -> "OperatingMethod":
         match self:
-            case CalibrationVariant.LEGACY:
-                return OperatingMethod.LEGACY_PACE
-            case CalibrationVariant.PREVIOUS:
-                return OperatingMethod.PREVIOUS_PACE
-            case CalibrationVariant.CROSS_FITTED:
-                return OperatingMethod.CROSS_FITTED_PACE
-            case CalibrationVariant.RESOLUTION:
-                return OperatingMethod.RESOLUTION_PACE
-            case CalibrationVariant.POOLED:
-                return OperatingMethod.POOLED_PACE
-            case CalibrationVariant.COLLAPSE:
-                return OperatingMethod.COLLAPSE_PACE
-            case CalibrationVariant.RESOLUTION_COLLAPSE:
-                return OperatingMethod.RESOLUTION_COLLAPSE_PACE
-            case CalibrationVariant.POOLED_COLLAPSE:
-                return OperatingMethod.POOLED_COLLAPSE_PACE
-            case CalibrationVariant.TEMPORAL:
-                return OperatingMethod.TEMPORAL_PACE
-            case CalibrationVariant.NO_GAUSSIAN:
-                return OperatingMethod.NO_GAUSSIAN_PACE
-            case CalibrationVariant.FAMILY_BUDGETS:
-                return OperatingMethod.FAMILY_BUDGETS_PACE
-            case CalibrationVariant.SECOND_ORDER:
-                return OperatingMethod.SECOND_ORDER_PACE
-            case CalibrationVariant.JOINT_CHANNELS:
-                return OperatingMethod.JOINT_CHANNELS_PACE
+            case PaceAblation.IN_SAMPLE_CALIBRATION:
+                return OperatingMethod.PACE_IN_SAMPLE_CALIBRATION
+            case PaceAblation.RESOLUTION_AWARE_BLOCKS:
+                return OperatingMethod.PACE_RESOLUTION_AWARE_BLOCKS
+            case PaceAblation.POOLED_CONFORMAL_RANK:
+                return OperatingMethod.PACE_POOLED_CONFORMAL_RANK
+            case PaceAblation.FORWARD_CHAINING_CALIBRATION:
+                return OperatingMethod.PACE_FORWARD_CHAINING_CALIBRATION
+            case PaceAblation.ANCHOR_COLLAPSE:
+                return OperatingMethod.PACE_ANCHOR_COLLAPSE
+            case PaceAblation.WITHOUT_GAUSSIAN_EXPERT:
+                return OperatingMethod.PACE_WITHOUT_GAUSSIAN_EXPERT
+            case PaceAblation.FAMILY_BUDGETS:
+                return OperatingMethod.PACE_FAMILY_BUDGETS
+            case PaceAblation.SECOND_ORDER_AGGREGATION:
+                return OperatingMethod.PACE_SECOND_ORDER_AGGREGATION
 
 
 class MatchClass(Enum):
@@ -925,22 +848,17 @@ class MatchDirection(Enum):
 
 
 class OperatingMethod(Enum):
-    PACE = "PACE_PRIMARY"
-    LEGACY_PACE = "LEGACY_PACE"
-    CROSS_FITTED_PACE = "CROSS_FITTED_PACE"
-    PREVIOUS_PACE = "PREVIOUS_PACE"
-    RESOLUTION_PACE = "RESOLUTION_PACE"
-    POOLED_PACE = "POOLED_PACE"
-    COLLAPSE_PACE = "COLLAPSE_PACE"
-    RESOLUTION_COLLAPSE_PACE = "RESOLUTION_COLLAPSE_PACE"
-    POOLED_COLLAPSE_PACE = "POOLED_COLLAPSE_PACE"
-    TEMPORAL_PACE = "TEMPORAL_PACE"
-    NO_GAUSSIAN_PACE = "NO_GAUSSIAN_PACE"
-    FAMILY_BUDGETS_PACE = "FAMILY_BUDGETS_PACE"
-    SECOND_ORDER_PACE = "SECOND_ORDER_PACE"
-    JOINT_CHANNELS_PACE = "JOINT_CHANNELS_PACE"
-    MEAN_ENSEMBLE = "MEAN_ENSEMBLE"
-    MEAN_ENSEMBLE_MATCHED = "MEAN_ENSEMBLE_MATCHED_CALIBRATION"
+    PACE = "PACE"
+    PACE_IN_SAMPLE_CALIBRATION = "PACE_IN_SAMPLE_CALIBRATION"
+    PACE_RESOLUTION_AWARE_BLOCKS = "PACE_RESOLUTION_AWARE_BLOCKS"
+    PACE_POOLED_CONFORMAL_RANK = "PACE_POOLED_CONFORMAL_RANK"
+    PACE_FORWARD_CHAINING_CALIBRATION = "PACE_FORWARD_CHAINING_CALIBRATION"
+    PACE_ANCHOR_COLLAPSE = "PACE_ANCHOR_COLLAPSE"
+    PACE_WITHOUT_GAUSSIAN_EXPERT = "PACE_WITHOUT_GAUSSIAN_EXPERT"
+    PACE_FAMILY_BUDGETS = "PACE_FAMILY_BUDGETS"
+    PACE_SECOND_ORDER_AGGREGATION = "PACE_SECOND_ORDER_AGGREGATION"
+    MEAN_ENSEMBLE_BLOCK_MAXIMUM = "MEAN_ENSEMBLE_BLOCK_MAXIMUM"
+    MEAN_ENSEMBLE_SAME_CALIBRATION = "MEAN_ENSEMBLE_SAME_CALIBRATION"
     KITNET = "KITNET"
     DIOT = "DIOT"
     MCDE = "MCDE"
@@ -950,41 +868,31 @@ class OperatingMethod(Enum):
         match self:
             case OperatingMethod.PACE:
                 return HexColor("#0072B2")
-            case OperatingMethod.LEGACY_PACE:
-                return HexColor("#56B4E9")
-            case OperatingMethod.CROSS_FITTED_PACE:
-                return HexColor("#009E73")
-            case OperatingMethod.PREVIOUS_PACE:
+            case OperatingMethod.PACE_IN_SAMPLE_CALIBRATION:
                 return HexColor("#999933")
-            case OperatingMethod.RESOLUTION_PACE:
+            case OperatingMethod.PACE_RESOLUTION_AWARE_BLOCKS:
                 return HexColor("#882255")
-            case OperatingMethod.POOLED_PACE:
+            case OperatingMethod.PACE_POOLED_CONFORMAL_RANK:
                 return HexColor("#117733")
-            case OperatingMethod.COLLAPSE_PACE:
+            case OperatingMethod.PACE_ANCHOR_COLLAPSE:
                 return HexColor("#44AA99")
-            case OperatingMethod.RESOLUTION_COLLAPSE_PACE:
-                return HexColor("#AA4499")
-            case OperatingMethod.POOLED_COLLAPSE_PACE:
-                return HexColor("#332288")
             case _:
                 return self.variant_color
 
     @property
     def variant_color(self) -> HexColor:
         match self:
-            case OperatingMethod.TEMPORAL_PACE:
+            case OperatingMethod.PACE_FORWARD_CHAINING_CALIBRATION:
                 return HexColor("#DDCC77")
-            case OperatingMethod.NO_GAUSSIAN_PACE:
+            case OperatingMethod.PACE_WITHOUT_GAUSSIAN_EXPERT:
                 return HexColor("#44AA66")
-            case OperatingMethod.FAMILY_BUDGETS_PACE:
+            case OperatingMethod.PACE_FAMILY_BUDGETS:
                 return HexColor("#88CCEE")
-            case OperatingMethod.SECOND_ORDER_PACE:
+            case OperatingMethod.PACE_SECOND_ORDER_AGGREGATION:
                 return HexColor("#AA4466")
-            case OperatingMethod.JOINT_CHANNELS_PACE:
-                return HexColor("#661100")
-            case OperatingMethod.MEAN_ENSEMBLE:
+            case OperatingMethod.MEAN_ENSEMBLE_BLOCK_MAXIMUM:
                 return HexColor("#E69F00")
-            case OperatingMethod.MEAN_ENSEMBLE_MATCHED:
+            case OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION:
                 return HexColor("#CC6677")
             case OperatingMethod.KITNET:
                 return HexColor("#D55E00")
@@ -998,41 +906,31 @@ class OperatingMethod(Enum):
         match self:
             case OperatingMethod.PACE:
                 return ReportedMethod.PACE.display_label
-            case OperatingMethod.LEGACY_PACE:
-                return DisplayText("Original PACE (legacy anchor fallback)")
-            case OperatingMethod.CROSS_FITTED_PACE:
-                return DisplayText("PACE with cross-fitted calibration")
-            case OperatingMethod.PREVIOUS_PACE:
-                return DisplayText("Previous PACE (budget-conserving, block-maximum)")
-            case OperatingMethod.RESOLUTION_PACE:
+            case OperatingMethod.PACE_IN_SAMPLE_CALIBRATION:
+                return DisplayText("PACE with in-sample block-maximum calibration")
+            case OperatingMethod.PACE_RESOLUTION_AWARE_BLOCKS:
                 return DisplayText("PACE with resolution-aware blocks")
-            case OperatingMethod.POOLED_PACE:
+            case OperatingMethod.PACE_POOLED_CONFORMAL_RANK:
                 return DisplayText("PACE with pooled conformal-rank calibration")
-            case OperatingMethod.COLLAPSE_PACE:
+            case OperatingMethod.PACE_ANCHOR_COLLAPSE:
                 return DisplayText("PACE with anchor collapse")
-            case OperatingMethod.RESOLUTION_COLLAPSE_PACE:
-                return DisplayText("PACE with resolution-aware blocks and anchor collapse")
-            case OperatingMethod.POOLED_COLLAPSE_PACE:
-                return DisplayText("PACE with pooled calibration and anchor collapse")
             case _:
                 return self.variant_label
 
     @property
     def variant_label(self) -> DisplayText:
         match self:
-            case OperatingMethod.TEMPORAL_PACE:
+            case OperatingMethod.PACE_FORWARD_CHAINING_CALIBRATION:
                 return DisplayText("PACE with forward-chaining cross-fitted calibration")
-            case OperatingMethod.NO_GAUSSIAN_PACE:
+            case OperatingMethod.PACE_WITHOUT_GAUSSIAN_EXPERT:
                 return DisplayText("PACE without the Gaussian bank expert")
-            case OperatingMethod.FAMILY_BUDGETS_PACE:
+            case OperatingMethod.PACE_FAMILY_BUDGETS:
                 return DisplayText("PACE with hierarchical family budgets")
-            case OperatingMethod.SECOND_ORDER_PACE:
+            case OperatingMethod.PACE_SECOND_ORDER_AGGREGATION:
                 return DisplayText("PACE with second-order bank aggregation")
-            case OperatingMethod.JOINT_CHANNELS_PACE:
-                return DisplayText("PACE with joint channel calibration")
-            case OperatingMethod.MEAN_ENSEMBLE:
-                return DisplayText("Mean-ensemble local branch (block-max calibration)")
-            case OperatingMethod.MEAN_ENSEMBLE_MATCHED:
+            case OperatingMethod.MEAN_ENSEMBLE_BLOCK_MAXIMUM:
+                return DisplayText("Mean-ensemble local branch (block-maximum calibration)")
+            case OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION:
                 return ReportedMethod.MEAN_ENSEMBLE.display_label
             case OperatingMethod.KITNET:
                 return ExternalBaseline.KITNET.display_label
@@ -1371,8 +1269,7 @@ class ColumnHeading(StrEnum):
     CALIBRATION_ROWS = "calibration_rows"
     RESOLUTION_FLOOR = "resolution_floor"
     EFFECTIVE_BUDGET = "effective_nominal_budget"
-    ORIGINAL_FALSE_ALERT = "original_pace_false_alert"
-    CROSS_FITTED_FALSE_ALERT = "cross_fitted_false_alert"
+    IN_SAMPLE_FALSE_ALERT = "in_sample_calibration_false_alert"
     ATTACK_TYPE = "attack_type"
     SEEDS_POSITIVE = "seeds_with_gain"
     GAIN_SHARE = "share_of_total_gain"

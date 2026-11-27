@@ -4,6 +4,7 @@ from unittest.mock import patch
 import numpy as np
 import pytest
 import torch
+from sklearn.covariance import OAS
 from sklearn.ensemble import IsolationForest
 
 from pace.config import LocalBankSettings, LocalDetectorSettings, load_configuration
@@ -21,10 +22,7 @@ from pace.experiment.models import (
 )
 from pace.types import (
     AnchorBudgetPolicy,
-    AnchorMembers,
     BankDesign,
-    ConditionLimitRule,
-    CovarianceEstimator,
     DetectorSampleLimit,
     DetectorScoreMatrix,
     ExecutionDevice,
@@ -46,7 +44,6 @@ SETTINGS = LocalBankSettings(
     anchor_share=0.5,
     anchor_budget_policy=AnchorBudgetPolicy.SHARE_CONSERVING,
     design=BankDesign.PER_EXPERT,
-    anchor_members=AnchorMembers.WITHOUT_AUTOENCODER,
 )
 PEERS = 5
 
@@ -373,114 +370,25 @@ def test_margin_variant_replaces_only_response_rows() -> None:
         assert same is (kind.family is not LocalExpertFamily.RESPONSE)
 
 
-def _ill_conditioned_covariance() -> np.ndarray:
-    generator = np.random.default_rng(7)
-    basis, _ = np.linalg.qr(generator.normal(size=(6, 6)))
-    return np.asarray((basis * np.array([40.0, 12.0, 3.0, 1.0, 1e-3, 1e-6])) @ basis.T)
-
-
-@pytest.mark.parametrize("limit", [5.0, 100.0, 1e4])
-def test_condition_limit_bounds_the_precision_condition_number(limit: float) -> None:
-    covariance = _ill_conditioned_covariance()
-    precision = models.condition_limited_precision(covariance, limit)
-    eigenvalues = np.linalg.eigvalsh(precision)
-    assert eigenvalues.min() > 0.0
-    assert eigenvalues.max() / eigenvalues.min() <= limit * (1.0 + 1e-9)
-
-
-def test_condition_limit_is_inactive_when_the_covariance_is_already_well_conditioned() -> None:
-    covariance = np.diag([4.0, 2.0, 1.0])
-    limited = models.condition_limited_precision(covariance, 10.0)
-    unlimited = models.condition_limited_precision(covariance, None)
-    np.testing.assert_allclose(limited, unlimited, atol=1e-12)
-
-
-def test_condition_limit_keeps_the_eigenvectors_and_floors_only_small_eigenvalues() -> None:
-    covariance = _ill_conditioned_covariance()
-    precision = models.condition_limited_precision(covariance, 100.0)
-    np.testing.assert_allclose(precision @ covariance, covariance @ precision, atol=1e-9)
-    eigenvalues = np.sort(np.linalg.eigvalsh(precision))
-    np.testing.assert_allclose(eigenvalues[0], 1.0 / 40.0, rtol=1e-9)
-    np.testing.assert_allclose(eigenvalues[-1], 100.0 / 40.0, rtol=1e-9)
-
-
-def test_condition_limit_never_increases_a_mahalanobis_score() -> None:
-    generator = np.random.default_rng(11)
-    covariance = _ill_conditioned_covariance()
-    queries = generator.normal(size=(200, 6)) * 3.0
-    limited = models.condition_limited_precision(covariance, 50.0)
-    unlimited = models.condition_limited_precision(covariance, None)
-    limited_scores = np.einsum("ij,jk,ik->i", queries, limited, queries)
-    unlimited_scores = np.einsum("ij,jk,ik->i", queries, unlimited, queries)
-    assert (limited_scores <= unlimited_scores + 1e-9).all()
-
-
-def test_condition_limit_bounds_the_score_of_a_shift_in_a_near_constant_direction() -> None:
-    covariance = _ill_conditioned_covariance()
-    eigenvalues, eigenvectors = np.linalg.eigh(covariance)
-    shift = eigenvectors[:, 0] * 2.0
-    limit = 100.0
-    unlimited_score = shift @ models.condition_limited_precision(covariance, None) @ shift
-    limited_score = shift @ models.condition_limited_precision(covariance, limit) @ shift
-    assert unlimited_score > 1e6
-    assert limited_score <= float(shift @ shift) * limit / eigenvalues.max() * (1.0 + 1e-9)
-
-
-def test_condition_limit_scales_inversely_with_the_covariance_scale() -> None:
-    covariance = _ill_conditioned_covariance()
-    base = models.condition_limited_precision(covariance, 100.0)
-    scaled = models.condition_limited_precision(covariance * 9.0, 100.0)
-    np.testing.assert_allclose(scaled * 9.0, base, rtol=1e-9, atol=1e-12)
-
-
-def test_gaussian_fit_without_a_limit_matches_the_unlimited_pseudo_inverse() -> None:
+def test_gaussian_fit_returns_the_pseudo_inverse_of_the_shrunk_regularized_covariance() -> None:
     generator = np.random.default_rng(3)
     features = generator.normal(size=(120, 5))
     features[:, 4] *= 1e-3
-    for estimator in CovarianceEstimator:
-        mean, precision = models.fit_gaussian(features, 1e-3, estimator)
-        reference_covariance = np.linalg.pinv(precision, hermitian=True)
-        np.testing.assert_allclose(mean, features.mean(axis=0, keepdims=True))
-        np.testing.assert_allclose(
-            np.linalg.pinv(reference_covariance, hermitian=True), precision, rtol=1e-8, atol=1e-8
-        )
+    mean, precision = models.fit_gaussian(features, 1e-3)
+    covariance = OAS().fit(features).covariance_ + np.eye(5) * 1e-3
+    np.testing.assert_allclose(mean, features.mean(axis=0, keepdims=True))
+    np.testing.assert_allclose(
+        np.linalg.pinv(precision, hermitian=True), covariance, rtol=1e-8, atol=1e-8
+    )
 
 
-def test_gaussian_fit_estimators_shrink_the_extreme_directions_in_the_order_ridge_oas_limit() -> (
-    None
-):
+def test_gaussian_fit_shrinks_the_extreme_directions_of_the_sample_covariance() -> None:
     generator = np.random.default_rng(5)
     features = generator.normal(size=(60, 8))
     features[:, 7] *= 1e-4
-    conditions: dict[CovarianceEstimator, float] = {}
-    for estimator in CovarianceEstimator:
-        _, precision = models.fit_gaussian(features, 1e-3, estimator)
-        eigenvalues = np.linalg.eigvalsh(precision)
-        conditions[estimator] = float(eigenvalues.max() / eigenvalues.min())
-    assert conditions[CovarianceEstimator.SHRINKAGE] < conditions[CovarianceEstimator.RIDGE]
-    assert conditions[CovarianceEstimator.LEDOIT_WOLF] < conditions[CovarianceEstimator.RIDGE]
-    _, limited = models.fit_gaussian(features, 1e-3, CovarianceEstimator.SHRINKAGE, 30.0)
-    limited_eigenvalues = np.linalg.eigvalsh(limited)
-    assert limited_eigenvalues.max() / limited_eigenvalues.min() <= 30.0 * (1.0 + 1e-9)
-
-
-def test_per_training_row_limit_scales_with_the_number_of_fitting_rows() -> None:
-    generator = np.random.default_rng(13)
-    small = generator.normal(size=(40, 5))
-    small[:, 4] *= 1e-5
-    large = np.vstack([small] * 5)
-    large = large + generator.normal(scale=1e-5, size=large.shape)
-    conditions: list[float] = []
-    for features in (small, large):
-        _, precision = models.fit_gaussian(
-            features,
-            1e-9,
-            CovarianceEstimator.RIDGE,
-            1.0,
-            ConditionLimitRule.PER_TRAINING_ROW,
-        )
-        eigenvalues = np.linalg.eigvalsh(precision)
-        conditions.append(float(eigenvalues.max() / eigenvalues.min()))
-    assert conditions[0] <= 40.0 * (1.0 + 1e-9)
-    assert conditions[1] <= 200.0 * (1.0 + 1e-9)
-    assert conditions[1] > conditions[0]
+    _, precision = models.fit_gaussian(features, 1e-3)
+    sample_covariance = np.cov(features, rowvar=False, ddof=1) + np.eye(8) * 1e-3
+    sample_precision = np.linalg.pinv(sample_covariance, hermitian=True)
+    shrunk = np.linalg.eigvalsh(precision)
+    plain = np.linalg.eigvalsh(sample_precision)
+    assert shrunk.max() / shrunk.min() < plain.max() / plain.min()

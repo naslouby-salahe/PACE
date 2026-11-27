@@ -675,7 +675,7 @@ def test_configuration_table_names_both_comparators(inputs: ReportInputs) -> Non
     settings = {str(row[0]): str(row[1]) for row in by_name[TableName.CONFIGURATION].rows}
     assert (
         settings["reporting.acceptance_comparator"]
-        == OperatingMethod.MEAN_ENSEMBLE_MATCHED.display_label
+        == OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION.display_label
     )
     assert (
         settings["reporting.nominal_gain_comparator"]
@@ -693,9 +693,7 @@ def test_configuration_table_labels_every_setting_explicitly(inputs: ReportInput
     assert settings["runtime.source_verification"] == SourceVerification.STRICT.name
     assert settings["scientific.local_bank.anchor_budget_policy"] == "Share-conserving"
     assert settings["scientific.local_bank.design"] == "Per-expert"
-    assert settings["scientific.local_bank.anchor_members"] == "Without autoencoder"
-    assert settings["scientific.local_detectors.covariance_condition_limit"] == "none"
-    assert "Cross-fitted calibration" in settings["scientific.study_arms"]
+    assert "Reserve quarter" in settings["scientific.study_arms"]
     assert not [
         text
         for text in settings.values()
@@ -703,13 +701,11 @@ def test_configuration_table_labels_every_setting_explicitly(inputs: ReportInput
     ]
 
 
-def test_ablations_omit_arms_that_equal_pace(inputs: ReportInputs) -> None:
-    assert StudyArm.CROSS_FITTED_CALIBRATION not in inputs.ablation_arms()
-    assert StudyArm.NO_LOCAL_CHANNEL in inputs.ablation_arms()
+def test_ablations_show_every_configured_study_arm(inputs: ReportInputs) -> None:
+    assert inputs.ablation_arms() == inputs.configuration.scientific.study_arms
     by_name = {table.name: table for table in build_tables(inputs)}
     shown = {str(row[2]) for row in by_name[TableName.ABLATIONS].rows}
-    assert StudyArm.CROSS_FITTED_CALIBRATION.display_label not in shown
-    assert StudyArm.NO_LOCAL_CHANNEL.display_label in shown
+    assert {arm.display_label for arm in inputs.ablation_arms()} <= shown
 
 
 def test_operating_points_count_targets_instead_of_target_seed_observations(

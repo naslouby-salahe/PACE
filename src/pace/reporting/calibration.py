@@ -148,7 +148,7 @@ def _method_points(
             if target not in cohort:
                 continue
             for result in seeds:
-                reference = curve_of(result, OperatingMethod.MEAN_ENSEMBLE)
+                reference = curve_of(result, OperatingMethod.MEAN_ENSEMBLE_BLOCK_MAXIMUM)
                 if reference is None:
                     continue
                 ensemble = point_detection(point_at(reference, alpha.fraction))

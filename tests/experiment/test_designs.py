@@ -3,8 +3,6 @@ from pathlib import Path
 import numpy as np
 
 from pace.config import LocalBankSettings, load_configuration
-from pace.core.decision import TieredLocalEvidence
-from pace.core.joint import apply_joint_local_peer_rule
 from pace.experiment.inputs import LocalEvidence, second_order_evidence
 from pace.experiment.models import (
     LocalBankDetectorScores,
@@ -15,18 +13,13 @@ from pace.experiment.models import (
 )
 from pace.types import (
     AnchorBudgetPolicy,
-    AnchorMembers,
     BankDesign,
-    CalibrationMode,
-    CovarianceEstimator,
     DetectorScoreMatrix,
     ExecutionDevice,
     LocalDetectorKind,
     LocalDetectorSeed,
     LocalExpertFamily,
     LocalExpertKind,
-    TieredCalibrationRule,
-    UnionCalibration,
 )
 from tests.support import REPOSITORY_ROOT
 
@@ -38,7 +31,6 @@ SETTINGS = LocalBankSettings(
     anchor_share=0.5,
     anchor_budget_policy=AnchorBudgetPolicy.SHARE_CONSERVING,
     design=BankDesign.PER_EXPERT,
-    anchor_members=AnchorMembers.WITHOUT_AUTOENCODER,
 )
 
 
@@ -113,107 +105,26 @@ def test_second_order_aggregation_ignores_a_single_misbehaving_expert() -> None:
     assert second.mean() < 0.25
 
 
-def _rule() -> TieredCalibrationRule:
-    return TieredCalibrationRule(
-        anchor_share=0.5,
-        anchor_policy=AnchorBudgetPolicy.SHARE_CONSERVING,
-        union=UnionCalibration(
-            scale_cap=64.0,
-            scale_iterations=20,
-            mode=CalibrationMode.CROSS_FITTED,
-            folds=5,
-            resolution_rows=2,
-        ),
-        design=BankDesign.JOINT_CHANNELS,
-    )
-
-
-def test_joint_calibration_accounts_for_every_channel_and_hits_the_budget() -> None:
-    generator = np.random.default_rng(31)
-    rates: list[float] = []
-    for _ in range(4):
-        local = TieredLocalEvidence(
-            generator.exponential(size=6000),
-            generator.exponential(size=60_000),
-            generator.exponential(size=(3, 6000)),
-            generator.exponential(size=(3, 60_000)),
-        )
-        decisions = apply_joint_local_peer_rule(
-            local,
-            generator.exponential(size=(4, 6000)),
-            generator.exponential(size=(4, 60_000)),
-            250,
-            0.025,
-            0.025,
-            _rule(),
-        )
-        assert decisions.anchor_budget is not None
-        assert decisions.bank_budget is not None
-        assert np.isclose(decisions.anchor_budget + decisions.bank_budget, 0.025)
-        assert len(decisions.bank_thresholds) == 3
-        assert len(decisions.expert_thresholds) == 4
-        assert np.array_equal(
-            decisions.combined_alerts, decisions.local_alerts | decisions.peer_alerts
-        )
-        rates.append(np.mean(decisions.combined_alerts).item())
-    assert 0.6 * 0.05 <= float(np.mean(rates)) <= 1.4 * 0.05
-
-
-def test_joint_calibration_without_a_bank_gives_the_whole_local_budget_to_the_anchor() -> None:
-    generator = np.random.default_rng(4)
-    local = TieredLocalEvidence(
-        generator.exponential(size=3000),
-        generator.exponential(size=3000),
-        np.empty((0, 3000)),
-        np.empty((0, 3000)),
-    )
-    decisions = apply_joint_local_peer_rule(
-        local,
-        generator.exponential(size=(3, 3000)),
-        generator.exponential(size=(3, 3000)),
-        250,
-        0.02,
-        0.03,
-        _rule(),
-    )
-    assert decisions.anchor_budget == 0.02
-    assert decisions.bank_budget is None
-    assert decisions.bank_thresholds == ()
-
-
 def test_shrinkage_bounds_the_gaussian_precision_that_a_near_constant_feature_inflates() -> None:
     generator = np.random.default_rng(415)
     training = generator.normal(0.0, 1.0, size=(300, 6))
     training[:, -1] = 1e-3 * generator.normal(size=300)
     configuration = load_configuration(REPOSITORY_ROOT / "configs" / "default.yaml", Path.cwd())
-    base = configuration.scientific.local_detectors.model_copy(
-        update={
-            "autoencoder_epochs": 1,
-            "detector_sample_limit": 300,
-            "covariance_estimator": CovarianceEstimator.RIDGE,
-        }
+    settings = configuration.scientific.local_detectors.model_copy(
+        update={"autoencoder_epochs": 1, "detector_sample_limit": 300}
     )
-    ridge = fit_local_ensemble(training, base, 3, ExecutionDevice.CPU)
-    shrunk = fit_local_ensemble(
-        training,
-        base.model_copy(update={"covariance_estimator": CovarianceEstimator.SHRINKAGE}),
-        3,
-        ExecutionDevice.CPU,
+    shrunk = fit_local_ensemble(training, settings, 3, ExecutionDevice.CPU)
+    ridge_covariance = np.cov(training, rowvar=False, ddof=1) + np.eye(6) * (
+        settings.covariance_regularization
     )
+    ridge_precision = np.linalg.pinv(ridge_covariance, hermitian=True)
     assert (
         np.linalg.eigvalsh(shrunk.gaussian_precision).max()
-        < 0.1 * np.linalg.eigvalsh(ridge.gaussian_precision).max()
+        < 0.1 * np.linalg.eigvalsh(ridge_precision).max()
     )
     shifted = training[:50].copy()
     shifted[:, -1] += 0.5
-    ridge_shift = np.sum(
-        ((shifted - ridge.gaussian_mean) @ ridge.gaussian_precision)
-        * (shifted - ridge.gaussian_mean),
-        axis=1,
-    )
-    shrunk_shift = np.sum(
-        ((shifted - shrunk.gaussian_mean) @ shrunk.gaussian_precision)
-        * (shifted - shrunk.gaussian_mean),
-        axis=1,
-    )
+    centered = shifted - shrunk.gaussian_mean
+    ridge_shift = np.sum((centered @ ridge_precision) * centered, axis=1)
+    shrunk_shift = np.sum((centered @ shrunk.gaussian_precision) * centered, axis=1)
     assert shrunk_shift.mean() < 0.1 * ridge_shift.mean()

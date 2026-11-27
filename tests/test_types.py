@@ -226,5 +226,4 @@ def test_every_stratum_has_a_distinct_paper_label() -> None:
 def test_every_study_arm_has_a_distinct_label_without_raw_enum_text() -> None:
     labels = [arm.display_label for arm in StudyArm]
     assert len(set(labels)) == len(StudyArm)
-    assert StudyArm.CROSS_FITTED_CALIBRATION.display_label == "Cross-fitted calibration"
     assert not [label for label in labels if "_" in label or label.isupper()]

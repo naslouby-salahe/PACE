@@ -227,7 +227,7 @@ def _acceptance_cell(
 
 
 def summarize_acceptance(inputs: ReportInputs) -> AcceptanceReport:
-    reference = OperatingMethod.MEAN_ENSEMBLE_MATCHED
+    reference = OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION
     settings = inputs.configuration.reporting
     return AcceptanceReport(
         reference,

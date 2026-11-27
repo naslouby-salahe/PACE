@@ -1,5 +1,5 @@
-alpha,local_rows,stratum,targets,calibration_rows,resolution_floor,effective_nominal_budget,pace_nominal_false_alert,original_pace_false_alert,cross_fitted_false_alert,share_above_twice_alpha
-0.01,100,IoT-23 untouched captures,5,11172.800000,0.016597,0.010000,0.004566,0.003300,,0.000000
-0.05,100,IoT-23 untouched captures,5,11172.800000,0.016597,0.050000,0.022403,0.016922,,0.000000
-0.01,400,IoT-23 untouched captures,5,11172.800000,0.016597,0.010000,0.004420,0.003999,,0.000000
-0.05,400,IoT-23 untouched captures,5,11172.800000,0.016597,0.050000,0.021894,0.016196,,0.000000
+alpha,local_rows,stratum,targets,calibration_rows,resolution_floor,effective_nominal_budget,pace_nominal_false_alert,in_sample_calibration_false_alert,share_above_twice_alpha
+0.01,100,IoT-23 untouched captures,5,11172.800000,0.016597,0.010000,0.004566,0.003263,0.000000
+0.05,100,IoT-23 untouched captures,5,11172.800000,0.016597,0.050000,0.022403,0.016922,0.000000
+0.01,400,IoT-23 untouched captures,5,11172.800000,0.016597,0.010000,0.004420,0.003359,0.000000
+0.05,400,IoT-23 untouched captures,5,11172.800000,0.016597,0.050000,0.021894,0.016196,0.000000

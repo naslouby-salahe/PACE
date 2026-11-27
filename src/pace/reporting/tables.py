@@ -46,17 +46,13 @@ from pace.types import (
     AcceptanceRule,
     AlphaLevel,
     AnchorBudgetPolicy,
-    AnchorMembers,
     BankDesign,
     BudgetAnalysisKind,
     BudgetAnalysisScope,
     CalibrationMode,
-    CalibrationVariant,
     ClientName,
     ColumnHeading,
-    ConditionLimitRule,
     ConfigurationSection,
-    CovarianceEstimator,
     DatasetName,
     DetectionContribution,
     DisplayText,
@@ -68,6 +64,7 @@ from pace.types import (
     MatrixCellSetting,
     ObservationCount,
     OperatingMethod,
+    PaceAblation,
     PValue,
     RateDifference,
     ReportedMethod,
@@ -458,16 +455,11 @@ def census_table(inputs: ReportInputs) -> ResultTable:
 
 
 def _setting_labels() -> dict[DisplayText, DisplayText]:
-    labels = {
-        DisplayText(item.name): item.operating_method.display_label for item in CalibrationVariant
-    }
+    labels = {DisplayText(item.name): item.operating_method.display_label for item in PaceAblation}
     for enumeration in (
         AnchorBudgetPolicy,
-        AnchorMembers,
         BankDesign,
         CalibrationMode,
-        ConditionLimitRule,
-        CovarianceEstimator,
         EvaluationRole,
         ExternalBaseline,
         StudyArm,
@@ -537,7 +529,7 @@ def configuration_table(inputs: ReportInputs) -> ResultTable:
         ),
         (
             DisplayText(f"{ConfigurationSection.REPORTING}.acceptance_comparator"),
-            OperatingMethod.MEAN_ENSEMBLE_MATCHED.display_label,
+            OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION.display_label,
         ),
         (
             DisplayText(f"{ConfigurationSection.REPORTING}.nominal_gain_comparator"),

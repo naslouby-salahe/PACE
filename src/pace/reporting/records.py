@@ -115,10 +115,8 @@ def _mean_detection(
 
 
 def _comparator_point(result: TargetPerformance, alpha: AlphaLevel) -> OperatingPoint:
-    curve = next(
-        (item for item in result.curves if item.method is OperatingMethod.MEAN_ENSEMBLE_MATCHED),
-        None,
-    )
+    method = OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION
+    curve = next((item for item in result.curves if item.method is method), None)
     if curve is None:
         raise DatasetValidationError("A result has no same-calibration comparator curve")
     return next(point for point in curve.points if np.isclose(point.nominal_budget, alpha.fraction))
@@ -584,8 +582,7 @@ class ReportInputs:
         return self.store.select(alpha, rows, self.cohort(BudgetAnalysisKind.UNIVERSAL_PRIMARY))
 
     def ablation_arms(self) -> tuple[StudyArm, ...]:
-        arms = self.configuration.scientific.study_arms
-        return tuple(arm for arm in arms if any(r.arm(arm) != r.pace for r in self.store.records))
+        return self.configuration.scientific.study_arms
 
     def alphas(self) -> tuple[AlphaLevel, ...]:
         observed = {record.alpha for record in self.store.records}

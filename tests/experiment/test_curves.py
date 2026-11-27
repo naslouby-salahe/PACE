@@ -62,17 +62,16 @@ def test_synthetic_campaign_records_every_curve_and_an_allocation_audit() -> Non
     methods = {curve.method for curve in results[0].curves}
     expected = {
         OperatingMethod.PACE,
-        OperatingMethod.LEGACY_PACE,
-        OperatingMethod.PREVIOUS_PACE,
-        OperatingMethod.RESOLUTION_PACE,
-        OperatingMethod.POOLED_PACE,
-        OperatingMethod.COLLAPSE_PACE,
-        OperatingMethod.TEMPORAL_PACE,
-        OperatingMethod.NO_GAUSSIAN_PACE,
-        OperatingMethod.FAMILY_BUDGETS_PACE,
-        OperatingMethod.SECOND_ORDER_PACE,
-        OperatingMethod.MEAN_ENSEMBLE,
-        OperatingMethod.MEAN_ENSEMBLE_MATCHED,
+        OperatingMethod.PACE_IN_SAMPLE_CALIBRATION,
+        OperatingMethod.PACE_RESOLUTION_AWARE_BLOCKS,
+        OperatingMethod.PACE_POOLED_CONFORMAL_RANK,
+        OperatingMethod.PACE_ANCHOR_COLLAPSE,
+        OperatingMethod.PACE_FORWARD_CHAINING_CALIBRATION,
+        OperatingMethod.PACE_WITHOUT_GAUSSIAN_EXPERT,
+        OperatingMethod.PACE_FAMILY_BUDGETS,
+        OperatingMethod.PACE_SECOND_ORDER_AGGREGATION,
+        OperatingMethod.MEAN_ENSEMBLE_BLOCK_MAXIMUM,
+        OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION,
         OperatingMethod.KITNET,
         OperatingMethod.DIOT,
         OperatingMethod.MCDE,
@@ -127,8 +126,8 @@ def test_matched_comparator_uses_the_same_calibration_as_pace_and_the_original_d
     results = run_single_seed_campaign(campaign_devices(), configuration)
     for result in results:
         curves = {curve.method: curve for curve in result.curves}
-        matched = curves[OperatingMethod.MEAN_ENSEMBLE_MATCHED]
-        original = curves[OperatingMethod.MEAN_ENSEMBLE]
+        matched = curves[OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION]
+        original = curves[OperatingMethod.MEAN_ENSEMBLE_BLOCK_MAXIMUM]
         assert [point.nominal_budget for point in matched.points] == [
             point.nominal_budget for point in original.points
         ]

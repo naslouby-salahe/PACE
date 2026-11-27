@@ -95,8 +95,7 @@ def calibration_audit_table(inputs: ReportInputs) -> ResultTable:
                     number(np.mean([audit.resolution_floor for audit in audits]).item()),
                     number(np.mean([audit.effective_nominal_budget for audit in audits]).item()),
                     number(np.mean(realized).item()),
-                    _method_false_alert(cells, OperatingMethod.LEGACY_PACE, alpha),
-                    _method_false_alert(cells, OperatingMethod.CROSS_FITTED_PACE, alpha),
+                    _method_false_alert(cells, OperatingMethod.PACE_IN_SAMPLE_CALIBRATION, alpha),
                     number(np.mean([value > 2.0 * alpha.fraction for value in realized]).item()),
                 )
             )
@@ -111,8 +110,7 @@ def calibration_audit_table(inputs: ReportInputs) -> ResultTable:
             ColumnHeading.RESOLUTION_FLOOR,
             ColumnHeading.EFFECTIVE_BUDGET,
             ColumnHeading.PACE_FALSE_ALERT,
-            ColumnHeading.ORIGINAL_FALSE_ALERT,
-            ColumnHeading.CROSS_FITTED_FALSE_ALERT,
+            ColumnHeading.IN_SAMPLE_FALSE_ALERT,
             ColumnHeading.SHARE_ABOVE_TWICE_ALPHA,
         ),
         tuple(rows),
@@ -246,7 +244,7 @@ def _stratum_gains(cell: ComparisonCell, stratum: StudyStratum) -> tuple[RateDif
 
 def gain_concentration_table(inputs: ReportInputs) -> ResultTable:
     rows: list[tuple[DisplayText, ...]] = []
-    for cell in primary_comparisons(inputs, OperatingMethod.MEAN_ENSEMBLE):
+    for cell in primary_comparisons(inputs, OperatingMethod.MEAN_ENSEMBLE_BLOCK_MAXIMUM):
         total = sum(sum(_stratum_gains(cell, stratum)) for stratum in StudyStratum)
         for stratum in StudyStratum:
             items = cell.stratum(stratum)

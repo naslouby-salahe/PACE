@@ -1,16 +1,16 @@
 alpha,local_rows,comparator,fpr_level,targets,matched_targets,coverage,pace_detection_at_level,comparator_detection_at_level,detection_difference_matched,matched_lower,matched_upper
-0.01,100,Mean-ensemble local branch (block-max calibration),0.5 alpha,58,24,0.413793,0.831723,0.775489,0.056234,0.028332,0.085041
-0.01,100,Mean-ensemble local branch (block-max calibration),alpha,58,32,0.551724,0.863048,0.823666,0.039382,0.027554,0.051658
-0.01,100,Mean-ensemble local branch (block-max calibration),2 alpha,58,39,0.672414,0.885976,0.853542,0.032434,0.014278,0.051109
-0.01,400,Mean-ensemble local branch (block-max calibration),0.5 alpha,58,25,0.431034,0.871751,0.818208,0.053543,0.024571,0.083150
-0.01,400,Mean-ensemble local branch (block-max calibration),alpha,58,32,0.551724,0.875585,0.844901,0.030684,0.014073,0.051448
-0.01,400,Mean-ensemble local branch (block-max calibration),2 alpha,58,39,0.672414,0.889452,0.866828,0.022623,0.002743,0.045841
-0.05,100,Mean-ensemble local branch (block-max calibration),0.5 alpha,58,41,0.706897,0.897380,0.868724,0.028657,0.011986,0.045914
-0.05,100,Mean-ensemble local branch (block-max calibration),alpha,58,40,0.689655,0.906860,0.874206,0.032654,0.010877,0.056567
-0.05,100,Mean-ensemble local branch (block-max calibration),2 alpha,58,26,0.448276,0.957078,0.934426,0.022652,0.004040,0.043840
-0.05,400,Mean-ensemble local branch (block-max calibration),0.5 alpha,58,40,0.689655,0.899347,0.875195,0.024152,0.005646,0.045836
-0.05,400,Mean-ensemble local branch (block-max calibration),alpha,58,37,0.637931,0.899703,0.859503,0.040200,0.012680,0.073661
-0.05,400,Mean-ensemble local branch (block-max calibration),2 alpha,58,30,0.517241,0.930838,0.902815,0.028023,0.010303,0.047170
+0.01,100,Mean-ensemble local branch (block-maximum calibration),0.5 alpha,58,24,0.413793,0.831723,0.775489,0.056234,0.028332,0.085041
+0.01,100,Mean-ensemble local branch (block-maximum calibration),alpha,58,32,0.551724,0.863048,0.823666,0.039382,0.027554,0.051658
+0.01,100,Mean-ensemble local branch (block-maximum calibration),2 alpha,58,39,0.672414,0.885976,0.853542,0.032434,0.014278,0.051109
+0.01,400,Mean-ensemble local branch (block-maximum calibration),0.5 alpha,58,25,0.431034,0.871751,0.818208,0.053543,0.024571,0.083150
+0.01,400,Mean-ensemble local branch (block-maximum calibration),alpha,58,32,0.551724,0.875585,0.844901,0.030684,0.014073,0.051448
+0.01,400,Mean-ensemble local branch (block-maximum calibration),2 alpha,58,39,0.672414,0.889452,0.866828,0.022623,0.002743,0.045841
+0.05,100,Mean-ensemble local branch (block-maximum calibration),0.5 alpha,58,41,0.706897,0.897380,0.868724,0.028657,0.011986,0.045914
+0.05,100,Mean-ensemble local branch (block-maximum calibration),alpha,58,40,0.689655,0.906860,0.874206,0.032654,0.010877,0.056567
+0.05,100,Mean-ensemble local branch (block-maximum calibration),2 alpha,58,26,0.448276,0.957078,0.934426,0.022652,0.004040,0.043840
+0.05,400,Mean-ensemble local branch (block-maximum calibration),0.5 alpha,58,40,0.689655,0.899347,0.875195,0.024152,0.005646,0.045836
+0.05,400,Mean-ensemble local branch (block-maximum calibration),alpha,58,37,0.637931,0.899703,0.859503,0.040200,0.012680,0.073661
+0.05,400,Mean-ensemble local branch (block-maximum calibration),2 alpha,58,30,0.517241,0.930838,0.902815,0.028023,0.010303,0.047170
 0.01,100,Mean-ensemble local branch (same calibration as PACE),0.5 alpha,58,24,0.413793,0.831723,0.803040,0.028683,0.012766,0.044659
 0.01,100,Mean-ensemble local branch (same calibration as PACE),alpha,58,33,0.568966,0.867197,0.834302,0.032894,0.022131,0.044430
 0.01,100,Mean-ensemble local branch (same calibration as PACE),2 alpha,58,42,0.724138,0.892076,0.865844,0.026232,0.009740,0.043790
@@ -23,30 +23,18 @@ alpha,local_rows,comparator,fpr_level,targets,matched_targets,coverage,pace_dete
 0.05,400,Mean-ensemble local branch (same calibration as PACE),0.5 alpha,58,44,0.758621,0.906572,0.885781,0.020790,0.004961,0.039823
 0.05,400,Mean-ensemble local branch (same calibration as PACE),alpha,58,47,0.810345,0.918975,0.890922,0.028053,0.007772,0.052306
 0.05,400,Mean-ensemble local branch (same calibration as PACE),2 alpha,58,46,0.793103,0.938264,0.914960,0.023304,0.008306,0.040206
-0.01,100,Original PACE (legacy anchor fallback),0.5 alpha,58,24,0.413793,0.831723,0.805453,0.026270,0.005204,0.050664
-0.01,100,Original PACE (legacy anchor fallback),alpha,58,32,0.551724,0.863048,0.856665,0.006384,0.002018,0.011949
-0.01,100,Original PACE (legacy anchor fallback),2 alpha,58,39,0.672414,0.885974,0.882420,0.003554,-0.002761,0.010312
-0.01,400,Original PACE (legacy anchor fallback),0.5 alpha,58,25,0.431034,0.871751,0.845759,0.025992,0.005461,0.048952
-0.01,400,Original PACE (legacy anchor fallback),alpha,58,33,0.568966,0.879353,0.871662,0.007691,0.001046,0.015829
-0.01,400,Original PACE (legacy anchor fallback),2 alpha,58,39,0.672414,0.889452,0.888323,0.001129,-0.003209,0.005380
-0.05,100,Original PACE (legacy anchor fallback),0.5 alpha,58,40,0.689655,0.894815,0.892843,0.001972,-0.001277,0.005497
-0.05,100,Original PACE (legacy anchor fallback),alpha,58,37,0.637931,0.899832,0.896132,0.003699,-0.001235,0.008456
-0.05,100,Original PACE (legacy anchor fallback),2 alpha,58,20,0.344828,0.966504,0.958665,0.007839,-0.000829,0.020574
-0.05,400,Original PACE (legacy anchor fallback),0.5 alpha,58,39,0.672414,0.896766,0.895920,0.000846,-0.001545,0.003428
-0.05,400,Original PACE (legacy anchor fallback),alpha,58,37,0.637931,0.899703,0.894089,0.005614,0.000816,0.011477
-0.05,400,Original PACE (legacy anchor fallback),2 alpha,58,23,0.396552,0.969088,0.964984,0.004104,-0.000155,0.011018
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",0.5 alpha,58,24,0.413793,0.831723,0.806389,0.025334,0.004380,0.049248
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",alpha,58,32,0.551724,0.863048,0.856946,0.006102,0.001640,0.011757
-0.01,100,"Previous PACE (budget-conserving, block-maximum)",2 alpha,58,39,0.672414,0.885974,0.882506,0.003469,-0.002878,0.010216
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",0.5 alpha,58,25,0.431034,0.871751,0.846911,0.024840,0.005226,0.046084
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",alpha,58,33,0.568966,0.879353,0.871666,0.007687,0.001041,0.015822
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",2 alpha,58,39,0.672414,0.889452,0.888323,0.001129,-0.003209,0.005380
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",0.5 alpha,58,40,0.689655,0.894815,0.892852,0.001963,-0.001289,0.005482
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",alpha,58,37,0.637931,0.899832,0.896132,0.003699,-0.001235,0.008456
-0.05,100,"Previous PACE (budget-conserving, block-maximum)",2 alpha,58,20,0.344828,0.966504,0.958665,0.007839,-0.000829,0.020574
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",0.5 alpha,58,39,0.672414,0.896766,0.895920,0.000846,-0.001545,0.003428
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",alpha,58,37,0.637931,0.899703,0.894089,0.005614,0.000816,0.011477
-0.05,400,"Previous PACE (budget-conserving, block-maximum)",2 alpha,58,23,0.396552,0.969088,0.964984,0.004104,-0.000155,0.011018
+0.01,100,PACE with in-sample block-maximum calibration,0.5 alpha,58,24,0.413793,0.831723,0.806389,0.025334,0.004380,0.049248
+0.01,100,PACE with in-sample block-maximum calibration,alpha,58,32,0.551724,0.863048,0.856946,0.006102,0.001640,0.011757
+0.01,100,PACE with in-sample block-maximum calibration,2 alpha,58,39,0.672414,0.885974,0.882506,0.003469,-0.002878,0.010216
+0.01,400,PACE with in-sample block-maximum calibration,0.5 alpha,58,25,0.431034,0.871751,0.846911,0.024840,0.005226,0.046084
+0.01,400,PACE with in-sample block-maximum calibration,alpha,58,33,0.568966,0.879353,0.871666,0.007687,0.001041,0.015822
+0.01,400,PACE with in-sample block-maximum calibration,2 alpha,58,39,0.672414,0.889452,0.888323,0.001129,-0.003209,0.005380
+0.05,100,PACE with in-sample block-maximum calibration,0.5 alpha,58,40,0.689655,0.894815,0.892852,0.001963,-0.001289,0.005482
+0.05,100,PACE with in-sample block-maximum calibration,alpha,58,37,0.637931,0.899832,0.896132,0.003699,-0.001235,0.008456
+0.05,100,PACE with in-sample block-maximum calibration,2 alpha,58,20,0.344828,0.966504,0.958665,0.007839,-0.000829,0.020574
+0.05,400,PACE with in-sample block-maximum calibration,0.5 alpha,58,39,0.672414,0.896766,0.895920,0.000846,-0.001545,0.003428
+0.05,400,PACE with in-sample block-maximum calibration,alpha,58,37,0.637931,0.899703,0.894089,0.005614,0.000816,0.011477
+0.05,400,PACE with in-sample block-maximum calibration,2 alpha,58,23,0.396552,0.969088,0.964984,0.004104,-0.000155,0.011018
 0.01,100,PACE with resolution-aware blocks,0.5 alpha,58,24,0.413793,0.831723,0.826970,0.004753,-0.000522,0.011818
 0.01,100,PACE with resolution-aware blocks,alpha,58,32,0.551724,0.863048,0.857207,0.005842,0.001499,0.011316
 0.01,100,PACE with resolution-aware blocks,2 alpha,58,39,0.672414,0.885974,0.881672,0.004302,-0.001317,0.010724
@@ -71,18 +59,18 @@ alpha,local_rows,comparator,fpr_level,targets,matched_targets,coverage,pace_dete
 0.05,400,PACE with pooled conformal-rank calibration,0.5 alpha,58,43,0.741379,0.906368,0.906718,-0.000350,-0.004798,0.004045
 0.05,400,PACE with pooled conformal-rank calibration,alpha,58,43,0.741379,0.920286,0.919498,0.000788,-0.000791,0.002439
 0.05,400,PACE with pooled conformal-rank calibration,2 alpha,58,36,0.620690,0.942092,0.938821,0.003271,0.000363,0.008436
-0.01,100,PACE with anchor collapse,0.5 alpha,58,24,0.413793,0.831723,0.796150,0.035573,0.014479,0.059969
-0.01,100,PACE with anchor collapse,alpha,58,32,0.551724,0.863048,0.843923,0.019126,0.009467,0.030729
-0.01,100,PACE with anchor collapse,2 alpha,58,39,0.672414,0.885974,0.875455,0.010519,0.001285,0.020565
-0.01,400,PACE with anchor collapse,0.5 alpha,58,25,0.431034,0.871751,0.842821,0.028930,0.007819,0.052380
-0.01,400,PACE with anchor collapse,alpha,58,33,0.568966,0.879353,0.870139,0.009214,0.002154,0.017783
-0.01,400,PACE with anchor collapse,2 alpha,58,39,0.672414,0.889452,0.887920,0.001532,-0.002814,0.005668
-0.05,100,PACE with anchor collapse,0.5 alpha,58,40,0.689655,0.894815,0.889930,0.004885,0.000043,0.009839
-0.05,100,PACE with anchor collapse,alpha,58,37,0.637931,0.899832,0.893598,0.006234,-0.000051,0.013586
-0.05,100,PACE with anchor collapse,2 alpha,58,20,0.344828,0.966504,0.958665,0.007839,-0.000829,0.020574
-0.05,400,PACE with anchor collapse,0.5 alpha,58,39,0.672414,0.896766,0.895920,0.000846,-0.001545,0.003428
-0.05,400,PACE with anchor collapse,alpha,58,37,0.637931,0.899703,0.891479,0.008223,0.001707,0.016043
-0.05,400,PACE with anchor collapse,2 alpha,58,23,0.396552,0.969088,0.964984,0.004104,-0.000155,0.011018
+0.01,100,PACE with anchor collapse,0.5 alpha,58,24,0.413793,0.831723,0.804158,0.027565,0.012811,0.042430
+0.01,100,PACE with anchor collapse,alpha,58,33,0.568966,0.867197,0.847811,0.019385,0.012741,0.028951
+0.01,100,PACE with anchor collapse,2 alpha,58,42,0.724138,0.892076,0.883454,0.008622,0.001130,0.019278
+0.01,400,PACE with anchor collapse,0.5 alpha,58,25,0.431034,0.871751,0.847094,0.024657,0.008489,0.040861
+0.01,400,PACE with anchor collapse,alpha,58,33,0.568966,0.879353,0.859829,0.019524,0.007546,0.042429
+0.01,400,PACE with anchor collapse,2 alpha,58,42,0.724138,0.895306,0.891387,0.003919,-0.001374,0.008718
+0.05,100,PACE with anchor collapse,0.5 alpha,58,45,0.775862,0.904618,0.898110,0.006508,-0.000191,0.016541
+0.05,100,PACE with anchor collapse,alpha,58,48,0.827586,0.912959,0.908189,0.004770,0.000000,0.012975
+0.05,100,PACE with anchor collapse,2 alpha,58,46,0.793103,0.940412,0.936638,0.003774,0.000000,0.011323
+0.05,400,PACE with anchor collapse,0.5 alpha,58,44,0.758621,0.906572,0.903318,0.003253,-0.000472,0.008411
+0.05,400,PACE with anchor collapse,alpha,58,47,0.810345,0.918975,0.917944,0.001031,0.000000,0.003092
+0.05,400,PACE with anchor collapse,2 alpha,58,46,0.793103,0.938264,0.933375,0.004889,0.000000,0.014667
 0.01,100,PACE with forward-chaining cross-fitted calibration,0.5 alpha,58,24,0.413793,0.831723,0.830469,0.001254,-0.000580,0.003036
 0.01,100,PACE with forward-chaining cross-fitted calibration,alpha,58,32,0.551724,0.870557,0.866562,0.003995,0.000417,0.007739
 0.01,100,PACE with forward-chaining cross-fitted calibration,2 alpha,58,42,0.724138,0.892076,0.887606,0.004470,-0.000187,0.009848
@@ -95,42 +83,42 @@ alpha,local_rows,comparator,fpr_level,targets,matched_targets,coverage,pace_dete
 0.05,400,PACE with forward-chaining cross-fitted calibration,0.5 alpha,58,44,0.758621,0.906572,0.901514,0.005058,-0.000468,0.013106
 0.05,400,PACE with forward-chaining cross-fitted calibration,alpha,58,43,0.741379,0.924086,0.926458,-0.002373,-0.006222,0.001497
 0.05,400,PACE with forward-chaining cross-fitted calibration,2 alpha,58,41,0.706897,0.937069,0.935732,0.001337,-0.000300,0.003706
-0.01,100,PACE without the Gaussian bank expert,0.5 alpha,58,24,0.413793,0.831723,0.806656,0.025067,0.004350,0.048812
-0.01,100,PACE without the Gaussian bank expert,alpha,58,32,0.551724,0.863048,0.855448,0.007600,0.002279,0.014025
-0.01,100,PACE without the Gaussian bank expert,2 alpha,58,39,0.672414,0.885974,0.883487,0.002487,-0.004261,0.009358
-0.01,400,PACE without the Gaussian bank expert,0.5 alpha,58,25,0.431034,0.871751,0.846816,0.024934,0.005399,0.046095
-0.01,400,PACE without the Gaussian bank expert,alpha,58,33,0.568966,0.879353,0.870637,0.008716,0.001815,0.017075
-0.01,400,PACE without the Gaussian bank expert,2 alpha,58,41,0.706897,0.894844,0.893549,0.001294,-0.002830,0.005347
-0.05,100,PACE without the Gaussian bank expert,0.5 alpha,58,40,0.689655,0.894815,0.894318,0.000497,-0.004281,0.004886
-0.05,100,PACE without the Gaussian bank expert,alpha,58,37,0.637931,0.899832,0.896582,0.003249,-0.001549,0.007837
-0.05,100,PACE without the Gaussian bank expert,2 alpha,58,20,0.344828,0.966504,0.959274,0.007230,-0.000830,0.020075
-0.05,400,PACE without the Gaussian bank expert,0.5 alpha,58,39,0.672414,0.896766,0.895657,0.001109,-0.001645,0.004217
-0.05,400,PACE without the Gaussian bank expert,alpha,58,37,0.637931,0.899703,0.894123,0.005579,0.001143,0.011015
-0.05,400,PACE without the Gaussian bank expert,2 alpha,58,24,0.413793,0.950767,0.948858,0.001909,-0.002271,0.008384
-0.01,100,PACE with hierarchical family budgets,0.5 alpha,58,24,0.413793,0.831723,0.806974,0.024749,0.003770,0.049048
-0.01,100,PACE with hierarchical family budgets,alpha,58,32,0.551724,0.863048,0.855982,0.007067,0.001177,0.013878
-0.01,100,PACE with hierarchical family budgets,2 alpha,58,40,0.689655,0.888825,0.888857,-0.000033,-0.007027,0.007219
-0.01,400,PACE with hierarchical family budgets,0.5 alpha,58,25,0.431034,0.871751,0.847484,0.024267,0.004524,0.045550
-0.01,400,PACE with hierarchical family budgets,alpha,58,33,0.568966,0.879353,0.871696,0.007657,0.001426,0.015497
-0.01,400,PACE with hierarchical family budgets,2 alpha,58,39,0.672414,0.889452,0.888603,0.000849,-0.003361,0.005032
-0.05,100,PACE with hierarchical family budgets,0.5 alpha,58,42,0.724138,0.899823,0.901627,-0.001804,-0.006193,0.002640
-0.05,100,PACE with hierarchical family budgets,alpha,58,36,0.620690,0.903055,0.901549,0.001506,-0.003465,0.006220
-0.05,100,PACE with hierarchical family budgets,2 alpha,58,20,0.344828,0.966504,0.960082,0.006421,-0.001249,0.019751
-0.05,400,PACE with hierarchical family budgets,0.5 alpha,58,40,0.689655,0.899347,0.898285,0.001062,-0.001393,0.003854
-0.05,400,PACE with hierarchical family budgets,alpha,58,38,0.655172,0.902342,0.896195,0.006147,0.001708,0.011441
-0.05,400,PACE with hierarchical family budgets,2 alpha,58,23,0.396552,0.969088,0.968062,0.001026,-0.004287,0.007522
-0.01,100,PACE with second-order bank aggregation,0.5 alpha,58,23,0.396552,0.824410,0.789529,0.034881,0.012113,0.059436
-0.01,100,PACE with second-order bank aggregation,alpha,58,32,0.551724,0.863048,0.849754,0.013294,0.000071,0.025325
-0.01,100,PACE with second-order bank aggregation,2 alpha,58,38,0.655172,0.882975,0.878474,0.004501,-0.005536,0.015844
-0.01,400,PACE with second-order bank aggregation,0.5 alpha,58,24,0.413793,0.866410,0.830549,0.035862,0.015172,0.058395
-0.01,400,PACE with second-order bank aggregation,alpha,58,32,0.551724,0.875585,0.859862,0.015723,0.008749,0.024096
-0.01,400,PACE with second-order bank aggregation,2 alpha,58,39,0.672414,0.889452,0.882765,0.006686,-0.001602,0.015194
-0.05,100,PACE with second-order bank aggregation,0.5 alpha,58,40,0.689655,0.894815,0.891888,0.002927,-0.005120,0.012083
-0.05,100,PACE with second-order bank aggregation,alpha,58,36,0.620690,0.903055,0.891074,0.011981,-0.000184,0.027735
-0.05,100,PACE with second-order bank aggregation,2 alpha,58,20,0.344828,0.966504,0.958239,0.008265,-0.003578,0.028744
-0.05,400,PACE with second-order bank aggregation,0.5 alpha,58,39,0.672414,0.896766,0.888961,0.007805,0.000531,0.016155
-0.05,400,PACE with second-order bank aggregation,alpha,58,37,0.637931,0.899703,0.882956,0.016747,0.004058,0.033496
-0.05,400,PACE with second-order bank aggregation,2 alpha,58,21,0.362069,0.966144,0.953673,0.012471,0.002573,0.025714
+0.01,100,PACE without the Gaussian bank expert,0.5 alpha,58,24,0.413793,0.831723,0.831380,0.000343,-0.000368,0.001204
+0.01,100,PACE without the Gaussian bank expert,alpha,58,33,0.568966,0.867197,0.867087,0.000110,-0.000010,0.000236
+0.01,100,PACE without the Gaussian bank expert,2 alpha,58,42,0.724138,0.892076,0.892596,-0.000519,-0.001541,0.000111
+0.01,400,PACE without the Gaussian bank expert,0.5 alpha,58,25,0.431034,0.871751,0.871903,-0.000152,-0.000972,0.000413
+0.01,400,PACE without the Gaussian bank expert,alpha,58,33,0.568966,0.879353,0.878278,0.001075,-0.000601,0.003718
+0.01,400,PACE without the Gaussian bank expert,2 alpha,58,42,0.724138,0.895306,0.894814,0.000492,-0.000499,0.001757
+0.05,100,PACE without the Gaussian bank expert,0.5 alpha,58,45,0.775862,0.904618,0.905502,-0.000884,-0.002254,-0.000072
+0.05,100,PACE without the Gaussian bank expert,alpha,58,48,0.827586,0.912959,0.914649,-0.001690,-0.004056,0.000260
+0.05,100,PACE without the Gaussian bank expert,2 alpha,58,46,0.793103,0.940412,0.943524,-0.003112,-0.006916,-0.000492
+0.05,400,PACE without the Gaussian bank expert,0.5 alpha,58,44,0.758621,0.906572,0.905945,0.000627,-0.000551,0.002136
+0.05,400,PACE without the Gaussian bank expert,alpha,58,47,0.810345,0.918975,0.919638,-0.000664,-0.003710,0.003033
+0.05,400,PACE without the Gaussian bank expert,2 alpha,58,46,0.793103,0.938264,0.938856,-0.000593,-0.001503,0.000075
+0.01,100,PACE with hierarchical family budgets,0.5 alpha,58,24,0.413793,0.831723,0.833555,-0.001832,-0.003442,-0.000218
+0.01,100,PACE with hierarchical family budgets,alpha,58,33,0.568966,0.867197,0.867445,-0.000248,-0.001903,0.001436
+0.01,100,PACE with hierarchical family budgets,2 alpha,58,42,0.724138,0.892076,0.892546,-0.000469,-0.001633,0.000326
+0.01,400,PACE with hierarchical family budgets,0.5 alpha,58,25,0.431034,0.871751,0.872951,-0.001201,-0.002369,-0.000274
+0.01,400,PACE with hierarchical family budgets,alpha,58,33,0.568966,0.879353,0.879863,-0.000510,-0.001665,0.000207
+0.01,400,PACE with hierarchical family budgets,2 alpha,58,42,0.724138,0.895306,0.895216,0.000090,-0.001161,0.001434
+0.05,100,PACE with hierarchical family budgets,0.5 alpha,58,45,0.775862,0.904618,0.905161,-0.000543,-0.001462,0.000125
+0.05,100,PACE with hierarchical family budgets,alpha,58,48,0.827586,0.912959,0.912891,0.000067,-0.000425,0.000568
+0.05,100,PACE with hierarchical family budgets,2 alpha,58,46,0.793103,0.940412,0.939510,0.000902,-0.001046,0.003646
+0.05,400,PACE with hierarchical family budgets,0.5 alpha,58,44,0.758621,0.906572,0.906161,0.000411,-0.000753,0.001862
+0.05,400,PACE with hierarchical family budgets,alpha,58,47,0.810345,0.918975,0.918392,0.000582,-0.001304,0.002814
+0.05,400,PACE with hierarchical family budgets,2 alpha,58,46,0.793103,0.938264,0.936107,0.002156,-0.000298,0.006390
+0.01,100,PACE with second-order bank aggregation,0.5 alpha,58,24,0.413793,0.831723,0.833165,-0.001442,-0.005007,0.002228
+0.01,100,PACE with second-order bank aggregation,alpha,58,33,0.568966,0.867197,0.864749,0.002447,-0.007748,0.011443
+0.01,100,PACE with second-order bank aggregation,2 alpha,58,42,0.724138,0.892076,0.893651,-0.001575,-0.010221,0.007119
+0.01,400,PACE with second-order bank aggregation,0.5 alpha,58,25,0.431034,0.871751,0.863173,0.008578,0.007364,0.009951
+0.01,400,PACE with second-order bank aggregation,alpha,58,33,0.568966,0.879353,0.873848,0.005505,0.002416,0.008882
+0.01,400,PACE with second-order bank aggregation,2 alpha,58,42,0.724138,0.895306,0.891600,0.003706,-0.002307,0.009867
+0.05,100,PACE with second-order bank aggregation,0.5 alpha,58,45,0.775862,0.904618,0.904979,-0.000362,-0.008880,0.008704
+0.05,100,PACE with second-order bank aggregation,alpha,58,48,0.827586,0.912959,0.910151,0.002808,-0.005694,0.012919
+0.05,100,PACE with second-order bank aggregation,2 alpha,58,46,0.793103,0.940412,0.943709,-0.003297,-0.006848,-0.000128
+0.05,400,PACE with second-order bank aggregation,0.5 alpha,58,44,0.758621,0.906572,0.901349,0.005222,-0.000296,0.011714
+0.05,400,PACE with second-order bank aggregation,alpha,58,47,0.810345,0.918975,0.914828,0.004147,-0.002828,0.011185
+0.05,400,PACE with second-order bank aggregation,2 alpha,58,46,0.793103,0.938264,0.938903,-0.000639,-0.005447,0.003283
 0.01,100,KitNET,0.5 alpha,58,23,0.396552,0.824458,0.431752,0.392706,0.300500,0.490011
 0.01,100,KitNET,alpha,58,31,0.534483,0.858661,0.469837,0.388824,0.296125,0.479851
 0.01,100,KitNET,2 alpha,58,39,0.672414,0.883788,0.501246,0.382542,0.296593,0.469832

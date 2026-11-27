@@ -13,7 +13,6 @@ from pace.core.evidence import (
     target_relative_evidence,
 )
 from pace.types import (
-    AnchorMembers,
     DetectorScoreMatrix,
     LocalDetectorKind,
     LocalDetectorSeed,
@@ -215,13 +214,7 @@ def test_anchor_excludes_only_the_autoencoder_row() -> None:
     assert LocalDetectorKind.AUTOENCODER.row not in rows
 
 
-def test_the_all_detector_anchor_includes_the_autoencoder_row() -> None:
-    rows = anchor_detector_rows(AnchorMembers.ALL_DETECTORS)
-    assert len(rows) == len(LocalDetectorKind)
-    assert LocalDetectorKind.AUTOENCODER.row in rows
-
-
-def test_detector_evidence_matrix_averages_to_the_legacy_ensemble_evidence() -> None:
+def test_detector_evidence_matrix_averages_to_the_mean_ensemble_evidence() -> None:
     generator = np.random.default_rng(23)
     reference = DetectorScoreMatrix(generator.normal(size=(len(LocalDetectorKind), 80)) ** 2)
     query = DetectorScoreMatrix(generator.normal(size=(len(LocalDetectorKind), 60)) ** 2)

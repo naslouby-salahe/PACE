@@ -245,11 +245,11 @@ def comparison_references(inputs: ReportInputs) -> tuple[OperatingMethod, ...]:
         baseline.operating_method for baseline in inputs.configuration.scientific.baselines.methods
     )
     variants = tuple(
-        variant.operating_method for variant in inputs.configuration.scientific.curve_variants
+        variant.operating_method for variant in inputs.configuration.scientific.ablation_curves
     )
     return (
-        OperatingMethod.MEAN_ENSEMBLE,
-        OperatingMethod.MEAN_ENSEMBLE_MATCHED,
+        OperatingMethod.MEAN_ENSEMBLE_BLOCK_MAXIMUM,
+        OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION,
         *variants,
         *baselines,
     )

@@ -260,7 +260,7 @@ def _p_text(value: BootstrapPValue | None) -> DisplayText:
 
 def inference_sensitivity_table(inputs: ReportInputs) -> ResultTable:
     settings = inputs.configuration.reporting
-    reference = OperatingMethod.MEAN_ENSEMBLE_MATCHED
+    reference = OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION
     rows: list[tuple[DisplayText, ...]] = []
     for cell in cell_results(inputs):
         if cell.kind is not BudgetAnalysisKind.UNIVERSAL_PRIMARY or not _has_reference(
@@ -349,7 +349,7 @@ def _resolution_floor(result: TargetPerformance) -> FalseAlertRate:
 
 
 def coverage_diagnosis_table(inputs: ReportInputs) -> ResultTable:
-    reference = OperatingMethod.MEAN_ENSEMBLE_MATCHED
+    reference = OperatingMethod.MEAN_ENSEMBLE_SAME_CALIBRATION
     rows: list[tuple[DisplayText, ...]] = []
     for cell in cell_results(inputs):
         if cell.kind is not BudgetAnalysisKind.UNIVERSAL_PRIMARY or not _has_reference(
