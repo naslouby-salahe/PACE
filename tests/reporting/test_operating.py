@@ -71,6 +71,14 @@ def test_the_envelope_never_lets_detection_decrease_with_the_false_alert_rate() 
     assert np.isclose(_present(read_curve(curve, 0.08, 0.001).detection), 0.64, atol=0.02)
 
 
+def test_tied_false_alert_rates_read_the_best_detection_among_them() -> None:
+    curve = _curve((0.001, 0.0, 0.3), (0.002, 0.0, 0.55), (0.1, 0.1, 0.8))
+    exact = read_curve(curve, 0.0, 0.001)
+    assert exact.match is MatchClass.EXACT
+    assert np.isclose(_present(exact.detection), 0.55)
+    assert np.isclose(_present(read_curve(curve, 0.05, 0.001).detection), 0.675)
+
+
 def test_points_expose_their_mean_detection_and_nominal_lookup() -> None:
     curve = _curve((0.01, 0.01, 0.3), (0.05, 0.04, 0.5))
     assert point_at(curve, 0.05).false_alert_rate == 0.04

@@ -23,6 +23,7 @@ from pace.types import (
     BudgetAnalysisKind,
     ConfigurationError,
     LogLevel,
+    SourceVerification,
     StudyArm,
     StudyStratum,
 )
@@ -547,10 +548,54 @@ def test_provenance_can_be_switched_off_explicitly_and_survives_path_resolution(
     omitted.write_text(source.replace("  provenance_active: true\n", ""), encoding="utf-8")
 
     assert load_configuration(relaxed, tmp_path).runtime.provenance_active is False
+    assert (
+        load_configuration(relaxed, tmp_path).runtime.verification is SourceVerification.DEVELOPMENT
+    )
     assert load_configuration(omitted, tmp_path).runtime.provenance_active is True
+    assert load_configuration(omitted, tmp_path).runtime.verification is SourceVerification.STRICT
     assert (
         load_configuration(relaxed, tmp_path).scientific_digest
         == load_configuration(
             REPOSITORY_ROOT / "configs" / "default.yaml", tmp_path
         ).scientific_digest
     )
+
+
+def _write_variant(tmp_path: Path, old: str, new: str) -> Path:
+    source = (REPOSITORY_ROOT / "configs" / "default.yaml").read_text(encoding="utf-8")
+    path = tmp_path / "variant.yaml"
+    path.write_text(source.replace(old, new), encoding="utf-8")
+    return path
+
+
+@pytest.mark.parametrize(
+    ("old", "cause"),
+    [
+        ("    covariance_estimator: SHRINKAGE\n", "covariance_estimator"),
+        ("    design: PER_EXPERT\n", "design"),
+        ("    anchor_members: WITHOUT_AUTOENCODER\n", "anchor_members"),
+    ],
+)
+def test_scientific_choices_have_no_silent_defaults(tmp_path: Path, old: str, cause: str) -> None:
+    with pytest.raises(ConfigurationError, match=f"{cause}: Field required"):
+        load_configuration(_write_variant(tmp_path, old, ""), tmp_path)
+
+
+def test_a_load_failure_names_the_file_and_the_cause(tmp_path: Path) -> None:
+    with pytest.raises(ConfigurationError, match=r"missing\.yaml.*No such file"):
+        load_configuration(tmp_path / "missing.yaml", tmp_path)
+    broken = tmp_path / "broken.yaml"
+    broken.write_text("scientific: [unclosed", encoding="utf-8")
+    with pytest.raises(ConfigurationError, match=r"broken\.yaml.*while parsing"):
+        load_configuration(broken, tmp_path)
+    bad_field = _write_variant(tmp_path, "reserve_fraction: 0.5", "reserve_fraction: 1.0")
+    with pytest.raises(ConfigurationError, match=r"variant\.yaml.*scientific\.reserve_fraction"):
+        load_configuration(bad_field, tmp_path)
+
+
+def test_the_development_role_allows_only_one_local_training_size(tmp_path: Path) -> None:
+    path = _write_variant(tmp_path, "evaluation_role: HELD_OUT", "evaluation_role: DEVELOPMENT")
+    with pytest.raises(ConfigurationError, match="only one local training row count"):
+        load_configuration(path, tmp_path)
+    development = load_configuration(REPOSITORY_ROOT / "configs" / "development.yaml", tmp_path)
+    assert len(development.protocol_matrix.local_training_row_counts) == 1

@@ -18,6 +18,8 @@ from pace.experiment.implementation import (
     require_implementation_unchanged,
     require_numerical_policy,
 )
+from pace.experiment.source_integrity import describe_input_difference
+from pace.experiment.sources import SourceBaseline
 from pace.types import (
     CURRENT_ARTIFACT_SCHEMA,
     AlertDecision,
@@ -38,6 +40,7 @@ from pace.types import (
     DatasetName,
     DatasetValidationError,
     DetectionRate,
+    DisplayText,
     ExecutionDevice,
     FalseAlertRate,
     FixtureKind,
@@ -56,6 +59,8 @@ from pace.types import (
     ReplacementPolicy,
     ScientificDigest,
     SeedDomain,
+    SourceFileRecord,
+    SourceVerification,
     StudyStratum,
     TargetPerformance,
     TextEncoding,
@@ -67,6 +72,7 @@ from pace.types import (
     default_study_stratum,
     payload_digest,
     placeholder_digest,
+    short_digest,
 )
 
 logger = structlog.get_logger()
@@ -128,6 +134,8 @@ class EvidenceArtifact(FrozenStrictModel, frozen=True):
     input_digest: ScientificDigest
     implementation_digest: ScientificDigest
     execution_device: ExecutionDevice
+    source_verification: SourceVerification
+    source_manifest: tuple[SourceFileRecord, ...]
     preprocessing_digest: ScientificDigest | None
     campaign_stratum: StudyStratum | None
     verification_state: VerificationState
@@ -166,6 +174,11 @@ class Provenance:
     preprocessing_digest: ScientificDigest | None = None
     campaign_stratum: StudyStratum | None = None
     provenance_active: ProvenanceActive = True
+    input_fingerprint: SourceBaseline | None = None
+
+    @property
+    def verification(self) -> SourceVerification:
+        return SourceVerification.for_provenance(self.provenance_active)
 
 
 def _content_digest(artifact: EvidenceArtifact) -> ScientificDigest:
@@ -192,7 +205,7 @@ def _digest_difference(
     if recorded == expected:
         return None
     return ProvenanceDifference(
-        f"{field} (artifact {(recorded or 'none')[:12]}, operation {(expected or 'none')[:12]})"
+        f"{field} (artifact {short_digest(recorded)}, operation {short_digest(expected)})"
     )
 
 
@@ -236,12 +249,22 @@ def provenance_differences(
     return tuple(difference for difference in differences if difference is not None)
 
 
+def _input_diagnostics(artifact: EvidenceArtifact, provenance: Provenance) -> DisplayText:
+    fingerprint = provenance.input_fingerprint
+    if fingerprint is None or artifact.input_digest == provenance.input_digest:
+        return DisplayText("")
+    return DisplayText(f"\n{describe_input_difference(artifact.source_manifest, fingerprint)}")
+
+
 def validate_artifact(artifact: EvidenceArtifact, provenance: Provenance) -> None:
     if (
         artifact.schema_version != CURRENT_ARTIFACT_SCHEMA
         or artifact.artifact_kind is not provenance.artifact_kind
     ):
         raise ArtifactValidationError("Artifact schema or kind is not supported")
+    provenance.verification.require_usable(
+        artifact.source_verification, DisplayText("Existing artifact")
+    )
     _validate_kind_specific(artifact, provenance)
     campaign_stratum = provenance.campaign_stratum
     if campaign_stratum is not None and artifact.campaign_stratum is not campaign_stratum:
@@ -251,7 +274,8 @@ def validate_artifact(artifact: EvidenceArtifact, provenance: Provenance) -> Non
     )
     if differences:
         raise ArtifactConflictError(
-            f"Existing artifact provenance does not match this operation: {'; '.join(differences)}"
+            f"Existing artifact provenance does not match this operation: "
+            f"{'; '.join(differences)}{_input_diagnostics(artifact, provenance)}"
         )
     if artifact.verification_state is not VerificationState.VERIFIED:
         raise ArtifactValidationError("Artifact has no successful verification state")
@@ -321,6 +345,10 @@ def _build_artifact(
             input_digest=provenance.input_digest,
             implementation_digest=provenance.implementation_digest,
             execution_device=provenance.execution_device,
+            source_verification=provenance.verification,
+            source_manifest=(
+                () if provenance.input_fingerprint is None else provenance.input_fingerprint.records
+            ),
             preprocessing_digest=provenance.preprocessing_digest,
             campaign_stratum=selected_stratum,
             verification_state=VerificationState.VERIFIED,
@@ -353,8 +381,9 @@ def reuse_or_write_artifact(
             if concurrent.content_digest != artifact.content_digest:
                 raise ArtifactConflictError(
                     "A concurrent writer persisted different content for identical provenance "
-                    f"(existing {concurrent.content_digest[:12]}, computed "
-                    f"{artifact.content_digest[:12]}); the computation is not deterministic"
+                    f"(existing {short_digest(concurrent.content_digest)}, computed "
+                    f"{short_digest(artifact.content_digest)}); the computation is not "
+                    "deterministic"
                 )
             return concurrent, ArtifactReuseState.REUSED
         _write_atomically(path, ArtifactPayload(canonical_json(artifact) + b"\n"), validate_written)
@@ -480,7 +509,7 @@ def reused_campaign(
 
 def campaign_provenance(
     configuration: ResolvedConfiguration,
-    input_digest: ScientificDigest,
+    baseline: SourceBaseline,
     identity: tuple[DatasetName, StudyStratum],
     clients: tuple[DatasetClientData, ...] | Callable[[], tuple[DatasetClientData, ...]],
 ) -> Provenance:
@@ -490,7 +519,7 @@ def campaign_provenance(
         configuration.scientific,
         configuration.splitting,
         configuration.scientific_digest,
-        input_digest,
+        baseline.digest,
         digest_implementation(),
         ArtifactKind.DATASET_CAMPAIGN,
         dataset,
@@ -498,6 +527,7 @@ def campaign_provenance(
         None if callable(clients) else digest_dataset_clients(clients),
         stratum,
         configuration.runtime.provenance_active,
+        baseline,
     )
 
 

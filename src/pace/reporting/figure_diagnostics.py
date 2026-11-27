@@ -63,8 +63,15 @@ def power(inputs: ReportInputs) -> Figure:
             label=None if labeled_observed_gain else observed_gain,
         )
         labeled_observed_gain = True
+    axes.set_title(
+        DisplayText(
+            "Observed gains are nominal-α gains, not matched-FPR gains\n"
+            f"power {protocol.power.power:.2f}, "
+            f"two-sided significance level {protocol.power.significance_level:.2f}"
+        )
+    )
     axes.set_xlabel("Number of targets")
-    axes.set_ylabel("Minimum detectable effect / observed gain")
+    axes.set_ylabel("Detection-rate gain\n(minimum detectable / observed)")
     axes.legend(frameon=False, fontsize=7)
     return figure
 
@@ -73,19 +80,13 @@ def census(inputs: ReportInputs) -> Figure:
     figure = new_figure(8.0, 4.5)
     axes = figure.add_subplot(1, 1, 1)
     axes.grid(alpha=0.25)
-    for index, item in enumerate(sorted(inputs.training, key=lambda entry: entry.stratum.name)):
+    ordered = sorted(inputs.training, key=lambda entry: entry.stratum.name)
+    for index, item in enumerate(ordered):
         rows = np.asarray([target.training_rows for target in item.targets])
         jitter = np.random.default_rng(index).uniform(-0.2, 0.2, len(rows))
         axes.scatter(index + jitter, rows, s=14, color=item.stratum.color)
     axes.set_yscale("log")
-    stratum_ticks(
-        axes,
-        range(len(inputs.training)),
-        [
-            item.stratum.display_label
-            for item in sorted(inputs.training, key=lambda entry: entry.stratum.name)
-        ],
-    )
+    stratum_ticks(axes, range(len(inputs.training)), [item.stratum for item in ordered])
     for index, budget in enumerate(inputs.budgets(BudgetAnalysisKind.HIGH_RESOURCE)):
         axes.axhline(
             budget,

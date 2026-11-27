@@ -1,3 +1,5 @@
+import dataclasses
+
 from pace.reporting.measurements import compute_cost_table, data_roles_table
 from pace.types import (
     ClientName,
@@ -61,7 +63,7 @@ def test_data_role_rows_flag_violations() -> None:
         held_out_rows=30,
         roles_disjoint=True,
     )
-    violated = RoleAudit(**{**audit.__dict__, "roles_disjoint": False}) if False else audit
+    violated = dataclasses.replace(audit, roles_disjoint=False)
     table = data_roles_table((audit, violated))
     assert table.name is TableName.DATA_ROLES
     assert all(len(row) == len(table.columns) for row in table.rows)

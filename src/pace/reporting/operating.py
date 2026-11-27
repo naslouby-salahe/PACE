@@ -15,6 +15,7 @@ from pace.reporting.records import (
 )
 from pace.types import (
     AlphaLevel,
+    ArtifactConflictError,
     BudgetAnalysisKind,
     ColumnHeading,
     DatasetClientId,
@@ -59,8 +60,12 @@ def read_curve(
     curve: OperatingCurve, false_alert_rate: FalseAlertRate, tolerance: FalseAlertRate
 ) -> CurveReading:
     ordered = sorted((point.false_alert_rate, point_detection(point)) for point in curve.points)
-    rates = np.asarray([rate for rate, _ in ordered], dtype=np.float64)
-    envelope = np.maximum.accumulate(np.asarray([value for _, value in ordered], dtype=np.float64))
+    all_rates = np.asarray([rate for rate, _ in ordered], dtype=np.float64)
+    running_best = np.maximum.accumulate(
+        np.asarray([value for _, value in ordered], dtype=np.float64)
+    )
+    last_of_tie = np.append(all_rates[1:] != all_rates[:-1], True)
+    rates, envelope = all_rates[last_of_tie], running_best[last_of_tie]
     nearest = np.argmin(np.abs(rates - false_alert_rate)).item()
     gap = abs(rates[nearest] - false_alert_rate).item()
     if gap <= tolerance:
@@ -189,7 +194,12 @@ def unique_results(
     ] = defaultdict(lambda: defaultdict(dict))
     for variant in performances:
         for result in variant.results:
-            grouped[(variant.alpha, variant.rows)][result.target].setdefault(result.seed, result)
+            by_seed = grouped[(variant.alpha, variant.rows)][result.target]
+            if by_seed.setdefault(result.seed, result) != result:
+                raise ArtifactConflictError(
+                    f"Conflicting results for {result.target.name} seed {result.seed} at "
+                    f"alpha {variant.alpha.fraction} and {variant.rows} training rows"
+                )
     return {
         key: {target: list(by_seed.values()) for target, by_seed in targets.items()}
         for key, targets in grouped.items()

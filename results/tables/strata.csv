@@ -1,4 +1,4 @@
-stratum,alpha,local_rows,targets,pace_detection,mean_ensemble_detection,gain,lower,upper,median_gain,wins,ties,losses,sign_test_p
+stratum,alpha,local_rows,targets,pace_nominal_detection,mean_ensemble_nominal_detection,gain,lower,upper,median_gain,wins,ties,losses,sign_test_p
 CTU_13,0.01,100,12,0.946249,0.936245,0.010004,0.000000,0.028216,0.000000,2,10,0,0.500000
 GOTHAM_2025,0.01,100,7,0.940421,0.934425,0.005996,0.000000,0.014829,0.000000,2,5,0,0.500000
 IOT_23,0.01,100,11,0.930864,0.909802,0.021062,0.000000,0.062677,0.000000,1,10,0,1.000000

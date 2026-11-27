@@ -33,6 +33,7 @@ from pace.types import (
     DatasetClientData,
     DatasetName,
     DatasetValidationError,
+    DisplayText,
     FrozenStrictModel,
     LocalTrainingRowCount,
     LogEvent,
@@ -40,6 +41,7 @@ from pace.types import (
     ObservationCount,
     OutputDirectory,
     ScientificDigest,
+    SourceVerification,
     StratumBudgetPlan,
     StudyStratum,
     TargetBudgetSupport,
@@ -78,6 +80,7 @@ class PersistedBudgetAnalysis(FrozenStrictModel, frozen=True):
 class PersistedBudgetPlan(FrozenStrictModel, frozen=True):
     stratum: StudyStratum
     input_digest: ScientificDigest
+    source_verification: SourceVerification
     requested_budgets: tuple[LocalTrainingRowCount, ...]
     candidates: tuple[PersistedTargetSupport, ...]
     eligible_targets: ObservationCount
@@ -201,10 +204,13 @@ def budget_plan_path(output_root: Path, stratum: StudyStratum) -> Path:
     )
 
 
-def _persisted(plan: StratumBudgetPlan, input_digest: ScientificDigest) -> PersistedBudgetPlan:
+def _persisted(
+    plan: StratumBudgetPlan, input_digest: ScientificDigest, verification: SourceVerification
+) -> PersistedBudgetPlan:
     return PersistedBudgetPlan(
         stratum=plan.stratum,
         input_digest=input_digest,
+        source_verification=verification,
         requested_budgets=plan.requested_budgets,
         candidates=tuple(
             PersistedTargetSupport(
@@ -228,10 +234,13 @@ def _persisted(plan: StratumBudgetPlan, input_digest: ScientificDigest) -> Persi
 
 
 def persist_budget_plan(
-    output_root: Path, plan: StratumBudgetPlan, input_digest: ScientificDigest
+    output_root: Path,
+    plan: StratumBudgetPlan,
+    input_digest: ScientificDigest,
+    verification: SourceVerification,
 ) -> Path:
     destination = budget_plan_path(output_root, plan.stratum)
-    persisted = _persisted(plan, input_digest)
+    persisted = _persisted(plan, input_digest, verification)
 
     def validate_written(path: Path) -> None:
         if _read_persisted(path) != persisted:
@@ -260,6 +269,9 @@ def read_budget_plan_summary(
 ) -> BudgetPlanSummary:
     persisted = _read_persisted(budget_plan_path(configuration.runtime.output_root, stratum))
     protocol = configuration.protocol_matrix
+    configuration.runtime.verification.require_usable(
+        persisted.source_verification, DisplayText(f"Budget plan for {stratum.name}")
+    )
     if (
         persisted.stratum is not stratum
         or persisted.requested_budgets != protocol.local_training_row_counts
@@ -307,7 +319,9 @@ def preflight_registered_dataset(
         bound,
     )
     plan = plan_stratum_budgets(clients, configuration)
-    persist_budget_plan(configuration.runtime.output_root, plan, input_digest)
+    persist_budget_plan(
+        configuration.runtime.output_root, plan, input_digest, configuration.runtime.verification
+    )
     bound.info(
         LogEvent.PREFLIGHT_COMPLETED,
         eligible_targets=len(plan.eligible),

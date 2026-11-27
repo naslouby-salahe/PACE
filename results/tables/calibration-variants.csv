@@ -2,7 +2,7 @@ alpha,local_rows,variant,targets,detection_rate,false_alert_rate,calibration_err
 0.01,100,PACE with anchor collapse,174,0.797007,0.029624,0.028658,0.247126,0,0.000914
 0.01,100,DIoT (flow-symbol adaptation),174,0.485181,0.026787,0.023224,0.155172,21,-0.310912
 0.01,100,PACE with hierarchical family budgets,174,0.820182,0.029839,0.029087,0.281609,0,0.024090
-0.01,100,KitNET,174,0.494895,0.043392,0.039596,0.189655,24,-0.301198
+0.01,100,KitNET,174,0.493962,0.032010,0.028156,0.189655,25,-0.302131
 0.01,100,Original PACE (legacy anchor fallback),174,0.822736,0.031395,0.029827,0.195402,0,0.026644
 0.01,100,MCDE (primary-source adaptation),174,0.678636,0.037589,0.034883,0.281609,19,-0.117456
 0.01,100,Mean-ensemble local branch (block-max calibration),174,0.796092,0.029148,0.028112,0.224138,0,0.000000
@@ -17,7 +17,7 @@ alpha,local_rows,variant,targets,detection_rate,false_alert_rate,calibration_err
 0.05,100,PACE with anchor collapse,174,0.890429,0.052056,0.053445,0.149425,0,0.017938
 0.05,100,DIoT (flow-symbol adaptation),174,0.609524,0.062297,0.038763,0.097701,17,-0.262967
 0.05,100,PACE with hierarchical family budgets,174,0.890051,0.052252,0.053341,0.143678,0,0.017560
-0.05,100,KitNET,174,0.610931,0.108820,0.085035,0.137931,18,-0.261561
+0.05,100,KitNET,174,0.617607,0.109125,0.084740,0.120690,19,-0.254885
 0.05,100,Original PACE (legacy anchor fallback),174,0.890429,0.052056,0.053445,0.149425,0,0.017938
 0.05,100,MCDE (primary-source adaptation),174,0.807039,0.080245,0.056181,0.126437,5,-0.065452
 0.05,100,Mean-ensemble local branch (block-max calibration),174,0.872491,0.057171,0.055310,0.172414,0,0.000000
@@ -30,9 +30,9 @@ alpha,local_rows,variant,targets,detection_rate,false_alert_rate,calibration_err
 0.05,100,PACE with second-order bank aggregation,174,0.881182,0.051485,0.053902,0.172414,0,0.008690
 0.05,100,PACE with forward-chaining cross-fitted calibration,174,0.882814,0.068455,0.049461,0.057471,0,0.010322
 0.01,400,PACE with anchor collapse,174,0.796510,0.029130,0.028540,0.241379,0,0.000234
-0.01,400,DIoT (flow-symbol adaptation),174,0.482064,0.026850,0.023256,0.160920,18,-0.314212
+0.01,400,DIoT (flow-symbol adaptation),174,0.510626,0.024348,0.021012,0.160920,16,-0.285649
 0.01,400,PACE with hierarchical family budgets,174,0.828892,0.029793,0.029338,0.310345,0,0.032616
-0.01,400,KitNET,174,0.523598,0.033441,0.031500,0.224138,16,-0.272677
+0.01,400,KitNET,174,0.534868,0.023567,0.021843,0.218391,16,-0.261408
 0.01,400,Original PACE (legacy anchor fallback),174,0.831725,0.031321,0.029945,0.218391,0,0.035450
 0.01,400,MCDE (primary-source adaptation),174,0.681250,0.042538,0.039506,0.270115,22,-0.115025
 0.01,400,Mean-ensemble local branch (block-max calibration),174,0.796275,0.029281,0.028635,0.235632,0,0.000000
@@ -45,9 +45,9 @@ alpha,local_rows,variant,targets,detection_rate,false_alert_rate,calibration_err
 0.01,400,PACE with second-order bank aggregation,174,0.799844,0.027594,0.027894,0.333333,0,0.003569
 0.01,400,PACE with forward-chaining cross-fitted calibration,174,0.872616,0.036575,0.031959,0.109195,0,0.076340
 0.05,400,PACE with anchor collapse,174,0.892989,0.053811,0.056058,0.166667,0,0.017838
-0.05,400,DIoT (flow-symbol adaptation),174,0.624763,0.065055,0.040978,0.097701,17,-0.250388
+0.05,400,DIoT (flow-symbol adaptation),174,0.639968,0.078613,0.054747,0.132184,9,-0.235183
 0.05,400,PACE with hierarchical family budgets,174,0.893430,0.053868,0.056078,0.172414,0,0.018279
-0.05,400,KitNET,174,0.677947,0.087032,0.069269,0.137931,10,-0.197204
+0.05,400,KitNET,174,0.688316,0.086269,0.071004,0.132184,9,-0.186835
 0.05,400,Original PACE (legacy anchor fallback),174,0.892989,0.053811,0.056058,0.166667,0,0.017838
 0.05,400,MCDE (primary-source adaptation),174,0.828361,0.085849,0.060652,0.126437,7,-0.046791
 0.05,400,Mean-ensemble local branch (block-max calibration),174,0.875151,0.063630,0.060911,0.189655,0,0.000000

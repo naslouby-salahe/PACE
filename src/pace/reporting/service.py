@@ -23,7 +23,7 @@ from pace.experiment.artifacts import (
 from pace.experiment.implementation import digest_implementation
 from pace.experiment.logging_setup import configure_logging
 from pace.experiment.preflight import MatrixVariant, matrix_variants, read_budget_plan_summary
-from pace.experiment.sources import digest_source_files
+from pace.experiment.sources import digest_source_files, fingerprint_source_files
 from pace.reporting.acceptance import summarize_acceptance
 from pace.reporting.figures import write_figures
 from pace.reporting.metrics import summarize_campaign
@@ -72,6 +72,7 @@ from pace.types import (
     ProvenanceActive,
     ReplacementPolicy,
     ScientificDigest,
+    SourceVerification,
     StudyStratum,
     TableFormat,
     TextEncoding,
@@ -97,6 +98,7 @@ class PersistedCampaignReport(FrozenStrictModel, frozen=True):
     implementation_digest: ScientificDigest
     source_artifact_digest: ScientificDigest
     sources: tuple[DatasetSourceProvenance, ...]
+    source_verification: SourceVerification
     metrics: CampaignMetricSummary
     content_digest: ScientificDigest
 
@@ -124,6 +126,10 @@ class ReportProvenance:
     sources: tuple[DatasetSourceProvenance, ...]
     provenance_active: ProvenanceActive = True
 
+    @property
+    def verification(self) -> SourceVerification:
+        return SourceVerification.for_provenance(self.provenance_active)
+
 
 def _content_digest(report: PersistedCampaignReport) -> ScientificDigest:
     return payload_digest(canonical_json(report, ArtifactSerializationMode.OMIT_DIGEST))
@@ -149,6 +155,7 @@ def build_campaign_report(
             implementation_digest=provenance.implementation_digest,
             source_artifact_digest=provenance.source_artifact_digest,
             sources=provenance.sources,
+            source_verification=provenance.verification,
             metrics=metrics,
             content_digest=content_digest,
         )
@@ -159,6 +166,9 @@ def build_campaign_report(
 def validate_campaign_report(report: PersistedCampaignReport, provenance: ReportProvenance) -> None:
     if report.schema_version != CURRENT_ARTIFACT_SCHEMA:
         raise ArtifactValidationError("Campaign report schema is not supported")
+    provenance.verification.require_usable(
+        report.source_verification, DisplayText("Campaign report")
+    )
     differing = tuple(
         field
         for field, matches in (
@@ -274,7 +284,10 @@ def _verified_campaign(
     implementation_digest: ScientificDigest,
 ) -> tuple[ScientificDigest, ScientificDigest, CampaignOutcome]:
     dataset = stratum.dataset
-    input_digest = digest_source_files(source_files, configuration.runtime.raw_data_root)
+    fingerprint = fingerprint_source_files(
+        source_files, configuration.runtime.raw_data_root, configuration.runtime.verification
+    )
+    input_digest = fingerprint.digest
     artifact = read_verified_artifact(
         campaign_artifact_path(
             configuration.runtime.output_root, stratum, configuration.scientific_digest
@@ -290,6 +303,7 @@ def _verified_campaign(
             configuration.runtime.execution_device,
             campaign_stratum=stratum,
             provenance_active=configuration.runtime.provenance_active,
+            input_fingerprint=fingerprint,
         ),
     )
     if not isinstance(artifact.outcome, CampaignOutcome):
@@ -547,7 +561,10 @@ def report_acceptance(
 
 
 def results_root(configuration: ResolvedConfiguration) -> Path:
-    return configuration.runtime.output_root.resolve().parent / OutputDirectory.RESULTS
+    root = configuration.runtime.output_root.resolve().parent / OutputDirectory.RESULTS
+    if configuration.runtime.verification.is_official:
+        return root
+    return root / OutputDirectory.DEVELOPMENT
 
 
 def write_results(

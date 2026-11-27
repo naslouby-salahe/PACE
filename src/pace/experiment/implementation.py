@@ -8,7 +8,9 @@ from functools import cache
 from pathlib import Path, PurePosixPath
 
 import torch
+from threadpoolctl import ThreadpoolController
 
+from pace.experiment.scientific_types import scientific_types_payload
 from pace.types import (
     ArtifactConflictError,
     ArtifactPayload,
@@ -67,18 +69,30 @@ def _runtime_environment() -> RuntimeEnvironment:
     )
 
 
+def _package_components(
+    scope: ImplementationScope, package_root: Path
+) -> Iterator[tuple[DigestComponentName, ArtifactPayload]]:
+    paths = {
+        PurePosixPath(path.relative_to(package_root).as_posix()): path
+        for path in sorted(package_root.rglob("*.py"))
+    }
+    included = {
+        name: ArtifactPayload(path.read_bytes())
+        for name, path in paths.items()
+        if not any(name.is_relative_to(prefix) for prefix in scope.excluded_sources)
+    }
+    for name, content in included.items():
+        if name == PurePosixPath("types.py"):
+            scope_sources = tuple(other for key, other in included.items() if key != name)
+            content = scientific_types_payload(content, scope_sources)
+        yield DigestComponentName(f"{DigestNamespace.SOURCE}/{name}"), content
+
+
 def _implementation_components(
     scope: ImplementationScope,
 ) -> Iterator[tuple[DigestComponentName, ArtifactPayload]]:
     package_root = Path(__file__).resolve().parents[1]
-    excluded = scope.excluded_sources
-    for source_path in sorted(package_root.rglob("*.py")):
-        relative_path = PurePosixPath(source_path.relative_to(package_root).as_posix())
-        if not any(relative_path.is_relative_to(prefix) for prefix in excluded):
-            yield (
-                DigestComponentName(f"{DigestNamespace.SOURCE}/{relative_path}"),
-                ArtifactPayload(source_path.read_bytes()),
-            )
+    yield from _package_components(scope, package_root)
     repository_root = next(
         (
             parent
@@ -161,8 +175,14 @@ def require_numerical_policy(threads: NumericalThreadCount) -> None:
     if torch.get_num_interop_threads() != threads:
         with contextlib.suppress(RuntimeError):
             torch.set_num_interop_threads(threads)
+    stray_pools = [
+        f"{pool.internal_api} in {Path(pool.filepath).name} ({pool.num_threads})"
+        for pool in ThreadpoolController().lib_controllers
+        if pool.num_threads != threads
+    ]
     if (
         mismatched
+        or stray_pools
         or torch.get_num_threads() != threads
         or torch.get_num_interop_threads() != threads
     ):
@@ -170,5 +190,6 @@ def require_numerical_policy(threads: NumericalThreadCount) -> None:
             f"The scientific configuration requires {threads} numerical thread(s) per process; "
             f"set {', '.join(mismatched) or 'the thread environment'} to {expected} before "
             f"starting (PyTorch reports {torch.get_num_threads()} intra-operation and "
-            f"{torch.get_num_interop_threads()} inter-operation threads)"
+            f"{torch.get_num_interop_threads()} inter-operation threads; loaded pools with "
+            f"another thread count: {', '.join(stray_pools) or 'none'})"
         )

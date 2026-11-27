@@ -23,6 +23,7 @@ from pace.experiment.preflight import (
 )
 from pace.types import (
     AlphaLevel,
+    ArtifactConflictError,
     ArtifactValidationError,
     BudgetAnalysis,
     BudgetAnalysisKind,
@@ -32,6 +33,7 @@ from pace.types import (
     DatasetName,
     DatasetValidationError,
     ObservationCount,
+    SourceVerification,
     StratumBudgetPlan,
     StudyStratum,
     TargetBudgetSupport,
@@ -302,7 +304,9 @@ def test_stratum_plan_uses_the_configured_protocol(tmp_path: Path) -> None:
 
 
 def _persist(configuration: ResolvedConfiguration, plan: StratumBudgetPlan) -> None:
-    persist_budget_plan(configuration.runtime.output_root, plan, DIGEST)
+    persist_budget_plan(
+        configuration.runtime.output_root, plan, DIGEST, configuration.runtime.verification
+    )
     assert budget_plan_path(configuration.runtime.output_root, plan.stratum).exists()
 
 
@@ -328,6 +332,22 @@ def test_persisted_plan_round_trips_and_detects_stale_inputs(tmp_path: Path) -> 
     )
     with pytest.raises(ArtifactValidationError, match="stale"):
         read_budget_plan_summary(budgets_changed, StudyStratum.N_BAIOT, DIGEST)
+
+
+def test_strict_refuses_development_plan(tmp_path: Path) -> None:
+    configuration = _configuration(tmp_path, protocol_matrix((16, 32)))
+    plan = plan_stratum_budgets(campaign_devices(), configuration)
+    persist_budget_plan(
+        configuration.runtime.output_root, plan, DIGEST, SourceVerification.DEVELOPMENT
+    )
+
+    with pytest.raises(ArtifactConflictError):
+        read_budget_plan_summary(configuration, StudyStratum.N_BAIOT, DIGEST)
+    development = configuration.model_copy(
+        update={"runtime": configuration.runtime.model_copy(update={"provenance_active": False})}
+    )
+    summary = read_budget_plan_summary(development, StudyStratum.N_BAIOT, DIGEST)
+    assert summary.analyses == plan.analyses
 
 
 def test_reading_a_missing_or_corrupt_plan_is_an_artifact_error(tmp_path: Path) -> None:

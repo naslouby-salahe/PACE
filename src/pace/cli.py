@@ -4,6 +4,7 @@ import time
 from collections.abc import Callable, Iterable
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
+from types import FunctionType
 
 import structlog
 import typer
@@ -32,6 +33,7 @@ from pace.reporting.service import (
 from pace.reporting.studies import write_calibration_study, write_compute_cost, write_data_roles
 from pace.types import (
     AnalysisPower,
+    CalibrationMode,
     CampaignCompletionState,
     CommandName,
     CommandTarget,
@@ -39,6 +41,7 @@ from pace.types import (
     ConfirmationEvidence,
     DisplayText,
     EnvironmentVariable,
+    EvaluationRole,
     ExitStatus,
     LocalTrainingRowCount,
     LogEvent,
@@ -53,6 +56,7 @@ from pace.types import (
     ReplacementPolicy,
     SmokeOption,
     SourceInventoryStatus,
+    SourceVerification,
     StratumBudgetPlan,
     StudyStratum,
     TargetArgument,
@@ -74,6 +78,12 @@ def _status_detail(state: CampaignCompletionState) -> DisplayText:
             return DisplayText("; artifact verification failed")
         case CampaignCompletionState.STALE:
             return DisplayText("; provenance is stale")
+        case CampaignCompletionState.SOURCES_MISSING:
+            return DisplayText("; raw data missing")
+
+
+def _command_help(command: FunctionType) -> DisplayText:
+    return CommandName(command.__name__.replace("_", "-")).description
 
 
 def _policy(overwrite: OverwriteOption) -> ReplacementPolicy:
@@ -92,6 +102,26 @@ def _load(config: Path) -> ResolvedConfiguration:
         raise typer.BadParameter(f"{error}") from error
 
 
+def _unofficial_reasons(configuration: ResolvedConfiguration) -> tuple[DisplayText, ...]:
+    scientific = configuration.scientific
+    verification = configuration.runtime.verification
+    reasons = (
+        (
+            verification is not SourceVerification.STRICT,
+            f"source verification is {verification.name}",
+        ),
+        (
+            scientific.evaluation_role is not EvaluationRole.HELD_OUT,
+            f"evaluation role is {scientific.evaluation_role.name}",
+        ),
+        (
+            scientific.calibration_mode is not CalibrationMode.CROSS_FITTED,
+            f"calibration mode is {scientific.calibration_mode.name}",
+        ),
+    )
+    return tuple(DisplayText(reason) for unofficial, reason in reasons if unofficial)
+
+
 def _command_logger(
     command: CommandName, configuration: ResolvedConfiguration, config: Path
 ) -> BoundLogger:
@@ -105,7 +135,7 @@ def _command_logger(
     logger.info(
         LogEvent.CONFIGURATION_LOADED,
         configuration_path=config.as_posix(),
-        provenance_active=configuration.runtime.provenance_active,
+        verification=configuration.runtime.verification.name,
     )
     return logger
 
@@ -117,9 +147,9 @@ def _execute(
     config = _configuration_path()
     configuration = _load(config)
     logger = _command_logger(command, configuration, config)
-    if not configuration.runtime.provenance_active:
+    if configuration.runtime.verification is SourceVerification.DEVELOPMENT:
         typer.echo(
-            "Warning: provenance verification is disabled (runtime.provenance_active: false); "
+            "Warning: DEVELOPMENT source verification (runtime.provenance_active: false); "
             "do not report results produced or reused in this mode",
             err=True,
         )
@@ -131,9 +161,11 @@ def _execute(
         logger.error(
             LogEvent.COMMAND_FAILED,
             failure_type=type(error).__name__,
+            error=f"{error}",
             duration_seconds=time.perf_counter() - started,
         )
-        raise typer.BadParameter(f"{error}") from error
+        typer.echo(f"Error: {error}", err=True)
+        return ExitStatus.RUNTIME_FAILURE
     logger.info(
         LogEvent.COMMAND_COMPLETED,
         exit_status=exit_status.name,
@@ -151,7 +183,7 @@ def _target_support_line(
     issues = "".join(f" [{issue.name}]" for issue in target.eligibility.issues)
     return DisplayText(
         f"  target {target.client.name}: benign {target.benign_rows}, "
-        f"train {target.training_rows}, available {target.training_rows}, "
+        f"train {target.training_rows}, "
         f"calibration {target.calibration_rows}, attack types {target.attack_type_count}, "
         f"{support}{issues}"
     )
@@ -336,6 +368,10 @@ def run(
     target: TargetArgument, overwrite: OverwriteOption = False, workers: WorkersOption = 1
 ) -> ExitStatus:
     def operation(configuration: ResolvedConfiguration, logger: BoundLogger) -> ExitStatus:
+        if workers > 1 and len(target.strata) == 1:
+            typer.echo(
+                "--workers has no effect for a single stratum; running it in-process", err=True
+            )
         if workers > 1 and len(target.strata) > 1:
             _run_in_parallel(
                 target.strata,
@@ -361,7 +397,8 @@ def report(population: PopulationOption = PopulationScope.PRIMARY) -> ExitStatus
     def operation(configuration: ResolvedConfiguration, _logger: BoundLogger) -> ExitStatus:
         files = write_results(configuration, ReplacementPolicy.PRESERVE_VALID, population)
         typer.echo(_results_line(files))
-        typer.echo("Calibration sensitivity is refreshed separately by pace calibration-study.")
+        if population is PopulationScope.PRIMARY:
+            typer.echo("Calibration sensitivity is refreshed separately by pace calibration-study.")
         return ExitStatus.SUCCESS
 
     return _execute(CommandName.REPORT, operation)
@@ -383,7 +420,7 @@ def audit(target: OptionalTargetArgument = CommandTarget.ALL) -> ExitStatus:
         output, violations = write_data_roles(configuration, target.strata)
         typer.echo(f"Data roles: {output.records} clients audited at {output.path}")
         for item in violations:
-            typer.echo(f"  role violation: {item.target.name}")
+            typer.echo(f"  role violation: {item.stratum.display_label} {item.target.name}")
         return ExitStatus.FAILURE if violations else ExitStatus.SUCCESS
 
     return _execute(CommandName.AUDIT, operation)
@@ -401,8 +438,12 @@ def calibration_study(workers: WorkersOption = 1) -> ExitStatus:
 def accept(population: PopulationOption = PopulationScope.PRIMARY) -> ExitStatus:
     def operation(configuration: ResolvedConfiguration, _logger: BoundLogger) -> ExitStatus:
         acceptance = report_acceptance(configuration, ReplacementPolicy.PRESERVE_VALID, population)
+        reasons = _unofficial_reasons(configuration)
+        protocol = (
+            f"not an official verdict: {'; '.join(reasons)}" if reasons else "Official protocol"
+        )
         typer.echo(
-            f"Official protocol; population: {population}; "
+            f"{protocol}; population: {population}; "
             "comparator: same-calibration mean-ensemble local branch; "
             "detection gain at comparable realised FPR"
         )
@@ -450,7 +491,7 @@ for _command in (
     audit,
     calibration_study,
 ):
-    app.command()(_command)
+    app.command(help=_command_help(_command))(_command)
 
 
 def main() -> ExitStatus:
@@ -461,4 +502,7 @@ def main() -> ExitStatus:
     except typer.TyperException as error:
         typer.echo(f"Error: {error}", err=True)
         raise SystemExit(ExitStatus.USAGE_ERROR) from error
-    return ExitStatus(exit_status) if exit_status else ExitStatus.SUCCESS
+    status = ExitStatus(exit_status) if exit_status else ExitStatus.SUCCESS
+    if status is ExitStatus.INTERRUPTED:
+        typer.echo("Interrupted; completed cells are kept", err=True)
+    return status

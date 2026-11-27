@@ -17,7 +17,7 @@ from pace.experiment.artifacts import (
 from pace.experiment.implementation import digest_implementation
 from pace.experiment.logging_setup import configure_logging
 from pace.experiment.preflight import matrix_variants, read_budget_plan_summary
-from pace.experiment.sources import digest_source_files
+from pace.experiment.sources import digest_source_files, fingerprint_source_files
 from pace.types import (
     ArtifactConflictError,
     ArtifactKind,
@@ -64,19 +64,25 @@ def inspect_dataset_campaign_status(
     if not destination.path.exists():
         return status(CampaignCompletionState.MISSING)
     try:
+        fingerprint = fingerprint_source_files(
+            source_files,
+            configuration.runtime.raw_data_root,
+            configuration.runtime.verification,
+        )
         artifact = read_verified_artifact(
             destination.path,
             Provenance(
                 configuration.scientific,
                 configuration.splitting,
                 configuration.scientific_digest,
-                digest_source_files(source_files, configuration.runtime.raw_data_root),
+                fingerprint.digest,
                 digest_implementation(),
                 ArtifactKind.DATASET_CAMPAIGN,
                 dataset,
                 configuration.runtime.execution_device,
                 campaign_stratum=selected_stratum,
                 provenance_active=configuration.runtime.provenance_active,
+                input_fingerprint=fingerprint,
             ),
         )
     except (ArtifactConflictError, DatasetValidationError):
@@ -86,6 +92,17 @@ def inspect_dataset_campaign_status(
     if not isinstance(artifact.outcome, CampaignOutcome):
         return status(CampaignCompletionState.INVALID)
     return status(CampaignCompletionState.COMPLETE, artifact.outcome.target_count)
+
+
+def _sources_missing(
+    dataset: DatasetName, stratum: StudyStratum, configuration: ResolvedConfiguration
+) -> CampaignStatus:
+    destination = campaign_artifact_path(
+        configuration.runtime.output_root, stratum, configuration.scientific_digest
+    )
+    return _record_status(
+        CampaignStatus(dataset, stratum, destination, CampaignCompletionState.SOURCES_MISSING, None)
+    )
 
 
 def inspect_registered_dataset_campaign_status(
@@ -103,7 +120,7 @@ def inspect_registered_dataset_campaign_status(
                 configuration.runtime.raw_data_root, dataset, selected_stratum
             )
         except DatasetValidationError:
-            source_files = ()
+            return _sources_missing(dataset, selected_stratum, configuration)
     return inspect_dataset_campaign_status(dataset, source_files, configuration, selected_stratum)
 
 
@@ -112,7 +129,10 @@ def inspect_matrix_status(
 ) -> tuple[CampaignStatus, ...]:
     dataset = stratum.dataset
     root = configuration.runtime.raw_data_root
-    source_files = dataset_source_files(root, dataset, stratum)
+    try:
+        source_files = dataset_source_files(root, dataset, stratum)
+    except DatasetValidationError:
+        return (_sources_missing(dataset, stratum, configuration),)
     try:
         summary = read_budget_plan_summary(
             configuration, stratum, digest_source_files(source_files, root)

@@ -1,9 +1,9 @@
-alpha,local_rows,comparator,direction,targets,detection_difference_nominal,nominal_lower,nominal_upper,false_alert_difference,matched_targets,detection_difference_matched,matched_lower,matched_upper,mean_matching_error
+alpha,local_rows,comparator,direction,targets,detection_difference_nominal,nominal_lower,nominal_upper,false_alert_difference_nominal,matched_targets,detection_difference_matched,matched_lower,matched_upper,mean_matching_error
 0.01,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,5,0.000029,0.000000,0.000087,0.001383,4,-0.000013,-0.000038,0.000000,0.000000
 0.01,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,5,0.000029,0.000000,0.000087,0.001383,5,0.000000,0.000000,0.000000,0.000000
 0.05,100,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,5,0.000174,0.000000,0.000523,0.004454,5,0.000174,0.000000,0.000523,0.000000
 0.05,100,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,5,0.000174,0.000000,0.000523,0.004454,5,0.000659,0.000000,0.001978,0.000000
-0.01,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,5,0.000174,0.000000,0.000523,0.001211,3,-0.000025,-0.000076,0.000000,0.000000
+0.01,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,5,0.000174,0.000000,0.000523,0.001211,3,-0.000014,-0.000043,0.000000,0.000000
 0.01,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,5,0.000174,0.000000,0.000523,0.001211,5,0.000000,0.000000,0.000000,0.000000
 0.05,400,Mean-ensemble local branch (block-max calibration),PACE read at the comparator FPR,5,0.000000,0.000000,0.000000,0.003176,5,0.000000,0.000000,0.000000,0.000000
 0.05,400,Mean-ensemble local branch (block-max calibration),Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.003176,5,0.000318,0.000000,0.000953,0.000000
@@ -19,7 +19,7 @@ alpha,local_rows,comparator,direction,targets,detection_difference_nominal,nomin
 0.01,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.001266,5,-0.000116,-0.000349,0.000000,0.000000
 0.05,100,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,5,0.000000,0.000000,0.000000,0.005481,5,0.000000,0.000000,0.000000,0.000000
 0.05,100,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.005481,5,0.000212,0.000000,0.000635,0.000000
-0.01,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,5,0.000029,0.000000,0.000087,0.000421,5,-0.000009,-0.000026,0.000000,0.000000
+0.01,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,5,0.000029,0.000000,0.000087,0.000421,5,-0.000002,-0.000006,0.000000,0.000000
 0.01,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,5,0.000029,0.000000,0.000087,0.000421,5,-0.000102,-0.000306,0.000000,0.000000
 0.05,400,Original PACE (legacy anchor fallback),PACE read at the comparator FPR,5,0.000000,0.000000,0.000000,0.005698,5,0.000000,0.000000,0.000000,0.000000
 0.05,400,Original PACE (legacy anchor fallback),Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.005698,5,0.000000,0.000000,0.000000,0.000000
@@ -27,7 +27,7 @@ alpha,local_rows,comparator,direction,targets,detection_difference_nominal,nomin
 0.01,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.001303,5,-0.000116,-0.000349,0.000000,0.000000
 0.05,100,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,5,0.000000,0.000000,0.000000,0.005481,5,0.000000,0.000000,0.000000,0.000000
 0.05,100,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.005481,5,0.000212,0.000000,0.000635,0.000000
-0.01,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,5,0.000029,0.000000,0.000087,0.001061,5,-0.000016,-0.000049,0.000000,0.000000
+0.01,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,5,0.000029,0.000000,0.000087,0.001061,5,-0.000011,-0.000034,0.000000,0.000000
 0.01,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,5,0.000029,0.000000,0.000087,0.001061,5,-0.000102,-0.000306,0.000000,0.000000
 0.05,400,"Previous PACE (budget-conserving, block-maximum)",PACE read at the comparator FPR,5,0.000000,0.000000,0.000000,0.005698,5,0.000000,0.000000,0.000000,0.000000
 0.05,400,"Previous PACE (budget-conserving, block-maximum)",Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.005698,5,0.000000,0.000000,0.000000,0.000000
@@ -51,7 +51,7 @@ alpha,local_rows,comparator,direction,targets,detection_difference_nominal,nomin
 0.01,100,PACE with anchor collapse,Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.001357,5,-0.000139,-0.000418,0.000000,0.000000
 0.05,100,PACE with anchor collapse,PACE read at the comparator FPR,5,0.000000,0.000000,0.000000,0.005481,5,0.000000,0.000000,0.000000,0.000000
 0.05,100,PACE with anchor collapse,Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.005481,5,0.000212,0.000000,0.000635,0.000000
-0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,5,0.000174,0.000000,0.000523,0.000628,3,-0.000014,-0.000043,0.000000,0.000000
+0.01,400,PACE with anchor collapse,PACE read at the comparator FPR,5,0.000174,0.000000,0.000523,0.000628,3,-0.000003,-0.000010,0.000000,0.000000
 0.01,400,PACE with anchor collapse,Comparator read at the PACE FPR,5,0.000174,0.000000,0.000523,0.000628,5,-0.000221,-0.000664,0.000000,0.000000
 0.05,400,PACE with anchor collapse,PACE read at the comparator FPR,5,0.000000,0.000000,0.000000,0.005698,5,0.000000,0.000000,0.000000,0.000000
 0.05,400,PACE with anchor collapse,Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.005698,5,0.000000,0.000000,0.000000,0.000000
@@ -67,7 +67,7 @@ alpha,local_rows,comparator,direction,targets,detection_difference_nominal,nomin
 0.01,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.001303,5,-0.000116,-0.000349,0.000000,0.000000
 0.05,100,PACE without the Gaussian bank expert,PACE read at the comparator FPR,5,0.000000,0.000000,0.000000,0.005216,5,0.000000,0.000000,0.000000,0.000000
 0.05,100,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.005216,5,0.000212,0.000000,0.000635,0.000000
-0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,5,0.000029,0.000000,0.000087,0.001061,5,-0.000016,-0.000049,0.000000,0.000000
+0.01,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,5,0.000029,0.000000,0.000087,0.001061,5,-0.000011,-0.000034,0.000000,0.000000
 0.01,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,5,0.000029,0.000000,0.000087,0.001061,5,-0.000102,-0.000306,0.000000,0.000000
 0.05,400,PACE without the Gaussian bank expert,PACE read at the comparator FPR,5,0.000000,0.000000,0.000000,0.004929,5,0.000000,0.000000,0.000000,0.000000
 0.05,400,PACE without the Gaussian bank expert,Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.004929,5,0.000000,0.000000,0.000000,0.000000
@@ -75,7 +75,7 @@ alpha,local_rows,comparator,direction,targets,detection_difference_nominal,nomin
 0.01,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.001303,5,-0.000029,-0.000087,0.000000,0.000000
 0.05,100,PACE with hierarchical family budgets,PACE read at the comparator FPR,5,0.000000,0.000000,0.000000,0.007225,5,0.000000,0.000000,0.000000,0.000000
 0.05,100,PACE with hierarchical family budgets,Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.007225,5,0.000212,0.000000,0.000635,0.000000
-0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,5,0.000029,0.000000,0.000087,0.001061,5,-0.000016,-0.000049,0.000000,0.000000
+0.01,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,5,0.000029,0.000000,0.000087,0.001061,5,-0.000011,-0.000034,0.000000,0.000000
 0.01,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,5,0.000029,0.000000,0.000087,0.001061,5,-0.000102,-0.000306,0.000000,0.000000
 0.05,400,PACE with hierarchical family budgets,PACE read at the comparator FPR,5,0.000000,0.000000,0.000000,0.005768,5,0.000000,0.000000,0.000000,0.000000
 0.05,400,PACE with hierarchical family budgets,Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.005768,5,0.000000,0.000000,0.000000,0.000000
@@ -83,26 +83,26 @@ alpha,local_rows,comparator,direction,targets,detection_difference_nominal,nomin
 0.01,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.001393,5,-0.000014,-0.000041,0.000000,0.000000
 0.05,100,PACE with second-order bank aggregation,PACE read at the comparator FPR,5,0.000174,0.000000,0.000523,0.007740,5,0.000174,0.000000,0.000523,0.000000
 0.05,100,PACE with second-order bank aggregation,Comparator read at the PACE FPR,5,0.000174,0.000000,0.000523,0.007740,5,0.000386,0.000000,0.001158,0.000000
-0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,5,0.000174,0.000000,0.000523,0.001269,3,-0.000027,-0.000081,0.000000,0.000000
+0.01,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,5,0.000174,0.000000,0.000523,0.001269,3,-0.000019,-0.000056,0.000000,0.000000
 0.01,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,5,0.000174,0.000000,0.000523,0.001269,5,-0.000204,-0.000611,0.000000,0.000000
 0.05,400,PACE with second-order bank aggregation,PACE read at the comparator FPR,5,0.000000,0.000000,0.000000,0.006264,5,0.000000,0.000000,0.000000,0.000000
 0.05,400,PACE with second-order bank aggregation,Comparator read at the PACE FPR,5,0.000000,0.000000,0.000000,0.006264,5,0.000000,0.000000,0.000000,0.000000
-0.01,100,KitNET,PACE read at the comparator FPR,5,0.396090,0.000000,0.796090,0.001288,3,0.000000,0.000000,0.000000,0.000000
-0.01,100,KitNET,Comparator read at the PACE FPR,5,0.396090,0.000000,0.796090,0.001288,5,0.531791,0.145440,0.904494,0.000000
-0.05,100,KitNET,PACE read at the comparator FPR,5,0.291754,0.000000,0.691754,-0.017419,5,0.291754,0.000000,0.691754,0.000000
-0.05,100,KitNET,Comparator read at the PACE FPR,5,0.291754,0.000000,0.691754,-0.017419,5,0.350872,0.000000,0.750872,0.000000
-0.01,400,KitNET,PACE read at the comparator FPR,5,0.411564,0.022707,0.800000,-0.000641,4,0.266074,0.000000,0.713072,0.000000
-0.01,400,KitNET,Comparator read at the PACE FPR,5,0.411564,0.022707,0.800000,-0.000641,5,0.455869,0.062797,0.842013,0.000000
-0.05,400,KitNET,PACE read at the comparator FPR,5,0.287282,0.022707,0.664575,-0.018532,5,0.287282,0.022707,0.664575,0.000000
-0.05,400,KitNET,Comparator read at the PACE FPR,5,0.287282,0.022707,0.664575,-0.018532,5,0.405554,0.022707,0.788402,0.000000
+0.01,100,KitNET,PACE read at the comparator FPR,5,0.396090,0.000000,0.796090,0.001659,3,0.000000,0.000000,0.000000,0.000000
+0.01,100,KitNET,Comparator read at the PACE FPR,5,0.396090,0.000000,0.796090,0.001659,5,0.531344,0.145440,0.903152,0.000000
+0.05,100,KitNET,PACE read at the comparator FPR,5,0.270385,0.000000,0.670385,-0.016309,5,0.270385,0.000000,0.670385,0.000000
+0.05,100,KitNET,Comparator read at the PACE FPR,5,0.270385,0.000000,0.670385,-0.016309,5,0.347049,0.000000,0.747049,0.000000
+0.01,400,KitNET,PACE read at the comparator FPR,5,0.410838,0.022707,0.798969,0.000139,4,0.264042,0.000000,0.706976,0.000000
+0.01,400,KitNET,Comparator read at the PACE FPR,5,0.410838,0.022707,0.798969,0.000139,5,0.459409,0.067808,0.842610,0.000000
+0.05,400,KitNET,PACE read at the comparator FPR,5,0.287282,0.022707,0.664575,-0.018668,5,0.287282,0.022707,0.664575,0.000000
+0.05,400,KitNET,Comparator read at the PACE FPR,5,0.287282,0.022707,0.664575,-0.018668,5,0.397153,0.022707,0.774446,0.000000
 0.01,100,DIoT (flow-symbol adaptation),PACE read at the comparator FPR,5,0.732211,0.351551,0.949623,-0.002409,5,0.732327,0.351667,0.949623,0.000000
-0.01,100,DIoT (flow-symbol adaptation),Comparator read at the PACE FPR,5,0.732211,0.351551,0.949623,-0.002409,4,0.938280,0.905341,0.976846,0.000000
+0.01,100,DIoT (flow-symbol adaptation),Comparator read at the PACE FPR,5,0.732211,0.351551,0.949623,-0.002409,4,0.934984,0.898750,0.975825,0.000000
 0.05,100,DIoT (flow-symbol adaptation),PACE read at the comparator FPR,5,0.521886,0.238332,0.805439,-0.011116,4,0.535230,0.180787,0.889672,0.000000
 0.05,100,DIoT (flow-symbol adaptation),Comparator read at the PACE FPR,5,0.521886,0.238332,0.805439,-0.011116,4,0.770164,0.617200,0.906147,0.000000
-0.01,400,DIoT (flow-symbol adaptation),PACE read at the comparator FPR,5,0.748154,0.366280,0.962534,-0.002551,5,0.748285,0.366280,0.962666,0.000000
-0.01,400,DIoT (flow-symbol adaptation),Comparator read at the PACE FPR,5,0.748154,0.366280,0.962534,-0.002551,4,0.939744,0.896508,0.982979,0.000000
-0.05,400,DIoT (flow-symbol adaptation),PACE read at the comparator FPR,5,0.401578,0.153252,0.660870,-0.012062,4,0.385682,0.090394,0.735316,0.000000
-0.05,400,DIoT (flow-symbol adaptation),Comparator read at the PACE FPR,5,0.401578,0.153252,0.660870,-0.012062,4,0.699075,0.480144,0.871098,0.000000
+0.01,400,DIoT (flow-symbol adaptation),PACE read at the comparator FPR,5,0.616589,0.258326,0.916527,-0.002883,4,0.573005,0.193383,0.952628,0.000000
+0.01,400,DIoT (flow-symbol adaptation),Comparator read at the PACE FPR,5,0.616589,0.258326,0.916527,-0.002883,4,0.901118,0.801127,0.975825,0.000000
+0.05,400,DIoT (flow-symbol adaptation),PACE read at the comparator FPR,5,0.326006,0.072315,0.608922,-0.010605,4,0.312413,0.000000,0.666058,0.000000
+0.05,400,DIoT (flow-symbol adaptation),Comparator read at the PACE FPR,5,0.326006,0.072315,0.608922,-0.010605,4,0.507670,0.183243,0.822155,0.000000
 0.01,100,MCDE (primary-source adaptation),PACE read at the comparator FPR,5,0.072547,0.000000,0.171867,0.001246,3,0.082767,0.000000,0.248300,0.000000
 0.01,100,MCDE (primary-source adaptation),Comparator read at the PACE FPR,5,0.072547,0.000000,0.171867,0.001246,5,0.177064,0.020188,0.348048,0.000000
 0.05,100,MCDE (primary-source adaptation),PACE read at the comparator FPR,5,0.007411,0.000000,0.022234,-0.006733,5,0.007411,0.000000,0.022234,0.000000

@@ -3,8 +3,8 @@
 alpha & local\_rows & comparator & fpr\_level & targets & matched\_targets & coverage & pace\_detection\_at\_level & comparator\_detection\_at\_level & detection\_difference\_matched & matched\_lower & matched\_upper \\
 \midrule
 0.01 & 100 & Mean-ensemble local branch (block-max calibration) & 0.5 alpha & 58 & 24 & 0.413793 & 0.831723 & 0.775489 & 0.056234 & 0.028332 & 0.085041 \\
-0.01 & 100 & Mean-ensemble local branch (block-max calibration) & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.823174 & 0.039874 & 0.027948 & 0.052238 \\
-0.01 & 100 & Mean-ensemble local branch (block-max calibration) & 2 alpha & 58 & 39 & 0.672414 & 0.885388 & 0.853542 & 0.031846 & 0.013108 & 0.050923 \\
+0.01 & 100 & Mean-ensemble local branch (block-max calibration) & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.823666 & 0.039382 & 0.027554 & 0.051658 \\
+0.01 & 100 & Mean-ensemble local branch (block-max calibration) & 2 alpha & 58 & 39 & 0.672414 & 0.885976 & 0.853542 & 0.032434 & 0.014278 & 0.051109 \\
 0.01 & 400 & Mean-ensemble local branch (block-max calibration) & 0.5 alpha & 58 & 25 & 0.431034 & 0.871751 & 0.818208 & 0.053543 & 0.024571 & 0.083150 \\
 0.01 & 400 & Mean-ensemble local branch (block-max calibration) & alpha & 58 & 32 & 0.551724 & 0.875585 & 0.844901 & 0.030684 & 0.014073 & 0.051448 \\
 0.01 & 400 & Mean-ensemble local branch (block-max calibration) & 2 alpha & 58 & 39 & 0.672414 & 0.889452 & 0.866828 & 0.022623 & 0.002743 & 0.045841 \\
@@ -16,7 +16,7 @@ alpha & local\_rows & comparator & fpr\_level & targets & matched\_targets & cov
 0.05 & 400 & Mean-ensemble local branch (block-max calibration) & 2 alpha & 58 & 30 & 0.517241 & 0.930838 & 0.902815 & 0.028023 & 0.010303 & 0.047170 \\
 0.01 & 100 & Mean-ensemble local branch (same calibration as PACE) & 0.5 alpha & 58 & 24 & 0.413793 & 0.831723 & 0.803040 & 0.028683 & 0.012766 & 0.044659 \\
 0.01 & 100 & Mean-ensemble local branch (same calibration as PACE) & alpha & 58 & 33 & 0.568966 & 0.867197 & 0.834302 & 0.032894 & 0.022131 & 0.044430 \\
-0.01 & 100 & Mean-ensemble local branch (same calibration as PACE) & 2 alpha & 58 & 42 & 0.724138 & 0.891530 & 0.865844 & 0.025686 & 0.008737 & 0.043698 \\
+0.01 & 100 & Mean-ensemble local branch (same calibration as PACE) & 2 alpha & 58 & 42 & 0.724138 & 0.892076 & 0.865844 & 0.026232 & 0.009740 & 0.043790 \\
 0.01 & 400 & Mean-ensemble local branch (same calibration as PACE) & 0.5 alpha & 58 & 25 & 0.431034 & 0.871751 & 0.846293 & 0.025458 & 0.009039 & 0.041926 \\
 0.01 & 400 & Mean-ensemble local branch (same calibration as PACE) & alpha & 58 & 33 & 0.568966 & 0.879353 & 0.852893 & 0.026460 & 0.010397 & 0.047062 \\
 0.01 & 400 & Mean-ensemble local branch (same calibration as PACE) & 2 alpha & 58 & 42 & 0.724138 & 0.895306 & 0.874570 & 0.020736 & 0.003491 & 0.041532 \\
@@ -27,45 +27,45 @@ alpha & local\_rows & comparator & fpr\_level & targets & matched\_targets & cov
 0.05 & 400 & Mean-ensemble local branch (same calibration as PACE) & alpha & 58 & 47 & 0.810345 & 0.918975 & 0.890922 & 0.028053 & 0.007772 & 0.052306 \\
 0.05 & 400 & Mean-ensemble local branch (same calibration as PACE) & 2 alpha & 58 & 46 & 0.793103 & 0.938264 & 0.914960 & 0.023304 & 0.008306 & 0.040206 \\
 0.01 & 100 & Original PACE (legacy anchor fallback) & 0.5 alpha & 58 & 24 & 0.413793 & 0.831723 & 0.805453 & 0.026270 & 0.005204 & 0.050664 \\
-0.01 & 100 & Original PACE (legacy anchor fallback) & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.856531 & 0.006517 & 0.002130 & 0.012083 \\
-0.01 & 100 & Original PACE (legacy anchor fallback) & 2 alpha & 58 & 39 & 0.672414 & 0.885386 & 0.882419 & 0.002967 & -0.003524 & 0.009845 \\
+0.01 & 100 & Original PACE (legacy anchor fallback) & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.856665 & 0.006384 & 0.002018 & 0.011949 \\
+0.01 & 100 & Original PACE (legacy anchor fallback) & 2 alpha & 58 & 39 & 0.672414 & 0.885974 & 0.882420 & 0.003554 & -0.002761 & 0.010312 \\
 0.01 & 400 & Original PACE (legacy anchor fallback) & 0.5 alpha & 58 & 25 & 0.431034 & 0.871751 & 0.845759 & 0.025992 & 0.005461 & 0.048952 \\
 0.01 & 400 & Original PACE (legacy anchor fallback) & alpha & 58 & 33 & 0.568966 & 0.879353 & 0.871662 & 0.007691 & 0.001046 & 0.015829 \\
-0.01 & 400 & Original PACE (legacy anchor fallback) & 2 alpha & 58 & 39 & 0.672414 & 0.889452 & 0.888210 & 0.001242 & -0.002943 & 0.005419 \\
-0.05 & 100 & Original PACE (legacy anchor fallback) & 0.5 alpha & 58 & 40 & 0.689655 & 0.894815 & 0.892842 & 0.001973 & -0.001277 & 0.005497 \\
+0.01 & 400 & Original PACE (legacy anchor fallback) & 2 alpha & 58 & 39 & 0.672414 & 0.889452 & 0.888323 & 0.001129 & -0.003209 & 0.005380 \\
+0.05 & 100 & Original PACE (legacy anchor fallback) & 0.5 alpha & 58 & 40 & 0.689655 & 0.894815 & 0.892843 & 0.001972 & -0.001277 & 0.005497 \\
 0.05 & 100 & Original PACE (legacy anchor fallback) & alpha & 58 & 37 & 0.637931 & 0.899832 & 0.896132 & 0.003699 & -0.001235 & 0.008456 \\
 0.05 & 100 & Original PACE (legacy anchor fallback) & 2 alpha & 58 & 20 & 0.344828 & 0.966504 & 0.958665 & 0.007839 & -0.000829 & 0.020574 \\
-0.05 & 400 & Original PACE (legacy anchor fallback) & 0.5 alpha & 58 & 39 & 0.672414 & 0.896766 & 0.895561 & 0.001205 & -0.001164 & 0.003731 \\
+0.05 & 400 & Original PACE (legacy anchor fallback) & 0.5 alpha & 58 & 39 & 0.672414 & 0.896766 & 0.895920 & 0.000846 & -0.001545 & 0.003428 \\
 0.05 & 400 & Original PACE (legacy anchor fallback) & alpha & 58 & 37 & 0.637931 & 0.899703 & 0.894089 & 0.005614 & 0.000816 & 0.011477 \\
 0.05 & 400 & Original PACE (legacy anchor fallback) & 2 alpha & 58 & 23 & 0.396552 & 0.969088 & 0.964984 & 0.004104 & -0.000155 & 0.011018 \\
 0.01 & 100 & Previous PACE (budget-conserving, block-maximum) & 0.5 alpha & 58 & 24 & 0.413793 & 0.831723 & 0.806389 & 0.025334 & 0.004380 & 0.049248 \\
-0.01 & 100 & Previous PACE (budget-conserving, block-maximum) & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.856812 & 0.006236 & 0.001759 & 0.011892 \\
-0.01 & 100 & Previous PACE (budget-conserving, block-maximum) & 2 alpha & 58 & 39 & 0.672414 & 0.885386 & 0.882504 & 0.002882 & -0.003621 & 0.009767 \\
+0.01 & 100 & Previous PACE (budget-conserving, block-maximum) & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.856946 & 0.006102 & 0.001640 & 0.011757 \\
+0.01 & 100 & Previous PACE (budget-conserving, block-maximum) & 2 alpha & 58 & 39 & 0.672414 & 0.885974 & 0.882506 & 0.003469 & -0.002878 & 0.010216 \\
 0.01 & 400 & Previous PACE (budget-conserving, block-maximum) & 0.5 alpha & 58 & 25 & 0.431034 & 0.871751 & 0.846911 & 0.024840 & 0.005226 & 0.046084 \\
 0.01 & 400 & Previous PACE (budget-conserving, block-maximum) & alpha & 58 & 33 & 0.568966 & 0.879353 & 0.871666 & 0.007687 & 0.001041 & 0.015822 \\
-0.01 & 400 & Previous PACE (budget-conserving, block-maximum) & 2 alpha & 58 & 39 & 0.672414 & 0.889452 & 0.888210 & 0.001242 & -0.002943 & 0.005419 \\
+0.01 & 400 & Previous PACE (budget-conserving, block-maximum) & 2 alpha & 58 & 39 & 0.672414 & 0.889452 & 0.888323 & 0.001129 & -0.003209 & 0.005380 \\
 0.05 & 100 & Previous PACE (budget-conserving, block-maximum) & 0.5 alpha & 58 & 40 & 0.689655 & 0.894815 & 0.892852 & 0.001963 & -0.001289 & 0.005482 \\
 0.05 & 100 & Previous PACE (budget-conserving, block-maximum) & alpha & 58 & 37 & 0.637931 & 0.899832 & 0.896132 & 0.003699 & -0.001235 & 0.008456 \\
 0.05 & 100 & Previous PACE (budget-conserving, block-maximum) & 2 alpha & 58 & 20 & 0.344828 & 0.966504 & 0.958665 & 0.007839 & -0.000829 & 0.020574 \\
-0.05 & 400 & Previous PACE (budget-conserving, block-maximum) & 0.5 alpha & 58 & 39 & 0.672414 & 0.896766 & 0.895561 & 0.001205 & -0.001164 & 0.003731 \\
+0.05 & 400 & Previous PACE (budget-conserving, block-maximum) & 0.5 alpha & 58 & 39 & 0.672414 & 0.896766 & 0.895920 & 0.000846 & -0.001545 & 0.003428 \\
 0.05 & 400 & Previous PACE (budget-conserving, block-maximum) & alpha & 58 & 37 & 0.637931 & 0.899703 & 0.894089 & 0.005614 & 0.000816 & 0.011477 \\
 0.05 & 400 & Previous PACE (budget-conserving, block-maximum) & 2 alpha & 58 & 23 & 0.396552 & 0.969088 & 0.964984 & 0.004104 & -0.000155 & 0.011018 \\
 0.01 & 100 & PACE with resolution-aware blocks & 0.5 alpha & 58 & 24 & 0.413793 & 0.831723 & 0.826970 & 0.004753 & -0.000522 & 0.011818 \\
-0.01 & 100 & PACE with resolution-aware blocks & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.857172 & 0.005876 & 0.001545 & 0.011348 \\
-0.01 & 100 & PACE with resolution-aware blocks & 2 alpha & 58 & 39 & 0.672414 & 0.885386 & 0.881671 & 0.003715 & -0.002150 & 0.010268 \\
-0.01 & 400 & PACE with resolution-aware blocks & 0.5 alpha & 58 & 25 & 0.431034 & 0.871751 & 0.866912 & 0.004839 & -0.000361 & 0.011663 \\
+0.01 & 100 & PACE with resolution-aware blocks & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.857207 & 0.005842 & 0.001499 & 0.011316 \\
+0.01 & 100 & PACE with resolution-aware blocks & 2 alpha & 58 & 39 & 0.672414 & 0.885974 & 0.881672 & 0.004302 & -0.001317 & 0.010724 \\
+0.01 & 400 & PACE with resolution-aware blocks & 0.5 alpha & 58 & 25 & 0.431034 & 0.871751 & 0.867005 & 0.004746 & -0.000493 & 0.011609 \\
 0.01 & 400 & PACE with resolution-aware blocks & alpha & 58 & 33 & 0.568966 & 0.879353 & 0.871343 & 0.008010 & 0.001562 & 0.016064 \\
-0.01 & 400 & PACE with resolution-aware blocks & 2 alpha & 58 & 39 & 0.672414 & 0.889452 & 0.886710 & 0.002742 & -0.000440 & 0.006361 \\
+0.01 & 400 & PACE with resolution-aware blocks & 2 alpha & 58 & 39 & 0.672414 & 0.889452 & 0.886799 & 0.002653 & -0.000526 & 0.006286 \\
 0.05 & 100 & PACE with resolution-aware blocks & 0.5 alpha & 58 & 40 & 0.689655 & 0.894815 & 0.892441 & 0.002374 & -0.000897 & 0.005877 \\
 0.05 & 100 & PACE with resolution-aware blocks & alpha & 58 & 37 & 0.637931 & 0.899832 & 0.897653 & 0.002178 & -0.003090 & 0.007260 \\
 0.05 & 100 & PACE with resolution-aware blocks & 2 alpha & 58 & 20 & 0.344828 & 0.966504 & 0.960822 & 0.005682 & -0.002340 & 0.019779 \\
-0.05 & 400 & PACE with resolution-aware blocks & 0.5 alpha & 58 & 39 & 0.672414 & 0.896766 & 0.895534 & 0.001233 & -0.001134 & 0.003756 \\
+0.05 & 400 & PACE with resolution-aware blocks & 0.5 alpha & 58 & 39 & 0.672414 & 0.896766 & 0.895890 & 0.000876 & -0.001515 & 0.003452 \\
 0.05 & 400 & PACE with resolution-aware blocks & alpha & 58 & 37 & 0.637931 & 0.899703 & 0.894173 & 0.005530 & 0.000733 & 0.011396 \\
 0.05 & 400 & PACE with resolution-aware blocks & 2 alpha & 58 & 23 & 0.396552 & 0.969088 & 0.966573 & 0.002515 & -0.002747 & 0.010448 \\
 0.01 & 100 & PACE with pooled conformal-rank calibration & 0.5 alpha & 58 & 24 & 0.413793 & 0.831723 & 0.826278 & 0.005445 & -0.007086 & 0.020087 \\
-0.01 & 100 & PACE with pooled conformal-rank calibration & alpha & 58 & 33 & 0.568966 & 0.867197 & 0.860867 & 0.006329 & -0.006634 & 0.022574 \\
-0.01 & 100 & PACE with pooled conformal-rank calibration & 2 alpha & 58 & 41 & 0.706897 & 0.890976 & 0.891532 & -0.000556 & -0.006546 & 0.006168 \\
-0.01 & 400 & PACE with pooled conformal-rank calibration & 0.5 alpha & 58 & 25 & 0.431034 & 0.871751 & 0.853648 & 0.018102 & -0.002069 & 0.039740 \\
+0.01 & 100 & PACE with pooled conformal-rank calibration & alpha & 58 & 33 & 0.568966 & 0.867197 & 0.861080 & 0.006117 & -0.006730 & 0.022183 \\
+0.01 & 100 & PACE with pooled conformal-rank calibration & 2 alpha & 58 & 41 & 0.706897 & 0.891535 & 0.891532 & 0.000004 & -0.005955 & 0.006680 \\
+0.01 & 400 & PACE with pooled conformal-rank calibration & 0.5 alpha & 58 & 25 & 0.431034 & 0.871751 & 0.853687 & 0.018063 & -0.002069 & 0.039627 \\
 0.01 & 400 & PACE with pooled conformal-rank calibration & alpha & 58 & 33 & 0.568966 & 0.879353 & 0.863765 & 0.015588 & 0.001651 & 0.034011 \\
 0.01 & 400 & PACE with pooled conformal-rank calibration & 2 alpha & 58 & 41 & 0.706897 & 0.894844 & 0.896087 & -0.001243 & -0.006448 & 0.003702 \\
 0.05 & 100 & PACE with pooled conformal-rank calibration & 0.5 alpha & 58 & 44 & 0.758621 & 0.904374 & 0.906063 & -0.001689 & -0.007472 & 0.003607 \\
@@ -75,20 +75,20 @@ alpha & local\_rows & comparator & fpr\_level & targets & matched\_targets & cov
 0.05 & 400 & PACE with pooled conformal-rank calibration & alpha & 58 & 43 & 0.741379 & 0.920286 & 0.919498 & 0.000788 & -0.000791 & 0.002439 \\
 0.05 & 400 & PACE with pooled conformal-rank calibration & 2 alpha & 58 & 36 & 0.620690 & 0.942092 & 0.938821 & 0.003271 & 0.000363 & 0.008436 \\
 0.01 & 100 & PACE with anchor collapse & 0.5 alpha & 58 & 24 & 0.413793 & 0.831723 & 0.796150 & 0.035573 & 0.014479 & 0.059969 \\
-0.01 & 100 & PACE with anchor collapse & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.843067 & 0.019981 & 0.009600 & 0.032757 \\
-0.01 & 100 & PACE with anchor collapse & 2 alpha & 58 & 39 & 0.672414 & 0.885386 & 0.875454 & 0.009933 & 0.000188 & 0.020394 \\
+0.01 & 100 & PACE with anchor collapse & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.843923 & 0.019126 & 0.009467 & 0.030729 \\
+0.01 & 100 & PACE with anchor collapse & 2 alpha & 58 & 39 & 0.672414 & 0.885974 & 0.875455 & 0.010519 & 0.001285 & 0.020565 \\
 0.01 & 400 & PACE with anchor collapse & 0.5 alpha & 58 & 25 & 0.431034 & 0.871751 & 0.842821 & 0.028930 & 0.007819 & 0.052380 \\
 0.01 & 400 & PACE with anchor collapse & alpha & 58 & 33 & 0.568966 & 0.879353 & 0.870139 & 0.009214 & 0.002154 & 0.017783 \\
-0.01 & 400 & PACE with anchor collapse & 2 alpha & 58 & 39 & 0.672414 & 0.889452 & 0.887806 & 0.001646 & -0.002579 & 0.005687 \\
-0.05 & 100 & PACE with anchor collapse & 0.5 alpha & 58 & 40 & 0.689655 & 0.894815 & 0.889930 & 0.004885 & 0.000044 & 0.009839 \\
+0.01 & 400 & PACE with anchor collapse & 2 alpha & 58 & 39 & 0.672414 & 0.889452 & 0.887920 & 0.001532 & -0.002814 & 0.005668 \\
+0.05 & 100 & PACE with anchor collapse & 0.5 alpha & 58 & 40 & 0.689655 & 0.894815 & 0.889930 & 0.004885 & 0.000043 & 0.009839 \\
 0.05 & 100 & PACE with anchor collapse & alpha & 58 & 37 & 0.637931 & 0.899832 & 0.893598 & 0.006234 & -0.000051 & 0.013586 \\
 0.05 & 100 & PACE with anchor collapse & 2 alpha & 58 & 20 & 0.344828 & 0.966504 & 0.958665 & 0.007839 & -0.000829 & 0.020574 \\
-0.05 & 400 & PACE with anchor collapse & 0.5 alpha & 58 & 39 & 0.672414 & 0.896766 & 0.895561 & 0.001205 & -0.001164 & 0.003731 \\
+0.05 & 400 & PACE with anchor collapse & 0.5 alpha & 58 & 39 & 0.672414 & 0.896766 & 0.895920 & 0.000846 & -0.001545 & 0.003428 \\
 0.05 & 400 & PACE with anchor collapse & alpha & 58 & 37 & 0.637931 & 0.899703 & 0.891479 & 0.008223 & 0.001707 & 0.016043 \\
 0.05 & 400 & PACE with anchor collapse & 2 alpha & 58 & 23 & 0.396552 & 0.969088 & 0.964984 & 0.004104 & -0.000155 & 0.011018 \\
 0.01 & 100 & PACE with forward-chaining cross-fitted calibration & 0.5 alpha & 58 & 24 & 0.413793 & 0.831723 & 0.830469 & 0.001254 & -0.000580 & 0.003036 \\
 0.01 & 100 & PACE with forward-chaining cross-fitted calibration & alpha & 58 & 32 & 0.551724 & 0.870557 & 0.866562 & 0.003995 & 0.000417 & 0.007739 \\
-0.01 & 100 & PACE with forward-chaining cross-fitted calibration & 2 alpha & 58 & 42 & 0.724138 & 0.891530 & 0.887606 & 0.003924 & -0.000636 & 0.009248 \\
+0.01 & 100 & PACE with forward-chaining cross-fitted calibration & 2 alpha & 58 & 42 & 0.724138 & 0.892076 & 0.887606 & 0.004470 & -0.000187 & 0.009848 \\
 0.01 & 400 & PACE with forward-chaining cross-fitted calibration & 0.5 alpha & 58 & 25 & 0.431034 & 0.871751 & 0.866382 & 0.005369 & -0.000843 & 0.011506 \\
 0.01 & 400 & PACE with forward-chaining cross-fitted calibration & alpha & 58 & 33 & 0.568966 & 0.879353 & 0.873227 & 0.006126 & -0.000164 & 0.013794 \\
 0.01 & 400 & PACE with forward-chaining cross-fitted calibration & 2 alpha & 58 & 42 & 0.724138 & 0.895306 & 0.890578 & 0.004728 & -0.001621 & 0.012354 \\
@@ -99,22 +99,22 @@ alpha & local\_rows & comparator & fpr\_level & targets & matched\_targets & cov
 0.05 & 400 & PACE with forward-chaining cross-fitted calibration & alpha & 58 & 43 & 0.741379 & 0.924086 & 0.926458 & -0.002373 & -0.006222 & 0.001497 \\
 0.05 & 400 & PACE with forward-chaining cross-fitted calibration & 2 alpha & 58 & 41 & 0.706897 & 0.937069 & 0.935732 & 0.001337 & -0.000300 & 0.003706 \\
 0.01 & 100 & PACE without the Gaussian bank expert & 0.5 alpha & 58 & 24 & 0.413793 & 0.831723 & 0.806656 & 0.025067 & 0.004350 & 0.048812 \\
-0.01 & 100 & PACE without the Gaussian bank expert & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.855354 & 0.007694 & 0.002395 & 0.014088 \\
-0.01 & 100 & PACE without the Gaussian bank expert & 2 alpha & 58 & 39 & 0.672414 & 0.885386 & 0.883457 & 0.001929 & -0.004945 & 0.008934 \\
+0.01 & 100 & PACE without the Gaussian bank expert & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.855448 & 0.007600 & 0.002279 & 0.014025 \\
+0.01 & 100 & PACE without the Gaussian bank expert & 2 alpha & 58 & 39 & 0.672414 & 0.885974 & 0.883487 & 0.002487 & -0.004261 & 0.009358 \\
 0.01 & 400 & PACE without the Gaussian bank expert & 0.5 alpha & 58 & 25 & 0.431034 & 0.871751 & 0.846816 & 0.024934 & 0.005399 & 0.046095 \\
-0.01 & 400 & PACE without the Gaussian bank expert & alpha & 58 & 33 & 0.568966 & 0.879353 & 0.870385 & 0.008968 & 0.002051 & 0.017277 \\
-0.01 & 400 & PACE without the Gaussian bank expert & 2 alpha & 58 & 41 & 0.706897 & 0.894844 & 0.893442 & 0.001402 & -0.002558 & 0.005393 \\
-0.05 & 100 & PACE without the Gaussian bank expert & 0.5 alpha & 58 & 40 & 0.689655 & 0.894815 & 0.894201 & 0.000614 & -0.003957 & 0.004895 \\
+0.01 & 400 & PACE without the Gaussian bank expert & alpha & 58 & 33 & 0.568966 & 0.879353 & 0.870637 & 0.008716 & 0.001815 & 0.017075 \\
+0.01 & 400 & PACE without the Gaussian bank expert & 2 alpha & 58 & 41 & 0.706897 & 0.894844 & 0.893549 & 0.001294 & -0.002830 & 0.005347 \\
+0.05 & 100 & PACE without the Gaussian bank expert & 0.5 alpha & 58 & 40 & 0.689655 & 0.894815 & 0.894318 & 0.000497 & -0.004281 & 0.004886 \\
 0.05 & 100 & PACE without the Gaussian bank expert & alpha & 58 & 37 & 0.637931 & 0.899832 & 0.896582 & 0.003249 & -0.001549 & 0.007837 \\
 0.05 & 100 & PACE without the Gaussian bank expert & 2 alpha & 58 & 20 & 0.344828 & 0.966504 & 0.959274 & 0.007230 & -0.000830 & 0.020075 \\
-0.05 & 400 & PACE without the Gaussian bank expert & 0.5 alpha & 58 & 39 & 0.672414 & 0.896766 & 0.895298 & 0.001468 & -0.001261 & 0.004539 \\
+0.05 & 400 & PACE without the Gaussian bank expert & 0.5 alpha & 58 & 39 & 0.672414 & 0.896766 & 0.895657 & 0.001109 & -0.001645 & 0.004217 \\
 0.05 & 400 & PACE without the Gaussian bank expert & alpha & 58 & 37 & 0.637931 & 0.899703 & 0.894123 & 0.005579 & 0.001143 & 0.011015 \\
 0.05 & 400 & PACE without the Gaussian bank expert & 2 alpha & 58 & 24 & 0.413793 & 0.950767 & 0.948858 & 0.001909 & -0.002271 & 0.008384 \\
 0.01 & 100 & PACE with hierarchical family budgets & 0.5 alpha & 58 & 24 & 0.413793 & 0.831723 & 0.806974 & 0.024749 & 0.003770 & 0.049048 \\
-0.01 & 100 & PACE with hierarchical family budgets & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.855848 & 0.007200 & 0.001319 & 0.014020 \\
-0.01 & 100 & PACE with hierarchical family budgets & 2 alpha & 58 & 40 & 0.689655 & 0.888251 & 0.888857 & -0.000606 & -0.007605 & 0.006577 \\
+0.01 & 100 & PACE with hierarchical family budgets & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.855982 & 0.007067 & 0.001177 & 0.013878 \\
+0.01 & 100 & PACE with hierarchical family budgets & 2 alpha & 58 & 40 & 0.689655 & 0.888825 & 0.888857 & -0.000033 & -0.007027 & 0.007219 \\
 0.01 & 400 & PACE with hierarchical family budgets & 0.5 alpha & 58 & 25 & 0.431034 & 0.871751 & 0.847484 & 0.024267 & 0.004524 & 0.045550 \\
-0.01 & 400 & PACE with hierarchical family budgets & alpha & 58 & 33 & 0.568966 & 0.879353 & 0.871692 & 0.007661 & 0.001429 & 0.015508 \\
+0.01 & 400 & PACE with hierarchical family budgets & alpha & 58 & 33 & 0.568966 & 0.879353 & 0.871696 & 0.007657 & 0.001426 & 0.015497 \\
 0.01 & 400 & PACE with hierarchical family budgets & 2 alpha & 58 & 39 & 0.672414 & 0.889452 & 0.888603 & 0.000849 & -0.003361 & 0.005032 \\
 0.05 & 100 & PACE with hierarchical family budgets & 0.5 alpha & 58 & 42 & 0.724138 & 0.899823 & 0.901627 & -0.001804 & -0.006193 & 0.002640 \\
 0.05 & 100 & PACE with hierarchical family budgets & alpha & 58 & 36 & 0.620690 & 0.903055 & 0.901549 & 0.001506 & -0.003465 & 0.006220 \\
@@ -123,45 +123,45 @@ alpha & local\_rows & comparator & fpr\_level & targets & matched\_targets & cov
 0.05 & 400 & PACE with hierarchical family budgets & alpha & 58 & 38 & 0.655172 & 0.902342 & 0.896195 & 0.006147 & 0.001708 & 0.011441 \\
 0.05 & 400 & PACE with hierarchical family budgets & 2 alpha & 58 & 23 & 0.396552 & 0.969088 & 0.968062 & 0.001026 & -0.004287 & 0.007522 \\
 0.01 & 100 & PACE with second-order bank aggregation & 0.5 alpha & 58 & 23 & 0.396552 & 0.824410 & 0.789529 & 0.034881 & 0.012113 & 0.059436 \\
-0.01 & 100 & PACE with second-order bank aggregation & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.849594 & 0.013454 & 0.000253 & 0.025459 \\
-0.01 & 100 & PACE with second-order bank aggregation & 2 alpha & 58 & 38 & 0.655172 & 0.882372 & 0.878412 & 0.003960 & -0.006103 & 0.015534 \\
+0.01 & 100 & PACE with second-order bank aggregation & alpha & 58 & 32 & 0.551724 & 0.863048 & 0.849754 & 0.013294 & 0.000071 & 0.025325 \\
+0.01 & 100 & PACE with second-order bank aggregation & 2 alpha & 58 & 38 & 0.655172 & 0.882975 & 0.878474 & 0.004501 & -0.005536 & 0.015844 \\
 0.01 & 400 & PACE with second-order bank aggregation & 0.5 alpha & 58 & 24 & 0.413793 & 0.866410 & 0.830549 & 0.035862 & 0.015172 & 0.058395 \\
 0.01 & 400 & PACE with second-order bank aggregation & alpha & 58 & 32 & 0.551724 & 0.875585 & 0.859862 & 0.015723 & 0.008749 & 0.024096 \\
-0.01 & 400 & PACE with second-order bank aggregation & 2 alpha & 58 & 39 & 0.672414 & 0.889452 & 0.882649 & 0.006802 & -0.001530 & 0.015353 \\
+0.01 & 400 & PACE with second-order bank aggregation & 2 alpha & 58 & 39 & 0.672414 & 0.889452 & 0.882765 & 0.006686 & -0.001602 & 0.015194 \\
 0.05 & 100 & PACE with second-order bank aggregation & 0.5 alpha & 58 & 40 & 0.689655 & 0.894815 & 0.891888 & 0.002927 & -0.005120 & 0.012083 \\
 0.05 & 100 & PACE with second-order bank aggregation & alpha & 58 & 36 & 0.620690 & 0.903055 & 0.891074 & 0.011981 & -0.000184 & 0.027735 \\
 0.05 & 100 & PACE with second-order bank aggregation & 2 alpha & 58 & 20 & 0.344828 & 0.966504 & 0.958239 & 0.008265 & -0.003578 & 0.028744 \\
-0.05 & 400 & PACE with second-order bank aggregation & 0.5 alpha & 58 & 39 & 0.672414 & 0.896766 & 0.888599 & 0.008168 & 0.000612 & 0.016948 \\
+0.05 & 400 & PACE with second-order bank aggregation & 0.5 alpha & 58 & 39 & 0.672414 & 0.896766 & 0.888961 & 0.007805 & 0.000531 & 0.016155 \\
 0.05 & 400 & PACE with second-order bank aggregation & alpha & 58 & 37 & 0.637931 & 0.899703 & 0.882956 & 0.016747 & 0.004058 & 0.033496 \\
 0.05 & 400 & PACE with second-order bank aggregation & 2 alpha & 58 & 21 & 0.362069 & 0.966144 & 0.953673 & 0.012471 & 0.002573 & 0.025714 \\
-0.01 & 100 & KitNET & 0.5 alpha & 58 & 22 & 0.379310 & 0.827388 & 0.440994 & 0.386394 & 0.295225 & 0.480824 \\
-0.01 & 100 & KitNET & alpha & 58 & 30 & 0.517241 & 0.857040 & 0.466578 & 0.390462 & 0.296736 & 0.480252 \\
-0.01 & 100 & KitNET & 2 alpha & 58 & 38 & 0.655172 & 0.882383 & 0.500000 & 0.382383 & 0.294436 & 0.470187 \\
-0.01 & 400 & KitNET & 0.5 alpha & 58 & 25 & 0.431034 & 0.871751 & 0.597516 & 0.274234 & 0.171010 & 0.379307 \\
-0.01 & 400 & KitNET & alpha & 58 & 32 & 0.551724 & 0.878565 & 0.633595 & 0.244970 & 0.157298 & 0.334895 \\
-0.01 & 400 & KitNET & 2 alpha & 58 & 40 & 0.689655 & 0.892215 & 0.657590 & 0.234625 & 0.168223 & 0.305414 \\
-0.05 & 100 & KitNET & 0.5 alpha & 58 & 41 & 0.706897 & 0.897385 & 0.572784 & 0.324600 & 0.245248 & 0.410174 \\
-0.05 & 100 & KitNET & alpha & 58 & 44 & 0.758621 & 0.908210 & 0.640919 & 0.267291 & 0.201854 & 0.337169 \\
-0.05 & 100 & KitNET & 2 alpha & 58 & 42 & 0.724138 & 0.935843 & 0.705685 & 0.230158 & 0.169334 & 0.297188 \\
-0.05 & 400 & KitNET & 0.5 alpha & 58 & 41 & 0.706897 & 0.901800 & 0.690144 & 0.211656 & 0.147529 & 0.280672 \\
-0.05 & 400 & KitNET & alpha & 58 & 42 & 0.724138 & 0.924153 & 0.770606 & 0.153546 & 0.096363 & 0.219153 \\
-0.05 & 400 & KitNET & 2 alpha & 58 & 42 & 0.724138 & 0.944836 & 0.783230 & 0.161606 & 0.113663 & 0.213628 \\
-0.01 & 100 & DIoT (flow-symbol adaptation) & 0.5 alpha & 58 & 23 & 0.396552 & 0.824485 & 0.469717 & 0.354768 & 0.240071 & 0.475549 \\
-0.01 & 100 & DIoT (flow-symbol adaptation) & alpha & 58 & 31 & 0.534483 & 0.866429 & 0.569546 & 0.296883 & 0.220566 & 0.370205 \\
-0.01 & 100 & DIoT (flow-symbol adaptation) & 2 alpha & 58 & 37 & 0.637931 & 0.901809 & 0.669748 & 0.232060 & 0.188036 & 0.276165 \\
-0.01 & 400 & DIoT (flow-symbol adaptation) & 0.5 alpha & 58 & 23 & 0.396552 & 0.862671 & 0.500332 & 0.362339 & 0.249986 & 0.480782 \\
-0.01 & 400 & DIoT (flow-symbol adaptation) & alpha & 58 & 32 & 0.551724 & 0.876943 & 0.569367 & 0.307576 & 0.231944 & 0.379390 \\
-0.01 & 400 & DIoT (flow-symbol adaptation) & 2 alpha & 58 & 38 & 0.655172 & 0.906230 & 0.651611 & 0.254618 & 0.207597 & 0.302492 \\
-0.05 & 100 & DIoT (flow-symbol adaptation) & 0.5 alpha & 58 & 40 & 0.689655 & 0.914544 & 0.652833 & 0.261711 & 0.223359 & 0.302515 \\
+0.01 & 100 & KitNET & 0.5 alpha & 58 & 23 & 0.396552 & 0.824458 & 0.431752 & 0.392706 & 0.300500 & 0.490011 \\
+0.01 & 100 & KitNET & alpha & 58 & 31 & 0.534483 & 0.858661 & 0.469837 & 0.388824 & 0.296125 & 0.479851 \\
+0.01 & 100 & KitNET & 2 alpha & 58 & 39 & 0.672414 & 0.883788 & 0.501246 & 0.382542 & 0.296593 & 0.469832 \\
+0.01 & 400 & KitNET & 0.5 alpha & 58 & 24 & 0.413793 & 0.868392 & 0.589489 & 0.278902 & 0.177541 & 0.383056 \\
+0.01 & 400 & KitNET & alpha & 58 & 33 & 0.568966 & 0.879353 & 0.621618 & 0.257735 & 0.167131 & 0.351213 \\
+0.01 & 400 & KitNET & 2 alpha & 58 & 41 & 0.706897 & 0.892752 & 0.652877 & 0.239875 & 0.167580 & 0.316072 \\
+0.05 & 100 & KitNET & 0.5 alpha & 58 & 42 & 0.724138 & 0.897812 & 0.567522 & 0.330290 & 0.252335 & 0.413928 \\
+0.05 & 100 & KitNET & alpha & 58 & 45 & 0.775862 & 0.908488 & 0.646979 & 0.261509 & 0.197701 & 0.331305 \\
+0.05 & 100 & KitNET & 2 alpha & 58 & 42 & 0.724138 & 0.935843 & 0.711699 & 0.224144 & 0.160928 & 0.294171 \\
+0.05 & 400 & KitNET & 0.5 alpha & 58 & 42 & 0.724138 & 0.902123 & 0.685255 & 0.216867 & 0.148862 & 0.292366 \\
+0.05 & 400 & KitNET & alpha & 58 & 43 & 0.741379 & 0.924072 & 0.755116 & 0.168957 & 0.104221 & 0.240766 \\
+0.05 & 400 & KitNET & 2 alpha & 58 & 42 & 0.724138 & 0.944836 & 0.797274 & 0.147562 & 0.095536 & 0.203863 \\
+0.01 & 100 & DIoT (flow-symbol adaptation) & 0.5 alpha & 58 & 23 & 0.396552 & 0.824485 & 0.472679 & 0.351805 & 0.237611 & 0.471806 \\
+0.01 & 100 & DIoT (flow-symbol adaptation) & alpha & 58 & 31 & 0.534483 & 0.866429 & 0.573576 & 0.292853 & 0.214319 & 0.367747 \\
+0.01 & 100 & DIoT (flow-symbol adaptation) & 2 alpha & 58 & 37 & 0.637931 & 0.901809 & 0.669823 & 0.231986 & 0.187897 & 0.276069 \\
+0.01 & 400 & DIoT (flow-symbol adaptation) & 0.5 alpha & 58 & 24 & 0.413793 & 0.868392 & 0.609111 & 0.259281 & 0.173630 & 0.340567 \\
+0.01 & 400 & DIoT (flow-symbol adaptation) & alpha & 58 & 32 & 0.551724 & 0.876943 & 0.628465 & 0.248478 & 0.176899 & 0.318973 \\
+0.01 & 400 & DIoT (flow-symbol adaptation) & 2 alpha & 58 & 40 & 0.689655 & 0.898488 & 0.677814 & 0.220674 & 0.165830 & 0.272651 \\
+0.05 & 100 & DIoT (flow-symbol adaptation) & 0.5 alpha & 58 & 40 & 0.689655 & 0.914544 & 0.652936 & 0.261609 & 0.223299 & 0.302353 \\
 0.05 & 100 & DIoT (flow-symbol adaptation) & alpha & 58 & 43 & 0.741379 & 0.920154 & 0.676811 & 0.243343 & 0.208009 & 0.280403 \\
 0.05 & 100 & DIoT (flow-symbol adaptation) & 2 alpha & 58 & 41 & 0.706897 & 0.945618 & 0.723084 & 0.222533 & 0.159393 & 0.283385 \\
-0.05 & 400 & DIoT (flow-symbol adaptation) & 0.5 alpha & 58 & 40 & 0.689655 & 0.916851 & 0.647049 & 0.269801 & 0.227428 & 0.313386 \\
-0.05 & 400 & DIoT (flow-symbol adaptation) & alpha & 58 & 43 & 0.741379 & 0.927979 & 0.692443 & 0.235536 & 0.185129 & 0.282144 \\
-0.05 & 400 & DIoT (flow-symbol adaptation) & 2 alpha & 58 & 41 & 0.706897 & 0.944596 & 0.719244 & 0.225352 & 0.152409 & 0.295070 \\
+0.05 & 400 & DIoT (flow-symbol adaptation) & 0.5 alpha & 58 & 42 & 0.724138 & 0.908972 & 0.670055 & 0.238918 & 0.184153 & 0.288539 \\
+0.05 & 400 & DIoT (flow-symbol adaptation) & alpha & 58 & 45 & 0.775862 & 0.920138 & 0.695930 & 0.224208 & 0.174407 & 0.270923 \\
+0.05 & 400 & DIoT (flow-symbol adaptation) & 2 alpha & 58 & 43 & 0.741379 & 0.950081 & 0.758493 & 0.191587 & 0.128786 & 0.255672 \\
 0.01 & 100 & MCDE (primary-source adaptation) & 0.5 alpha & 58 & 24 & 0.413793 & 0.831723 & 0.739813 & 0.091910 & 0.029078 & 0.156861 \\
 0.01 & 100 & MCDE (primary-source adaptation) & alpha & 58 & 30 & 0.517241 & 0.881417 & 0.817034 & 0.064383 & 0.013733 & 0.116922 \\
-0.01 & 100 & MCDE (primary-source adaptation) & 2 alpha & 58 & 37 & 0.637931 & 0.890532 & 0.841669 & 0.048863 & 0.003557 & 0.096992 \\
-0.01 & 400 & MCDE (primary-source adaptation) & 0.5 alpha & 58 & 24 & 0.413793 & 0.875874 & 0.784227 & 0.091647 & 0.030886 & 0.153551 \\
+0.01 & 100 & MCDE (primary-source adaptation) & 2 alpha & 58 & 37 & 0.637931 & 0.891151 & 0.841669 & 0.049483 & 0.003979 & 0.097351 \\
+0.01 & 400 & MCDE (primary-source adaptation) & 0.5 alpha & 58 & 24 & 0.413793 & 0.875874 & 0.784231 & 0.091643 & 0.030881 & 0.153547 \\
 0.01 & 400 & MCDE (primary-source adaptation) & alpha & 58 & 31 & 0.534483 & 0.891863 & 0.827599 & 0.064264 & 0.017457 & 0.115412 \\
 0.01 & 400 & MCDE (primary-source adaptation) & 2 alpha & 58 & 37 & 0.637931 & 0.889053 & 0.822251 & 0.066801 & 0.010923 & 0.125159 \\
 0.05 & 100 & MCDE (primary-source adaptation) & 0.5 alpha & 58 & 40 & 0.689655 & 0.904867 & 0.819962 & 0.084905 & 0.037116 & 0.130633 \\

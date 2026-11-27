@@ -32,7 +32,7 @@ from pace.reporting.records import (
     decomposition_of,
     interval_cells,
     mean_of,
-    method_false_alert,
+    method_rates,
     number,
     optional_number,
     pooled_difference,
@@ -42,19 +42,30 @@ from pace.reporting.records import (
 from pace.reporting.scaling import scaling_strata_table, scaling_table
 from pace.reporting.text import semicolon_list
 from pace.types import (
+    ABSENT_TEXT,
     AcceptanceRule,
     AlphaLevel,
+    AnchorBudgetPolicy,
+    AnchorMembers,
+    BankDesign,
     BudgetAnalysisKind,
     BudgetAnalysisScope,
+    CalibrationMode,
+    CalibrationVariant,
     ClientName,
     ColumnHeading,
+    ConditionLimitRule,
     ConfigurationSection,
+    CovarianceEstimator,
     DatasetName,
     DetectionContribution,
     DisplayText,
+    EvaluationRole,
+    ExternalBaseline,
     FalseAlertGuide,
     LeaveOneOutScope,
     LogEvent,
+    MatrixCellSetting,
     ObservationCount,
     OperatingMethod,
     PValue,
@@ -181,7 +192,7 @@ def ablations_table(inputs: ReportInputs) -> ResultTable:
     for alpha in inputs.alphas():
         for budget in inputs.budgets(BudgetAnalysisKind.UNIVERSAL_PRIMARY):
             members = inputs.primary(alpha, budget)
-            for arm in inputs.configuration.scientific.study_arms:
+            for arm in inputs.ablation_arms():
                 gain, interval = pooled_difference(
                     members,
                     lambda item, arm=arm: item.pace.detection - item.arm(arm).detection,
@@ -228,7 +239,7 @@ def false_alert_rates_table(inputs: ReportInputs) -> ResultTable:
         for budget in inputs.budgets(BudgetAnalysisKind.UNIVERSAL_PRIMARY):
             members = inputs.primary(alpha, budget)
             for method in ReportedMethod:
-                rates = np.asarray([method_false_alert(method, item) for item in members])
+                rates = np.asarray([method_rates(method, item).false_alert for item in members])
                 rows.append(
                     (
                         method.display_label,
@@ -421,7 +432,7 @@ def census_table(inputs: ReportInputs) -> ResultTable:
     reference = {(record.stratum, record.target.name): record for record in inputs.store.records}
     rows = tuple(
         (
-            DisplayText(item.stratum.name),
+            item.stratum.display_label,
             DisplayText(target.client),
             count(target.training_rows),
             count(target.attack_type_count),
@@ -447,23 +458,34 @@ def census_table(inputs: ReportInputs) -> ResultTable:
 
 
 def _setting_labels() -> dict[DisplayText, DisplayText]:
-    labels: dict[DisplayText, DisplayText] = {}
+    labels = {
+        DisplayText(item.name): item.operating_method.display_label for item in CalibrationVariant
+    }
+    for enumeration in (
+        AnchorBudgetPolicy,
+        AnchorMembers,
+        BankDesign,
+        CalibrationMode,
+        ConditionLimitRule,
+        CovarianceEstimator,
+        EvaluationRole,
+        ExternalBaseline,
+        StudyArm,
+        StudyStratum,
+    ):
+        labels.update({DisplayText(item.name): item.display_label for item in enumeration})
     labels.update({DisplayText(item.name): DisplayText(f"{item.fraction}") for item in AlphaLevel})
-    labels.update({DisplayText(item.name): item.display_label for item in StudyArm})
-    labels.update({DisplayText(item.name): item.display_label for item in StudyStratum})
+    labels.update({DisplayText(item.name): item.title for item in BudgetAnalysisKind})
     return labels
 
 
 def _setting_text(text: DisplayText) -> DisplayText:
-    known = _setting_labels().get(DisplayText(text.upper()))
-    if known is not None:
-        return known
-    if text.isupper():
-        return DisplayText(text.lower().replace("_", " "))
-    return DisplayText(text)
+    return _setting_labels().get(DisplayText(text.upper()), text)
 
 
 def _setting_value(value: JsonValue) -> DisplayText:
+    if value is None:
+        return ABSENT_TEXT
     if isinstance(value, dict):
         return DisplayText(
             " // ".join(
@@ -505,8 +527,14 @@ def configuration_table(inputs: ReportInputs) -> ResultTable:
         (ConfigurationSection.PROTOCOL_MATRIX, configuration.protocol_matrix),
     )
     rows = tuple(
-        pair for name, model in sections for pair in _flatten(DisplayText(name), _section(model))
+        (setting, DisplayText("per matrix cell") if setting in MatrixCellSetting else value)
+        for name, model in sections
+        for setting, value in _flatten(DisplayText(name), _section(model))
     ) + (
+        (
+            DisplayText(f"{ConfigurationSection.RUNTIME}.source_verification"),
+            DisplayText(configuration.runtime.verification.name),
+        ),
         (
             DisplayText(f"{ConfigurationSection.REPORTING}.acceptance_comparator"),
             OperatingMethod.MEAN_ENSEMBLE_MATCHED.display_label,

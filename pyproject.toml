@@ -21,6 +21,7 @@ dependencies = [
   "polars>=1.44.2",
   "indexed-bzip2>=1.7.0",
   "matplotlib>=3.9,<4",
+  "threadpoolctl>=3.5,<4",
 ]
 
 [project.scripts]
@@ -48,6 +49,21 @@ dev = [
   "semgrep>=1.100,<2",
   "vulture>=2.14,<3",
 ]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src",
+  "/tests",
+  "/configs",
+  "/rules",
+  "/stubs",
+  "/Makefile",
+  "/README.md",
+  "/LICENSE",
+  "/pyrightconfig.json",
+  "/uv.lock",
+]
+exclude = ["__pycache__", "*.pyc"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pace"]

@@ -11,7 +11,7 @@ from pace.config import (
     ResolvedConfiguration,
     configuration_for_protocol_variant,
 )
-from pace.experiment import artifacts, runner
+from pace.experiment import artifacts, inputs, runner
 from pace.experiment.artifacts import derive_learning_seed
 from pace.experiment.runner import (
     run_dataset_matrix_workflow,
@@ -134,9 +134,9 @@ def test_dataset_matrix_reuses_peer_training_and_campaign_artifacts(
     raw_source = tmp_path / "raw" / "fixture.csv"
     raw_source.parent.mkdir(parents=True)
     raw_source.write_text("fixed source", encoding="utf-8")
-    original_training = runner.train_peer_mlp
+    original_training = inputs.train_peer_mlp
     training_spy = Mock(wraps=original_training)
-    monkeypatch.setattr(runner, "train_peer_mlp", training_spy)
+    monkeypatch.setattr(inputs, "train_peer_mlp", training_spy)
     original_local = runner.compute_local_evidence
     local_spy = Mock(wraps=original_local)
     monkeypatch.setattr(runner, "compute_local_evidence", local_spy)
@@ -204,7 +204,9 @@ def test_dataset_matrix_rejects_source_changes_between_variants(
     monkeypatch.setattr("pace.experiment.runner.run_dataset_workflow", run_variant)
 
     campaign_devices_input = campaign_devices()
-    with pytest.raises(DatasetValidationError, match="changed during matrix execution"):
+    with pytest.raises(
+        DatasetValidationError, match="did not match their baseline during matrix execution"
+    ):
         run_dataset_matrix_workflow(
             campaign_devices_input, (source_file,), configuration, ReplacementPolicy.PRESERVE_VALID
         )
@@ -644,7 +646,9 @@ def test_workflow_rejects_mismatched_or_changing_inputs(
         return ()
 
     monkeypatch.setattr(runner, "run_dataset_study", change_source)
-    with pytest.raises(DatasetValidationError, match="changed during campaign execution"):
+    with pytest.raises(
+        DatasetValidationError, match="did not match their baseline during campaign execution"
+    ):
         run_dataset_workflow(loaded, (source,), configuration)
 
 

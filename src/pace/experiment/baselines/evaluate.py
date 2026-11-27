@@ -50,8 +50,8 @@ class BaselineCache:
     supervised: dict[DatasetClientId, HistGradientBoostingClassifier] = field(
         default_factory=dict[DatasetClientId, HistGradientBoostingClassifier]
     )
-    profiles: dict[DatasetClientId, FederatedProfile] = field(
-        default_factory=dict[DatasetClientId, FederatedProfile]
+    profiles: dict[tuple[DatasetClientId, LocalTrainingRowCount], FederatedProfile] = field(
+        default_factory=dict[tuple[DatasetClientId, LocalTrainingRowCount], FederatedProfile]
     )
     scores: dict[_ScoreKey, BaselineScores] = field(default_factory=dict[_ScoreKey, BaselineScores])
 
@@ -125,11 +125,12 @@ def _diot_scores(
     local = select_local_training_rows(
         target.training, scientific.local_detectors.local_training_rows
     )
-    profile = cache.profiles.get(target.client)
+    key = (target.client, scientific.local_detectors.local_training_rows)
+    profile = cache.profiles.get(key)
     if profile is None:
         share = max(1, settings.symbol_fit_row_limit // max(1, len(peers)))
         pooled = np.concatenate([peer.training[:share] for peer in peers] + [local], axis=0)
-        profile = cache.profiles[target.client] = fit_federated_profile(
+        profile = cache.profiles[key] = fit_federated_profile(
             tuple(peer.training for peer in peers),
             fit_alphabet(pooled, settings, seed),
             settings,

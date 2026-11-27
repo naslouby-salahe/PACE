@@ -14,6 +14,7 @@ from pace.experiment.inputs import (
     build_target_frame,
     compute_local_evidence,
     compute_peer_evidence,
+    fit_peer_experts,
 )
 from pace.reporting.metrics import summarize_campaign
 from pace.types import AlphaLevel, LocalExpertKind, StudyArm
@@ -100,7 +101,7 @@ def _local_inputs(
     configuration: ResolvedConfiguration,
 ) -> tuple[PreparedDevice, TargetFrame, PeerEvidence]:
     prepared = runner.prepare_clients(campaign_devices(), configuration)
-    experts = runner.fit_peer_experts(prepared, configuration, SEED)
+    experts = fit_peer_experts(prepared, configuration, SEED)
     target = prepared[0]
     frame = build_target_frame(target)
     peers = compute_peer_evidence(tuple(e for e in experts if e.client != target.client), frame)

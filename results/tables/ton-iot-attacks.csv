@@ -1,4 +1,4 @@
-alpha,local_rows,target,attack_type,pace_detection,mean_ensemble_detection,gain,local_detection,peer_union_detection,seeds_with_gain
+alpha,local_rows,target,attack_type,pace_nominal_detection,mean_ensemble_nominal_detection,gain,local_detection,peer_union_detection,seeds_with_gain
 0.01,100,192.168.1.1,CROSS_SITE_SCRIPTING,0.004484,0.001544,0.002940,0.004337,0.001544,3
 0.01,100,192.168.1.1,DDOS,0.004200,0.001400,0.002800,0.002867,0.001400,3
 0.01,100,192.168.1.1,DOS,0.000000,0.000000,0.000000,0.000000,0.000000,0

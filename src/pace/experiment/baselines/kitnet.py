@@ -61,8 +61,8 @@ class _Autoencoder:
         self.weights += rate * (
             np.outer(normalised, hidden_error) + np.outer(visible_error, hidden)
         )
-        self.hidden_bias += rate * np.mean(hidden_error)
-        self.visible_bias += rate * np.mean(visible_error)
+        self.hidden_bias += rate * hidden_error
+        self.visible_bias += rate * visible_error
         return np.sqrt(np.mean(np.square(visible_error)))
 
     def scores(self, rows: FloatMatrix) -> FloatArray:

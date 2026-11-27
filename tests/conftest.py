@@ -1,8 +1,16 @@
+from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
+from threadpoolctl import threadpool_limits
 
 ARCHITECTURE_ROOT = Path(__file__).resolve().parent / "architecture"
+
+
+@pytest.fixture(scope="session", autouse=True)
+def single_threaded_pools() -> Iterator[None]:
+    with threadpool_limits(limits=1):
+        yield
 
 
 def architecture_only(paths: list[Path]) -> bool:

@@ -1,9 +1,10 @@
 from collections import defaultdict
+from itertools import cycle
 
 import numpy as np
 from matplotlib.figure import Figure
 
-from pace.reporting.figure_canvas import new_figure
+from pace.reporting.figure_canvas import legend_beside, new_figure
 from pace.reporting.operating import (
     curve_of,
     point_at,
@@ -25,10 +26,9 @@ from pace.types import (
     LocalTrainingRowCount,
     OperatingMethod,
     PlotInk,
-    PlotLegendAnchor,
     PlotLineStyle,
-    PlotMarker,
     SensitivityRecord,
+    SeriesStyle,
     TableName,
 )
 
@@ -103,15 +103,16 @@ def calibration_sensitivity_figure(records: tuple[SensitivityRecord, ...]) -> Fi
         axes.grid(alpha=0.25)
         axes.set_xscale("log")
         axes.set_yscale("log")
-        for rank, mode in enumerate(CalibrationMode):
+        for mode, style in zip(CalibrationMode, cycle(SeriesStyle), strict=False):
             selected = _sensitivity_series(records, scenario, mode, budget, experts)
             if selected:
                 axes.plot(
                     [item.rows for item in selected],
                     [max(item.budget_ratio, 1e-4) for item in selected],
-                    marker=PlotMarker.CIRCLE,
-                    markersize=11 - 1.5 * rank,
-                    linewidth=3.2 - 0.5 * rank,
+                    marker=style.marker,
+                    markersize=style.size,
+                    linestyle=style.line,
+                    linewidth=style.width,
                     label=mode.display_label,
                 )
         vertical = PlotInk.BLACK
@@ -124,8 +125,7 @@ def calibration_sensitivity_figure(records: tuple[SensitivityRecord, ...]) -> Fi
         )
         axes.set_xlabel("Calibration rows")
         axes.set_ylabel(f"Realised FPR / budget\n({experts} experts, tier {budget}; floor 10⁻⁴)")
-    handles, _ = figure.axes[0].get_legend_handles_labels()
-    figure.legend(handles=handles, loc=PlotLegendAnchor.OUTSIDE_RIGHT, fontsize=8, frameon=False)
+    legend_beside(figure)
     return figure
 
 

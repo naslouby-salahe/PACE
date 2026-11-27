@@ -18,8 +18,8 @@ SETTINGS = KitNetSettings(max_autoencoder_size=4, hidden_ratio=0.75, learning_ra
 class _ReferenceAutoencoder:
     def __init__(self, weights: FloatMatrix) -> None:
         self.weights = weights.copy()
-        self.hbias = np.zeros(weights.shape[1])
-        self.vbias = np.zeros(weights.shape[0])
+        self.hbias: FloatArray = np.zeros(weights.shape[1])
+        self.vbias: FloatArray = np.zeros(weights.shape[0])
         self.norm_max = np.full(weights.shape[0], -np.inf)
         self.norm_min = np.full(weights.shape[0], np.inf)
         self.lr = 0.1
@@ -37,8 +37,8 @@ class _ReferenceAutoencoder:
         l_h1 = (l_h2 @ self.weights) * y * (1 - y)
         l_w = np.outer(x, l_h1) + np.outer(l_h2, y)
         self.weights += self.lr * l_w
-        self.hbias += self.lr * np.mean(l_h1, axis=0)
-        self.vbias += self.lr * np.mean(l_h2, axis=0)
+        self.hbias += self.lr * l_h1
+        self.vbias += self.lr * l_h2
         return np.sqrt(np.mean(l_h2**2)).item()
 
     def execute(self, x: FloatArray) -> float:
@@ -116,6 +116,15 @@ def test_single_pass_training_and_scoring_match_the_reference_line_by_line() -> 
         ]
     )
     np.testing.assert_allclose(model.scores(queries), expected, rtol=1e-9, atol=1e-12)
+
+
+def test_bias_updates_are_per_unit_not_a_shared_scalar() -> None:
+    model = fit_kitnet(_data(150, 9, 2), SETTINGS, 7)
+    multi_unit = [a for a in (*model.ensemble, model.output) if a.hidden_bias.size > 1]
+    assert multi_unit
+    for autoencoder in multi_unit:
+        assert np.ptp(autoencoder.hidden_bias) > 0.0
+        assert np.ptp(autoencoder.visible_bias) > 0.0
 
 
 def test_scores_are_deterministic_and_seed_dependent() -> None:

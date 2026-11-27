@@ -1,20 +1,20 @@
 .PHONY: check format test build
 
 check:
-	uv run ruff check .
-	uv run ruff format --check .
-	uv run pyright
-	uv run semgrep --config rules/semgrep --no-git-ignore src tests
-	uv run lint-imports --config rules/import-linter/contracts.ini
-	uv run vulture src --min-confidence 80
-	uv run deptry src
-	uv run pytest
+	uv run --locked ruff check .
+	uv run --locked ruff format --check .
+	uv run --locked pyright
+	uv run --locked semgrep --config rules/semgrep --no-git-ignore src tests
+	uv run --locked lint-imports --config rules/import-linter/contracts.ini
+	uv run --locked vulture src --min-confidence 80
+	uv run --locked deptry src
+	uv run --locked pytest
 
 format:
-	uv run ruff format .
+	uv run --locked ruff format .
 
 test:
-	uv run pytest
+	uv run --locked pytest
 
 build:
 	uv build

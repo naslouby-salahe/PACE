@@ -175,6 +175,23 @@ MUTATIONS: dict[str, tuple[str, str, Callable[[SourceUnit], list[Finding]]]] = {
     "escape-cast": ("escape-hatch", "y = cast(int, x)\n", rule_escape_hatches),
     "escape-typing-cast": ("escape-hatch", "y = typing.cast(int, x)\n", rule_escape_hatches),
     "escape-getattr": ("escape-hatch", "y = getattr(x, name)\n", rule_escape_hatches),
+    "escape-subclasses": (
+        "escape-hatch",
+        "kinds = Base.__subclasses__()\n",
+        rule_escape_hatches,
+    ),
+    "escape-globals": ("escape-hatch", "table = globals()\n", rule_escape_hatches),
+    "escape-dict": ("escape-hatch", "table = Base.__dict__\n", rule_escape_hatches),
+    "escape-attrgetter": (
+        "escape-hatch",
+        "read = operator.attrgetter(name)\n",
+        rule_escape_hatches,
+    ),
+    "escape-import-module": (
+        "escape-hatch",
+        "module = importlib.import_module(name)\n",
+        rule_escape_hatches,
+    ),
     "escape-setattr": (
         "escape-hatch",
         "object.__setattr__(self, 'a', 1)\n",

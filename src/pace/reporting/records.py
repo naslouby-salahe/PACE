@@ -583,6 +583,10 @@ class ReportInputs:
     def primary(self, alpha: AlphaLevel, rows: LocalTrainingRowCount) -> tuple[TargetRecord, ...]:
         return self.store.select(alpha, rows, self.cohort(BudgetAnalysisKind.UNIVERSAL_PRIMARY))
 
+    def ablation_arms(self) -> tuple[StudyArm, ...]:
+        arms = self.configuration.scientific.study_arms
+        return tuple(arm for arm in arms if any(r.arm(arm) != r.pace for r in self.store.records))
+
     def alphas(self) -> tuple[AlphaLevel, ...]:
         observed = {record.alpha for record in self.store.records}
         configured = self.configuration.protocol_matrix.alpha_levels
@@ -630,20 +634,20 @@ def mean_of(values: tuple[RateDifference, ...]) -> RateDifference:
     return np.mean(values).item()
 
 
-def method_false_alert(method: ReportedMethod, record: TargetRecord) -> FalseAlertRate:
+def method_rates(method: ReportedMethod, record: TargetRecord) -> MethodRates:
     match method:
         case ReportedMethod.PACE:
-            return record.pace.false_alert
+            return record.pace
         case ReportedMethod.MEAN_ENSEMBLE:
-            return record.mean_ensemble.false_alert
+            return record.mean_ensemble
         case ReportedMethod.LOCAL_BRANCH:
-            return record.local.false_alert
+            return record.local
         case ReportedMethod.PEER_UNION:
-            return record.peer_union.false_alert
+            return record.peer_union
         case ReportedMethod.MAX_FUSION:
-            return record.max_fusion.false_alert
+            return record.max_fusion
         case ReportedMethod.BONFERRONI:
-            return record.bonferroni.false_alert
+            return record.bonferroni
 
 
 def sensitivity_rows(

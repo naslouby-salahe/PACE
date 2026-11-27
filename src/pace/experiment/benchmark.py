@@ -21,10 +21,11 @@ from pace.experiment.inputs import (
     build_target_frame,
     compute_local_evidence,
     compute_peer_evidence,
+    fit_peer_experts,
     train_peer_mlp,
 )
 from pace.experiment.models import fit_local_ensemble, select_local_training_rows
-from pace.experiment.runner import fit_peer_experts, prepare_clients
+from pace.experiment.runner import prepare_clients
 from pace.experiment.sources import digest_source_files
 from pace.types import (
     ComputeMeasurement,

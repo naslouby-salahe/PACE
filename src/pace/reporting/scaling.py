@@ -16,6 +16,7 @@ from pace.reporting.records import (
     mean_of,
     number,
     optional_number,
+    verdict_text,
 )
 from pace.reporting.text import slash_list
 from pace.types import (
@@ -207,6 +208,18 @@ def scaling_points(inputs: ReportInputs) -> tuple[ScalingPoint, ...]:
     return tuple(points)
 
 
+def distinct_cohorts(points: tuple[ScalingPoint, ...]) -> tuple[ScalingCohort, ...]:
+    cohorts = tuple(ScalingCohort)
+    readings = {
+        cohort: tuple(point.readings for point in points if point.cohort is cohort)
+        for cohort in cohorts
+    }
+    first = cohorts[0]
+    if all(readings[cohort] == readings[first] for cohort in cohorts):
+        return (first,)
+    return cohorts
+
+
 def _seed_text(gains: tuple[SeedRateDifference, ...]) -> DisplayText:
     return slash_list(DisplayText(f"{item.seed}: {item.difference:+.4f}") for item in gains)
 
@@ -219,10 +232,11 @@ def scaling_table(inputs: ReportInputs) -> ResultTable:
             ColumnHeading.ALPHA,
             ColumnHeading.LOCAL_ROWS,
             ColumnHeading.COHORT,
+            ColumnHeading.GATING,
             ColumnHeading.TARGETS,
             ColumnHeading.SUPPORTED_TARGETS,
-            ColumnHeading.PACE_DETECTION,
-            ColumnHeading.MEAN_ENSEMBLE_DETECTION,
+            ColumnHeading.PACE_MATCHED_DETECTION,
+            ColumnHeading.MEAN_ENSEMBLE_MATCHED_DETECTION,
             ColumnHeading.PACE_FALSE_ALERT,
             ColumnHeading.MEAN_ENSEMBLE_FALSE_ALERT,
             ColumnHeading.GAIN,
@@ -239,6 +253,10 @@ def scaling_table(inputs: ReportInputs) -> ResultTable:
                 alpha_text(point.alpha),
                 count(point.rows),
                 point.cohort.label,
+                verdict_text(
+                    point.kind is BudgetAnalysisKind.UNIVERSAL_PRIMARY
+                    and point.cohort is ScalingCohort.AVAILABLE
+                ),
                 count(point.target_count),
                 count(point.supported),
                 optional_number(point.pace_detection),
@@ -276,7 +294,7 @@ def scaling_strata_table(inputs: ReportInputs) -> ResultTable:
                 alpha_text(point.alpha),
                 count(point.rows),
                 point.cohort.label,
-                DisplayText(contribution.stratum.name),
+                contribution.stratum.display_label,
                 count(contribution.targets),
                 number(contribution.gain),
             )

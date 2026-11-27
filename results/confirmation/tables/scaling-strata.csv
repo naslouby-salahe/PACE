@@ -1,49 +1,49 @@
 analysis,alpha,local_rows,cohort,stratum,supported_targets,gain
-universal_primary,0.01,100,all supported targets,IOT_23_FRESH,4,0.000218
-universal_primary,0.01,100,targets supported at every budget,IOT_23_FRESH,4,0.000218
-universal_primary,0.01,400,all supported targets,IOT_23_FRESH,4,0.000247
-universal_primary,0.01,400,targets supported at every budget,IOT_23_FRESH,4,0.000247
-universal_primary,0.05,100,all supported targets,IOT_23_FRESH,4,-0.002397
-universal_primary,0.05,100,targets supported at every budget,IOT_23_FRESH,4,-0.002397
-universal_primary,0.05,400,all supported targets,IOT_23_FRESH,4,-0.002614
-universal_primary,0.05,400,targets supported at every budget,IOT_23_FRESH,4,-0.002614
-universal_robustness,0.01,100,all supported targets,IOT_23_FRESH,3,0.000290
-universal_robustness,0.01,100,targets supported at every budget,IOT_23_FRESH,3,0.000290
-universal_robustness,0.01,400,all supported targets,IOT_23_FRESH,3,0.000330
-universal_robustness,0.01,400,targets supported at every budget,IOT_23_FRESH,3,0.000330
-universal_robustness,0.01,750,all supported targets,IOT_23_FRESH,3,0.000000
-universal_robustness,0.01,750,targets supported at every budget,IOT_23_FRESH,3,0.000000
-universal_robustness,0.05,100,all supported targets,IOT_23_FRESH,3,-0.003195
-universal_robustness,0.05,100,targets supported at every budget,IOT_23_FRESH,3,-0.003195
-universal_robustness,0.05,400,all supported targets,IOT_23_FRESH,3,-0.003486
-universal_robustness,0.05,400,targets supported at every budget,IOT_23_FRESH,3,-0.003486
-universal_robustness,0.05,750,all supported targets,IOT_23_FRESH,3,-0.003486
-universal_robustness,0.05,750,targets supported at every budget,IOT_23_FRESH,3,-0.003486
-broad_scaling,0.01,100,all supported targets,IOT_23_FRESH,3,0.000290
-broad_scaling,0.01,100,targets supported at every budget,IOT_23_FRESH,3,0.000290
-broad_scaling,0.01,400,all supported targets,IOT_23_FRESH,3,0.000330
-broad_scaling,0.01,400,targets supported at every budget,IOT_23_FRESH,3,0.000330
-broad_scaling,0.01,2000,all supported targets,IOT_23_FRESH,3,-0.000038
-broad_scaling,0.01,2000,targets supported at every budget,IOT_23_FRESH,3,-0.000038
-broad_scaling,0.05,100,all supported targets,IOT_23_FRESH,3,-0.003195
-broad_scaling,0.05,100,targets supported at every budget,IOT_23_FRESH,3,-0.003195
-broad_scaling,0.05,400,all supported targets,IOT_23_FRESH,3,-0.003486
-broad_scaling,0.05,400,targets supported at every budget,IOT_23_FRESH,3,-0.003486
-broad_scaling,0.05,2000,all supported targets,IOT_23_FRESH,3,0.000000
-broad_scaling,0.05,2000,targets supported at every budget,IOT_23_FRESH,3,0.000000
-high_resource,0.01,100,all supported targets,IOT_23_FRESH,1,0.000000
-high_resource,0.01,100,targets supported at every budget,IOT_23_FRESH,1,0.000000
-high_resource,0.01,400,all supported targets,IOT_23_FRESH,1,0.000000
-high_resource,0.01,400,targets supported at every budget,IOT_23_FRESH,1,0.000000
-high_resource,0.01,2000,all supported targets,IOT_23_FRESH,1,0.000000
-high_resource,0.01,2000,targets supported at every budget,IOT_23_FRESH,1,0.000000
-high_resource,0.01,20000,all supported targets,IOT_23_FRESH,1,0.000000
-high_resource,0.01,20000,targets supported at every budget,IOT_23_FRESH,1,0.000000
-high_resource,0.05,100,all supported targets,IOT_23_FRESH,1,0.000000
-high_resource,0.05,100,targets supported at every budget,IOT_23_FRESH,1,0.000000
-high_resource,0.05,400,all supported targets,IOT_23_FRESH,1,0.000000
-high_resource,0.05,400,targets supported at every budget,IOT_23_FRESH,1,0.000000
-high_resource,0.05,2000,all supported targets,IOT_23_FRESH,1,0.000000
-high_resource,0.05,2000,targets supported at every budget,IOT_23_FRESH,1,0.000000
-high_resource,0.05,20000,all supported targets,IOT_23_FRESH,1,0.000000
-high_resource,0.05,20000,targets supported at every budget,IOT_23_FRESH,1,0.000000
+universal_primary,0.01,100,all supported targets,IoT-23 untouched captures,4,0.000829
+universal_primary,0.01,100,targets supported at every budget,IoT-23 untouched captures,4,0.000829
+universal_primary,0.01,400,all supported targets,IoT-23 untouched captures,4,0.000247
+universal_primary,0.01,400,targets supported at every budget,IoT-23 untouched captures,4,0.000247
+universal_primary,0.05,100,all supported targets,IoT-23 untouched captures,4,-0.002397
+universal_primary,0.05,100,targets supported at every budget,IoT-23 untouched captures,4,-0.002397
+universal_primary,0.05,400,all supported targets,IoT-23 untouched captures,4,-0.002614
+universal_primary,0.05,400,targets supported at every budget,IoT-23 untouched captures,4,-0.002614
+universal_robustness,0.01,100,all supported targets,IoT-23 untouched captures,3,0.001105
+universal_robustness,0.01,100,targets supported at every budget,IoT-23 untouched captures,3,0.001105
+universal_robustness,0.01,400,all supported targets,IoT-23 untouched captures,3,0.000330
+universal_robustness,0.01,400,targets supported at every budget,IoT-23 untouched captures,3,0.000330
+universal_robustness,0.01,750,all supported targets,IoT-23 untouched captures,3,0.001073
+universal_robustness,0.01,750,targets supported at every budget,IoT-23 untouched captures,3,0.001073
+universal_robustness,0.05,100,all supported targets,IoT-23 untouched captures,3,-0.003195
+universal_robustness,0.05,100,targets supported at every budget,IoT-23 untouched captures,3,-0.003195
+universal_robustness,0.05,400,all supported targets,IoT-23 untouched captures,3,-0.003486
+universal_robustness,0.05,400,targets supported at every budget,IoT-23 untouched captures,3,-0.003486
+universal_robustness,0.05,750,all supported targets,IoT-23 untouched captures,3,-0.003486
+universal_robustness,0.05,750,targets supported at every budget,IoT-23 untouched captures,3,-0.003486
+broad_scaling,0.01,100,all supported targets,IoT-23 untouched captures,3,0.001105
+broad_scaling,0.01,100,targets supported at every budget,IoT-23 untouched captures,3,0.001105
+broad_scaling,0.01,400,all supported targets,IoT-23 untouched captures,3,0.000330
+broad_scaling,0.01,400,targets supported at every budget,IoT-23 untouched captures,3,0.000330
+broad_scaling,0.01,2000,all supported targets,IoT-23 untouched captures,3,-0.000038
+broad_scaling,0.01,2000,targets supported at every budget,IoT-23 untouched captures,3,-0.000038
+broad_scaling,0.05,100,all supported targets,IoT-23 untouched captures,3,-0.003195
+broad_scaling,0.05,100,targets supported at every budget,IoT-23 untouched captures,3,-0.003195
+broad_scaling,0.05,400,all supported targets,IoT-23 untouched captures,3,-0.003486
+broad_scaling,0.05,400,targets supported at every budget,IoT-23 untouched captures,3,-0.003486
+broad_scaling,0.05,2000,all supported targets,IoT-23 untouched captures,3,0.000000
+broad_scaling,0.05,2000,targets supported at every budget,IoT-23 untouched captures,3,0.000000
+high_resource,0.01,100,all supported targets,IoT-23 untouched captures,1,0.000000
+high_resource,0.01,100,targets supported at every budget,IoT-23 untouched captures,1,0.000000
+high_resource,0.01,400,all supported targets,IoT-23 untouched captures,1,0.000000
+high_resource,0.01,400,targets supported at every budget,IoT-23 untouched captures,1,0.000000
+high_resource,0.01,2000,all supported targets,IoT-23 untouched captures,1,0.000000
+high_resource,0.01,2000,targets supported at every budget,IoT-23 untouched captures,1,0.000000
+high_resource,0.01,20000,all supported targets,IoT-23 untouched captures,1,0.000000
+high_resource,0.01,20000,targets supported at every budget,IoT-23 untouched captures,1,0.000000
+high_resource,0.05,100,all supported targets,IoT-23 untouched captures,1,0.000000
+high_resource,0.05,100,targets supported at every budget,IoT-23 untouched captures,1,0.000000
+high_resource,0.05,400,all supported targets,IoT-23 untouched captures,1,0.000000
+high_resource,0.05,400,targets supported at every budget,IoT-23 untouched captures,1,0.000000
+high_resource,0.05,2000,all supported targets,IoT-23 untouched captures,1,0.000000
+high_resource,0.05,2000,targets supported at every budget,IoT-23 untouched captures,1,0.000000
+high_resource,0.05,20000,all supported targets,IoT-23 untouched captures,1,0.000000
+high_resource,0.05,20000,targets supported at every budget,IoT-23 untouched captures,1,0.000000

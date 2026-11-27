@@ -1,7 +1,10 @@
 from collections.abc import Iterator, Sequence
 from dataclasses import dataclass
 from math import ceil
+from textwrap import fill
 
+import matplotlib
+from matplotlib.artist import Artist
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 
@@ -10,6 +13,7 @@ from pace.types import (
     AlphaLevel,
     BudgetAnalysisKind,
     DisplayText,
+    FigureCount,
     FigureExtent,
     FigureLayout,
     LocalTrainingRowCount,
@@ -17,7 +21,11 @@ from pace.types import (
     PlotLegendAnchor,
     PlotLineStyle,
     PlotPosition,
+    StudyStratum,
+    default_study_stratum,
 )
+
+matplotlib.rc("axes.formatter", useoffset=False)
 
 
 @dataclass(frozen=True, slots=True)
@@ -66,22 +74,47 @@ def legend_outside(axes: Axes) -> None:
         axes.legend(handles, labels, frameon=False, fontsize=8)
 
 
+def wrap_label(text: DisplayText, limit: FigureCount) -> DisplayText:
+    return DisplayText(fill(text, width=limit.size, break_on_hyphens=False))
+
+
+def side_legend(figure: Figure, handles: Sequence[Artist]) -> None:
+    figure.legend(
+        handles=handles,
+        labels=[
+            wrap_label(DisplayText(handle.get_label()), FigureCount.LEGEND_LABEL_CHARACTERS)
+            for handle in handles
+        ],
+        loc=PlotLegendAnchor.OUTSIDE_RIGHT,
+        frameon=False,
+        fontsize=8,
+    )
+
+
 def legend_beside(figure: Figure) -> None:
     if figure.axes:
-        handles, labels = figure.axes[0].get_legend_handles_labels()
+        handles, _ = figure.axes[0].get_legend_handles_labels()
         if handles:
-            figure.legend(
-                handles=handles,
-                labels=labels,
-                loc=PlotLegendAnchor.OUTSIDE_RIGHT,
-                frameon=False,
-                fontsize=8,
-            )
+            side_legend(figure, handles)
+
+
+def corpus_label(stratum: StudyStratum) -> DisplayText:
+    return default_study_stratum(stratum.dataset).display_label
+
+
+def stratum_label(stratum: StudyStratum) -> DisplayText:
+    if stratum.is_confirmation:
+        return DisplayText(f"{corpus_label(stratum)} (confirmation)")
+    return stratum.display_label
 
 
 def stratum_ticks(
-    axes: Axes, positions: Sequence[PlotPosition], labels: Sequence[DisplayText]
+    axes: Axes, positions: Sequence[PlotPosition], strata: Sequence[StudyStratum]
 ) -> None:
+    labels = [stratum_label(stratum) for stratum in strata]
+    if len(labels) == 1:
+        axes.set_xticks(positions, labels, fontsize=8)
+        return
     axes.set_xticks(positions, labels, rotation=30, ha="right", rotation_mode="anchor", fontsize=8)
 
 

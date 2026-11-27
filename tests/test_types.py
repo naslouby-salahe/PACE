@@ -32,6 +32,7 @@ from pace.types import (
     ScientificDigest,
     SeedDomain,
     SignedUnitFloat,
+    StudyArm,
     StudyStratum,
     TargetPerformance,
     TonIotType,
@@ -212,3 +213,18 @@ def test_target_performance_requires_complete_dataset_local_and_peer_seed_proven
     )
     with pytest.raises(ValueError, match="must belong to the target"):
         replace(performance, local_model_seed=wrong_local_owner)
+
+
+def test_every_stratum_has_a_distinct_paper_label() -> None:
+    labels = [stratum.display_label for stratum in StudyStratum]
+    assert len(set(labels)) == len(StudyStratum)
+    assert StudyStratum.TON_IOT.display_label == "TON_IoT"
+    assert StudyStratum.UNSW_IOT_ATTACK_FLOWS_G2.display_label == "UNSW IoT-attack flows G2"
+    assert not [label for label in labels if "_" in label.replace("TON_IoT", "")]
+
+
+def test_every_study_arm_has_a_distinct_label_without_raw_enum_text() -> None:
+    labels = [arm.display_label for arm in StudyArm]
+    assert len(set(labels)) == len(StudyArm)
+    assert StudyArm.CROSS_FITTED_CALIBRATION.display_label == "Cross-fitted calibration"
+    assert not [label for label in labels if "_" in label or label.isupper()]

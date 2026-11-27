@@ -6,7 +6,9 @@ import numpy as np
 from pace.config import ResolvedConfiguration, ScientificSettings
 from pace.core.decision import (
     TieredLocalEvidence,
+    apply_bonferroni_local_peer_rule,
     apply_local_union_peer_rule,
+    apply_max_fusion_rule,
     apply_protected_local_peer_rule,
     apply_tiered_local_peer_rule,
     block_max_threshold,
@@ -31,6 +33,7 @@ from pace.types import (
     FalseAlarmBudget,
     FloatMatrix,
     LocalDetectorSeed,
+    MaxFusionDecisions,
     ReserveFraction,
     StudyArm,
     TieredCalibrationRule,
@@ -74,18 +77,6 @@ def designed_decisions(
     peer_budget: FalseAlarmBudget,
     rule: TieredCalibrationRule,
 ) -> ChannelDecisions:
-    if rule.design is BankDesign.NO_ANCHOR:
-        return apply_local_union_peer_rule(
-            local.bank_calibration,
-            local.bank_evaluation,
-            peer_calibration_evidence,
-            peer_query_evidence,
-            scientific.calibration_block_size,
-            local_budget,
-            peer_budget,
-            rule.union,
-            local.bank_shares,
-        )
     decide = (
         apply_joint_local_peer_rule
         if rule.design is BankDesign.JOINT_CHANNELS
@@ -120,6 +111,42 @@ def protected_channel_decisions(
         local_budget,
         peer_budget,
         selected,
+    )
+
+
+def max_fusion_decisions(
+    local: LocalEvidence,
+    peers: PeerEvidence,
+    scientific: ScientificSettings,
+    local_budget: FalseAlarmBudget,
+    peer_budget: FalseAlarmBudget,
+) -> MaxFusionDecisions:
+    return apply_max_fusion_rule(
+        local.calibration,
+        local.query,
+        peers.max_fusion_calibration_evidence,
+        peers.max_fusion_query_evidence,
+        scientific.calibration_block_size,
+        local_budget,
+        peer_budget,
+    )
+
+
+def bonferroni_decisions(
+    local: LocalEvidence,
+    peers: PeerEvidence,
+    scientific: ScientificSettings,
+    local_budget: FalseAlarmBudget,
+    peer_budget: FalseAlarmBudget,
+) -> ChannelDecisions:
+    return apply_bonferroni_local_peer_rule(
+        local.calibration,
+        local.query,
+        peers.calibration_evidence,
+        peers.query_evidence,
+        scientific.calibration_block_size,
+        local_budget,
+        peer_budget,
     )
 
 

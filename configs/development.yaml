@@ -29,6 +29,7 @@ scientific:
     nearest_neighbors: 10
     histogram_bins: 20
     covariance_regularization: 0.001
+    covariance_estimator: RIDGE
   local_bank:
     response_forest_trees: 100
     pair_count: 150
@@ -36,6 +37,8 @@ scientific:
     pair_smoothing: 0.5
     anchor_share: 0.5
     anchor_budget_policy: SHARE_CONSERVING
+    design: PER_EXPERT
+    anchor_members: WITHOUT_AUTOENCODER
   calibration_mode: IN_SAMPLE
   cross_fit_folds: 5
   resolution_rows: 2

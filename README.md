@@ -31,11 +31,28 @@ ln -s /path/to/shared/raw data/raw
 uv run pace doctor
 uv run pace preflight
 uv run pace run all
+uv run pace run iot_23_fresh
 uv run pace report
+uv run pace report --population confirmation
 uv run pace accept
+uv run pace accept --population confirmation
+uv run pace audit
+uv run pace benchmark
+uv run pace calibration-study
 ```
 
-The commands use `configs/default.yaml`, with cross-fitted calibration and held-out evaluation. `pace run all` writes each stratum's figures to `outputs/figures/`, `pace report` builds the project's `results/` folder, and `pace accept` evaluates the same-calibration, fixed-FPR protocol (`acceptance.csv`). Run `pace calibration-study` separately to refresh the synthetic calibration figure. Set `PACE_CONFIG` to use another configuration; use an empty `runtime.output_root` for a clean-room run.
+The commands use `configs/default.yaml` (cross-fitted calibration, held-out evaluation, strict provenance); set `PACE_CONFIG` to use another configuration. `configs/development.yaml` is a development configuration whose output is never an official verdict. `pace run all` covers the seven study strata and `pace run iot_23_fresh` the independent confirmation corpus. `pace report` writes the tables, figures and `acceptance.csv` under `results/`; `pace accept` evaluates the same-calibration, fixed-FPR protocol and prints the verdict. For a clean-room run, point `runtime.output_root` at an empty directory.
+
+### Exit codes
+
+| Code | Meaning |
+| ---- | ------- |
+| 0 | success |
+| 1 | gate not met or rejected (also incomplete sources, stale cells, role violations) |
+| 2 | usage or configuration error |
+| 3 | confirmation inconclusive because of a detection ceiling |
+| 4 | runtime failure (message printed as `Error: ...`) |
+| 130 | interrupted; completed cells are kept |
 
 ## Development
 

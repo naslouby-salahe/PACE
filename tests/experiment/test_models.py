@@ -21,6 +21,8 @@ from pace.experiment.models import (
 )
 from pace.types import (
     AnchorBudgetPolicy,
+    AnchorMembers,
+    BankDesign,
     ConditionLimitRule,
     CovarianceEstimator,
     DetectorSampleLimit,
@@ -43,6 +45,8 @@ SETTINGS = LocalBankSettings(
     pair_smoothing=0.5,
     anchor_share=0.5,
     anchor_budget_policy=AnchorBudgetPolicy.SHARE_CONSERVING,
+    design=BankDesign.PER_EXPERT,
+    anchor_members=AnchorMembers.WITHOUT_AUTOENCODER,
 )
 PEERS = 5
 

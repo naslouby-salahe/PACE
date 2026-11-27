@@ -54,6 +54,19 @@ SCALAR_CONVERSIONS = frozenset({"bool", "bytes", "complex", "float", "int", "str
 ESCAPE_HATCH_CALLS = frozenset(
     {"cast", "delattr", "eval", "exec", "getattr", "hasattr", "setattr", "vars", "__import__"}
 )
+REFLECTION_NAMES = frozenset(
+    {
+        "__dict__",
+        "__subclasses__",
+        "attrgetter",
+        "dir",
+        "getmembers",
+        "globals",
+        "import_module",
+        "locals",
+        "methodcaller",
+    }
+)
 SUPPRESSION_PATTERN = re.compile(
     r"#\s*(type:\s*ignore|noqa|pyright:|pylint:|fmt:|nosec|pragma)", re.IGNORECASE
 )
@@ -388,7 +401,7 @@ def rule_escape_hatches(unit: SourceUnit) -> list[Finding]:
             if target in ESCAPE_HATCH_CALLS | {"__setattr__"}:
                 findings.append(unit.finding("escape-hatch", node, ast.unparse(node)[:80]))
         elif isinstance(node, ast.Name | ast.Attribute):
-            if _name_of(node) in {"Any", "object"}:
+            if _name_of(node) in {"Any", "object"} | REFLECTION_NAMES:
                 findings.append(unit.finding("escape-hatch", node, ast.unparse(node)))
         elif isinstance(node, ast.ImportFrom):
             findings.extend(

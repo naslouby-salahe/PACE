@@ -32,6 +32,7 @@ from pace.types import (
     CrossFitFoldCount,
     DetectorCount,
     DetectorSampleLimit,
+    DisplayText,
     EvaluationRole,
     ExecutionDevice,
     ExternalBaseline,
@@ -75,6 +76,7 @@ from pace.types import (
     ScientificDigest,
     SequenceLookback,
     SignificanceLevel,
+    SourceVerification,
     SplitFraction,
     StatisticalPower,
     StudyArm,
@@ -110,28 +112,12 @@ class LocalDetectorSettings(FrozenStrictModel, frozen=True):
     nearest_neighbors: DetectorCount
     histogram_bins: DetectorCount
     covariance_regularization: CovarianceRegularization
-    covariance_estimator: CovarianceEstimator = CovarianceEstimator.RIDGE
+    covariance_estimator: CovarianceEstimator
     covariance_condition_limit: CovarianceConditionLimit | None = None
     covariance_condition_rule: ConditionLimitRule = ConditionLimitRule.FIXED
 
     def with_training_rows(self, rows: LocalTrainingRowCount) -> "LocalDetectorSettings":
-        return LocalDetectorSettings(
-            autoencoder_hidden_widths=self.autoencoder_hidden_widths,
-            autoencoder_epochs=self.autoencoder_epochs,
-            autoencoder_batch_size=self.autoencoder_batch_size,
-            autoencoder_learning_rate=self.autoencoder_learning_rate,
-            local_training_rows=rows,
-            detector_sample_limit=self.detector_sample_limit,
-            pca_explained_variance=self.pca_explained_variance,
-            isolation_forest_trees=self.isolation_forest_trees,
-            lof_neighbors=self.lof_neighbors,
-            nearest_neighbors=self.nearest_neighbors,
-            histogram_bins=self.histogram_bins,
-            covariance_regularization=self.covariance_regularization,
-            covariance_estimator=self.covariance_estimator,
-            covariance_condition_limit=self.covariance_condition_limit,
-            covariance_condition_rule=self.covariance_condition_rule,
-        )
+        return self.model_copy(update=dict(local_training_rows=rows))
 
     @model_validator(mode="after")
     def detector_counts_fit_training_limit(self) -> "LocalDetectorSettings":
@@ -150,8 +136,8 @@ class LocalBankSettings(FrozenStrictModel, frozen=True):
     pair_smoothing: CountSmoothing
     anchor_share: AnchorShare
     anchor_budget_policy: AnchorBudgetPolicy
-    design: BankDesign = BankDesign.PER_EXPERT
-    anchor_members: AnchorMembers = AnchorMembers.WITHOUT_AUTOENCODER
+    design: BankDesign
+    anchor_members: AnchorMembers
 
 
 class BudgetSweepSettings(FrozenStrictModel, frozen=True):
@@ -264,29 +250,8 @@ class ScientificSettings(FrozenStrictModel, frozen=True):
         local_detectors: LocalDetectorSettings,
         target_clients: tuple[ClientName, ...] = (),
     ) -> "ScientificSettings":
-        return ScientificSettings(
-            alpha=alpha,
-            reserve_fraction=self.reserve_fraction,
-            calibration_block_size=self.calibration_block_size,
-            minimum_peer_count=self.minimum_peer_count,
-            seed=self.seed,
-            learning_seeds=self.learning_seeds,
-            joint_scale_cap=self.joint_scale_cap,
-            joint_scale_iterations=self.joint_scale_iterations,
-            budget_sweep_multipliers=self.budget_sweep_multipliers,
-            peer_training=self.peer_training,
-            local_detectors=local_detectors,
-            local_bank=self.local_bank,
-            calibration_mode=self.calibration_mode,
-            cross_fit_folds=self.cross_fit_folds,
-            resolution_rows=self.resolution_rows,
-            curve_variants=self.curve_variants,
-            operating_grid=self.operating_grid,
-            evaluation_role=self.evaluation_role,
-            baselines=self.baselines,
-            study_arms=self.study_arms,
-            target_clients=target_clients,
-            numerical_threads=self.numerical_threads,
+        return self.model_copy(
+            update=dict(alpha=alpha, local_detectors=local_detectors, target_clients=target_clients)
         )
 
     @field_validator("learning_seeds", mode="after")
@@ -336,6 +301,10 @@ class RuntimeSettings(FrozenStrictModel, frozen=True):
     execution_device: ExecutionDevice
     lab_network: LabNetwork
     provenance_active: ProvenanceActive = True
+
+    @property
+    def verification(self) -> SourceVerification:
+        return SourceVerification.for_provenance(self.provenance_active)
 
     def rooted_at(self, repository_root: Path) -> "RuntimeSettings":
         return RuntimeSettings(
@@ -484,6 +453,18 @@ class _ConfigurationInput(FrozenStrictModel, frozen=True):
     reporting: ReportingSettings
     protocol_matrix: ProtocolMatrixSettings
 
+    @model_validator(mode="after")
+    def development_role_has_one_training_size(self) -> "_ConfigurationInput":
+        if (
+            self.scientific.evaluation_role is EvaluationRole.DEVELOPMENT
+            and len(self.protocol_matrix.local_training_row_counts) > 1
+        ):
+            raise ValueError(
+                "The DEVELOPMENT evaluation role depends on the local training size, so the "
+                "protocol matrix may list only one local training row count"
+            )
+        return self
+
 
 class _ScientificDigestMaterial(FrozenStrictModel, frozen=True):
     scientific: ScientificSettings
@@ -498,12 +479,21 @@ def _scientific_digest(
     )
 
 
+def _first_cause(error: Exception) -> DisplayText:
+    if isinstance(error, ValidationError):
+        location, message = f"{error}".splitlines()[1:3]
+        return DisplayText(f"{location}: {message.strip()}")
+    return DisplayText(" ".join(f"{error}".split()))
+
+
 def load_configuration(configuration_path: Path, repository_root: Path) -> ResolvedConfiguration:
     try:
         decoded = yaml.safe_load(configuration_path.read_text(encoding=TextEncoding.UTF8))
         supplied = _ConfigurationInput.model_validate_json(json.dumps(decoded), strict=True)
     except (OSError, yaml.YAMLError, ValidationError, TypeError) as error:
-        raise ConfigurationError(f"Configuration is invalid: {configuration_path}") from error
+        raise ConfigurationError(
+            f"Configuration is invalid: {configuration_path}: {_first_cause(error)}"
+        ) from error
     if not supplied.scientific.study_arms:
         raise ConfigurationError(
             f"Configuration must name at least one study arm: {configuration_path}"

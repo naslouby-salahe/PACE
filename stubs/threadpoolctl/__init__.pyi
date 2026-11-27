@@ -1,0 +1,13 @@
+class LibController:
+    internal_api: str
+    filepath: str
+    @property
+    def num_threads(self) -> int: ...
+
+class ThreadpoolController:
+    lib_controllers: list[LibController]
+
+class threadpool_limits:
+    def __init__(self, limits: int | None = ...) -> None: ...
+    def __enter__(self) -> threadpool_limits: ...
+    def __exit__(self, *exception: object) -> None: ...

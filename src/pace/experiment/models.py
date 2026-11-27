@@ -14,7 +14,6 @@ from torch import Tensor, nn
 
 from pace.config import LocalBankSettings, LocalDetectorSettings
 from pace.core.evidence import (
-    alternative_anchor_evidence,
     anchor_detector_rows,
     fit_ecod_sum,
     fit_pair_cooccurrence,
@@ -22,7 +21,6 @@ from pace.core.evidence import (
     target_relative_evidence,
 )
 from pace.types import (
-    BankDesign,
     ConditionLimitRule,
     CovarianceConditionLimit,
     CovarianceEstimator,
@@ -46,7 +44,6 @@ from pace.types import (
     LocalTrainingRowCount,
     ObservationCount,
     PcaSolver,
-    RowIndexArray,
 )
 
 
@@ -433,26 +430,12 @@ class LocalBankDetectorScores:
 
 
 @dataclass(frozen=True, slots=True)
-class AnchorAlternative:
-    design: BankDesign
-    calibration: FloatArray
-    query: FloatArray
-
-
-@dataclass(frozen=True, slots=True)
 class LocalBankEvidence:
     anchor_calibration: FloatArray
     anchor_query: FloatArray
     expert_kinds: tuple[LocalExpertKind, ...]
     calibration: FloatMatrix
     query: FloatMatrix
-    anchor_alternatives: tuple[AnchorAlternative, ...] = ()
-
-    def anchor_for(self, design: BankDesign) -> tuple[FloatArray, FloatArray]:
-        for alternative in self.anchor_alternatives:
-            if alternative.design is design:
-                return alternative.calibration, alternative.query
-        return self.anchor_calibration, self.anchor_query
 
     def __post_init__(self) -> None:
         if (
@@ -473,7 +456,6 @@ class LocalBankEvidence:
             tuple(self.expert_kinds[index] for index in kept),
             self.calibration[kept],
             self.query[kept],
-            self.anchor_alternatives,
         )
 
     def family_shares(self) -> tuple[FalseAlarmBudget, ...]:
@@ -489,7 +471,6 @@ class LocalBankEvidence:
             tuple(self.expert_kinds[index] for index in kept),
             self.calibration[kept],
             self.query[kept],
-            self.anchor_alternatives,
         )
 
 
@@ -525,24 +506,6 @@ def _evidence_rows(
                 for row in range(reference.shape[0])
             ]
         ),
-    )
-
-
-def _anchor_alternatives(
-    calibration_evidence: FloatMatrix, query_evidence: FloatMatrix, anchor_rows: RowIndexArray
-) -> tuple[AnchorAlternative, ...]:
-    bank_rows = np.asarray(
-        [kind.detector.row for kind in LocalExpertKind if kind.detector is not None],
-        dtype=np.int64,
-    )
-    return tuple(
-        AnchorAlternative(
-            design,
-            alternative_anchor_evidence(calibration_evidence, anchor_rows, bank_rows, design),
-            alternative_anchor_evidence(query_evidence, anchor_rows, bank_rows, design),
-        )
-        for design in BankDesign
-        if design.is_anchor_alternative
     )
 
 
@@ -597,14 +560,12 @@ def build_local_bank(
     by_kind_cal[LocalExpertKind.RARITY_PAIR_COOCCURRENCE] = rarity_cal[1]
     by_kind_query[LocalExpertKind.RARITY_PAIR_COOCCURRENCE] = rarity_qry[1]
     kinds = tuple(LocalExpertKind)
-    alternatives = _anchor_alternatives(calibration_evidence, query_evidence, anchor_rows)
     return LocalBankEvidence(
         np.mean(calibration_evidence[anchor_rows], axis=0),
         np.mean(query_evidence[anchor_rows], axis=0),
         kinds,
         np.stack([by_kind_cal[kind] for kind in kinds]),
         np.stack([by_kind_query[kind] for kind in kinds]),
-        alternatives,
     )
 
 

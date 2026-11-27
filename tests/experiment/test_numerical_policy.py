@@ -1,6 +1,7 @@
 import os
 import subprocess
 import sys
+from unittest.mock import Mock
 
 import numpy as np
 import pytest
@@ -20,12 +21,19 @@ def _environment(monkeypatch: pytest.MonkeyPatch, value: str) -> None:
         monkeypatch.setenv(variable, value)
 
 
+def _loaded_pool(monkeypatch: pytest.MonkeyPatch, threads: int) -> None:
+    pool = Mock(internal_api="openblas", filepath="/lib/libopenblas.so", num_threads=threads)
+    controller = Mock(lib_controllers=[pool])
+    monkeypatch.setattr(implementation, "ThreadpoolController", Mock(return_value=controller))
+
+
 def test_matching_environment_and_torch_threads_satisfy_the_policy(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     _environment(monkeypatch, "3")
     monkeypatch.setattr(torch, "get_num_threads", lambda: 3)
     monkeypatch.setattr(torch, "get_num_interop_threads", lambda: 3)
+    _loaded_pool(monkeypatch, 3)
     require_numerical_policy(3)
 
 
@@ -53,6 +61,17 @@ def test_a_mismatched_inter_operation_thread_count_is_rejected(
     monkeypatch.setattr(torch, "get_num_threads", lambda: 1)
     monkeypatch.setattr(torch, "get_num_interop_threads", lambda: 7)
     with pytest.raises(NumericalPolicyError, match="7 inter-operation"):
+        require_numerical_policy(1)
+
+
+def test_a_loaded_pool_with_another_thread_count_is_rejected(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _environment(monkeypatch, "1")
+    monkeypatch.setattr(torch, "get_num_threads", lambda: 1)
+    monkeypatch.setattr(torch, "get_num_interop_threads", lambda: 1)
+    _loaded_pool(monkeypatch, 8)
+    with pytest.raises(NumericalPolicyError, match=r"openblas in libopenblas.so \(8\)"):
         require_numerical_policy(1)
 
 

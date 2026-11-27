@@ -1,14 +1,17 @@
 from collections import defaultdict
 from collections.abc import Callable
+from itertools import cycle
 from pathlib import Path
-from textwrap import fill
 
 import numpy as np
 import structlog
+from matplotlib.axes import Axes
 from matplotlib.figure import Figure
+from matplotlib.ticker import MaxNLocator
 
 from pace.reporting.calibration import calibration_sensitivity
 from pace.reporting.figure_canvas import (
+    Panel,
     axes_center,
     horizontal_guide,
     legend_beside,
@@ -16,27 +19,33 @@ from pace.reporting.figure_canvas import (
     new_figure,
     panel_grid,
     primary_panels,
+    stratum_label,
     stratum_ticks,
     vertical_guide,
+    wrap_label,
 )
 from pace.reporting.figure_diagnostics import census, power, resolution_mechanism
+from pace.reporting.figure_ranges import share_gain_abscissa, share_gain_ordinate
+from pace.reporting.figure_titles import figure_title
 from pace.reporting.figures_operating import comparable_operating_curves, matching_coverage
 from pace.reporting.records import (
-    MethodRates,
     ReportInputs,
     TargetRecord,
     decomposition_of,
-    method_false_alert,
+    method_rates,
     pooled_difference,
     sensitivity_rows,
 )
-from pace.reporting.scaling import scaling_points
+from pace.reporting.scaling import distinct_cohorts, scaling_points
+from pace.reporting.text import bootstrap_interval_text
 from pace.types import (
+    CDF_HEADROOM,
     BudgetAnalysisKind,
     DatasetName,
     DetectionContribution,
     DisplayText,
     FalseAlertGuide,
+    FigureCount,
     FigureExtent,
     FigureName,
     FigureResolution,
@@ -49,16 +58,16 @@ from pace.types import (
     LogEvent,
     PdfMetadataField,
     PlotInk,
-    PlotLegendAnchor,
     PlotLineStyle,
     PlotMarker,
     PlotPosition,
     PlotStepWhere,
+    PointArea,
     RateDifference,
     ReferenceAnnotation,
     ReportedMethod,
-    ScalingCohort,
     SeedPanel,
+    SeriesStyle,
     StudyStratum,
     UnavailableReading,
 )
@@ -67,26 +76,11 @@ logger = structlog.get_logger()
 
 
 def _nominal_gain_label() -> DisplayText:
-    return DisplayText("Gain vs same-calibration\nmean ensemble (nominal α)")
-
-
-def _settle_noise_only_axes(figure: Figure) -> None:
-    for axes in figure.axes:
-        bottom, top = axes.get_ylim()
-        if top - bottom < 1e-9:
-            axes.set_ylim(-0.04, 0.04)
-        elif top - bottom < 1e-3:
-            centre = (top + bottom) / 2.0
-            axes.set_ylim(centre - 5e-4, centre + 5e-4)
-        left, right = axes.get_xlim()
-        if 0.0 < right - left < 1e-3:
-            centre = (left + right) / 2.0
-            axes.set_xlim(centre - 5e-4, centre + 5e-4)
+    return DisplayText("Detection-rate gain vs\nsame-calibration\nmean ensemble (nominal α)")
 
 
 def save_figure(figure: Figure, name: FigureName, directory: Path) -> tuple[Path, ...]:
     directory.mkdir(parents=True, exist_ok=True)
-    _settle_noise_only_axes(figure)
     pdf = directory / f"{name}.{ImageFormat.PDF}"
     png = directory / f"{name}.{ImageFormat.PNG}"
     figure.savefig(
@@ -114,24 +108,25 @@ def stratum_color(record: TargetRecord) -> HexColor:
     return record.stratum.color
 
 
-def _method_rates(method: ReportedMethod, record: TargetRecord) -> MethodRates:
-    match method:
-        case ReportedMethod.PACE:
-            return record.pace
-        case ReportedMethod.MEAN_ENSEMBLE:
-            return record.mean_ensemble
-        case ReportedMethod.LOCAL_BRANCH:
-            return record.local
-        case ReportedMethod.PEER_UNION:
-            return record.peer_union
-        case ReportedMethod.MAX_FUSION:
-            return record.max_fusion
-        case ReportedMethod.BONFERRONI:
-            return record.bonferroni
-
-
 def _mean(values: tuple[RateDifference, ...]) -> RateDifference:
     return np.mean(values).item()
+
+
+def _scatter_methods(axes: Axes, records: tuple[TargetRecord, ...]) -> None:
+    hollow = cycle((PlotMarker.CIRCLE, PlotMarker.SQUARE, PlotMarker.TRIANGLE))
+    for method in ReportedMethod:
+        rates = [method_rates(method, item) for item in records]
+        highlighted = method is ReportedMethod.PACE
+        axes.scatter(
+            _mean(tuple(item.false_alert for item in rates)),
+            _mean(tuple(item.detection for item in rates)),
+            marker=PlotMarker.DIAMOND if highlighted else next(hollow),
+            facecolors=method.color if highlighted else PlotInk.NONE,
+            edgecolors=PlotInk.BLACK if highlighted else method.color,
+            s=(PointArea.HIGHLIGHTED if highlighted else PointArea.REGULAR).size,
+            zorder=2 if highlighted else 3,
+            label=method.display_label,
+        )
 
 
 def operating_curves(inputs: ReportInputs) -> Figure:
@@ -150,24 +145,19 @@ def operating_curves(inputs: ReportInputs) -> Figure:
         axes.plot(
             false_alert,
             detection,
-            marker=PlotMarker.CIRCLE,
+            marker=SeriesStyle.THIN.marker,
+            markersize=SeriesStyle.THIN.size,
+            linewidth=SeriesStyle.THIN.width,
             color=ReportedMethod.PACE.color,
             label=ReferenceAnnotation.PACE_SWEEP.label,
         )
-        for method in ReportedMethod:
-            rates = [_method_rates(method, item) for item in panel.records]
-            axes.scatter(
-                _mean(tuple(item.false_alert for item in rates)),
-                _mean(tuple(item.detection for item in rates)),
-                color=method.color,
-                s=40,
-                label=method.display_label,
-            )
-        vertical_guide(axes, panel.alpha.fraction)
+        _scatter_methods(axes, panel.records)
+        vertical_guide(axes, panel.alpha.fraction, label=FalseAlertGuide.NOMINAL.label)
         axes.set_xlabel("Mean realised false-alert rate")
+        axes.xaxis.set_major_locator(MaxNLocator(nbins=FigureCount.SPARSE_AXIS_TICKS.size))
+        axes.set_ylim(0.0, CDF_HEADROOM)
         axes.set_ylabel("Mean detection rate")
-    handles, _ = figure.axes[0].get_legend_handles_labels()
-    figure.legend(handles=handles, loc=PlotLegendAnchor.OUTSIDE_RIGHT, fontsize=8, frameon=False)
+    legend_beside(figure)
     return figure
 
 
@@ -176,13 +166,15 @@ def false_alert_distribution(inputs: ReportInputs) -> Figure:
     figure = new_figure(10.0, 3.4 * ((len(panels) + 1) // 2))
     methods = (ReportedMethod.PACE, ReportedMethod.MEAN_ENSEMBLE, ReportedMethod.MAX_FUSION)
     for panel, axes in panel_grid(figure, panels):
-        for method in methods:
-            rates = np.sort([method_false_alert(method, item) for item in panel.records])
+        for method, style in zip(methods, cycle(SeriesStyle), strict=False):
+            rates = np.sort([method_rates(method, item).false_alert for item in panel.records])
             axes.step(
                 rates,
                 np.arange(1, len(rates) + 1) / len(rates),
                 where=PlotStepWhere.POST,
                 color=method.color,
+                linestyle=style.line,
+                linewidth=style.width,
                 label=method.display_label,
             )
         for guide in FalseAlertGuide:
@@ -192,15 +184,13 @@ def false_alert_distribution(inputs: ReportInputs) -> Figure:
                 style=PlotLineStyle.DASHED
                 if guide is FalseAlertGuide.NOMINAL
                 else PlotLineStyle.DOTTED,
-                label=DisplayText("α" if guide is FalseAlertGuide.NOMINAL else "2α"),
+                label=guide.label,
             )
         axes.set_xlabel("Realised false-alert rate per target")
+        axes.xaxis.set_major_locator(MaxNLocator(nbins=FigureCount.SPARSE_AXIS_TICKS.size))
+        axes.set_ylim(0.0, CDF_HEADROOM)
         axes.set_ylabel("Cumulative share of targets")
-    if panels:
-        handles, _ = figure.axes[0].get_legend_handles_labels()
-        figure.legend(
-            handles=handles, loc=PlotLegendAnchor.OUTSIDE_RIGHT, fontsize=8, frameon=False
-        )
+    legend_beside(figure)
     return figure
 
 
@@ -225,8 +215,8 @@ def detection_decomposition(inputs: ReportInputs) -> Figure:
             )
             axes.bar(range(len(strata)), heights, bottom=bottom, label=part.label)
             bottom = bottom + heights
-        stratum_ticks(axes, range(len(strata)), [item.display_label for item in strata])
-        axes.set_ylabel("Mean of per-target\nattack-family means")
+        stratum_ticks(axes, range(len(strata)), strata)
+        axes.set_ylabel("Detection rate by channel\n(mean of per-target\nattack-family means)")
     return figure
 
 
@@ -246,9 +236,11 @@ def family_gains(inputs: ReportInputs) -> Figure:
             )
             jitter = np.random.default_rng(index).uniform(-0.25, 0.25, len(gains))
             axes.scatter(index + jitter, gains, s=6, color=stratum.color, alpha=0.7)
-        stratum_ticks(axes, range(len(strata)), [item.display_label for item in strata])
+        stratum_ticks(axes, range(len(strata)), strata)
         axes.axhline(0.0, color=PlotInk.BLACK, linewidth=0.8)
-        axes.set_ylabel("Attack-family gain vs\nsame-calibration mean\nensemble (nominal α)")
+        axes.set_ylabel(
+            "Attack-family detection-rate\ngain vs same-calibration\nmean ensemble (nominal α)"
+        )
     return figure
 
 
@@ -262,10 +254,10 @@ def peer_drowning(inputs: ReportInputs) -> Figure:
         ReportedMethod.BONFERRONI,
     )
     for panel, axes in panel_grid(figure, panels):
-        for method in methods:
+        for method, style in zip(methods, cycle(SeriesStyle), strict=False):
             differences = np.sort(
                 [
-                    _method_rates(method, item).detection - item.local.detection
+                    method_rates(method, item).detection - item.local.detection
                     for item in panel.records
                 ]
             )
@@ -274,13 +266,26 @@ def peer_drowning(inputs: ReportInputs) -> Figure:
                 np.arange(1, len(differences) + 1) / len(differences),
                 where=PlotStepWhere.POST,
                 color=method.color,
+                linestyle=style.line,
+                linewidth=style.width,
                 label=method.display_label,
             )
         axes.axvline(0.0, color=PlotInk.BLACK, linewidth=0.8)
+        axes.xaxis.set_major_locator(MaxNLocator(nbins=FigureCount.DENSE_AXIS_TICKS.size))
         axes.set_xlabel("Detection rate minus the PACE local branch alone")
+        axes.set_ylim(0.0, CDF_HEADROOM)
         axes.set_ylabel("Cumulative share of targets")
         legend_outside(axes)
     return figure
+
+
+def _stratum_legend(figure: Figure, panels: tuple[Panel, ...]) -> None:
+    strata = sorted(
+        {record.stratum for panel in panels for record in panel.records}, key=lambda s: s.name
+    )
+    for stratum in strata:
+        figure.axes[0].scatter([], [], c=[stratum.color], s=14, label=stratum_label(stratum))
+    legend_beside(figure)
 
 
 def gain_against_peer_coverage(inputs: ReportInputs) -> Figure:
@@ -295,18 +300,9 @@ def gain_against_peer_coverage(inputs: ReportInputs) -> Figure:
         )
         axes.axhline(0.0, color=PlotInk.BLACK, linewidth=0.8)
         axes.set_xlabel("Peer-union detection rate")
+        axes.set_xlim(0.0, CDF_HEADROOM)
         axes.set_ylabel(_nominal_gain_label())
-    if panels:
-        strata = sorted(
-            {record.stratum for panel in panels for record in panel.records}, key=lambda s: s.name
-        )
-        handles = [
-            figure.axes[0].scatter([], [], c=[stratum.color], s=14, label=stratum.display_label)
-            for stratum in strata
-        ]
-        figure.legend(
-            handles=handles, loc=PlotLegendAnchor.OUTSIDE_RIGHT, fontsize=7, frameon=False
-        )
+    _stratum_legend(figure, panels)
     return figure
 
 
@@ -323,7 +319,7 @@ def false_alert_decomposition(inputs: ReportInputs) -> Figure:
             values = [
                 _mean(
                     tuple(
-                        method_false_alert(method, item)
+                        method_rates(method, item).false_alert
                         for item in panel.records
                         if item.stratum is stratum
                     )
@@ -337,8 +333,8 @@ def false_alert_decomposition(inputs: ReportInputs) -> Figure:
                 color=method.color,
                 label=method.display_label,
             )
-        horizontal_guide(axes, panel.alpha.fraction, label=DisplayText("Nominal α"))
-        stratum_ticks(axes, positions.tolist(), [item.display_label for item in strata])
+        horizontal_guide(axes, panel.alpha.fraction, label=FalseAlertGuide.NOMINAL.label)
+        stratum_ticks(axes, positions.tolist(), strata)
         axes.set_ylabel("Mean realised false-alert rate")
     return figure
 
@@ -369,7 +365,7 @@ def headline_gain(inputs: ReportInputs) -> Figure:
             )
         labels.append(
             DisplayText(
-                f"α={cell.alpha.fraction}, N={cell.local_training_rows} "
+                f"α = {cell.alpha.fraction}, N = {cell.local_training_rows} "
                 f"({level.matched_targets}/{cell.target_count} supported)"
                 + (
                     f" — {UnavailableReading.NOT_AVAILABLE}"
@@ -383,10 +379,8 @@ def headline_gain(inputs: ReportInputs) -> Figure:
     axes.axvline(0.0, color=PlotInk.BLACK, linewidth=0.8)
     axes.set_yticks(ticks, labels, fontsize=7)
     axes.set_title("PACE vs same-calibration mean-ensemble local branch")
-    confidence = inputs.configuration.reporting.confidence_level
-    axes.set_xlabel(
-        f"Detection-rate gain at realised FPR = α ({confidence:.0%} interval); N = training rows"
-    )
+    interval_text = bootstrap_interval_text(inputs.configuration.reporting.confidence_level)
+    axes.set_xlabel(f"Detection-rate gain at realised FPR = α ({interval_text})\nN = training rows")
     return figure
 
 
@@ -404,17 +398,7 @@ def target_gains(inputs: ReportInputs) -> Figure:
         axes.axhline(0.0, color=PlotInk.BLACK, linewidth=0.8)
         axes.set_xlabel("Target (sorted by gain)")
         axes.set_ylabel(_nominal_gain_label())
-    if panels:
-        strata = sorted(
-            {record.stratum for panel in panels for record in panel.records}, key=lambda s: s.name
-        )
-        handles = [
-            figure.axes[0].scatter([], [], c=[stratum.color], s=14, label=stratum.display_label)
-            for stratum in strata
-        ]
-        figure.legend(
-            handles=handles, loc=PlotLegendAnchor.OUTSIDE_RIGHT, fontsize=7, frameon=False
-        )
+    _stratum_legend(figure, panels)
     return figure
 
 
@@ -437,10 +421,10 @@ def stratum_gains(inputs: ReportInputs) -> Figure:
                 color=PlotInk.BLACK,
                 capsize=3,
             )
-        stratum_ticks(axes, range(len(strata)), [item.display_label for item in strata])
-        confidence = settings.confidence_level
+        stratum_ticks(axes, range(len(strata)), strata)
         axes.set_ylabel(
-            f"Gain vs same-calibration\nmean ensemble\n(nominal α; {confidence:.0%} CI)"
+            "Detection-rate gain vs\nsame-calibration mean ensemble\n"
+            f"(nominal α; {bootstrap_interval_text(settings.confidence_level)})"
         )
         axes.axhline(0.0, color=PlotInk.BLACK, linewidth=0.8)
     return figure
@@ -448,7 +432,7 @@ def stratum_gains(inputs: ReportInputs) -> Figure:
 
 def ablations(inputs: ReportInputs) -> Figure:
     settings = inputs.configuration.reporting
-    arms = inputs.configuration.scientific.study_arms
+    arms = inputs.ablation_arms()
     panels = primary_panels(inputs)
     figure = new_figure(10.0, 3.6 * ((len(panels) + 1) // 2))
     for panel, axes in panel_grid(figure, panels):
@@ -466,12 +450,13 @@ def ablations(inputs: ReportInputs) -> Figure:
             )
         axes.set_yticks(
             range(len(arms)),
-            [fill(arm.display_label, width=34) for arm in arms],
+            [wrap_label(arm.display_label, FigureCount.ARM_LABEL_CHARACTERS) for arm in arms],
             fontsize=7,
         )
         axes.axvline(0.0, color=PlotInk.BLACK, linewidth=0.8)
         axes.set_xlabel(
-            f"PACE detection rate minus arm\n(nominal α; {settings.confidence_level:.0%} CI)"
+            "PACE detection rate minus arm (nominal α)\n"
+            f"({bootstrap_interval_text(settings.confidence_level)})"
         )
     return figure
 
@@ -494,7 +479,7 @@ def budget_scaling(inputs: ReportInputs) -> Figure:
     settings = inputs.configuration.reporting
     points = scaling_points(inputs)
     alphas = inputs.alphas()
-    cohorts = tuple(ScalingCohort)
+    cohorts = distinct_cohorts(points)
     figure = new_figure(4.6 * len(alphas) + 2.6, 3.6 * len(cohorts))
     for row, cohort in enumerate(cohorts):
         for column, alpha in enumerate(alphas):
@@ -527,8 +512,11 @@ def budget_scaling(inputs: ReportInputs) -> Figure:
                     marker=marker,
                     linestyle=style,
                     markersize=size,
-                    markerfacecolor="none",
-                    label=DisplayText(f"{kind.title} ({chosen[0].target_count} targets)"),
+                    markerfacecolor=PlotInk.NONE,
+                    label=DisplayText(
+                        f"{kind.title} ({chosen[0].target_count} "
+                        f"{'target' if chosen[0].target_count == 1 else 'targets'})"
+                    ),
                 )
                 axes.fill_between(
                     rows,
@@ -541,8 +529,9 @@ def budget_scaling(inputs: ReportInputs) -> Figure:
             axes.axhline(0.0, color=PlotInk.BLACK, linewidth=0.8)
             axes.set_xlabel("Local training rows")
             axes.set_ylabel(
-                "Matched-FPR gain at FPR = α\n"
-                f"(PACE − same-calibration comparator;\n{settings.confidence_level:.0%} CI bands)"
+                "Matched-FPR detection-rate gain\n"
+                "PACE − same-calibration comparator\n"
+                f"({bootstrap_interval_text(settings.confidence_level)} bands)"
             )
     return figure
 
@@ -617,7 +606,7 @@ def sensitivity(inputs: ReportInputs) -> Figure:
         if positions:
             axes.set_xlim(min(positions) - 0.5, max(positions) + 0.5)
         if len(scopes) < len(LeaveOneOutScope):
-            axes.set_title(f"{panel.title}\nStratum omission unavailable")
+            axes.set_title(f"{panel.title}\nLeave-one-stratum-out not available\n(single corpus)")
         axes.axhline(0.0, color=PlotInk.BLACK, linewidth=0.8)
         axes.set_ylabel(_nominal_gain_label())
     return figure
@@ -657,14 +646,12 @@ def draw(name: FigureName, inputs: ReportInputs) -> Figure:
         FigureName.BUDGET_SCALING,
     ):
         legend_beside(figure)
+    if name.has_gain_ordinate:
+        share_gain_ordinate(figure)
+    if name.has_gain_abscissa:
+        share_gain_abscissa(figure)
     if name not in (FigureName.RESOLUTION_MECHANISM, FigureName.CALIBRATION_SENSITIVITY):
-        confirmation = inputs.evidence and all(
-            item.stratum.is_confirmation for item in inputs.evidence
-        )
-        figure.suptitle(
-            "Confirmation cohort" if confirmation else "Primary population",
-            x=axes_center(figure),
-        )
+        figure.suptitle(figure_title(name, inputs), x=axes_center(figure))
     return figure
 
 

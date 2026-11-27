@@ -1,5 +1,7 @@
 import dataclasses
+import re
 from dataclasses import dataclass
+from itertools import combinations
 from pathlib import Path
 from unittest.mock import Mock
 
@@ -21,13 +23,15 @@ from pace.experiment.artifacts import (
 from pace.experiment.implementation import digest_implementation
 from pace.experiment.preflight import matrix_variants
 from pace.experiment.runner import run_dataset_study
-from pace.experiment.sources import digest_files
+from pace.experiment.sources import digest_source_files
 from pace.reporting.acceptance import summarize_acceptance
-from pace.reporting.figure_canvas import Panel, axes_center, new_figure  # noqa
+from pace.reporting.figure_canvas import Panel, axes_center, new_figure, stratum_label  # noqa
+from pace.reporting.figure_titles import figure_title
 from pace.reporting.figures import write_figures
 from pace.reporting.metrics import summarize_campaign
-from pace.reporting.operating import mean_operating_points
+from pace.reporting.operating import mean_operating_points, unique_results
 from pace.reporting.records import (
+    MethodRates,
     RecordStore,
     ReportInputs,
     StratumBudgetEvidence,
@@ -45,6 +49,7 @@ from pace.reporting.service import (
     report_acceptance,
     report_dataset_campaign,
     report_registered_dataset_matrix,
+    results_root,
     validate_campaign_report,
     write_table,
 )
@@ -70,13 +75,16 @@ from pace.types import (
     DatasetName,
     DatasetValidationError,
     ExternalBaseline,
+    FigureCount,
     FigureName,
     ImplementationScope,
     LearningSeed,
     LeaveOneOutScope,
     OperatingMethod,
+    OutputDirectory,
     PopulationScope,
     ReplacementPolicy,
+    SourceVerification,
     StudyArm,
     StudyStratum,
     TableName,
@@ -155,6 +163,7 @@ def _write_verified_campaign(
     configuration: ResolvedConfiguration,
     dataset: DatasetName = DatasetName.N_BAIOT,
     client_name: str = "target",
+    provenance_active: bool = True,
 ) -> tuple[Path, ...]:
     raw_root = configuration.runtime.raw_data_root
     dataset_directory = "N-BaIoT" if dataset is DatasetName.N_BAIOT else dataset.name
@@ -164,7 +173,7 @@ def _write_verified_campaign(
     source_files = (
         (source_file,) if dataset is not DatasetName.N_BAIOT else nbaiot_source_files(raw_root)
     )
-    source_digest = digest_files(source_files, raw_root)
+    source_digest = digest_source_files(source_files, raw_root)
     implementation_digest = digest_implementation()
     reuse_or_write_artifact(
         campaign_artifact_path(
@@ -186,6 +195,7 @@ def _write_verified_campaign(
             implementation_digest,
             ArtifactKind.DATASET_CAMPAIGN,
             dataset,
+            provenance_active=provenance_active,
         ),
         ReplacementPolicy.PRESERVE_VALID,
     )
@@ -260,6 +270,39 @@ def test_report_rejects_source_changes_instead_of_reusing_old_evidence(
 
     with pytest.raises(ArtifactConflictError):
         report_registered_dataset_campaign(DatasetName.N_BAIOT, configuration)
+
+
+def _development(configuration: ResolvedConfiguration) -> ResolvedConfiguration:
+    return configuration.model_copy(
+        update={"runtime": configuration.runtime.model_copy(update={"provenance_active": False})}
+    )
+
+
+def test_development_report_needs_development(tmp_path: Path) -> None:
+    configuration = _configuration(tmp_path)
+    development = _development(configuration)
+    _write_verified_campaign(configuration, provenance_active=False)
+
+    with pytest.raises(ArtifactConflictError):
+        report_registered_dataset_campaign(DatasetName.N_BAIOT, configuration)
+    result = report_registered_dataset_campaign(DatasetName.N_BAIOT, development)
+    persisted = PersistedCampaignReport.model_validate_json(
+        result.artifact_path.path.read_bytes(), strict=True
+    )
+    assert persisted.source_verification is SourceVerification.DEVELOPMENT
+    assert results_root(configuration).name == OutputDirectory.RESULTS
+    assert results_root(development) == results_root(configuration) / OutputDirectory.DEVELOPMENT
+
+
+def test_strict_report_is_marked_strict(tmp_path: Path) -> None:
+    configuration = _configuration(tmp_path)
+    _write_verified_campaign(configuration)
+    result = report_registered_dataset_campaign(DatasetName.N_BAIOT, configuration)
+    persisted = PersistedCampaignReport.model_validate_json(
+        result.artifact_path.path.read_bytes(), strict=True
+    )
+    assert persisted.source_verification is SourceVerification.STRICT
+    assert result.artifact_path.path.is_relative_to(tmp_path / "outputs" / "reports")
 
 
 def test_reporting_configuration_changes_get_separate_reusable_artifacts(
@@ -375,7 +418,7 @@ def world(tmp_path_factory: pytest.TempPathFactory) -> ReportWorld:
             configuration.scientific,
             configuration.splitting,
             configuration.scientific_digest,
-            digest_files((source,), configuration.runtime.raw_data_root),
+            digest_source_files((source,), configuration.runtime.raw_data_root),
             digest_implementation(),
             ArtifactKind.DATASET_CAMPAIGN,
             DatasetName.N_BAIOT,
@@ -504,6 +547,24 @@ def test_report_provenance_is_validated(world: ReportWorld) -> None:
         validate(variant)
 
 
+@pytest.mark.parametrize("provenance_active", [True, False])
+def test_report_verification_follows_provenance_activity(
+    world: ReportWorld, provenance_active: bool
+) -> None:
+    configuration = world.configuration
+    provenance = ReportProvenance(
+        configuration.scientific_digest,
+        configuration.reporting,
+        configuration.reporting_digest,
+        "3" * 64,
+        "5" * 64,
+        "4" * 64,
+        (),
+        provenance_active,
+    )
+    assert provenance.verification.is_official is provenance_active
+
+
 def test_report_sources_must_be_canonical_and_match_their_digests(world: ReportWorld) -> None:
     report, sources = _report(world)
     fields: dict[str, object] = {
@@ -624,6 +685,33 @@ def test_configuration_table_names_both_comparators(inputs: ReportInputs) -> Non
     assert "block-max" in settings["reporting.nominal_gain_comparator"]
 
 
+def test_configuration_table_labels_every_setting_explicitly(inputs: ReportInputs) -> None:
+    by_name = {table.name: table for table in build_tables(inputs)}
+    settings = {str(row[0]): str(row[1]) for row in by_name[TableName.CONFIGURATION].rows}
+    assert settings["scientific.alpha"] == "per matrix cell"
+    assert settings["scientific.local_detectors.local_training_rows"] == "per matrix cell"
+    assert settings["runtime.source_verification"] == SourceVerification.STRICT.name
+    assert settings["scientific.local_bank.anchor_budget_policy"] == "Share-conserving"
+    assert settings["scientific.local_bank.design"] == "Per-expert"
+    assert settings["scientific.local_bank.anchor_members"] == "Without autoencoder"
+    assert settings["scientific.local_detectors.covariance_condition_limit"] == "none"
+    assert "Cross-fitted calibration" in settings["scientific.study_arms"]
+    assert not [
+        text
+        for text in settings.values()
+        if re.search(r"\bNone\b|\b[A-Z]{2,}(_[A-Z0-9]+)+\b", text)
+    ]
+
+
+def test_ablations_omit_arms_that_equal_pace(inputs: ReportInputs) -> None:
+    assert StudyArm.CROSS_FITTED_CALIBRATION not in inputs.ablation_arms()
+    assert StudyArm.NO_LOCAL_CHANNEL in inputs.ablation_arms()
+    by_name = {table.name: table for table in build_tables(inputs)}
+    shown = {str(row[2]) for row in by_name[TableName.ABLATIONS].rows}
+    assert StudyArm.CROSS_FITTED_CALIBRATION.display_label not in shown
+    assert StudyArm.NO_LOCAL_CHANNEL.display_label in shown
+
+
 def test_operating_points_count_targets_instead_of_target_seed_observations(
     inputs: ReportInputs,
 ) -> None:
@@ -658,7 +746,7 @@ def test_confirmation_panels_do_not_show_unavailable_exclusions(
     reporting_figures.sensitivity(inputs)
     labels = axes.set_xticks.call_args.args[1]
     assert labels == [LeaveOneOutScope.TARGET.axis_label]
-    assert "Stratum omission unavailable" in axes.set_title.call_args.args[0]
+    assert "Leave-one-stratum-out not available" in axes.set_title.call_args.args[0]
 
 
 def test_matching_coverage_distinguishes_unavailable_comparisons(
@@ -679,25 +767,192 @@ def test_matching_coverage_distinguishes_unavailable_comparisons(
     assert "target-budget pairs" in axes.set_xlabel.call_args.args[0]
 
 
+def _confirmation(inputs: ReportInputs) -> ReportInputs:
+    return dataclasses.replace(
+        inputs,
+        evidence=tuple(
+            dataclasses.replace(item, stratum=StudyStratum.IOT_23_FRESH) for item in inputs.evidence
+        ),
+    )
+
+
+def _saturated(inputs: ReportInputs) -> ReportInputs:
+    def full(rates: MethodRates) -> MethodRates:
+        return dataclasses.replace(rates, detection=1.0)
+
+    records = tuple(
+        dataclasses.replace(
+            item,
+            pace=full(item.pace),
+            mean_ensemble=full(item.mean_ensemble),
+            local=full(item.local),
+            peer_union=full(item.peer_union),
+            max_fusion=full(item.max_fusion),
+            bonferroni=full(item.bonferroni),
+        )
+        for item in inputs.store.records
+    )
+    return dataclasses.replace(inputs, store=RecordStore(records))
+
+
+def test_figure_titles_name_the_stratum_and_the_interval_rule(inputs: ReportInputs) -> None:
+    assert figure_title(FigureName.TARGET_GAINS, inputs) == "Primary population: N-BaIoT"
+    assert figure_title(FigureName.HEADLINE_GAIN, inputs).split("\n") == [
+        "Primary population: N-BaIoT",
+        "Intervals: targets resampled within corpus; corpora fixed",
+    ]
+
+
+def test_pooled_figures_do_not_name_a_single_stratum(inputs: ReportInputs) -> None:
+    other = dataclasses.replace(inputs.evidence[0], stratum=StudyStratum.GOTHAM_2025)
+    pooled = dataclasses.replace(inputs, evidence=(*inputs.evidence, other))
+    assert figure_title(FigureName.TARGET_GAINS, pooled) == "Primary population"
+
+
+def test_confirmation_figures_count_the_cohort_targets(inputs: ReportInputs) -> None:
+    title = figure_title(FigureName.TARGET_GAINS, _confirmation(inputs))
+    assert title == "Independent confirmation cohort (5 IoT-23 targets)"
+    assert stratum_label(StudyStratum.IOT_23_FRESH) == "IoT-23 (confirmation)"
+    assert stratum_label(StudyStratum.GOTHAM_2025) == StudyStratum.GOTHAM_2025.display_label
+
+
+def test_saturated_strata_say_so_in_the_stratum_figure_title(inputs: ReportInputs) -> None:
+    note = "saturated: every method detects all attack rows"
+    assert note in figure_title(FigureName.OPERATING_CURVES, _saturated(inputs))
+    assert note not in figure_title(FigureName.OPERATING_CURVES, inputs)
+    assert note not in figure_title(FigureName.HEADLINE_GAIN, _saturated(inputs))
+
+
 def test_report_figures_identify_the_population(
     inputs: ReportInputs, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     figure = Mock()
     monkeypatch.setattr(
         "pace.reporting.figures._builders",
-        Mock(return_value={FigureName.HEADLINE_GAIN: Mock(return_value=figure)}),
+        Mock(return_value={FigureName.CENSUS: Mock(return_value=figure)}),
     )
     monkeypatch.setattr("pace.reporting.figures.axes_center", Mock(return_value=0.42))
-    reporting_figures.draw(FigureName.HEADLINE_GAIN, inputs)
-    figure.suptitle.assert_called_with("Primary population", x=0.42)
-    confirmation = dataclasses.replace(
-        inputs,
-        evidence=tuple(
-            dataclasses.replace(item, stratum=StudyStratum.IOT_23_FRESH) for item in inputs.evidence
-        ),
+    reporting_figures.draw(FigureName.CENSUS, inputs)
+    figure.suptitle.assert_called_with("Primary population: N-BaIoT", x=0.42)
+    reporting_figures.draw(FigureName.CENSUS, _confirmation(inputs))
+    figure.suptitle.assert_called_with("Independent confirmation cohort (5 IoT-23 targets)", x=0.42)
+
+
+LABEL_LINE_LIMIT = 76
+PEER_DROWNING_METHODS = 4
+FALSE_ALERT_METHODS = 3
+MAX_GAIN_LABEL_LINES = 3
+
+
+@pytest.mark.parametrize("name", list(FigureName))
+def test_axis_labels_stay_short_unique_and_inside_the_figure(
+    name: FigureName, inputs: ReportInputs
+) -> None:
+    figure = reporting_figures.draw(name, inputs)
+    figure.draw_without_rendering()
+    for axes in figure.axes:
+        for label in (axes.get_xlabel(), axes.get_ylabel(), axes.get_title()):
+            assert all(len(line) <= LABEL_LINE_LIMIT for line in label.split("\n")), label
+            assert "))" not in label
+    extents = [
+        text.get_window_extent()
+        for axes in figure.axes
+        for text in (axes.xaxis.label, axes.yaxis.label)
+        if text.get_text()
+    ]
+    area = figure.bbox
+    assert all(
+        area.x0 <= extent.x0
+        and extent.x1 <= area.x1
+        and area.y0 <= extent.y0 <= extent.y1 <= area.y1
+        for extent in extents
     )
-    reporting_figures.draw(FigureName.HEADLINE_GAIN, confirmation)
-    figure.suptitle.assert_called_with("Confirmation cohort", x=0.42)
+    assert not any(first.overlaps(second) for first, second in combinations(extents, 2))
+
+
+def test_interval_axes_name_the_interval_without_the_resampling_rule(
+    inputs: ReportInputs,
+) -> None:
+    labels = [
+        axes.get_xlabel()
+        for name in (FigureName.HEADLINE_GAIN, FigureName.ABLATIONS)
+        for axes in reporting_figures.draw(name, inputs).axes
+    ]
+    assert labels and all("95% bootstrap interval" in label for label in labels)
+    assert not any("resampled" in label for label in labels)
+
+
+def test_gain_figures_share_one_symmetric_vertical_range(inputs: ReportInputs) -> None:
+    figure = reporting_figures.draw(FigureName.TARGET_GAINS, inputs)
+    limits = {axes.get_ylim() for axes in figure.axes}
+    assert len(limits) == 1
+    bottom, top = limits.pop()
+    assert bottom == -top
+
+
+def test_peer_drowning_shares_one_symmetric_horizontal_range(inputs: ReportInputs) -> None:
+    figure = reporting_figures.draw(FigureName.PEER_DROWNING, inputs)
+    limits = {axes.get_xlim() for axes in figure.axes}
+    assert len(limits) == 1
+    left, right = limits.pop()
+    assert left == -right
+
+
+def test_peer_drowning_series_have_distinct_line_styles(inputs: ReportInputs) -> None:
+    figure = reporting_figures.peer_drowning(inputs)
+    series = figure.axes[0].get_lines()[:PEER_DROWNING_METHODS]
+    assert len({(line.get_linestyle(), line.get_linewidth()) for line in series}) == len(series)
+
+
+def test_power_figure_states_its_assumptions(inputs: ReportInputs) -> None:
+    axes = reporting_figures.draw(FigureName.POWER, inputs).axes[0]
+    assumed = inputs.configuration.protocol_matrix.power
+    assert "nominal-α gains, not matched-FPR gains" in axes.get_title()
+    assert f"power {assumed.power:.2f}" in axes.get_title()
+    assert f"significance level {assumed.significance_level:.2f}" in axes.get_title()
+
+
+def test_sensitivity_titles_fit_within_their_column(inputs: ReportInputs) -> None:
+    figure = reporting_figures.draw(FigureName.SENSITIVITY, inputs)
+    figure.draw_without_rendering()
+    assert "not available" in figure.axes[0].get_title()
+    assert all(
+        axes.title.get_window_extent().width <= figure.bbox.width / 2 for axes in figure.axes
+    )
+
+
+@pytest.mark.parametrize("name", [FigureName.OPERATING_CURVES, FigureName.FALSE_ALERT_DISTRIBUTION])
+def test_false_alert_axes_keep_their_horizontal_ticks_sparse(
+    name: FigureName, inputs: ReportInputs
+) -> None:
+    figure = reporting_figures.draw(name, inputs)
+    for axes in figure.axes:
+        left, right = axes.get_xlim()
+        shown = [tick for tick in axes.get_xticks() if left <= tick <= right]
+        assert len(shown) <= FigureCount.SPARSE_AXIS_TICKS.size + 1
+
+
+def test_false_alert_distribution_series_have_distinct_styles(inputs: ReportInputs) -> None:
+    figure = reporting_figures.false_alert_distribution(inputs)
+    series = figure.axes[0].get_lines()[:FALSE_ALERT_METHODS]
+    assert len({(line.get_linestyle(), line.get_linewidth()) for line in series}) == len(series)
+
+
+def test_headline_and_gain_labels_are_spaced_and_closed(inputs: ReportInputs) -> None:
+    headline = reporting_figures.headline_gain(inputs)
+    assert all("α = " in tick.get_text() for tick in headline.axes[0].get_yticklabels())
+    stratum = reporting_figures.stratum_gains(inputs).axes[0].get_ylabel().split("\n")
+    assert len(stratum) <= MAX_GAIN_LABEL_LINES
+    assert stratum[-1] == "(nominal α; 95% bootstrap interval)"
+    scaling = reporting_figures.budget_scaling(inputs).axes[0].get_ylabel().split("\n")
+    assert len(scaling) <= MAX_GAIN_LABEL_LINES
+    assert scaling[-1] == "(95% bootstrap interval bands)"
+
+
+def test_matching_coverage_legend_uses_the_alpha_symbol(inputs: ReportInputs) -> None:
+    figure = reporting_figures_operating.matching_coverage(inputs)
+    labels = [handle.get_label() for handle in figure.axes[0].get_legend_handles_labels()[0]]
+    assert labels and all(label.startswith("α = ") for label in labels)
 
 
 def test_figure_titles_are_centred_over_the_axes_span() -> None:
@@ -883,3 +1138,25 @@ def test_confirmation_results_are_written_under_their_own_directory(
     assert scopes == [PopulationScope.CONFIRMATION]
     assert (tmp_path / "results" / "confirmation" / "tables" / "acceptance.csv").is_file()
     assert not (tmp_path / "results" / "tables" / "acceptance.csv").exists()
+
+
+def test_repeated_identical_results_are_counted_once() -> None:
+    alpha = campaign_configuration().scientific.alpha
+    result = _target_performance(7)
+    variants = (
+        VariantPerformances(StudyStratum.N_BAIOT, alpha, 100, (result,)),
+        VariantPerformances(StudyStratum.N_BAIOT, alpha, 100, (result,)),
+    )
+    assert unique_results(variants)[(alpha, 100)][result.target] == [result]
+
+
+def test_conflicting_results_for_one_seed_are_rejected() -> None:
+    alpha = campaign_configuration().scientific.alpha
+    result = _target_performance(7)
+    other = dataclasses.replace(result, realized_false_alert_rate=0.05)
+    variants = (
+        VariantPerformances(StudyStratum.N_BAIOT, alpha, 100, (result,)),
+        VariantPerformances(StudyStratum.N_BAIOT, alpha, 100, (other,)),
+    )
+    with pytest.raises(ArtifactConflictError, match="seed 7"):
+        unique_results(variants)

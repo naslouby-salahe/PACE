@@ -1,10 +1,11 @@
 from collections import defaultdict
+from itertools import cycle
 
 import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 
-from pace.reporting.figure_canvas import new_figure
+from pace.reporting.figure_canvas import new_figure, side_legend
 from pace.reporting.operating import (
     MeanOperatingPoint,
     comparison_references,
@@ -22,8 +23,8 @@ from pace.types import (
     MatchDirection,
     OperatingMethod,
     PlotInk,
-    PlotLegendAnchor,
     PlotMarker,
+    SeriesStyle,
 )
 
 
@@ -38,30 +39,44 @@ def _by_panel(
     return grouped
 
 
+def _series_styles(methods: set[OperatingMethod]) -> dict[OperatingMethod, SeriesStyle]:
+    styles = {
+        OperatingMethod.PACE: SeriesStyle.BOLD,
+        OperatingMethod.MEAN_ENSEMBLE_MATCHED: SeriesStyle.DASHED,
+    }
+    background = cycle((SeriesStyle.DASH_DOT, SeriesStyle.DOTTED, SeriesStyle.THIN))
+    others = sorted(methods - styles.keys(), key=lambda method: method.name)
+    styles.update(zip(others, background, strict=False))
+    return styles
+
+
 def _plot_operating_methods(
     axes: Axes,
     methods: dict[OperatingMethod, list[MeanOperatingPoint]],
-    selected: set[OperatingMethod],
+    visible: set[OperatingMethod],
     references: set[OperatingMethod],
+    styles: dict[OperatingMethod, SeriesStyle],
     limit: FalseAlertRate,
 ) -> CriterionSatisfied:
     has_points = False
     for method, points in methods.items():
-        if method not in selected and method not in references:
+        if method not in visible:
             continue
         shown = [point for point in points if point.false_alert_rate <= limit]
         if shown:
             has_points = True
+            reference = method in references
             axes.plot(
                 [point.false_alert_rate for point in shown],
                 [point.detection_rate for point in shown],
                 marker=PlotMarker.CIRCLE,
                 color=method.color,
                 label=method.display_label,
-                linewidth=2.2 if method in references else 1.0,
-                alpha=1.0 if method in references else 0.65,
-                markersize=4 if method in references else 2.5,
-                zorder=3 if method in references else 2,
+                linestyle=styles[method].line,
+                linewidth=styles[method].width,
+                alpha=1.0 if reference else 0.65,
+                markersize=4 if reference else 2.5,
+                zorder=3 if reference else 2,
             )
     return has_points
 
@@ -77,6 +92,7 @@ def comparable_operating_curves(inputs: ReportInputs) -> Figure:
     }
     references = {OperatingMethod.PACE, OperatingMethod.MEAN_ENSEMBLE_MATCHED}
     variants = set(comparison_references(inputs)) - baselines - references
+    styles = _series_styles(baselines | variants | references)
     panels = (
         ("Baselines", 1.0, baselines),
         ("Baselines, low FPR", 0.06, baselines),
@@ -89,7 +105,9 @@ def comparable_operating_curves(inputs: ReportInputs) -> Figure:
                 len(panels), max(1, len(grouped)), row * len(grouped) + column + 1
             )
             axes.grid(alpha=0.25)
-            has_points = _plot_operating_methods(axes, methods, selected, references, limit)
+            has_points = _plot_operating_methods(
+                axes, methods, selected | references, references, styles, limit
+            )
             axes.set_title(
                 f"{label}, {rows} local rows" + (" — no points" if not has_points else "")
             )
@@ -105,7 +123,7 @@ def comparable_operating_curves(inputs: ReportInputs) -> Figure:
         for handle, label in zip(variant_handles, variant_labels, strict=True)
         if label not in labels
     )
-    figure.legend(handles=handles, loc=PlotLegendAnchor.OUTSIDE_RIGHT, fontsize=8, frameon=False)
+    side_legend(figure, handles)
     return figure
 
 
@@ -144,7 +162,7 @@ def matching_coverage(inputs: ReportInputs) -> Figure:
                 height=width,
                 color=_direction_ink(direction),
                 alpha=0.4 + 0.3 * (alpha is AlphaLevel.ALPHA_005),
-                label=f"alpha {alpha.fraction}: {direction.display_label}",
+                label=f"α = {alpha.fraction}: {direction.display_label}",
             )
             offset += 1
     axes.set_yticks(
@@ -158,5 +176,5 @@ def matching_coverage(inputs: ReportInputs) -> Figure:
     axes.set_title(f"Training budgets pooled: {budgets} rows")
     axes.set_xlabel("Matched share of available target-budget pairs (no bar: unavailable)")
     handles, _ = axes.get_legend_handles_labels()
-    figure.legend(handles=handles, loc=PlotLegendAnchor.OUTSIDE_RIGHT, fontsize=8, frameon=False)
+    side_legend(figure, handles)
     return figure

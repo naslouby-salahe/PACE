@@ -2,10 +2,10 @@ from collections.abc import Callable
 from dataclasses import dataclass
 
 import numpy as np
+from scipy.special import log_expit
 
 from pace.types import (
     AnchorMembers,
-    BankDesign,
     CountSmoothing,
     DetectorScoreMatrix,
     FeatureCount,
@@ -53,20 +53,21 @@ def target_relative_evidence(reference: FloatArray, query: FloatArray) -> FloatA
     )
 
 
-def probability_tail_evidence(reference: FloatArray, query: FloatArray) -> FloatArray:
-    sorted_reference = _validated_scores(reference)
-    if (
-        query.ndim != 1
-        or not np.isfinite(query).all()
-        or np.any(query < 0.0)
-        or np.any(query > 1.0)
-        or np.any(sorted_reference < 0.0)
-        or np.any(sorted_reference > 1.0)
-    ):
-        raise ValueError("Probability scores must be finite values between zero and one")
-    reference_maximum = max(sorted_reference[-1], np.finfo(np.float64).tiny)
+def _log_attack_probability(margins: FloatArray) -> FloatArray:
+    return np.asarray(log_expit(margins), dtype=np.float64)
+
+
+def probability_tail_evidence(
+    reference_margins: FloatArray, query_margins: FloatArray
+) -> FloatArray:
+    sorted_reference = _validated_scores(reference_margins)
+    if query_margins.ndim != 1 or not np.isfinite(query_margins).all():
+        raise ValueError("query margins must be a finite one-dimensional array")
+    reference_log_probability = _log_attack_probability(sorted_reference[-1:])
     return _empirical_evidence(
-        sorted_reference, query, lambda beyond: np.log(beyond / reference_maximum)
+        sorted_reference,
+        query_margins,
+        lambda beyond: _log_attack_probability(beyond) - reference_log_probability,
     )
 
 
@@ -90,25 +91,6 @@ def local_ensemble_evidence(
 def _validated(features: FloatMatrix) -> None:
     if features.ndim != 2 or features.shape[0] == 0 or not np.isfinite(features).all():
         raise ValueError("Local bank features must be a finite, non-empty row-by-feature matrix")
-
-
-def alternative_anchor_evidence(
-    detector_evidence: FloatMatrix,
-    member_rows: RowIndexArray,
-    bank_rows: RowIndexArray,
-    design: BankDesign,
-) -> FloatArray:
-    members = detector_evidence[member_rows]
-    match design:
-        case BankDesign.MEDIAN_ANCHOR:
-            return np.median(members, axis=0)
-        case BankDesign.TRIMMED_ANCHOR:
-            return np.mean(np.sort(members, axis=0)[1:-1], axis=0)
-        case BankDesign.COMPLEMENTARY_ANCHOR:
-            complement = np.setdiff1d(member_rows, bank_rows)
-            return np.mean(detector_evidence[complement], axis=0)
-        case _:
-            raise ValueError("Only anchor-alternative designs define an alternative anchor")
 
 
 def anchor_detector_rows(

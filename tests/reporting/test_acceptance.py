@@ -37,7 +37,9 @@ from pace.reporting.records import (
     records_of,
 )
 from pace.reporting.scaling import (
+    ScalingPoint,
     common_targets,
+    distinct_cohorts,
     scaling_points,
     scaling_strata_table,
     scaling_table,
@@ -471,7 +473,7 @@ def test_scaling_tables_and_figure_expose_matched_fpr_evidence(
     strata = scaling_strata_table(inputs)
     assert len(strata.rows) == sum(len(point.strata) for point in scaling_points(inputs))
     figure = budget_scaling(inputs)
-    assert len(figure.axes) == len(inputs.alphas()) * len(ScalingCohort)
+    assert len(figure.axes) == len(inputs.alphas())
     styles = {
         (line.get_linestyle(), line.get_marker())
         for axes in figure.axes
@@ -497,3 +499,31 @@ def test_a_target_unsupported_at_one_budget_leaves_the_common_cohort() -> None:
     )
     assert common == frozenset({first.target})
     assert common_targets({}) == frozenset()
+
+
+def _point(cohort: ScalingCohort, *readings: TargetLevel) -> ScalingPoint:
+    return ScalingPoint(
+        BudgetAnalysisKind.UNIVERSAL_PRIMARY,
+        AlphaLevel.ALPHA_001,
+        100,
+        cohort,
+        2,
+        readings,
+        None,
+        None,
+        None,
+    )
+
+
+def test_cohort_rows_merge_only_when_every_point_agrees() -> None:
+    first, second = _level("a"), _level("b")
+    same = (
+        _point(ScalingCohort.AVAILABLE, first, second),
+        _point(ScalingCohort.COMMON, first, second),
+    )
+    assert distinct_cohorts(same) == (ScalingCohort.AVAILABLE,)
+    different = (
+        _point(ScalingCohort.AVAILABLE, first, second),
+        _point(ScalingCohort.COMMON, first),
+    )
+    assert distinct_cohorts(different) == tuple(ScalingCohort)

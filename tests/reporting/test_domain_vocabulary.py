@@ -102,6 +102,7 @@ def test_reporting_quantities_keep_their_scientific_values() -> None:
     }
     assert {section for section in ConfigurationSection} == {
         ConfigurationSection.SCIENTIFIC,
+        ConfigurationSection.RUNTIME,
         ConfigurationSection.SPLITTING,
         ConfigurationSection.REPORTING,
         ConfigurationSection.PROTOCOL_MATRIX,

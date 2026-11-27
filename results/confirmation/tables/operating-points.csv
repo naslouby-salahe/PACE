@@ -39,14 +39,14 @@ local_rows,method,nominal_budget,targets,false_alert_rate,detection_rate
 100,KitNET,0.001,5,0.000277,0.400000
 100,KitNET,0.0025,5,0.000277,0.400000
 100,KitNET,0.005,5,0.001509,0.400543
-100,KitNET,0.01,5,0.003278,0.600523
-100,KitNET,0.02,5,0.009011,0.642643
-100,KitNET,0.035,5,0.034039,0.706271
-100,KitNET,0.05,5,0.039822,0.706329
-100,KitNET,0.075,5,0.048659,0.706387
-100,KitNET,0.1,5,0.069313,0.728762
-100,KitNET,0.15,5,0.126693,0.731986
-100,KitNET,0.25,5,0.193888,0.735365
+100,KitNET,0.01,5,0.002907,0.600523
+100,KitNET,0.02,5,0.007947,0.645897
+100,KitNET,0.035,5,0.032781,0.727640
+100,KitNET,0.05,5,0.038712,0.727698
+100,KitNET,0.075,5,0.047359,0.727727
+100,KitNET,0.1,5,0.069610,0.727727
+100,KitNET,0.15,5,0.125921,0.734120
+100,KitNET,0.25,5,0.193521,0.735300
 100,Original PACE (legacy anchor fallback),0.0005,5,0.003186,0.996593
 100,Original PACE (legacy anchor fallback),0.001,5,0.003186,0.996593
 100,Original PACE (legacy anchor fallback),0.0025,5,0.003186,0.996593
@@ -191,18 +191,18 @@ local_rows,method,nominal_budget,targets,false_alert_rate,detection_rate
 400,PACE with anchor collapse,0.1,5,0.031235,0.997908
 400,PACE with anchor collapse,0.15,5,0.044525,0.997908
 400,PACE with anchor collapse,0.25,5,0.088842,1.000000
-400,DIoT (flow-symbol adaptation),0.0005,5,0.000686,0.217739
-400,DIoT (flow-symbol adaptation),0.001,5,0.001256,0.219815
-400,DIoT (flow-symbol adaptation),0.0025,5,0.003017,0.219863
-400,DIoT (flow-symbol adaptation),0.005,5,0.004042,0.223596
-400,DIoT (flow-symbol adaptation),0.01,5,0.006971,0.248459
-400,DIoT (flow-symbol adaptation),0.02,5,0.015825,0.337097
-400,DIoT (flow-symbol adaptation),0.035,5,0.025259,0.462192
-400,DIoT (flow-symbol adaptation),0.05,5,0.033955,0.596330
-400,DIoT (flow-symbol adaptation),0.075,5,0.051195,0.611128
-400,DIoT (flow-symbol adaptation),0.1,5,0.062687,0.663836
-400,DIoT (flow-symbol adaptation),0.15,5,0.095424,0.738390
-400,DIoT (flow-symbol adaptation),0.25,5,0.158582,0.839358
+400,DIoT (flow-symbol adaptation),0.0005,5,0.001248,0.217834
+400,DIoT (flow-symbol adaptation),0.001,5,0.001820,0.219796
+400,DIoT (flow-symbol adaptation),0.0025,5,0.003412,0.226496
+400,DIoT (flow-symbol adaptation),0.005,5,0.004349,0.226770
+400,DIoT (flow-symbol adaptation),0.01,5,0.007303,0.380024
+400,DIoT (flow-symbol adaptation),0.02,5,0.016288,0.527163
+400,DIoT (flow-symbol adaptation),0.035,5,0.024972,0.536768
+400,DIoT (flow-symbol adaptation),0.05,5,0.032499,0.671902
+400,DIoT (flow-symbol adaptation),0.075,5,0.049548,0.747623
+400,DIoT (flow-symbol adaptation),0.1,5,0.061680,0.768348
+400,DIoT (flow-symbol adaptation),0.15,5,0.096761,0.838008
+400,DIoT (flow-symbol adaptation),0.25,5,0.154599,0.861572
 400,PACE with hierarchical family budgets,0.0005,5,0.003281,0.996564
 400,PACE with hierarchical family budgets,0.001,5,0.003281,0.996564
 400,PACE with hierarchical family budgets,0.0025,5,0.003281,0.996564
@@ -217,16 +217,16 @@ local_rows,method,nominal_budget,targets,false_alert_rate,detection_rate
 400,PACE with hierarchical family budgets,0.25,5,0.089042,1.000000
 400,KitNET,0.0005,5,0.000031,0.400000
 400,KitNET,0.001,5,0.000303,0.400000
-400,KitNET,0.0025,5,0.000381,0.422660
-400,KitNET,0.005,5,0.001944,0.422660
-400,KitNET,0.01,5,0.005061,0.585049
-400,KitNET,0.02,5,0.008136,0.585049
-400,KitNET,0.035,5,0.022851,0.634923
-400,KitNET,0.05,5,0.040425,0.710627
-400,KitNET,0.075,5,0.052816,0.710627
-400,KitNET,0.1,5,0.064028,0.710627
-400,KitNET,0.15,5,0.118997,0.777293
-400,KitNET,0.25,5,0.185591,0.777293
+400,KitNET,0.0025,5,0.000329,0.422660
+400,KitNET,0.005,5,0.001598,0.422660
+400,KitNET,0.01,5,0.004281,0.585776
+400,KitNET,0.02,5,0.006655,0.586153
+400,KitNET,0.035,5,0.021501,0.652744
+400,KitNET,0.05,5,0.040562,0.710627
+400,KitNET,0.075,5,0.052016,0.710627
+400,KitNET,0.1,5,0.064770,0.710627
+400,KitNET,0.15,5,0.121275,0.777293
+400,KitNET,0.25,5,0.182857,0.777293
 400,Original PACE (legacy anchor fallback),0.0005,5,0.003281,0.996564
 400,Original PACE (legacy anchor fallback),0.001,5,0.003281,0.996564
 400,Original PACE (legacy anchor fallback),0.0025,5,0.003281,0.996564

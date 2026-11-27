@@ -17,7 +17,7 @@ from pace.experiment.artifacts import (
 )
 from pace.experiment.implementation import digest_implementation
 from pace.experiment.runner import run_dataset_workflow
-from pace.experiment.sources import digest_files
+from pace.experiment.sources import digest_source_files
 from pace.experiment.status import (
     inspect_dataset_campaign_status,
     inspect_matrix_status,
@@ -50,7 +50,6 @@ from pace.types import (
     FeatureSchemaId,
     LearningSeed,
     ReplacementPolicy,
-    ScientificDigest,
     StudyStratum,
     TargetPerformance,
 )
@@ -156,7 +155,7 @@ def _write_verified_campaign(
     source_file.parent.mkdir(parents=True)
     source_file.write_bytes(b"immutable source fixture")
     source_files = (source_file,)
-    input_digest = digest_files(source_files, raw_root)
+    input_digest = digest_source_files(source_files, raw_root)
     implementation_digest = digest_implementation()
     destination = campaign_artifact_path(
         configuration.runtime.output_root,
@@ -327,19 +326,10 @@ def test_campaign_status_verifies_provenance_before_reporting_complete(
     assert artifact_path.stat().st_mtime_ns == original_modified
 
 
-def test_campaign_status_marks_changed_input_provenance_stale(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
+def test_campaign_status_marks_changed_input_provenance_stale(tmp_path: Path) -> None:
     configuration = _configuration(tmp_path, tmp_path / "outputs")
-    _write_verified_campaign(configuration, configuration.runtime.raw_data_root)
-
-    def changed_input_digest(_source_files: tuple[Path, ...], _root: Path) -> ScientificDigest:
-        return "a" * 64
-
-    monkeypatch.setattr(
-        "pace.experiment.sources.digest_files",
-        changed_input_digest,
-    )
+    source_file, _ = _write_verified_campaign(configuration, configuration.runtime.raw_data_root)
+    source_file.write_text("a changed source file", encoding="utf-8")
 
     status = inspect_registered_dataset_campaign_status(DatasetName.N_BAIOT, configuration)
 
@@ -361,7 +351,7 @@ def test_campaign_status_marks_corrupt_artifact_invalid(tmp_path: Path) -> None:
     assert status.target_count is None
 
 
-def test_campaign_status_marks_unavailable_source_stale(
+def test_campaign_status_reports_unavailable_raw_data_as_such(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     configuration = _configuration(tmp_path, tmp_path / "outputs")
@@ -379,8 +369,10 @@ def test_campaign_status_marks_unavailable_source_stale(
 
     status = inspect_registered_dataset_campaign_status(DatasetName.N_BAIOT, configuration)
 
-    assert status.state is CampaignCompletionState.STALE
+    assert status.state is CampaignCompletionState.SOURCES_MISSING
     assert status.artifact_path.path == artifact_path
+    unavailable = inspect_matrix_status(StudyStratum.N_BAIOT, configuration)
+    assert [cell.state for cell in unavailable] == [CampaignCompletionState.SOURCES_MISSING]
 
 
 def _runtime_configuration(tmp_path: Path) -> ResolvedConfiguration:

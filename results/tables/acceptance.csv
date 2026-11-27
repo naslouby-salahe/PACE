@@ -1,7 +1,7 @@
 analysis,alpha,local_rows,criterion,measure,value,threshold,satisfied
 universal_primary,0.01,100,fixed_fpr_gain,fixed-FPR gain lower bound,0.022131,0.000000,yes
 universal_primary,0.01,100,coverage,supported target share,0.568966,0.500000,yes
-universal_primary,0.01,100,low_fpr_consistency,smallest gain across FPR levels,0.025686,0.000000,yes
+universal_primary,0.01,100,low_fpr_consistency,smallest gain across FPR levels,0.026232,0.000000,yes
 universal_primary,0.01,100,generalisation,lower bound without excluded dataset,0.002230,0.000000,yes
 universal_primary,0.01,100,stratum_robustness,smallest leave-one-stratum-out gain,0.007073,0.000000,yes
 universal_primary,0.01,100,seed_signs,smallest seed gain,0.028825,0.000000,yes
@@ -41,7 +41,7 @@ universal_primary,0.05,400,false_alert_safeguard,false-alert difference upper bo
 universal_primary,0.05,400,false_alert_safeguard,exceedance share increase,-0.005747,0.030000,yes
 universal_robustness,0.01,750,fixed_fpr_gain,fixed-FPR gain lower bound,0.010107,0.000000,yes
 universal_robustness,0.01,750,coverage,supported target share,0.586207,0.500000,yes
-universal_robustness,0.01,750,low_fpr_consistency,smallest gain across FPR levels,0.022524,0.000000,yes
+universal_robustness,0.01,750,low_fpr_consistency,smallest gain across FPR levels,0.022534,0.000000,yes
 universal_robustness,0.01,750,generalisation,lower bound without excluded dataset,0.000884,0.000000,yes
 universal_robustness,0.01,750,stratum_robustness,smallest leave-one-stratum-out gain,0.005949,0.000000,yes
 universal_robustness,0.01,750,seed_signs,smallest seed gain,0.019043,0.000000,yes

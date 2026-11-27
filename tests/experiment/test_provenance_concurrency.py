@@ -1,6 +1,5 @@
 import os
 import threading
-import time
 from collections.abc import Iterator
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -20,17 +19,15 @@ from pace.experiment.artifacts import (
     write_bytes_atomically,
 )
 from pace.experiment.implementation import digest_implementation, require_implementation_unchanged
-from pace.experiment.sources import baseline_source_files, digest_files, require_unchanged_sources
+from pace.experiment.sources import digest_source_files
 from pace.types import (
     ArtifactConflictError,
     ArtifactKind,
     ArtifactPayload,
     ArtifactReuseState,
     DatasetName,
-    DatasetValidationError,
     DigestComponentName,
     ExecutionDevice,
-    ExecutionPhase,
     ImplementationScope,
     ReplacementPolicy,
     StudyStratum,
@@ -76,46 +73,31 @@ def _sources(root: Path) -> tuple[Path, ...]:
 
 def test_source_digest_depends_only_on_content_and_relative_names(tmp_path: Path) -> None:
     first, second = _sources(tmp_path)
-    reference = digest_files((first, second), tmp_path)
+    reference = digest_source_files((first, second), tmp_path)
 
     os.utime(first, (1, 1))
     os.utime(second, (2_000_000_000, 2_000_000_000))
-    assert digest_files((second, first), tmp_path) == reference
+    assert digest_source_files((second, first), tmp_path) == reference
 
     second.write_bytes(b"beta" * 999 + b"betb")
-    assert digest_files((first, second), tmp_path) != reference
+    assert digest_source_files((first, second), tmp_path) != reference
     second.write_bytes(b"beta" * 1000)
-    assert digest_files((first, second), tmp_path) == reference
+    assert digest_source_files((first, second), tmp_path) == reference
 
     renamed = second.rename(second.with_name("c.csv"))
-    assert digest_files((first, renamed), tmp_path) != reference
+    assert digest_source_files((first, renamed), tmp_path) != reference
 
 
 def test_concurrent_readers_obtain_one_stable_source_digest(tmp_path: Path) -> None:
     sources = _sources(tmp_path)
-    expected = digest_files(sources, tmp_path)
+    expected = digest_source_files(sources, tmp_path)
 
     def digest(_round: int) -> str:
-        return digest_files(sources, tmp_path)
+        return digest_source_files(sources, tmp_path)
 
     with ThreadPoolExecutor(max_workers=8) as pool:
         digests = list(pool.map(digest, range(32)))
     assert set(digests) == {expected}
-
-
-def test_changed_source_error_names_the_file_and_both_digests(tmp_path: Path) -> None:
-    root = tmp_path / "raw"
-    first, second = _sources(root)
-    baseline = baseline_source_files((first, second), root)
-
-    require_unchanged_sources((first, second), root, baseline)
-    second.write_bytes(b"tampered")
-    with pytest.raises(DatasetValidationError, match="changed during matrix execution") as caught:
-        require_unchanged_sources((first, second), root, baseline, ExecutionPhase.MATRIX)
-    message = str(caught.value)
-    assert "corpus/b.csv" in message
-    assert "corpus/a.csv" not in message
-    assert baseline.digest[:12] in message
 
 
 def test_implementation_digest_is_the_snapshot_of_the_loaded_code_and_edits_are_named(
@@ -257,8 +239,10 @@ def test_interrupted_writers_leave_only_ignorable_temporary_files(
     assert read_verified_artifact(destination, provenance).content_digest == artifact.content_digest
 
 
-def test_reader_never_observes_a_partial_artifact_while_it_is_replaced(
-    tmp_path: Path, campaign: tuple[EvidenceArtifact, ResolvedConfiguration]
+def test_the_artifact_is_complete_on_both_sides_of_the_atomic_replacement(
+    tmp_path: Path,
+    campaign: tuple[EvidenceArtifact, ResolvedConfiguration],
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     artifact, configuration = campaign
     provenance = _provenance(configuration)
@@ -266,26 +250,17 @@ def test_reader_never_observes_a_partial_artifact_while_it_is_replaced(
     reuse_or_write_artifact(
         destination, _outcome(artifact), provenance, ReplacementPolicy.PRESERVE_VALID
     )
-    stop = threading.Event()
-    failures: list[Exception] = []
+    observed: list[str] = []
+    original = Path.replace
 
-    def read_continuously() -> None:
-        while not stop.is_set():
-            try:
-                read_verified_artifact(destination, provenance)
-            except Exception as error:
-                failures.append(error)
-                return
+    def observing_replace(source: Path, target: Path) -> Path:
+        observed.append(read_verified_artifact(destination, provenance).content_digest)
+        moved = original(source, target)
+        observed.append(read_verified_artifact(destination, provenance).content_digest)
+        return moved
 
-    reader = threading.Thread(target=read_continuously)
-    reader.start()
-    try:
-        for _round in range(8):
-            reuse_or_write_artifact(
-                destination, _outcome(artifact), provenance, ReplacementPolicy.REPLACE_REQUESTED
-            )
-            time.sleep(0.01)
-    finally:
-        stop.set()
-        reader.join()
-    assert failures == []
+    monkeypatch.setattr(Path, "replace", observing_replace)
+    reuse_or_write_artifact(
+        destination, _outcome(artifact), provenance, ReplacementPolicy.REPLACE_REQUESTED
+    )
+    assert observed == [artifact.content_digest] * 2

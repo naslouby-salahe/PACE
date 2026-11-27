@@ -16,22 +16,23 @@ from pace.config import (
     SplitSettings,
     configuration_for_protocol_variant,
 )
-from pace.core.decision import (
-    apply_bonferroni_local_peer_rule,
-    apply_max_fusion_rule,
-)
 from pace.datasets.cache import resolve_clients, validate_dataset_clients
 from pace.datasets.registry import (
     dataset_source_files,
     load_dataset,
     resolve_study_stratum,
 )
-from pace.experiment.arms import ArmContext, evaluate_arms, protected_channel_decisions
+from pace.experiment.arms import (
+    ArmContext,
+    bonferroni_decisions,
+    evaluate_arms,
+    max_fusion_decisions,
+    protected_channel_decisions,
+)
 from pace.experiment.artifacts import (
     CampaignOutcome,
     campaign_artifact_path,
     campaign_provenance,
-    derive_learning_seed,
     execution_log_path,
     reuse_or_write_artifact,
     reused_campaign,
@@ -48,8 +49,8 @@ from pace.experiment.inputs import (
     build_target_frame,
     compute_local_evidence,
     compute_peer_evidence,
+    fit_peer_experts,
     prepare_device,
-    train_peer_mlp,
 )
 from pace.experiment.logging_setup import configure_logging, execute_with_failure_logging
 from pace.experiment.preflight import (
@@ -58,11 +59,11 @@ from pace.experiment.preflight import (
     persist_budget_plan,
     plan_stratum_budgets,
 )
+from pace.experiment.source_integrity import require_stable_manifest, require_unchanged_sources
 from pace.experiment.sources import (
     SourceBaseline,
     baseline_source_files,
     digest_source_files,
-    require_unchanged_sources,
 )
 from pace.experiment.splitting import (
     assess_target_eligibility,
@@ -191,27 +192,6 @@ def prepare_clients(
     )
 
 
-def fit_peer_experts(
-    prepared: tuple[PreparedDevice, ...],
-    configuration: ResolvedConfiguration,
-    seed: LearningSeed,
-) -> tuple[PeerExpert, ...]:
-    experts: list[PeerExpert] = []
-    for device in prepared:
-        if not device.development:
-            continue
-        peer_seed = derive_learning_seed(seed, device.client, SeedDomain.PEER_MODEL)
-        model = train_peer_mlp(
-            device.training,
-            np.concatenate([features for _, features in device.development], axis=0),
-            peer_seed,
-            configuration.scientific.peer_training,
-        )
-        experts.append(PeerExpert(device.client, peer_seed, model))
-    logger.info(LogEvent.PEER_EXPERTS_TRAINED, expert_count=len(experts), seed=seed)
-    return tuple(experts)
-
-
 def _sweep_performance(
     decisions: ChannelDecisions, frame: TargetFrame, multiplier: BudgetMultiplier
 ) -> BudgetSweepPerformance:
@@ -288,24 +268,8 @@ def _campaign_decisions(
         )
         for multiplier in scientific.budget_sweep_multipliers.for_alpha(scientific.alpha)
     )
-    max_fusion = apply_max_fusion_rule(
-        local.calibration,
-        local.query,
-        peers.max_fusion_calibration_evidence,
-        peers.max_fusion_query_evidence,
-        scientific.calibration_block_size,
-        local_budget,
-        peer_budget,
-    )
-    bonferroni = apply_bonferroni_local_peer_rule(
-        local.calibration,
-        local.query,
-        peers.calibration_evidence,
-        peers.query_evidence,
-        scientific.calibration_block_size,
-        local_budget,
-        peer_budget,
-    )
+    max_fusion = max_fusion_decisions(local, peers, scientific, local_budget, peer_budget)
+    bonferroni = bonferroni_decisions(local, peers, scientific, local_budget, peer_budget)
     return _CampaignDecisions(decisions, max_fusion, bonferroni, budget_sweep)
 
 
@@ -570,10 +534,14 @@ def run_dataset_matrix_workflow(
         clients, configuration.scientific.peer_training, configuration.splitting
     )
     raw_data_root = configuration.runtime.raw_data_root
-    baseline = baseline_source_files(source_files, raw_data_root)
+    baseline = baseline_source_files(
+        source_files, raw_data_root, configuration.runtime.verification
+    )
     matrix_cache.source_baseline = baseline
     plan = plan_stratum_budgets(clients, configuration)
-    persist_budget_plan(configuration.runtime.output_root, plan, baseline.digest)
+    persist_budget_plan(
+        configuration.runtime.output_root, plan, baseline.digest, configuration.runtime.verification
+    )
     results: list[MatrixRunResult] = []
     for variant in matrix_variants(plan.analyses, configuration.protocol_matrix.alpha_levels):
         logger.info(
@@ -597,7 +565,8 @@ def run_dataset_matrix_workflow(
                 ),
             )
         )
-        require_unchanged_sources(source_files, raw_data_root, baseline, ExecutionPhase.MATRIX)
+        require_stable_manifest(source_files, raw_data_root, baseline, ExecutionPhase.MATRIX)
+    require_unchanged_sources(source_files, raw_data_root, baseline, ExecutionPhase.MATRIX)
     return tuple(results)
 
 
@@ -637,10 +606,10 @@ def _execute_dataset_workflow(
     dataset, stratum = identity
     shared_baseline = None if matrix_cache is None else matrix_cache.source_baseline
     baseline = shared_baseline or baseline_source_files(
-        source_files, configuration.runtime.raw_data_root
+        source_files, configuration.runtime.raw_data_root, configuration.runtime.verification
     )
     input_digest = baseline.digest
-    provenance = campaign_provenance(configuration, input_digest, identity, clients)
+    provenance = campaign_provenance(configuration, baseline, identity, clients)
     logger = initial_logger.bind(
         input_digest=input_digest,
         implementation_digest=provenance.implementation_digest,
@@ -659,7 +628,10 @@ def _execute_dataset_workflow(
         if matrix_cache is None
         else run_dataset_study(resolved_clients, configuration, matrix_cache)
     )
-    require_unchanged_sources(source_files, configuration.runtime.raw_data_root, baseline)
+    verify_sources = (
+        require_unchanged_sources if shared_baseline is None else require_stable_manifest
+    )
+    verify_sources(source_files, configuration.runtime.raw_data_root, baseline)
     outcome = CampaignOutcome.from_targets(targets)
     artifact, reuse_state = reuse_or_write_artifact(
         destination.path, outcome, provenance, replacement_policy

@@ -5,7 +5,10 @@ from pathlib import Path
 from unittest.mock import Mock
 
 import pytest
+import typer
+from typer.core import TyperGroup
 
+from pace import cli
 from pace.config import CalibrationStudySettings
 from pace.experiment.calibration_study import study_cells
 from pace.experiment.preflight import MatrixVariant
@@ -163,6 +166,12 @@ def test_status_cli_counts_complete_matrix_cells_and_sets_the_exit_code(
     assert "N-BaIoT: 1 of 3 matrix cells complete" in rendered
     assert "provenance is stale" in rendered
     assert "artifact missing" in rendered
+    unavailable = (_cell_status(tmp_path, CampaignCompletionState.SOURCES_MISSING),)
+    monkeypatch.setattr("pace.cli.inspect_matrix_status", Mock(return_value=unavailable))
+    assert main(["status", "n_baiot"]) == ExitStatus.FAILURE
+    rendered = capsys.readouterr().out
+    assert "raw data missing" in rendered
+    assert "stale" not in rendered
     monkeypatch.setattr("pace.cli.inspect_matrix_status", Mock(return_value=cells[:1]))
     assert main(["status"]) == ExitStatus.SUCCESS
     assert capsys.readouterr().out.count("1 of 1 matrix cells complete") == 7
@@ -210,6 +219,8 @@ def test_report_cli_writes_tables_and_figures_without_options(
     output = capsys.readouterr().out
     assert "Results written: 2 table files, 2 figure files" in output
     assert "pace calibration-study" in output
+    assert main(["report", "--population", "confirmation"]) == ExitStatus.SUCCESS
+    assert "pace calibration-study" not in capsys.readouterr().out
 
 
 def _failing(*_arguments: object, **_keywords: object) -> None:
@@ -225,7 +236,7 @@ def _failing(*_arguments: object, **_keywords: object) -> None:
         ("pace.cli.report_acceptance", ["accept"]),
     ],
 )
-def test_cli_translates_domain_errors_into_parser_errors(
+def test_cli_reports_runtime_failures_with_their_message_and_a_dedicated_exit_code(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
@@ -237,10 +248,19 @@ def test_cli_translates_domain_errors_into_parser_errors(
     monkeypatch.setattr(
         "pace.cli.run_doctor", Mock(return_value=Mock(sources=(), is_complete=True))
     )
-    with pytest.raises(SystemExit) as error:
-        main(arguments)
-    assert error.value.code == 2
-    assert "synthetic failure" in capsys.readouterr().err
+    assert main(arguments) == ExitStatus.RUNTIME_FAILURE
+    assert "Error: synthetic failure" in capsys.readouterr().err
+    log_path = tmp_path / "outputs" / "logs" / f"{arguments[0]}.jsonl"
+    assert "synthetic failure" in log_path.read_text(encoding="utf-8")
+
+
+def test_an_interrupted_command_exits_with_130_and_one_line(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    _config(tmp_path, monkeypatch)
+    monkeypatch.setattr("pace.cli.write_results", Mock(side_effect=KeyboardInterrupt))
+    assert main(["report"]) == ExitStatus.INTERRUPTED == 130
+    assert "Interrupted; completed cells are kept" in capsys.readouterr().err.splitlines()
 
 
 def test_cli_requires_a_command() -> None:
@@ -296,9 +316,9 @@ def test_preflight_cli_prints_the_per_target_table_and_the_cohort_decision(
     assert main(["preflight", "ton_iot"]) == ExitStatus.SUCCESS
 
     rendered = capsys.readouterr().out
-    assert "TON_IOT budget feasibility" in rendered
+    assert "TON_IoT budget feasibility" in rendered
     assert (
-        "target big: benign 75000, train 30000, available 30000, calibration 15000, "
+        "target big: benign 75000, train 30000, calibration 15000, "
         "attack types 3, >=100: yes, >=400: yes, >=20000: yes"
     ) in rendered
     assert "target mid: benign 12500, train 5000" in rendered
@@ -381,13 +401,14 @@ def test_run_cli_fans_strata_out_to_bounded_workers(
 
 
 def test_run_cli_stays_sequential_for_a_single_stratum_even_with_workers(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     _config(tmp_path, monkeypatch)
     ran = Mock()
     monkeypatch.setattr("pace.cli._run_stratum", ran)
     assert main(["run", "n_baiot", "--workers", "4"]) == ExitStatus.SUCCESS
     assert ran.call_count == 1
+    assert "--workers has no effect for a single stratum" in capsys.readouterr().err
 
 
 def _measurement() -> ComputeMeasurement:
@@ -454,7 +475,7 @@ def test_audit_cli_fails_on_any_role_violation(
 
     rendered = capsys.readouterr().out
     assert "Data roles: 1 clients audited" in rendered
-    assert ("role violation" in rendered) is (not disjoint)
+    assert ("role violation: N-BaIoT client-0" in rendered) is (not disjoint)
     assert (tmp_path / "results" / "tables" / "data-roles.csv").is_file()
 
 
@@ -574,6 +595,74 @@ def test_accept_cli_reports_the_verdict_and_sets_the_exit_status(
     assert ("failed [fixed_fpr_gain]" in rendered) is (not accepted)
 
 
+def test_accept_cli_flags_development_output(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    path = _config(tmp_path, monkeypatch)
+    path.write_text(
+        path.read_text(encoding="utf-8").replace(
+            "provenance_active: true", "provenance_active: false"
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr("pace.cli.report_acceptance", Mock(return_value=_acceptance_report(True)))
+    main(["accept"])
+    captured = capsys.readouterr()
+    assert "Official protocol" not in captured.out
+    assert "not an official verdict: source verification is DEVELOPMENT; population" in captured.out
+    assert "Warning: DEVELOPMENT source verification" in captured.err
+
+
+@pytest.mark.parametrize(
+    ("old", "new", "reason"),
+    [
+        (
+            "evaluation_role: HELD_OUT",
+            "evaluation_role: DEVELOPMENT_CALIBRATION_SPLIT",
+            "evaluation role is DEVELOPMENT_CALIBRATION_SPLIT",
+        ),
+        (
+            "calibration_mode: CROSS_FITTED",
+            "calibration_mode: IN_SAMPLE",
+            "calibration mode is IN_SAMPLE",
+        ),
+    ],
+)
+def test_accept_cli_names_why_a_configuration_is_not_official(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    old: str,
+    new: str,
+    reason: str,
+) -> None:
+    path = _config(tmp_path, monkeypatch)
+    path.write_text(path.read_text(encoding="utf-8").replace(old, new), encoding="utf-8")
+    monkeypatch.setattr("pace.cli.report_acceptance", Mock(return_value=_acceptance_report(True)))
+    main(["accept"])
+    captured = capsys.readouterr()
+    assert f"not an official verdict: {reason}; population" in captured.out
+    assert "Official protocol" not in captured.out
+    assert "Warning" not in captured.err
+
+
+def test_every_command_warns_on_stderr_under_development_verification(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    path = _config(tmp_path, monkeypatch)
+    path.write_text(
+        path.read_text(encoding="utf-8").replace(
+            "provenance_active: true", "provenance_active: false"
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr("pace.cli.write_results", Mock(return_value=ResultFiles((), ())))
+    main(["report"])
+    assert "Warning: DEVELOPMENT source verification" in capsys.readouterr().err
+    log_path = tmp_path / "outputs" / "logs" / "report.jsonl"
+    assert '"verification": "DEVELOPMENT"' in log_path.read_text(encoding="utf-8")
+
+
 def test_diagnostic_cells_carry_measured_limitations_and_no_verdict(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -665,3 +754,23 @@ def test_obsolete_acceptance_commands_are_unavailable(
         main([command])
     assert error.value.code != 0
     capsys.readouterr()
+
+
+def test_every_command_and_parameter_has_help_text() -> None:
+    group = typer.main.get_command(cli.app)
+    assert isinstance(group, TyperGroup)
+    assert set(group.commands) == {
+        "doctor",
+        "status",
+        "preflight",
+        "run",
+        "report",
+        "accept",
+        "benchmark",
+        "audit",
+        "calibration-study",
+    }
+    for name, command in group.commands.items():
+        assert command.help, name
+        for parameter in command.params:
+            assert getattr(parameter, "help", None), f"{name} {parameter.name}"

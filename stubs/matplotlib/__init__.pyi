@@ -1,0 +1,3 @@
+def rc(group: str, **kwargs: object) -> None: ...
+
+rcParams: dict[str, bool]

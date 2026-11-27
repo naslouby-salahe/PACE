@@ -1,3 +1,4 @@
+import ast
 import hashlib
 import ipaddress
 import json
@@ -144,12 +145,21 @@ LocalDetectorSeed = NewType("LocalDetectorSeed", int)
 CudaDeviceIndex = NewType("CudaDeviceIndex", int)
 SourceBinaryStream = IO[bytes]
 UnixTimestampNanoseconds = NewType("UnixTimestampNanoseconds", int)
+InodeNumber = NewType("InodeNumber", int)
+DeviceNumber = NewType("DeviceNumber", int)
+SourceFileName = NewType("SourceFileName", str)
+SegmentIndex = NewType("SegmentIndex", int)
+FileDescriptor = NewType("FileDescriptor", int)
+IdentifierName = NewType("IdentifierName", str)
+NameSet = set[IdentifierName]
+ClassIndex = dict[IdentifierName, ast.ClassDef]
 
 DisplayText = NewType("DisplayText", str)
 HexColor = NewType("HexColor", str)
 PValue = Annotated[float, Field(ge=0.0, le=1.0, allow_inf_nan=False)]
 FigureExtent = Annotated[float, Field(gt=0.0, allow_inf_nan=False)]
 PlotPosition = FiniteFloat
+CDF_HEADROOM: PlotPosition = 1.02
 FeatureValue = NewType("FeatureValue", float)
 EpochSeconds = NewType("EpochSeconds", float)
 SourceRowNumber = NewType("SourceRowNumber", int)
@@ -173,6 +183,12 @@ def lab_host_ip(network: LabNetwork, host_number: LabHostNumber) -> IPv4AddressT
 
 class FrozenStrictModel(BaseModel, frozen=True, extra="forbid", strict=True):
     pass
+
+
+class SourceFileRecord(FrozenStrictModel, frozen=True):
+    name: SourceFileName
+    size: SourceByteCount
+    digest: ScientificDigest
 
 
 class ArtifactField(StrEnum):
@@ -223,6 +239,51 @@ class ExecutionPhase(StrEnum):
     MATRIX = "matrix"
 
 
+class TextSeparator(StrEnum):
+    LINE = "\n"
+    LIST = ", "
+
+
+class SourceVerification(Enum):
+    STRICT = "STRICT"
+    DEVELOPMENT = "DEVELOPMENT"
+
+    @classmethod
+    def for_provenance(cls, provenance_active: ProvenanceActive) -> "SourceVerification":
+        return cls.STRICT if provenance_active else cls.DEVELOPMENT
+
+    @property
+    def is_official(self) -> bool:
+        return self is SourceVerification.STRICT
+
+    def require_usable(self, recorded: "SourceVerification", subject: "DisplayText") -> None:
+        if recorded is SourceVerification.DEVELOPMENT and self is SourceVerification.STRICT:
+            raise ArtifactConflictError(
+                f"{subject} was produced under {recorded.name} source verification and cannot "
+                f"be used by a {self.name} operation"
+            )
+
+
+class ReadStrategy(Enum):
+    STREAMING = "STREAMING"
+    SEGMENTED = "SEGMENTED"
+    SEGMENTED_EVICTED = "SEGMENTED_EVICTED"
+
+
+class SourceChange(StrEnum):
+    ADDED = "added"
+    REMOVED = "removed"
+    CHANGED = "changed"
+
+
+class SourceFinding(StrEnum):
+    STAMP_CHANGED = "metadata changed"
+    CHANGED_WHILE_HASHING = "changed while hashing"
+    REPRODUCED = "reproduced mismatch"
+    TRANSIENT = "transient mismatch"
+    UNREPEATABLE = "unrepeatable reads"
+
+
 class LockMode(Enum):
     SHARED = "SHARED"
     EXCLUSIVE = "EXCLUSIVE"
@@ -238,6 +299,7 @@ class DevelopmentBenignRows(IntEnum):
 
 class ByteBlockSize(IntEnum):
     DIGEST = 1_048_576
+    SEGMENT = 67_108_864
 
 
 def canonical_json(
@@ -271,6 +333,14 @@ def payload_digest(payload: ArtifactPayload) -> ScientificDigest:
 
 def placeholder_digest() -> ScientificDigest:
     return LengthPrefixedHasher().hexdigest()
+
+
+DIGEST_PREFIX_LENGTH = 12
+ABSENT_TEXT = DisplayText("none")
+
+
+def short_digest(digest: ScientificDigest | None) -> DisplayText:
+    return DisplayText((digest or ABSENT_TEXT)[:DIGEST_PREFIX_LENGTH])
 
 
 HashedLabel = ClientName | AttackTypeName | DigestComponentName | ScientificDigest | SplitRole
@@ -388,6 +458,14 @@ class AnchorMembers(Enum):
     WITHOUT_AUTOENCODER = "WITHOUT_AUTOENCODER"
     ALL_DETECTORS = "ALL_DETECTORS"
 
+    @property
+    def display_label(self) -> "DisplayText":
+        match self:
+            case AnchorMembers.WITHOUT_AUTOENCODER:
+                return DisplayText("Without autoencoder")
+            case AnchorMembers.ALL_DETECTORS:
+                return DisplayText("All detectors")
+
 
 class BankDesign(Enum):
     PER_EXPERT = "PER_EXPERT"
@@ -395,29 +473,49 @@ class BankDesign(Enum):
     FAMILY_BUDGETS = "FAMILY_BUDGETS"
     SECOND_ORDER = "SECOND_ORDER"
     JOINT_CHANNELS = "JOINT_CHANNELS"
-    MEDIAN_ANCHOR = "MEDIAN_ANCHOR"
-    TRIMMED_ANCHOR = "TRIMMED_ANCHOR"
-    COMPLEMENTARY_ANCHOR = "COMPLEMENTARY_ANCHOR"
-    NO_ANCHOR = "NO_ANCHOR"
 
     @property
-    def is_anchor_alternative(self) -> bool:
-        return self in (
-            BankDesign.MEDIAN_ANCHOR,
-            BankDesign.TRIMMED_ANCHOR,
-            BankDesign.COMPLEMENTARY_ANCHOR,
-        )
+    def display_label(self) -> "DisplayText":
+        match self:
+            case BankDesign.PER_EXPERT:
+                return DisplayText("Per-expert")
+            case BankDesign.NO_GAUSSIAN:
+                return DisplayText("Without Gaussian expert")
+            case BankDesign.FAMILY_BUDGETS:
+                return DisplayText("Family budgets")
+            case BankDesign.SECOND_ORDER:
+                return DisplayText("Second-order aggregation")
+            case BankDesign.JOINT_CHANNELS:
+                return DisplayText("Joint channels")
 
 
 class ConditionLimitRule(Enum):
     FIXED = "FIXED"
     PER_TRAINING_ROW = "PER_TRAINING_ROW"
 
+    @property
+    def display_label(self) -> "DisplayText":
+        match self:
+            case ConditionLimitRule.FIXED:
+                return DisplayText("Fixed")
+            case ConditionLimitRule.PER_TRAINING_ROW:
+                return DisplayText("Per training row")
+
 
 class CovarianceEstimator(Enum):
     RIDGE = "RIDGE"
     SHRINKAGE = "SHRINKAGE"
     LEDOIT_WOLF = "LEDOIT_WOLF"
+
+    @property
+    def display_label(self) -> "DisplayText":
+        match self:
+            case CovarianceEstimator.RIDGE:
+                return DisplayText("Ridge")
+            case CovarianceEstimator.SHRINKAGE:
+                return DisplayText("Shrinkage")
+            case CovarianceEstimator.LEDOIT_WOLF:
+                return DisplayText("Ledoit-Wolf")
 
 
 class LocalExpertFamily(Enum):
@@ -466,6 +564,8 @@ class ExitStatus(IntEnum):
     FAILURE = 1
     USAGE_ERROR = 2
     INCONCLUSIVE = 3
+    RUNTIME_FAILURE = 4
+    INTERRUPTED = 130
 
 
 class ProgramName(StrEnum):
@@ -547,9 +647,35 @@ class StudyArm(Enum):
 
     @property
     def display_label(self) -> "DisplayText":
-        if self is StudyArm.MEAN_ENSEMBLE_LOCAL_BRANCH:
-            return DisplayText("Mean-ensemble local branch (block-max calibration arm)")
-        return DisplayText(self.name.replace("_", " ").capitalize())
+        match self:
+            case StudyArm.NO_LOCAL_CHANNEL:
+                return DisplayText("No local channel")
+            case StudyArm.LOCAL_ONLY:
+                return DisplayText("Local only")
+            case StudyArm.RESERVE_QUARTER:
+                return DisplayText("Reserve quarter")
+            case StudyArm.PEER_MEAN_FUSION:
+                return DisplayText("Peer mean fusion")
+            case StudyArm.PEER_MAX_FUSION:
+                return DisplayText("Peer max fusion")
+            case StudyArm.MEAN_ENSEMBLE_LOCAL_BRANCH:
+                return DisplayText("Mean-ensemble local branch (block-max calibration arm)")
+            case StudyArm.BANK_WITHOUT_FEATURE_EXPERTS:
+                return DisplayText("Bank without feature experts")
+            case StudyArm.BANK_WITHOUT_RESPONSE_EXPERTS:
+                return DisplayText("Bank without response experts")
+            case StudyArm.BANK_WITHOUT_RARITY_EXPERTS:
+                return DisplayText("Bank without rarity experts")
+            case StudyArm.BANK_WITHOUT_ANCHOR:
+                return DisplayText("Bank without anchor")
+            case StudyArm.BANK_SINGLE_UNION:
+                return DisplayText("Bank single union")
+            case StudyArm.RESPONSE_ON_MARGINS:
+                return DisplayText("Response on margins")
+            case StudyArm.LEGACY_ANCHOR_FALLBACK:
+                return DisplayText("Legacy anchor fallback")
+            case StudyArm.CROSS_FITTED_CALIBRATION:
+                return DisplayText("Cross-fitted calibration")
 
     @property
     def reserve_variant(self) -> ReserveFraction:
@@ -562,6 +688,16 @@ class AnchorBudgetPolicy(Enum):
     LEGACY_FULL_LOCAL_FALLBACK = "LEGACY_FULL_LOCAL_FALLBACK"
     SHARE_CONSERVING = "SHARE_CONSERVING"
     COLLAPSE_TO_ANCHOR = "COLLAPSE_TO_ANCHOR"
+
+    @property
+    def display_label(self) -> "DisplayText":
+        match self:
+            case AnchorBudgetPolicy.LEGACY_FULL_LOCAL_FALLBACK:
+                return DisplayText("Legacy full-local fallback")
+            case AnchorBudgetPolicy.SHARE_CONSERVING:
+                return DisplayText("Share-conserving")
+            case AnchorBudgetPolicy.COLLAPSE_TO_ANCHOR:
+                return DisplayText("Collapse to anchor")
 
 
 class CalibrationMode(Enum):
@@ -590,6 +726,16 @@ class EvaluationRole(Enum):
     HELD_OUT = "HELD_OUT"
     DEVELOPMENT = "DEVELOPMENT"
     DEVELOPMENT_CALIBRATION_SPLIT = "DEVELOPMENT_CALIBRATION_SPLIT"
+
+    @property
+    def display_label(self) -> "DisplayText":
+        match self:
+            case EvaluationRole.HELD_OUT:
+                return DisplayText("Held-out")
+            case EvaluationRole.DEVELOPMENT:
+                return DisplayText("Development")
+            case EvaluationRole.DEVELOPMENT_CALIBRATION_SPLIT:
+                return DisplayText("Development (calibration split)")
 
 
 class BaselineFidelity(Enum):
@@ -685,22 +831,10 @@ class CalibrationVariant(Enum):
     FAMILY_BUDGETS = "FAMILY_BUDGETS"
     SECOND_ORDER = "SECOND_ORDER"
     JOINT_CHANNELS = "JOINT_CHANNELS"
-    MEDIAN_ANCHOR = "MEDIAN_ANCHOR"
-    TRIMMED_ANCHOR = "TRIMMED_ANCHOR"
-    COMPLEMENTARY_ANCHOR = "COMPLEMENTARY_ANCHOR"
-    NO_ANCHOR = "NO_ANCHOR"
 
     @property
     def design(self) -> BankDesign:
         match self:
-            case CalibrationVariant.MEDIAN_ANCHOR:
-                return BankDesign.MEDIAN_ANCHOR
-            case CalibrationVariant.TRIMMED_ANCHOR:
-                return BankDesign.TRIMMED_ANCHOR
-            case CalibrationVariant.COMPLEMENTARY_ANCHOR:
-                return BankDesign.COMPLEMENTARY_ANCHOR
-            case CalibrationVariant.NO_ANCHOR:
-                return BankDesign.NO_ANCHOR
             case CalibrationVariant.NO_GAUSSIAN:
                 return BankDesign.NO_GAUSSIAN
             case CalibrationVariant.FAMILY_BUDGETS:
@@ -769,14 +903,6 @@ class CalibrationVariant(Enum):
                 return OperatingMethod.SECOND_ORDER_PACE
             case CalibrationVariant.JOINT_CHANNELS:
                 return OperatingMethod.JOINT_CHANNELS_PACE
-            case CalibrationVariant.MEDIAN_ANCHOR:
-                return OperatingMethod.MEDIAN_ANCHOR_PACE
-            case CalibrationVariant.TRIMMED_ANCHOR:
-                return OperatingMethod.TRIMMED_ANCHOR_PACE
-            case CalibrationVariant.COMPLEMENTARY_ANCHOR:
-                return OperatingMethod.COMPLEMENTARY_ANCHOR_PACE
-            case CalibrationVariant.NO_ANCHOR:
-                return OperatingMethod.NO_ANCHOR_PACE
 
 
 class MatchClass(Enum):
@@ -813,10 +939,6 @@ class OperatingMethod(Enum):
     FAMILY_BUDGETS_PACE = "FAMILY_BUDGETS_PACE"
     SECOND_ORDER_PACE = "SECOND_ORDER_PACE"
     JOINT_CHANNELS_PACE = "JOINT_CHANNELS_PACE"
-    MEDIAN_ANCHOR_PACE = "MEDIAN_ANCHOR_PACE"
-    TRIMMED_ANCHOR_PACE = "TRIMMED_ANCHOR_PACE"
-    COMPLEMENTARY_ANCHOR_PACE = "COMPLEMENTARY_ANCHOR_PACE"
-    NO_ANCHOR_PACE = "NO_ANCHOR_PACE"
     MEAN_ENSEMBLE = "MEAN_ENSEMBLE"
     MEAN_ENSEMBLE_MATCHED = "MEAN_ENSEMBLE_MATCHED_CALIBRATION"
     KITNET = "KITNET"
@@ -860,14 +982,6 @@ class OperatingMethod(Enum):
                 return HexColor("#AA4466")
             case OperatingMethod.JOINT_CHANNELS_PACE:
                 return HexColor("#661100")
-            case OperatingMethod.MEDIAN_ANCHOR_PACE:
-                return HexColor("#6699CC")
-            case OperatingMethod.TRIMMED_ANCHOR_PACE:
-                return HexColor("#994455")
-            case OperatingMethod.COMPLEMENTARY_ANCHOR_PACE:
-                return HexColor("#EECC66")
-            case OperatingMethod.NO_ANCHOR_PACE:
-                return HexColor("#997700")
             case OperatingMethod.MEAN_ENSEMBLE:
                 return HexColor("#E69F00")
             case OperatingMethod.MEAN_ENSEMBLE_MATCHED:
@@ -916,14 +1030,6 @@ class OperatingMethod(Enum):
                 return DisplayText("PACE with second-order bank aggregation")
             case OperatingMethod.JOINT_CHANNELS_PACE:
                 return DisplayText("PACE with joint channel calibration")
-            case OperatingMethod.MEDIAN_ANCHOR_PACE:
-                return DisplayText("PACE with a median anchor")
-            case OperatingMethod.TRIMMED_ANCHOR_PACE:
-                return DisplayText("PACE with a trimmed-mean anchor")
-            case OperatingMethod.COMPLEMENTARY_ANCHOR_PACE:
-                return DisplayText("PACE with an anchor over non-bank detectors")
-            case OperatingMethod.NO_ANCHOR_PACE:
-                return DisplayText("PACE without the anchor tier")
             case OperatingMethod.MEAN_ENSEMBLE:
                 return DisplayText("Mean-ensemble local branch (block-max calibration)")
             case OperatingMethod.MEAN_ENSEMBLE_MATCHED:
@@ -999,6 +1105,7 @@ class OutputDirectory(StrEnum):
     FIGURES = "figures"
     TABLES = "tables"
     CONFIRMATION = "confirmation"
+    DEVELOPMENT = "development"
 
 
 class ArtifactFileName(StrEnum):
@@ -1029,6 +1136,7 @@ class CampaignCompletionState(Enum):
     MISSING = "MISSING"
     INVALID = "INVALID"
     STALE = "STALE"
+    SOURCES_MISSING = "SOURCES_MISSING"
 
 
 class ReplacementPolicy(Enum):
@@ -1086,6 +1194,9 @@ class LogEvent(StrEnum):
     BENCHMARK_RECORDED = "benchmark.recorded"
     AUDIT_RECORDED = "audit.recorded"
     CALIBRATION_STUDY_RECORDED = "calibration.study.recorded"
+    SOURCE_BASELINE_RECORDED = "source.baseline.recorded"
+    SOURCE_READ = "source.read"
+    SOURCE_MISMATCH = "source.mismatch"
 
 
 class ArtifactCommitState(StrEnum):
@@ -1107,6 +1218,42 @@ class CommandName(StrEnum):
     @property
     def log_file_name(self) -> PurePosixPath:
         return PurePosixPath(f"{self}.jsonl")
+
+    @property
+    def description(self) -> DisplayText:
+        match self:
+            case CommandName.DOCTOR:
+                return DisplayText(
+                    "Check that the dataset sources are present; --smoke also runs a synthetic "
+                    "workflow."
+                )
+            case CommandName.SMOKE:
+                return DisplayText("Run the synthetic end-to-end workflow.")
+            case CommandName.STATUS:
+                return DisplayText(
+                    "Show which protocol matrix cells have a complete, verified campaign artifact."
+                )
+            case CommandName.RUN:
+                return DisplayText("Run the protocol matrix for a stratum and write its figures.")
+            case CommandName.REPORT:
+                return DisplayText("Build the results tables and figures from completed campaigns.")
+            case CommandName.PREFLIGHT:
+                return DisplayText(
+                    "Report budget feasibility, cohorts and statistical power without running "
+                    "any model."
+                )
+            case CommandName.ACCEPT:
+                return DisplayText(
+                    "Evaluate the pre-declared acceptance protocol; exit 0 only when it is met."
+                )
+            case CommandName.BENCHMARK:
+                return DisplayText("Measure the compute cost of PACE and the baselines.")
+            case CommandName.AUDIT:
+                return DisplayText("Check that the data roles of every client are disjoint.")
+            case CommandName.CALIBRATION_STUDY:
+                return DisplayText(
+                    "Refresh the synthetic calibration-sensitivity table and figure."
+                )
 
 
 class EvaluationRule(Enum):
@@ -1148,8 +1295,11 @@ class ColumnHeading(StrEnum):
     SATISFIED = "satisfied"
     STRATUM = "stratum"
     TARGET = "target"
-    PACE_DETECTION = "pace_detection"
-    MEAN_ENSEMBLE_DETECTION = "mean_ensemble_detection"
+    PACE_DETECTION = "pace_nominal_detection"
+    MEAN_ENSEMBLE_DETECTION = "mean_ensemble_nominal_detection"
+    PACE_MATCHED_DETECTION = "pace_detection_matched_at_alpha"
+    MEAN_ENSEMBLE_MATCHED_DETECTION = "mean_ensemble_detection_matched_at_alpha"
+    GATING = "gating"
     GAIN = "gain"
     LOWER = "lower"
     UPPER = "upper"
@@ -1163,8 +1313,8 @@ class ColumnHeading(StrEnum):
     TIES = "ties"
     LOSSES = "losses"
     SIGN_TEST_P = "sign_test_p"
-    PACE_FALSE_ALERT = "pace_false_alert"
-    MEAN_ENSEMBLE_FALSE_ALERT = "mean_ensemble_false_alert"
+    PACE_FALSE_ALERT = "pace_nominal_false_alert"
+    MEAN_ENSEMBLE_FALSE_ALERT = "mean_ensemble_nominal_false_alert"
     LOCAL_DETECTION = "local_detection"
     PEER_UNION_DETECTION = "peer_union_detection"
     MAX_FUSION_DETECTION = "max_fusion_detection"
@@ -1208,13 +1358,13 @@ class ColumnHeading(StrEnum):
     UNMATCHED_TARGETS = "unmatched_targets"
     COVERAGE = "coverage"
     MEAN_MATCH_ERROR = "mean_matching_error"
-    FALSE_ALERT_DIFFERENCE = "false_alert_difference"
+    FALSE_ALERT_DIFFERENCE = "false_alert_difference_nominal"
     DETECTION_DIFFERENCE = "detection_difference_nominal"
     MATCHED_DETECTION_DIFFERENCE = "detection_difference_matched"
     MATCHED_LOWER_BOUND = "matched_lower"
     MATCHED_UPPER_BOUND = "matched_upper"
-    UNMATCHED_REFERENCE_FALSE_ALERT = "unmatched_comparator_false_alert"
-    MATCHED_REFERENCE_FALSE_ALERT = "matched_comparator_false_alert"
+    UNMATCHED_REFERENCE_FALSE_ALERT = "comparator_nominal_false_alert_unmatched_targets"
+    MATCHED_REFERENCE_FALSE_ALERT = "comparator_nominal_false_alert_matched_targets"
     NOMINAL_BUDGET = "nominal_budget"
     FALSE_ALERT_RATE = "false_alert_rate"
     DETECTION_RATE = "detection_rate"
@@ -1330,6 +1480,31 @@ class FigureName(StrEnum):
             FigureName.GAIN_AGAINST_PEER_COVERAGE,
             FigureName.FALSE_ALERT_DECOMPOSITION,
         )
+
+    @property
+    def has_interval_estimates(self) -> bool:
+        return self in (
+            FigureName.HEADLINE_GAIN,
+            FigureName.STRATUM_GAINS,
+            FigureName.ABLATIONS,
+            FigureName.BUDGET_SCALING,
+        )
+
+    @property
+    def has_gain_ordinate(self) -> bool:
+        return self in (
+            FigureName.TARGET_GAINS,
+            FigureName.STRATUM_GAINS,
+            FigureName.FAMILY_GAINS,
+            FigureName.BUDGET_SCALING,
+            FigureName.SEED_STABILITY,
+            FigureName.SENSITIVITY,
+            FigureName.GAIN_AGAINST_PEER_COVERAGE,
+        )
+
+    @property
+    def has_gain_abscissa(self) -> bool:
+        return self in (FigureName.ABLATIONS, FigureName.PEER_DROWNING)
 
 
 class ImageFormat(StrEnum):
@@ -1471,9 +1646,15 @@ class LeaveOneOutScope(Enum):
 
 class ConfigurationSection(StrEnum):
     SCIENTIFIC = "scientific"
+    RUNTIME = "runtime"
     SPLITTING = "splitting"
     REPORTING = "reporting"
     PROTOCOL_MATRIX = "protocol_matrix"
+
+
+class MatrixCellSetting(StrEnum):
+    ALPHA = "scientific.alpha"
+    LOCAL_TRAINING_ROWS = "scientific.local_detectors.local_training_rows"
 
 
 class SummaryQuantile(Enum):
@@ -1495,6 +1676,14 @@ class FalseAlertGuide(Enum):
                 return 1.0
             case FalseAlertGuide.TWICE:
                 return AcceptanceRule.EXCEEDANCE_MULTIPLE.threshold
+
+    @property
+    def label(self) -> "DisplayText":
+        match self:
+            case FalseAlertGuide.NOMINAL:
+                return DisplayText("α (nominal)")
+            case FalseAlertGuide.TWICE:
+                return DisplayText("2α")
 
 
 class SeedPanel(Enum):
@@ -1525,6 +1714,7 @@ class PlotInk(StrEnum):
     CYCLE_1 = "C1"
     CYCLE_2 = "C2"
     CYCLE_3 = "C3"
+    NONE = "none"
 
 
 class PlotLineStyle(StrEnum):
@@ -1556,6 +1746,50 @@ class FigureLayout(StrEnum):
 
 class FigureResolution(IntEnum):
     PNG = 200
+
+
+class SeriesStyle(Enum):
+    BOLD = (PlotLineStyle.SOLID, 3.2, PlotMarker.CIRCLE, 10.0)
+    DASHED = (PlotLineStyle.DASHED, 2.4, PlotMarker.SQUARE, 7.5)
+    DASH_DOT = (PlotLineStyle.DASHDOT, 1.8, PlotMarker.TRIANGLE, 5.5)
+    DOTTED = (PlotLineStyle.DOTTED, 1.4, PlotMarker.DIAMOND, 4.0)
+    THIN = (PlotLineStyle.SOLID, 1.0, PlotMarker.CROSS, 5.0)
+
+    def __init__(
+        self, line: PlotLineStyle, width: FigureExtent, marker: PlotMarker, size: FigureExtent
+    ) -> None:
+        self.line = line
+        self.width = width
+        self.marker = marker
+        self.size = size
+
+
+class FigureLimit(Enum):
+    NEGLIGIBLE_RATE = 1e-3
+    MINIMUM_HALF_WIDTH = 1e-2
+    DATA_MARGIN = 5e-2
+    NOTE_HEIGHT = 0.85
+
+    def __init__(self, size: FigureExtent) -> None:
+        self.size = size
+
+
+class PointArea(Enum):
+    REGULAR = 40.0
+    HIGHLIGHTED = 100.0
+
+    def __init__(self, size: FigureExtent) -> None:
+        self.size = size
+
+
+class FigureCount(Enum):
+    LEGEND_LABEL_CHARACTERS = 32
+    ARM_LABEL_CHARACTERS = 34
+    DENSE_AXIS_TICKS = 6
+    SPARSE_AXIS_TICKS = 4
+
+    def __init__(self, size: PositiveInt) -> None:
+        self.size = size
 
 
 class PdfMetadataField(StrEnum):
@@ -1612,10 +1846,6 @@ class DatasetName(Enum):
     CTU_13 = "CTU_13"
     N_BAIOT = "N_BAIOT"
     UNSW_IOT_ATTACK_FLOWS = "UNSW_IOT_ATTACK_FLOWS"
-
-    @property
-    def display_label(self) -> "DisplayText":
-        return DisplayText("N-BaIoT" if self is DatasetName.N_BAIOT else self.name)
 
     @property
     def source_location(self) -> PurePosixPath:
@@ -1678,11 +1908,23 @@ class StudyStratum(Enum):
 
     @property
     def display_label(self) -> DisplayText:
-        if self is StudyStratum.N_BAIOT:
-            return self.dataset.display_label
-        if self is StudyStratum.IOT_23_FRESH:
-            return DisplayText("IoT-23 untouched captures")
-        return DisplayText(self.name)
+        match self:
+            case StudyStratum.IOT_23:
+                return DisplayText("IoT-23")
+            case StudyStratum.TON_IOT:
+                return DisplayText("TON_IoT")
+            case StudyStratum.GOTHAM_2025:
+                return DisplayText("Gotham 2025")
+            case StudyStratum.CTU_13:
+                return DisplayText("CTU-13")
+            case StudyStratum.N_BAIOT:
+                return DisplayText("N-BaIoT")
+            case StudyStratum.UNSW_IOT_ATTACK_FLOWS_G1:
+                return DisplayText("UNSW IoT-attack flows G1")
+            case StudyStratum.UNSW_IOT_ATTACK_FLOWS_G2:
+                return DisplayText("UNSW IoT-attack flows G2")
+            case StudyStratum.IOT_23_FRESH:
+                return DisplayText("IoT-23 untouched captures")
 
     @property
     def dataset(self) -> DatasetName:
@@ -1870,6 +2112,10 @@ class DatasetSourceInventory:
 
 
 class DatasetValidationError(PaceError):
+    pass
+
+
+class SourceIntegrityError(DatasetValidationError):
     pass
 
 
@@ -3241,7 +3487,7 @@ class DatasetInventoryReport:
         return all(source.is_available for source in self.sources)
 
 
-CURRENT_ARTIFACT_SCHEMA: ArtifactSchemaVersion = 17
+CURRENT_ARTIFACT_SCHEMA: ArtifactSchemaVersion = 18
 
 
 @dataclass(frozen=True, slots=True)
@@ -3897,13 +4143,30 @@ class PopulationScope(StrEnum):
         return stratum.is_confirmation is (self is PopulationScope.CONFIRMATION)
 
 
-OverwriteOption = Annotated[bool, typer.Option("--overwrite")]
-PopulationOption = Annotated[PopulationScope, typer.Option("--population")]
-SmokeOption = Annotated[bool, typer.Option("--smoke")]
-WorkersOption = Annotated[WorkerCount, typer.Option("--workers")]
-RepeatsOption = Annotated[RepeatCount, typer.Option("--repeats")]
-TargetArgument = Annotated[CommandTarget, typer.Argument(case_sensitive=False)]
-OptionalTargetArgument = Annotated[CommandTarget, typer.Argument(case_sensitive=False)]
+OverwriteOption = Annotated[
+    bool, typer.Option("--overwrite", help="Recompute and replace artifacts that are still valid")
+]
+PopulationOption = Annotated[
+    PopulationScope,
+    typer.Option(
+        "--population", help="Study population: the primary strata or the confirmation one"
+    ),
+]
+SmokeOption = Annotated[
+    bool, typer.Option("--smoke", help="Also run the synthetic end-to-end workflow")
+]
+WorkersOption = Annotated[WorkerCount, typer.Option("--workers", help="Parallel worker processes")]
+RepeatsOption = Annotated[
+    RepeatCount, typer.Option("--repeats", help="Timing repetitions per measurement")
+]
+TargetArgument = Annotated[
+    CommandTarget,
+    typer.Argument(case_sensitive=False, help="Study stratum to process, or all of them"),
+]
+OptionalTargetArgument = Annotated[
+    CommandTarget,
+    typer.Argument(case_sensitive=False, help="Study stratum to process (default: all)"),
+]
 
 
 class InferenceMethod(Enum):

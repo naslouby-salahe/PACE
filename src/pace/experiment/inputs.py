@@ -4,7 +4,6 @@ from math import sqrt
 
 import numpy as np
 import structlog
-from scipy.special import expit
 
 from pace.config import PeerTrainingSettings, ResolvedConfiguration
 from pace.core.decision import TieredLocalEvidence
@@ -99,10 +98,6 @@ class PeerMLP:
             activations = np.maximum(activations @ layer.weights + layer.bias, 0.0)
         logits = activations @ self.layers[-1].weights + self.layers[-1].bias
         return logits[:, 1] - logits[:, 0]
-
-
-def attack_probabilities_from_margins(margins: FloatArray) -> FloatArray:
-    return np.clip(expit(margins), np.finfo(np.float64).tiny, 1.0)
 
 
 def _validate_training_features(
@@ -306,6 +301,27 @@ class PeerExpert:
     model: PeerMLP
 
 
+def fit_peer_experts(
+    prepared: tuple[PreparedDevice, ...],
+    configuration: ResolvedConfiguration,
+    seed: LearningSeed,
+) -> tuple[PeerExpert, ...]:
+    experts: list[PeerExpert] = []
+    for device in prepared:
+        if not device.development:
+            continue
+        peer_seed = derive_learning_seed(seed, device.client, SeedDomain.PEER_MODEL)
+        model = train_peer_mlp(
+            device.training,
+            np.concatenate([features for _, features in device.development], axis=0),
+            peer_seed,
+            configuration.scientific.peer_training,
+        )
+        experts.append(PeerExpert(device.client, peer_seed, model))
+    logger.info(LogEvent.PEER_EXPERTS_TRAINED, expert_count=len(experts), seed=seed)
+    return tuple(experts)
+
+
 @dataclass(frozen=True, slots=True)
 class TargetFrame:
     reference: FloatMatrix
@@ -363,7 +379,6 @@ class PeerEvidence:
     reference_margins: FloatMatrix
     calibration_margins: FloatMatrix
     query_margins: FloatMatrix
-    reference_probabilities: FloatMatrix
     calibration_evidence: FloatMatrix
     query_evidence: FloatMatrix
     max_fusion_calibration_evidence: FloatMatrix
@@ -411,21 +426,15 @@ def compute_peer_evidence(
         experts, frame.calibration, previous, lambda item: item.calibration_margins
     )
     query_margins = _margin_rows(experts, frame.query, previous, lambda item: item.query_margins)
-    reference_probabilities = attack_probabilities_from_margins(reference_margins)
-    calibration_probabilities = attack_probabilities_from_margins(calibration_margins)
-    query_probabilities = attack_probabilities_from_margins(query_margins)
     return PeerEvidence(
         experts,
         reference_margins,
         calibration_margins,
         query_margins,
-        reference_probabilities,
         _stack_evidence(target_relative_evidence, reference_margins, calibration_margins),
         _stack_evidence(target_relative_evidence, reference_margins, query_margins),
-        _stack_evidence(
-            probability_tail_evidence, reference_probabilities, calibration_probabilities
-        ),
-        _stack_evidence(probability_tail_evidence, reference_probabilities, query_probabilities),
+        _stack_evidence(probability_tail_evidence, reference_margins, calibration_margins),
+        _stack_evidence(probability_tail_evidence, reference_margins, query_margins),
     )
 
 
@@ -444,17 +453,16 @@ class LocalEvidence:
         selected = self.bank if bank is None else bank
         if design is BankDesign.NO_GAUSSIAN:
             selected = selected.without_kind(LocalExpertKind.FEATURE_GAUSSIAN)
-        anchor_calibration, anchor_query = selected.anchor_for(design)
         if design is BankDesign.SECOND_ORDER:
             return TieredLocalEvidence(
-                anchor_calibration,
-                anchor_query,
+                selected.anchor_calibration,
+                selected.anchor_query,
                 second_order_evidence(selected.calibration),
                 second_order_evidence(selected.query),
             )
         return TieredLocalEvidence(
-            anchor_calibration,
-            anchor_query,
+            selected.anchor_calibration,
+            selected.anchor_query,
             selected.calibration,
             selected.query,
             selected.family_shares() if design is BankDesign.FAMILY_BUDGETS else None,
