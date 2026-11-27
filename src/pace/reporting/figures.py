@@ -17,6 +17,7 @@ from pace.reporting.figure_canvas import (
     legend_beside,
     legend_outside,
     new_figure,
+    note_overlapping_curves,
     panel_grid,
     primary_panels,
     stratum_label,
@@ -276,6 +277,7 @@ def peer_drowning(inputs: ReportInputs) -> Figure:
         axes.set_ylim(0.0, CDF_HEADROOM)
         axes.set_ylabel("Cumulative share of targets")
         legend_outside(axes)
+    note_overlapping_curves(figure)
     return figure
 
 
@@ -405,7 +407,7 @@ def target_gains(inputs: ReportInputs) -> Figure:
 def stratum_gains(inputs: ReportInputs) -> Figure:
     settings = inputs.configuration.reporting
     panels = primary_panels(inputs)
-    figure = new_figure(9.0, 3.2 * ((len(panels) + 1) // 2))
+    figure = new_figure(9.0, 3.6 * ((len(panels) + 1) // 2))
     for panel, axes in panel_grid(figure, panels):
         grouped: dict[StudyStratum, list[TargetRecord]] = defaultdict(list)
         for record in panel.records:

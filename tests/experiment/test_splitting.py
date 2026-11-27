@@ -287,6 +287,35 @@ def test_standardizer_uses_only_pooled_training_rows_and_handles_constants() -> 
         standardizer.transform(np.ones((1, 1)))
 
 
+def test_standardizer_depends_on_each_device_only_through_its_moments() -> None:
+    generator = np.random.default_rng(7)
+    devices = tuple(
+        generator.normal(shift, spread, (rows, 3))
+        for shift, spread, rows in (
+            (0.0, 1.0, 40),
+            (2.0, 3.0, 25),
+            (-1.0, 0.5, 60),
+        )
+    )
+    standardizer = fit_pooled_standardizer(devices)
+
+    counts = np.asarray([device.shape[0] for device in devices], dtype=np.float64)
+    means = np.stack([device.mean(axis=0) for device in devices])
+    variances = np.stack([device.var(axis=0) for device in devices])
+    pooled_mean = (counts[:, np.newaxis] * means).sum(axis=0) / counts.sum()
+    pooled_variance = (counts[:, np.newaxis] * (variances + np.square(means - pooled_mean))).sum(
+        axis=0
+    ) / counts.sum()
+    np.testing.assert_allclose(standardizer.mean, pooled_mean)
+    np.testing.assert_allclose(standardizer.scale, np.sqrt(pooled_variance))
+
+    reflected = 2.0 * devices[1].mean(axis=0) - devices[1]
+    assert not np.allclose(np.sort(reflected, axis=0), np.sort(devices[1], axis=0))
+    resampled = fit_pooled_standardizer((devices[0], reflected, devices[2]))
+    np.testing.assert_allclose(resampled.mean, standardizer.mean)
+    np.testing.assert_allclose(resampled.scale, standardizer.scale)
+
+
 def test_standardizer_rejects_empty_misaligned_and_non_finite_training() -> None:
     with pytest.raises(ValueError):
         fit_pooled_standardizer(())

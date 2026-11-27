@@ -1,5 +1,5 @@
 from collections import defaultdict
-from itertools import cycle
+from itertools import combinations, cycle
 
 import numpy as np
 from matplotlib.figure import Figure
@@ -125,8 +125,33 @@ def calibration_sensitivity_figure(records: tuple[SensitivityRecord, ...]) -> Fi
         )
         axes.set_xlabel("Calibration rows")
         axes.set_ylabel(f"Realised FPR / budget\n({experts} experts, tier {budget}; floor 10⁻⁴)")
+    coinciding = _coinciding_modes(records, budget, experts)
+    if coinciding:
+        figure.supxlabel(
+            "Coinciding series are drawn on top of one another: "
+            + " = ".join(mode.display_label for mode in coinciding)
+            + ".",
+            fontsize=9,
+        )
     legend_beside(figure)
     return figure
+
+
+def _coinciding_modes(
+    records: tuple[SensitivityRecord, ...], budget: FalseAlarmBudget, experts: DetectorCount
+) -> tuple[CalibrationMode, ...]:
+    series = {
+        mode: tuple(
+            (scenario, item.rows, item.budget_ratio)
+            for scenario in CalibrationScenario
+            for item in _sensitivity_series(records, scenario, mode, budget, experts)
+        )
+        for mode in CalibrationMode
+    }
+    for first, second in combinations(CalibrationMode, 2):
+        if series[first] and series[first] == series[second]:
+            return (first, second)
+    return ()
 
 
 def _method_points(

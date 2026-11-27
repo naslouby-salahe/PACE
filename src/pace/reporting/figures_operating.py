@@ -5,7 +5,7 @@ import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 
-from pace.reporting.figure_canvas import new_figure, side_legend
+from pace.reporting.figure_canvas import new_figure, note_overlapping_curves, side_legend
 from pace.reporting.operating import (
     MeanOperatingPoint,
     comparison_references,
@@ -123,6 +123,7 @@ def comparable_operating_curves(inputs: ReportInputs) -> Figure:
         for handle, label in zip(variant_handles, variant_labels, strict=True)
         if label not in labels
     )
+    note_overlapping_curves(figure)
     side_legend(figure, handles)
     return figure
 

@@ -54,6 +54,13 @@ def axes_center(figure: Figure) -> FigureExtent:
     return (min(item.x0 for item in positions) + max(item.x1 for item in positions)) / 2.0
 
 
+def note_overlapping_curves(figure: Figure) -> None:
+    figure.supxlabel(
+        "Overlapping curves are drawn on top of one another; the legend lists every series.",
+        fontsize=9,
+    )
+
+
 def new_figure(width: FigureExtent, height: FigureExtent) -> Figure:
     return Figure(figsize=(width, height), layout=FigureLayout.CONSTRAINED)
 
